@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crónicas del Reino</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cardo&display=swap" rel="stylesheet">
+
+<style>
+
+body{
+margin:0;
+background:#0b0b0f;
+color:#e8e6e3;
+font-family:'Cardo',serif;
+}
+
+header{
+text-align:center;
+padding:60px 20px;
+background:linear-gradient(#0b0b0f,#151520);
+border-bottom:1px solid #333;
+}
+
+h1{
+font-family:'Cinzel',serif;
+font-size:48px;
+letter-spacing:3px;
+margin:0;
+}
+
+nav{
+text-align:center;
+padding:15px;
+background:#111118;
+position:sticky;
+top:0;
+}
+
+nav a{
+color:#ddd;
+margin:0 20px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+color:white;
+}
+
+section{
+max-width:1000px;
+margin:auto;
+padding:60px 20px;
+}
+
+h2{
+font-family:'Cinzel',serif;
+border-bottom:1px solid #333;
+padding-bottom:10px;
+}
+
+.cover{
+width:260px;
+display:block;
+margin:auto;
+border-radius:6px;
+box-shadow:0 0 25px rgba(0,0,0,0.7);
+}
+
+.characters{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:25px;
+margin-top:30px;
+}
+
+.card{
+background:#151520;
+padding:20px;
+border-radius:10px;
+border:1px solid #2a2a35;
+}
+
+.map-container{
+position:relative;
+}
+
+.map-container img{
+width:100%;
+border-radius:8px;
+}
+
+.location{
+position:absolute;
+width:14px;
+height:14px;
+background:red;
+border-radius:50%;
+cursor:pointer;
+}
+
+.tooltip{
+position:absolute;
+background:#111;
+padding:8px 12px;
+border-radius:6px;
+font-size:14px;
+display:none;
+}
+
+.chapter{
+margin-bottom:25px;
+padding:20px;
+background:#151520;
+border-radius:8px;
+}
+
+button{
+background:#8b0000;
+border:none;
+padding:10px 20px;
+color:white;
+font-size:15px;
+border-radius:5px;
+cursor:pointer;
+}
+
+button:hover{
+background:#a80000;
+}
+
+footer{
+text-align:center;
+padding:40px;
+background:#0d0d13;
+color:#777;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>Crónicas del Reino</h1>
+<p>Una historia de guerra, destino y oscuridad</p>
+</header>
+
+<nav>
+<a href="#sinopsis">Historia</a>
+<a href="#personajes">Personajes</a>
+<a href="#mapa">Mapa</a>
+<a href="#capitulos">Capítulos</a>
+<a href="#autor">Autor</a>
+</nav>
+
+<section id="sinopsis">
+<h2>La Historia</h2>
+
+<img src="cover.jpg" class="cover">
+
+<p>
+En un reino fracturado por antiguas guerras, una profecía olvidada comienza a despertar.
+Un joven marcado por la sangre y el destino deberá enfrentar un poder que podría
+consumir el mundo entero.
+</p>
+
+</section>
+
+<section id="personajes">
+<h2>Personajes</h2>
+
+<div class="characters">
+
+<div class="card">
+<h3>Kael</h3>
+<p>Un joven perseguido por una profecía capaz de destruir el reino.</p>
+</div>
+
+<div class="card">
+<h3>Kruss</h3>
+<p>Un guerrero veterano que ha pasado años buscando al muchacho.</p>
+</div>
+
+<div class="card">
+<h3>Athoz</h3>
+<p>Un brutal combatiente cuya lealtad pertenece al trono.</p>
+</div>
+
+<div class="card">
+<h3>Marthoz</h3>
+<p>Consejero oscuro que conoce secretos antiguos.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="mapa">
+<h2>Mapa del Mundo</h2>
+
+<div class="map-container">
+
+<img src="mapa.jpg">
+
+<div class="location" style="top:40%;left:60%" data-name="Capital del Reino"></div>
+<div class="location" style="top:65%;left:30%" data-name="Montañas Negras"></div>
+<div class="location" style="top:25%;left:45%" data-name="Bosque Antiguo"></div>
+
+<div class="tooltip" id="tooltip"></div>
+
+</div>
+
+</section>
+
+<section id="capitulos">
+<h2>Capítulos</h2>
+
+<div class="chapter">
+<h3>Capítulo 1</h3>
+<p>El comienzo de la historia...</p>
+<button onclick="leerCapitulo(1)">Leer</button>
+</div>
+
+<div class="chapter">
+<h3>Capítulo 2</h3>
+<p>El viaje comienza.</p>
+<button onclick="leerCapitulo(2)">Leer</button>
+</div>
+
+</section>
+
+<section id="autor">
+<h2>Sobre el Autor</h2>
+
+<p>
+Autor de fantasía dedicado a crear mundos oscuros, reinos antiguos
+y personajes marcados por el destino.
+</p>
+
+</section>
+
+<footer>
+<p>2026 - Sitio oficial de la novela</p>
+</footer>
+
+<script>
+
+const locations = document.querySelectorAll('.location');
+const tooltip = document.getElementById('tooltip');
+
+locations.forEach(loc => {
+
+loc.addEventListener('mouseenter', e=>{
+
+const name = loc.dataset.name;
+
+tooltip.style.display='block';
+tooltip.innerText=name;
+
+tooltip.style.left=e.pageX+10+'px';
+tooltip.style.top=e.pageY+10+'px';
+
+});
+
+loc.addEventListener('mouseleave',()=>{
+
+tooltip.style.display='none';
+
+});
+
+});
+
+function leerCapitulo(num){
+
+alert("Aquí se abrirá el capítulo " + num);
+
+}
+
+</script>
+
+</body>
+</html>
