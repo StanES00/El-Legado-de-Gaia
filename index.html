@@ -1,368 +1,292 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>El Legado de Gaia</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cardo&display=swap" rel="stylesheet">
 
 <style>
 
 body{
+font-family: Georgia, serif;
 margin:0;
-background:#0b0b0f;
-color:#e8e6e3;
-font-family:'Cardo',serif;
+background:#0f0f0f;
+color:white;
 }
+
+/* HEADER */
 
 header{
+background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)), url("portada.jpg");
+background-size:cover;
+background-position:center;
+padding:140px 20px;
 text-align:center;
-padding:60px 20px;
-background:linear-gradient(#0b0b0f,#151520);
-border-bottom:1px solid #333;
 }
 
-h1{
-font-family:'Cinzel',serif;
-font-size:48px;
-letter-spacing:3px;
+header h1{
+font-size:60px;
 margin:0;
 }
 
+header p{
+font-size:22px;
+opacity:0.9;
+}
+
+/* MENU */
+
 nav{
-text-align:center;
+background:#111;
 padding:15px;
-background:#111118;
-position:sticky;
-top:0;
+text-align:center;
 }
 
 nav a{
-color:#ddd;
-margin:0 20px;
+color:white;
+margin:0 15px;
 text-decoration:none;
-font-weight:bold;
+font-size:18px;
 }
 
 nav a:hover{
-color:white;
+color:#d4af37;
 }
 
+/* SECTIONS */
+
 section{
-max-width:1000px;
-margin:auto;
-padding:60px 20px;
+padding:60px 15%;
 }
 
 h2{
-font-family:'Cinzel',serif;
-border-bottom:1px solid #333;
+border-bottom:2px solid #444;
 padding-bottom:10px;
 }
 
-.cover{
-width:260px;
-display:block;
-margin:auto;
-border-radius:6px;
-box-shadow:0 0 25px rgba(0,0,0,0.7);
+/* PERSONAJES */
+
+.personajes{
+display:flex;
+flex-wrap:wrap;
+gap:30px;
 }
 
-.characters{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:25px;
-margin-top:30px;
+.personaje{
+width:200px;
+text-align:center;
 }
 
-.card{
-background:#151520;
-padding:20px;
-border-radius:10px;
-border:1px solid #2a2a35;
-}
-
-.map-container{
-position:relative;
-}
-
-.map-container img{
+.personaje img{
 width:100%;
-border-radius:8px;
+border-radius:10px;
 }
 
-.location{
-position:absolute;
-width:14px;
-height:14px;
-background:red;
-border-radius:50%;
+/* GALERIA */
+
+.galeria{
+display:flex;
+flex-wrap:wrap;
+gap:15px;
+}
+
+.galeria img{
+width:250px;
 cursor:pointer;
+border-radius:8px;
+transition:0.3s;
 }
 
-.tooltip{
-position:absolute;
-background:#111;
-padding:8px 12px;
-border-radius:6px;
-font-size:14px;
+.galeria img:hover{
+transform:scale(1.05);
+}
+
+/* VISOR IMAGEN */
+
+#visor{
 display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:rgba(0,0,0,0.9);
+justify-content:center;
+align-items:center;
 }
 
-.chapter{
-margin-bottom:25px;
-padding:20px;
-background:#151520;
-border-radius:8px;
+#visor img{
+max-width:90%;
+max-height:90%;
 }
 
-button{
-background:#8b0000;
-border:none;
-padding:10px 20px;
-color:white;
-font-size:15px;
-border-radius:5px;
-cursor:pointer;
-}
-
-button:hover{
-background:#a80000;
-}
+/* FOOTER */
 
 footer{
-text-align:center;
+background:#111;
 padding:40px;
-background:#0d0d13;
-color:#777;
+text-align:center;
+}
+
+footer a{
+color:#d4af37;
+text-decoration:none;
+margin:0 10px;
 }
 
 </style>
 </head>
 
+
 <body>
 
 <header>
+
 <h1>El Legado de Gaia</h1>
-<p>Una historia de guerra, destino y oscuridad</p>
-<style>
+<p>El Mundo Oculto Tras el Muro</p>
 
-header{
-background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5)), url("Portada.png");
-background-size: cover;
-background-position: center;
-padding:140px;
-text-align:center;
-color:white;
-}
-
-</style>
 </header>
 
+
 <nav>
-<a href="#sinopsis">Historia</a>
-<a href="#personajes">Personajes</a>
-<a href="#reinos">Reinos de Panasea</a>
-<a href="#mapa">Mapa</a>
-<a href="#capitulos">Capítulos</a>
+
+<a href="#sinopsis">Sinopsis</a>
+<a href="#personajes">Fichas de Personajes</a>
+<a href="#reinos">Galerías por Reino</a>
 <a href="#autor">Autor</a>
+
 </nav>
 
-<section id="sinopsis">
-<h2>La Historia</h2>
 
-<img src="cover.jpg" class="cover">
+<section id="sinopsis">
+
+<h2>Sinopsis</h2>
 
 <p>
-Rio tiene veinte años, dos trabajos, una bicicleta oxidada y el silencio de un padre ausente desde la infancia. Vive en un pequeño departamento en Santiago, estudia criptología y navega sus días con una resignación aprendida. Hasta que una noche, seis figuras vestidas de negro irrumpen en su casa, destrozan cada rincón y le hacen la pregunta que lleva años temiendo: ¿dónde está tu padre?
-La respuesta honesta es que no lo sabe. Pero la pregunta lo lanza a un viaje que lo llevará mucho más allá de lo que cualquier respuesta podría contener.
-Junto a Amaya —su amiga de universidad, cuya destreza física pronto revelará que guarda secretos propios— y Rayen —una joven de apariencia frágil pero de una lealtad inquebrantable—, Rio huye de Santiago perseguido por el Comandante Reiner, un militar de voluntad de hierro que opera para una organización de poder global conocida como Las Sombras.
-La fuga los conduce hacia el sur, hasta un umbral que la tecnología y los mapas oficiales se niegan a registrar: El Muro. Y al cruzarlo, Rio descubre algo que sacude los cimientos de todo lo que creía saber: el mundo no es uno solo. Lo que él siempre conoció tiene un nombre desde el otro lado —Pangea—, el mundo de adentro. Y más allá del muro existe Panasea, un continente oculto donde las reglas se quiebran, criaturas que no deberían existir habitan sus paisajes y el frío puede matar en minutos. Las sombras que los perseguían desde Santiago —tanto las reales como las internas— los alcanzan también allí.
-En Panasea, Rio comienza a cambiar. Sus reacciones son demasiado rápidas, su resistencia demasiado alta, su fuerza demasiado grande. En los momentos de peligro extremo, sus ojos se oscurecen hasta volverse pozos negros y algo antiguo —algo que no pertenece del todo al mundo humano— toma el control de su cuerpo. Nadie sabe aún qué es. Ni él mismo. Pero Reiner lo intuye, Las Sombras lo sospechan, y un guerrero inmortal llamado Still lo espera en lo alto de un volcán como si llevara siglos haciéndolo.
-Mientras la historia avanza, los cimientos de la lealtad se agrietan y los vínculos del grupo son sometidos a pruebas que ninguno habría imaginado sobrevivir. Y la pregunta que el prólogo plantó con delicadeza quirúrgica cobra una urgencia nueva: ¿quién es realmente Rio? ¿Qué legado le dejó su padre? ¿Y a qué precio se hereda una identidad que el mundo entero quiso mantenerle oculta?.
+Durante siglos el mundo creyó que el muro marcaba el final de la civilización.  
+Pero tras él se extiende Panasea, un continente olvidado donde dioses, guerreros
+y criaturas antiguas aún gobiernan.
+
+Reinos como Valhalla, la Ciudadela o el Olimpo guardan secretos que podrían
+cambiar el destino de todos los pueblos.
+
+Cuando un joven marcado por la sangre de Gaia emerge de las sombras,
+el equilibrio entre los reinos comienza a romperse.
 </p>
 
 </section>
+
 
 <section id="personajes">
-<h2>Personajes</h2>
 
-<div class="characters">
+<h2>Fichas de Personajes</h2>
 
-<div class="card">
+<div class="personajes">
+
+<div class="personaje">
+<img src="personajes/kael.jpg">
+<h3>Kael</h3>
+<p>El heredero de un destino que podría destruir Panasea.</p>
+</div>
+
+<div class="personaje">
+<img src="personajes/kruss.jpg">
+<h3>Kruss</h3>
+<p>Guerrero implacable que busca al elegido.</p>
+</div>
+
+<div class="personaje">
+<img src="personajes/rio.jpg">
 <h3>Rio</h3>
-<img src="Rio.png" width="200">
-<p>Un joven de 18 años, abandonado por su padre, no conoció a su madre y ahora miitares lo persiguen por que creen que tiene informacion de su padre.</p>
-</div>
-
-<div class="card">
-<h3>Amaya</h3>
-<img src="Amaya.png" width="200">
-<p>Un guerrero veterano que ha pasado años buscando al muchacho.</p>
-</div>
-
-<div class="card">
-<h3>Rayen</h3>
-<img src="Rayen.png" width="200">
-<p>Un brutal combatiente cuya lealtad pertenece al trono.</p>
-</div>
-
-<div class="card">
-<h3>Reiner</h3>
-<img src="Reiner.png" width="200">
-<p>Consejero oscuro que conoce secretos antiguos.</p>
-</div>
-
-  <div class="card">
-<h3>Rollo</h3>
-<img src="Rollo.png" width="200">
-<p>Consejero oscuro que conoce secretos antiguos.</p>
-</div>
-
-  <div class="card">
-<h3>Draven</h3>
-<img src="Draven.jpg" width="200">
-<p>Consejero oscuro que conoce secretos antiguos.</p>
-</div>
-
-  <div class="card">
-<h3>Still</h3>
-<img src="Still.png" width="200">
-<p>Consejero oscuro que conoce secretos antiguos.</p>
+<p>Misterioso viajero que conoce los secretos del muro.</p>
 </div>
 
 </div>
 
 </section>
 
-<section id="mapa">
-<h2>Mapa del Mundo</h2>
 
-<div class="map-container">
+<section id="reinos">
 
-<img src="mapa.jpg">
-
-<div class="location" style="top:40%;left:60%" data-name="La Entrada a Panasea"></div>
-<div class="location" style="top:65%;left:30%" data-name="Sementerio Blanco"></div>
-<div class="location" style="top:25%;left:45%" data-name="El Castillo de Still"></div>
-  <h3>Castillo de Still</h3>
-<img src="Castillostill2.png" style="max-width:10%; height:auto;">
-<div class="location" style="top:25%;left:45%" data-name="La Ciudadela"></div>
-<div class="location" style="top:25%;left:45%" data-name="El Valhalla"></div>
-  <h3>Valhalla</h3>
-<img src="Valhalla2.png" style="max-width:10%; height:auto;">
-<div class="location" style="top:25%;left:45%" data-name="El Olimpo"></div>
-<div class="location" style="top:25%;left:45%" data-name="El Inframundo"></div>
-<div class="location" style="top:25%;left:45%" data-name="Khamet"></div>
-<div class="location" style="top:25%;left:45%" data-name="El Valle de los Condenados"></div>
-<div class="location" style="top:25%;left:45%" data-name="La Tierra de los Mapu"></div>
-
-<div class="tooltip" id="tooltip"></div>
-
-</div>
-
-  <section id="reinos">
-
-<h2>Reinos de Panasea</h2>
+<h2>Galerías por Reino</h2>
 
 <h3>Valhalla</h3>
-<img src="Valhalla1.jpeg" width="400">
-<p>La tierra de los guerreros eternos y el árbol sagrado Yggdrasil.</p>
+
+<div class="galeria">
+<img src="reinos/valhalla1.jpg" onclick="abrirImagen(this)">
+<img src="reinos/valhalla2.jpg" onclick="abrirImagen(this)">
+<img src="reinos/valhalla3.jpg" onclick="abrirImagen(this)">
+</div>
+
+<br>
+
+<h3>Castillo de Still</h3>
+
+<div class="galeria">
+<img src="reinos/still1.jpg" onclick="abrirImagen(this)">
+<img src="reinos/still2.jpg" onclick="abrirImagen(this)">
+</div>
+
+<br>
 
 <h3>La Ciudadela</h3>
-<img src="Ciudadela1.jpeg" width="400">
-<p>Los tres Pilares Flotantes que custodian la pureza sobre el gran bosque de Panasea.</p>
 
-<h3>Olimpo</h3>
-<img src="Olimpo1.jpeg" width="400">
-<p>El Palasio oculto entre nuves de tormenta en lo alto del monte Olimpo .</p>
-
-<h3>Khamet</h3>
-<img src="Khamet1.jpeg" width="400">
-<p>El Imperio del desierto y las pirámides solares.</p>
-
-<h3>Inframundo</h3>
-<img src="Inframundo1.jpeg" width="400">
-<p>El Reino oscuro de piedra negra y coronas antiguas.</p>
-
-<h3>Valle de los Condenados</h3>
-<img src="Valledeloscondenados1.jpeg" width="400">
-<p>El Reino que se tomaron las Abominaciones de Panasea Bajo Tierra.</p>
-
-    <h3>Los Mapu</h3>
-<img src="Tierradelosmapu.png" width="400">
-<p>Una Isla escondida entre bosques custodiada por enormes criaturas.</p>
-
-</section>
-
-</section>
-
-<section id="capitulos">
-<h2>Capítulos</h2>
-
-<div class="chapter">
-<h3>Capítulo 1</h3>
-<p>El comienzo de la historia...</p>
-<button onclick="leerCapitulo(1)">Leer</button>
-</div>
-
-<div class="chapter">
-<h3>Capítulo 2</h3>
-<p>El viaje comienza.</p>
-<button onclick="leerCapitulo(2)">Leer</button>
+<div class="galeria">
+<img src="reinos/ciudadela1.jpg" onclick="abrirImagen(this)">
+<img src="reinos/ciudadela2.jpg" onclick="abrirImagen(this)">
 </div>
 
 </section>
+
 
 <section id="autor">
-<h2>Sobre el Autor</h2>
+
+<h2>Autor</h2>
 
 <p>
-Autor de fantasía dedicado a crear mundos oscuros, reinos antiguos
-y personajes marcados por el destino.
+Andrew — creador del universo de Panasea y autor de
+<strong>El Legado de Gaia</strong>.
 </p>
 
 </section>
 
+
 <footer>
-<p>2026 - Sitio oficial de la novela</p>
+
+<h3>Redes Sociales</h3>
+
+<a href="https://instagram.com/TU_USUARIO">Instagram</a>
+<a href="https://twitter.com/TU_USUARIO">Twitter</a>
+<a href="https://facebook.com/TU_USUARIO">Facebook</a>
+
+<br><br>
+
+<h3>Comprar el libro</h3>
+
+<a href="https://amazon.com/TU_LIBRO">Amazon</a>
+<a href="https://books.apple.com/TU_LIBRO">Apple Books</a>
+
 </footer>
+
+
+<div id="visor" onclick="cerrarImagen()">
+<img id="imgGrande">
+</div>
+
 
 <script>
 
-const locations = document.querySelectorAll('.location');
-const tooltip = document.getElementById('tooltip');
+function abrirImagen(img){
+document.getElementById("visor").style.display="flex";
+document.getElementById("imgGrande").src=img.src;
+}
 
-locations.forEach(loc => {
-
-loc.addEventListener('mouseenter', e=>{
-
-const name = loc.dataset.name;
-
-tooltip.style.display='block';
-tooltip.innerText=name;
-
-tooltip.style.left=e.pageX+10+'px';
-tooltip.style.top=e.pageY+10+'px';
-
-});
-
-loc.addEventListener('mouseleave',()=>{
-
-tooltip.style.display='none';
-
-});
-
-});
-
-function leerCapitulo(num){
-
-alert("Aquí se abrirá el capítulo " + num);
-
+function cerrarImagen(){
+document.getElementById("visor").style.display="none";
 }
 
 </script>
 
 </body>
 </html>
+```
