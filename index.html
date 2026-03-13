@@ -4,145 +4,60 @@
 <head>
 
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>El Legado de Gaia</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Libre+Baskerville&display=swap" rel="stylesheet">
 
 <style>
 
 body{
 margin:0;
 background:#0b0f14;
-color:#e6e6e6;
-font-family:'Libre Baskerville', serif;
+color:white;
+font-family:Arial;
+text-align:center;
 }
-
-/* NAV */
-
-nav{
-position:fixed;
-top:0;
-width:100%;
-background:#0b0f14ee;
-display:flex;
-justify-content:center;
-gap:40px;
-padding:15px;
-z-index:1000;
-border-bottom:1px solid #333;
-}
-
-nav a{
-color:#ddd;
-text-decoration:none;
-font-size:14px;
-letter-spacing:2px;
-}
-
-nav a:hover{
-color:#d4af37;
-}
-
-/* HERO */
 
 .hero{
-height:100vh;
-background:url(Portada.png) center/cover no-repeat;
+height:90vh;
+background:url("Portada.png") center/cover no-repeat;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
-text-align:center;
-background:radial-gradient(circle,#1a2230,#05070a);
 }
 
 .hero h1{
-font-family:'Cinzel', serif;
-font-size:70px;
-letter-spacing:6px;
-color:#d4af37;
-margin:0;
+font-size:60px;
+background:rgba(0,0,0,0.6);
+padding:20px;
 }
-
-.hero p{
-max-width:700px;
-margin-top:20px;
-font-size:18px;
-}
-
-/* SECTIONS */
 
 section{
-max-width:1100px;
-margin:auto;
-padding:80px 20px;
+padding:60px 20px;
 }
-
-h2{
-font-family:'Cinzel', serif;
-color:#d4af37;
-font-size:34px;
-margin-bottom:30px;
-}
-
-/* GRID */
 
 .grid{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
 gap:25px;
+max-width:1200px;
+margin:auto;
 }
 
 .card{
 background:#141a22;
-border:1px solid #2c3440;
-padding:20px;
-border-radius:8px;
-transition:0.3s;
-}
-
-.card:hover{
-transform:translateY(-5px);
-border-color:#d4af37;
+padding:15px;
+border-radius:10px;
 }
 
 .card img{
 width:100%;
-border-radius:6px;
-margin-bottom:10px;
+border-radius:8px;
 }
 
-.name{
-font-family:'Cinzel', serif;
-font-size:20px;
-color:#d4af37;
-}
-
-/* TIMELINE */
-
-.timeline{
-border-left:2px solid #d4af37;
-padding-left:20px;
-}
-
-.event{
-margin-bottom:30px;
-}
-
-.year{
-color:#d4af37;
-font-weight:bold;
-}
-
-/* FOOTER */
-
-footer{
-text-align:center;
-padding:40px;
-border-top:1px solid #333;
-color:#888;
+h2{
+margin-bottom:40px;
 }
 
 </style>
@@ -151,210 +66,119 @@ color:#888;
 
 <body>
 
-<nav>
-
-<a href="#historia">Historia</a>
-<a href="#personajes">Personajes</a>
-<a href="#facciones">Facciones</a>
-<a href="#cronologia">Cronología</a>
-<a href="#mundo">El Mundo</a>
-
-</nav>
-
 <div class="hero">
 
 <h1>EL LEGADO DE GAIA</h1>
 
-<p>
-Cuando los dioses regresen y las entidades antiguas despierten,
-la humanidad descubrirá que nunca fue dueña del mundo.
-</p>
-
 </div>
 
-<section id="historia">
-
-<h2>La Historia</h2>
-
-<p>
-
-Durante milenios la humanidad construyó civilizaciones creyendo
-que dominaba la Tierra.
-
-Pero bajo templos enterrados y textos prohibidos
-se oculta una verdad olvidada:
-
-Gaia no es solo un mito.
-
-Es una conciencia antigua.
-
-Y está despertando.
-
-</p>
-
-</section>
-
-<section id="personajes">
+<section>
 
 <h2>Personajes</h2>
 
 <div class="grid">
 
 <div class="card">
-
-<img src="imagenes/rio.jpg">
-
-<div class="name">Río</div>
-
-<p>
-Un joven que descubre un misterio relacionado con la desaparición
-de su padre y antiguos textos prohibidos.
-</p>
-
+<img src="Rio.png">
+<h3>Rio</h3>
 </div>
 
 <div class="card">
-
-<img src="imagenes/amaya.jpg">
-
-<div class="name">Amaya</div>
-
-<p>
-Portadora de un conocimiento ancestral capaz de alterar
-el destino del mundo.
-</p>
-
+<img src="Amaya.png">
+<h3>Amaya</h3>
 </div>
 
 <div class="card">
+<img src="Rayen.png">
+<h3>Rayen</h3>
+</div>
 
-<img src="imagenes/rayen.jpg">
+<div class="card">
+<img src="Draven.jpg">
+<h3>Draven</h3>
+</div>
 
-<div class="name">Rayen</div>
+<div class="card">
+<img src="Reiner.png">
+<h3>Reiner</h3>
+</div>
 
-<p>
-Guerrera entrenada que conoce secretos sobre los dioses
-y las entidades que acechan la humanidad.
-</p>
-
+<div class="card">
+<img src="Rollo.png">
+<h3>Rollo</h3>
 </div>
 
 </div>
 
 </section>
 
-<section id="facciones">
+<section>
+
+<h2>Reinos</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="Valhalla1.jpeg">
+</div>
+
+<div class="card">
+<img src="Olimpo1.jpeg">
+</div>
+
+<div class="card">
+<img src="Khamet1.jpeg">
+</div>
+
+<div class="card">
+<img src="Ciudadela1.jpeg">
+</div>
+
+<div class="card">
+<img src="Castillostill2.png">
+</div>
+
+</div>
+
+</section>
+
+<section>
+
+<h2>Inframundo</h2>
+
+<div class="grid">
+
+<div class="card">
+<img src="Inframundo1.jpeg">
+</div>
+
+<div class="card">
+<img src="Inframundo2.png">
+</div>
+
+<div class="card">
+<img src="Valledeloscondenados1.jpeg">
+</div>
+
+</div>
+
+</section>
+
+<section>
 
 <h2>Facciones</h2>
 
 <div class="grid">
 
 <div class="card">
-
-<div class="name">La Resistencia</div>
-
-<p>
-Grupo clandestino que intenta impedir el despertar
-de las entidades antiguas.
-</p>
-
-</div>
-
-<div class="card">
-
-<div class="name">Los Custodios</div>
-
-<p>
-Guardianes del conocimiento perdido de la humanidad.
-</p>
-
-</div>
-
-<div class="card">
-
-<div class="name">Las Abominaciones</div>
-
-<p>
-Entidades primordiales que existían antes
-del surgimiento de la civilización humana.
-</p>
-
+<img src="Resistencia.jpeg">
+<h3>La Resistencia</h3>
 </div>
 
 </div>
 
 </section>
-
-<section id="cronologia">
-
-<h2>Cronología</h2>
-
-<div class="timeline">
-
-<div class="event">
-
-<div class="year">1999</div>
-
-Desaparición de un investigador que estudiaba
-antiguos textos relacionados con Gaia.
-
-</div>
-
-<div class="event">
-
-<div class="year">2012</div>
-
-Aparece un códice que menciona a entidades
-anteriores a los dioses conocidos.
-
-</div>
-
-<div class="event">
-
-<div class="year">2024</div>
-
-Comienza la búsqueda de la verdad.
-
-</div>
-
-<div class="event">
-
-<div class="year">2030</div>
-
-El despertar.
-
-</div>
-
-</div>
-
-</section>
-
-<section id="mundo">
-
-<h2>El Mundo</h2>
-
-<p>
-
-El mundo de El Legado de Gaia está lleno de lugares ocultos.
-
-Templos enterrados bajo montañas.
-
-Ciudades perdidas.
-
-Portales hacia dimensiones antiguas.
-
-El mapa completo del mundo será revelado
-a medida que la historia avance.
-
-</p>
-
-</section>
-
-<footer>
-
-Universo narrativo El Legado de Gaia
-
-</footer>
 
 </body>
+
 </html>
