@@ -160,19 +160,197 @@ margin:0 10px;
 
 <section id="sinopsis">
 
-<h2>Sinopsis</h2>
+<!-- Pega esto DENTRO de tu <section id="sinopsis">, reemplazando lo que ya tienes -->
 
-<p>
-Durante siglos el mundo creyó que el muro marcaba el final de la civilización.  
-Pero tras él se extiende Panasea, un continente olvidado donde dioses, guerreros
-y criaturas antiguas aún gobiernan.
+<style>
+  #sinopsis { background-color: #0e0c0a; padding: 0; overflow-x: hidden; }
+  .gs-wrap { max-width: 760px; margin: 0 auto; padding: 3.5rem 2rem 5rem; font-family: 'Lora', Georgia, serif; color: #f5f0e8; }
+  .gs-wrap * { box-sizing: border-box; }
 
-Reinos como Valhalla, la Ciudadela o el Olimpo guardan secretos que podrían
-cambiar el destino de todos los pueblos.
+  /* Importar fuentes */
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap');
 
-Cuando un joven marcado por la sangre de Gaia emerge de las sombras,
-el equilibrio entre los reinos comienza a romperse.
-</p>
+  /* Título de sección */
+  #sinopsis h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 400;
+    color: #f5f0e8;
+    text-align: center;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+  .gs-subt {
+    text-align: center;
+    font-size: 0.8rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #c9a84c;
+    margin-bottom: 2rem;
+  }
+  .gs-ornament {
+    display: flex; align-items: center; gap: 0.9rem;
+    margin: 0 auto 2.5rem; width: fit-content;
+  }
+  .gs-ornament span { display: block; height: 1px; width: 90px; }
+  .gs-ornament span:first-child { background: linear-gradient(to right, transparent, #c9a84c); }
+  .gs-ornament span:last-child  { background: linear-gradient(to left,  transparent, #c9a84c); }
+  .gs-diamond { width: 7px; height: 7px; background: #c9a84c; transform: rotate(45deg); flex-shrink: 0; }
+
+  /* Párrafos */
+  .gs-wrap p {
+    font-size: clamp(0.97rem, 1.6vw, 1.08rem);
+    line-height: 1.9;
+    color: rgba(245,240,232,0.86);
+    margin-bottom: 1.4rem;
+  }
+
+  /* Drop cap */
+  .gs-drop::first-letter {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 4.8em; float: left;
+    line-height: 0.72; padding-right: 0.1em; padding-top: 0.08em;
+    color: #c9a84c; font-weight: 700;
+  }
+
+  /* Estilos inline */
+  .gs-char  { font-weight: 500; color: #c9a84c; }
+  .gs-world { font-family: 'Playfair Display', Georgia, serif; font-style: italic; color: #c9a84c; }
+  .gs-muted { font-style: italic; color: rgba(245,240,232,0.6); }
+
+  /* Cita destacada */
+  .gs-quote {
+    border-left: 3px solid #c9a84c;
+    padding: 0.9rem 0 0.9rem 1.6rem;
+    margin: 1.8rem 0;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.15rem);
+    color: rgba(245,240,232,0.7);
+    line-height: 1.7;
+  }
+
+  /* Separador */
+  .gs-sep { display: flex; align-items: center; gap: 1.1rem; margin: 2rem 0; }
+  .gs-sep hr { flex: 1; border: none; border-top: 1px solid rgba(201,168,76,0.2); }
+  .gs-sep .tri { width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 9px solid rgba(201,168,76,0.38); }
+
+  /* Cards de personajes */
+  .gs-chars { display: grid; grid-template-columns: repeat(auto-fit, minmax(175px, 1fr)); gap: 1rem; margin: 1.8rem 0; }
+  .gs-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(201,168,76,0.18);
+    border-top: 2px solid rgba(201,168,76,0.5);
+    padding: 1rem 1.2rem; border-radius: 2px;
+  }
+  .gs-card h3 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 0.98rem; font-weight: 700;
+    color: #c9a84c; margin-bottom: 0.4rem;
+  }
+  .gs-card p { font-size: 0.84rem !important; color: rgba(245,240,232,0.55) !important; line-height: 1.6 !important; margin: 0 !important; }
+
+  /* Banner de mundos */
+  .gs-worlds {
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px; padding: 1.5rem 1.6rem;
+    text-align: center; margin: 1.8rem 0;
+  }
+  .gs-worlds-row { display: flex; align-items: center; justify-content: center; gap: 1.2rem; flex-wrap: wrap; }
+  .gs-wbadge { font-family: 'Playfair Display', Georgia, serif; font-size: 1.2rem; font-style: italic; color: #c9a84c; }
+  .gs-wlabel { font-size: 0.7rem; color: rgba(245,240,232,0.42); letter-spacing: 0.2em; text-transform: uppercase; margin-top: 0.2rem; }
+  .gs-warrow { font-size: 1.3rem; color: rgba(201,168,76,0.32); }
+  .gs-worlds > p { font-size: 0.78rem !important; color: rgba(245,240,232,0.42) !important; margin: 0.8rem 0 0 !important; letter-spacing: 0.12em; text-transform: uppercase; }
+
+  /* Preguntas finales */
+  .gs-questions { border-top: 1px solid rgba(201,168,76,0.2); padding-top: 2rem; margin-top: 0.5rem; }
+  .gs-questions h4 { font-family: 'Lora', serif; font-size: 0.73rem; letter-spacing: 0.28em; text-transform: uppercase; color: #c9a84c; margin-bottom: 1.2rem; opacity: 0.7; }
+  .gs-qlist { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; padding: 0; }
+  .gs-qlist li { font-family: 'Playfair Display', Georgia, serif; font-style: italic; font-size: clamp(0.97rem, 1.8vw, 1.1rem); color: rgba(245,240,232,0.66); padding-left: 1.3rem; position: relative; line-height: 1.5; }
+  .gs-qlist li::before { content: '—'; position: absolute; left: 0; color: #c9a84c; }
+
+  /* Animación scroll */
+  .gs-sec { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .gs-sec.gs-on { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 600px) {
+    .gs-wrap { padding: 2.5rem 1.3rem 3.5rem; }
+    .gs-chars { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="gs-wrap">
+
+  <h2>El Legado de Gaia</h2>
+  <p class="gs-subt">Sinopsis</p>
+  <div class="gs-ornament">
+    <span></span><div class="gs-diamond"></div><div class="gs-diamond" style="width:5px;height:5px;opacity:0.4;"></div><div class="gs-diamond"></div><span></span>
+  </div>
+
+  <div class="gs-sec">
+    <p class="gs-drop">Todo comienza con una carta sin destinatario: las palabras de un padre que eligió desaparecer para proteger a su hijo de sombras que nunca pudo nombrar. Esa voz —íntima, rota, cargada de amor culpable— es la primera señal de que <em>El Legado de Gaia</em> no es una historia de héroes invencibles, sino de personas ordinarias arrastradas por un destino que nunca pidieron.</p>
+  </div>
+
+  <div class="gs-sep"><hr><div class="tri"></div><hr></div>
+
+  <div class="gs-sec">
+    <p><span class="gs-char">Rio</span> tiene veinte años, dos trabajos, una bicicleta oxidada y el silencio de un padre ausente desde la infancia. Vive en un pequeño departamento en Santiago, estudia criptología y navega sus días con una resignación aprendida. Hasta que una noche, seis figuras vestidas de negro irrumpen en su casa, destrozan cada rincón y le hacen la pregunta que lleva años temiendo:</p>
+    <div class="gs-quote">¿Dónde está tu padre?</div>
+    <p>La respuesta honesta es que no lo sabe. Pero la pregunta lo lanza a un viaje que lo llevará mucho más allá de lo que cualquier respuesta podría contener.</p>
+  </div>
+
+  <div class="gs-sec">
+    <div class="gs-chars">
+      <div class="gs-card"><h3>Rio</h3><p>Estudiante de criptología. Carga el peso de una ausencia que no eligió, y un poder que aún no comprende.</p></div>
+      <div class="gs-card"><h3>Amaya</h3><p>Su amiga de universidad. Su destreza física pronto revelará que guarda secretos propios.</p></div>
+      <div class="gs-card"><h3>Rayen</h3><p>De apariencia frágil, pero con una lealtad tan firme como el acero cuando los demás fallan.</p></div>
+      <div class="gs-card"><h3>Cdte. Reiner</h3><p>Militar de voluntad de hierro. Opera para una organización de poder global: <em>Las Sombras</em>.</p></div>
+    </div>
+  </div>
+
+  <div class="gs-sep"><hr><div class="tri"></div><hr></div>
+
+  <div class="gs-sec">
+    <p>Junto a <span class="gs-char">Amaya</span> y <span class="gs-char">Rayen</span>, Rio huye de Santiago perseguido por el <span class="gs-char">Comandante Reiner</span>, un militar que opera para una organización de poder global conocida como <span class="gs-muted">Las Sombras</span>. La fuga los conduce al sur, hasta un umbral que los mapas oficiales se niegan a registrar.</p>
+    <div class="gs-worlds">
+      <div class="gs-worlds-row">
+        <div><div class="gs-wbadge">Pangea</div><div class="gs-wlabel">El mundo conocido</div></div>
+        <div class="gs-warrow">&#8594;</div>
+        <div><div class="gs-wbadge" style="font-size:1.5rem;color:#e8dbc0;">El Muro</div><div class="gs-wlabel">El umbral prohibido</div></div>
+        <div class="gs-warrow">&#8594;</div>
+        <div><div class="gs-wbadge">Panasea</div><div class="gs-wlabel">El continente oculto</div></div>
+      </div>
+      <p>Al cruzarlo, Rio descubre que el mundo no es uno solo</p>
+    </div>
+    <p>Al cruzar <span class="gs-world">El Muro</span>, Rio descubre que lo que siempre conoció tiene un nombre: <span class="gs-world">Pangea</span>. Y más allá existe <span class="gs-world">Panasea</span>, un continente oculto donde las reglas se quiebran, criaturas que no deberían existir habitan sus paisajes y el frío puede matar en minutos.</p>
+  </div>
+
+  <div class="gs-sep"><hr><div class="tri"></div><hr></div>
+
+  <div class="gs-sec">
+    <p>En <span class="gs-world">Panasea</span>, <span class="gs-char">Rio</span> comienza a cambiar. Sus reacciones son demasiado rápidas, su resistencia demasiado alta, su fuerza demasiado grande. En los momentos de peligro extremo, sus ojos se oscurecen hasta volverse pozos negros y algo antiguo —algo que no pertenece del todo al mundo humano— toma el control de su cuerpo.</p>
+    <p>Nadie sabe aún qué es. Ni él mismo. Pero <span class="gs-char">Reiner</span> lo intuye, <span class="gs-muted">Las Sombras</span> lo sospechan, y un guerrero inmortal llamado <span class="gs-char">Still</span> lo espera en lo alto de un volcán como si llevara siglos haciéndolo.</p>
+  </div>
+
+  <div class="gs-sec gs-questions">
+    <h4>Las preguntas que lo persiguen</h4>
+    <ul class="gs-qlist">
+      <li>¿Quién es realmente Rio?</li>
+      <li>¿Qué legado le dejó su padre?</li>
+      <li>¿Y a qué precio se hereda una identidad que el mundo entero quiso mantenerle oculta?</li>
+    </ul>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  var s = document.querySelectorAll('.gs-sec');
+  var o = new IntersectionObserver(function(e){ e.forEach(function(i){ if(i.isIntersecting){ i.target.classList.add('gs-on'); o.unobserve(i.target); } }); }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+  s.forEach(function(x){ o.observe(x); });
+})();
+</script>
 
 </section>
 
