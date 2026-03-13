@@ -8,6 +8,8 @@
 
 <title>El Legado de Gaia</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap" rel="stylesheet">
+
 <style>
 
 body{
@@ -16,6 +18,29 @@ background:#0b0f14;
 color:white;
 font-family:Arial;
 text-align:center;
+}
+
+/* MENU */
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+background:#0b0f14;
+padding:15px;
+border-bottom:1px solid #333;
+z-index:1000;
+}
+
+nav a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+font-weight:bold;
+}
+
+nav a:hover{
+color:#d4af37;
 }
 
 /* PORTADA */
@@ -30,34 +55,36 @@ align-items:center;
 }
 
 .hero h1{
-font-size:70px;
-letter-spacing:4px;
+font-family:'Cinzel',serif;
+font-size:75px;
+letter-spacing:5px;
 }
 
 /* SECCIONES */
 
 section{
-padding:60px 20px;
+padding:80px 20px;
+max-width:1200px;
+margin:auto;
 }
 
 h2{
-margin-bottom:40px;
+font-family:'Cinzel',serif;
 font-size:35px;
+margin-bottom:40px;
 }
 
 /* GRID */
 
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
 gap:25px;
-max-width:1200px;
-margin:auto;
 }
 
 .card{
 background:#141a22;
-padding:10px;
+padding:15px;
 border-radius:8px;
 }
 
@@ -66,26 +93,11 @@ width:100%;
 border-radius:8px;
 }
 
-.card h3{
-margin:10px 0;
+.card p{
+font-size:14px;
 }
 
 /* REDES */
-
-.social{
-margin-top:40px;
-}
-
-.social a{
-color:white;
-margin:0 15px;
-font-size:18px;
-text-decoration:none;
-}
-
-.social a:hover{
-color:#d4af37;
-}
 
 footer{
 margin-top:60px;
@@ -93,11 +105,32 @@ padding:40px;
 border-top:1px solid #333;
 }
 
+.social a{
+color:white;
+margin:0 15px;
+text-decoration:none;
+}
+
+.social a:hover{
+color:#d4af37;
+}
+
 </style>
 
 </head>
 
 <body>
+
+<!-- MENU -->
+
+<nav>
+
+<a href="#personajes">Personajes</a>
+<a href="#reinos">Reinos</a>
+<a href="#estandartes">Estandartes</a>
+<a href="#contacto">Contacto</a>
+
+</nav>
 
 <!-- PORTADA -->
 
@@ -109,7 +142,7 @@ border-top:1px solid #333;
 
 <!-- PERSONAJES -->
 
-<section>
+<section id="personajes">
 
 <h2>Personajes</h2>
 
@@ -118,36 +151,43 @@ border-top:1px solid #333;
 <div class="card">
 <img src="Rio.png">
 <h3>Rio</h3>
+<p>Joven que descubre secretos antiguos relacionados con Gaia y el origen oculto del mundo.</p>
 </div>
 
 <div class="card">
 <img src="Amaya.png">
 <h3>Amaya</h3>
+<p>Portadora de un conocimiento antiguo capaz de cambiar el destino de la humanidad.</p>
 </div>
 
 <div class="card">
 <img src="Rayen.png">
 <h3>Rayen</h3>
+<p>Guerrera entrenada que conoce los secretos de las antiguas civilizaciones.</p>
 </div>
 
 <div class="card">
 <img src="Draven.jpg">
 <h3>Draven</h3>
+<p>Guerrero híbrido entre ángel y demonio que lucha contra fuerzas oscuras.</p>
 </div>
 
 <div class="card">
 <img src="Reiner.png">
 <h3>Reiner</h3>
+<p>Estratega y combatiente con un pasado oscuro ligado a antiguos conflictos.</p>
 </div>
 
 <div class="card">
 <img src="Rollo.png">
 <h3>Rollo</h3>
+<p>Guerrero feroz con un carácter sarcástico y espíritu indomable.</p>
 </div>
 
 <div class="card">
 <img src="Still.png">
 <h3>Still</h3>
+<p>Figura misteriosa vinculada a un antiguo castillo y secretos olvidados.</p>
 </div>
 
 </div>
@@ -156,7 +196,7 @@ border-top:1px solid #333;
 
 <!-- REINOS -->
 
-<section>
+<section id="reinos">
 
 <h2>Reinos</h2>
 
@@ -193,11 +233,6 @@ border-top:1px solid #333;
 </div>
 
 <div class="card">
-<img src="Resistencia.jpeg">
-<h3>Tierra de los Mapu</h3>
-</div>
-
-<div class="card">
 <img src="Castillostill2.png">
 <h3>Castillo de Still</h3>
 </div>
@@ -208,7 +243,7 @@ border-top:1px solid #333;
 
 <!-- ESTANDARTES -->
 
-<section>
+<section id="estandartes">
 
 <h2>Estandartes</h2>
 
@@ -216,44 +251,55 @@ border-top:1px solid #333;
 
 <div class="card">
 <img src="Valhalla1.jpeg">
-<h3>Estandarte Valhalla</h3>
+<h3>Valhalla</h3>
 </div>
 
 <div class="card">
 <img src="Ciudadela1.jpeg">
-<h3>Estandarte Ciudadela</h3>
+<h3>Ciudadela</h3>
 </div>
 
 <div class="card">
 <img src="Olimpo1.jpeg">
-<h3>Estandarte Olimpo</h3>
+<h3>Olimpo</h3>
 </div>
 
 <div class="card">
 <img src="Khamet1.jpeg">
-<h3>Estandarte Khamet</h3>
+<h3>Khamet</h3>
+</div>
+
+<div class="card">
+<img src="Inframundo1.jpeg">
+<h3>Inframundo</h3>
+</div>
+
+<div class="card">
+<img src="Valledeloscondenados1.jpeg">
+<h3>Valle de los Condenados</h3>
+</div>
+
+<div class="card">
+<img src="Resistencia.jpeg">
+<h3>La Resistencia</h3>
 </div>
 
 </div>
 
 </section>
 
-<!-- REDES Y TIENDAS -->
+<!-- REDES -->
 
-<footer>
+<footer id="contacto">
 
 <h2>El Legado de Gaia</h2>
 
 <div class="social">
 
 <a href="#">Instagram</a>
-
 <a href="#">TikTok</a>
-
 <a href="#">X</a>
-
 <a href="#">Amazon</a>
-
 <a href="#">Apple Books</a>
 
 </div>
