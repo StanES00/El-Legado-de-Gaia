@@ -18,8 +18,10 @@ font-family:Arial;
 text-align:center;
 }
 
+/* PORTADA */
+
 .hero{
-height:90vh;
+height:95vh;
 background:url("Portada.png") center/cover no-repeat;
 display:flex;
 flex-direction:column;
@@ -28,18 +30,26 @@ align-items:center;
 }
 
 .hero h1{
-font-size:60px;
-background:rgba(0,0,0,0.6);
-padding:20px;
+font-size:70px;
+letter-spacing:4px;
 }
+
+/* SECCIONES */
 
 section{
 padding:60px 20px;
 }
 
+h2{
+margin-bottom:40px;
+font-size:35px;
+}
+
+/* GRID */
+
 .grid{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
 gap:25px;
 max-width:1200px;
 margin:auto;
@@ -47,8 +57,8 @@ margin:auto;
 
 .card{
 background:#141a22;
-padding:15px;
-border-radius:10px;
+padding:10px;
+border-radius:8px;
 }
 
 .card img{
@@ -56,8 +66,31 @@ width:100%;
 border-radius:8px;
 }
 
-h2{
-margin-bottom:40px;
+.card h3{
+margin:10px 0;
+}
+
+/* REDES */
+
+.social{
+margin-top:40px;
+}
+
+.social a{
+color:white;
+margin:0 15px;
+font-size:18px;
+text-decoration:none;
+}
+
+.social a:hover{
+color:#d4af37;
+}
+
+footer{
+margin-top:60px;
+padding:40px;
+border-top:1px solid #333;
 }
 
 </style>
@@ -66,11 +99,15 @@ margin-bottom:40px;
 
 <body>
 
+<!-- PORTADA -->
+
 <div class="hero">
 
 <h1>EL LEGADO DE GAIA</h1>
 
 </div>
+
+<!-- PERSONAJES -->
 
 <section>
 
@@ -108,9 +145,16 @@ margin-bottom:40px;
 <h3>Rollo</h3>
 </div>
 
+<div class="card">
+<img src="Still.png">
+<h3>Still</h3>
+</div>
+
 </div>
 
 </section>
+
+<!-- REINOS -->
 
 <section>
 
@@ -119,66 +163,102 @@ margin-bottom:40px;
 <div class="grid">
 
 <div class="card">
-<img src="Valhalla1.jpeg">
+<img src="Valhalla2.png">
+<h3>Valhalla</h3>
 </div>
 
 <div class="card">
-<img src="Olimpo1.jpeg">
+<img src="Ciudadela2.png">
+<h3>Ciudadela</h3>
 </div>
 
 <div class="card">
-<img src="Khamet1.jpeg">
+<img src="Valle2.png">
+<h3>Valle de los Condenados</h3>
 </div>
 
 <div class="card">
-<img src="Ciudadela1.jpeg">
+<img src="Olimpo2.png">
+<h3>Olimpo</h3>
 </div>
 
 <div class="card">
-<img src="Castillostill2.png">
-</div>
-
-</div>
-
-</section>
-
-<section>
-
-<h2>Inframundo</h2>
-
-<div class="grid">
-
-<div class="card">
-<img src="Inframundo1.jpeg">
+<img src="Khamet2.png">
+<h3>Khamet</h3>
 </div>
 
 <div class="card">
 <img src="Inframundo2.png">
+<h3>Inframundo</h3>
 </div>
 
 <div class="card">
-<img src="Valledeloscondenados1.jpeg">
+<img src="Resistencia.jpeg">
+<h3>Tierra de los Mapu</h3>
+</div>
+
+<div class="card">
+<img src="Castillostill2.png">
+<h3>Castillo de Still</h3>
 </div>
 
 </div>
 
 </section>
 
+<!-- ESTANDARTES -->
+
 <section>
 
-<h2>Facciones</h2>
+<h2>Estandartes</h2>
 
 <div class="grid">
 
 <div class="card">
-<img src="Resistencia.jpeg">
-<h3>La Resistencia</h3>
+<img src="Valhalla1.jpeg">
+<h3>Estandarte Valhalla</h3>
+</div>
+
+<div class="card">
+<img src="Ciudadela1.jpeg">
+<h3>Estandarte Ciudadela</h3>
+</div>
+
+<div class="card">
+<img src="Olimpo1.jpeg">
+<h3>Estandarte Olimpo</h3>
+</div>
+
+<div class="card">
+<img src="Khamet1.jpeg">
+<h3>Estandarte Khamet</h3>
 </div>
 
 </div>
 
 </section>
 
-</body>
+<!-- REDES Y TIENDAS -->
 
+<footer>
+
+<h2>El Legado de Gaia</h2>
+
+<div class="social">
+
+<a href="#">Instagram</a>
+
+<a href="#">TikTok</a>
+
+<a href="#">X</a>
+
+<a href="#">Amazon</a>
+
+<a href="#">Apple Books</a>
+
+</div>
+
+</footer>
+
+</body>
 </html>
