@@ -1,598 +1,370 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>El Legado de Gaia – El Continente tras el Muro</title>
+  <meta name="description" content="El Legado de Gaia – Una novela de fantasía épica. El continente tras el Muro."/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
   <style>
     :root {
-      --gold:       #c9a84c;
-      --gold-light: #e8c97a;
-      --dark:       #0a0a0e;
-      --dark2:      #111118;
-      --dark3:      #1a1a26;
-      --mid:        #23233a;
-      --text:       #d4cfc5;
-      --text-dim:   #8a8478;
-      --accent:     #6b3fa0;
-      --accent2:    #3a1f5e;
-      --red:        #8b2020;
+      --gold:#c9a84c; --gold-light:#e8c97a; --dark:#08080c; --dark2:#0f0f18;
+      --dark3:#161622; --mid:#1e1e2e; --text:#d8d3c8; --text-dim:#7a7470;
+      --accent:#5a2d8a; --accent2:#2e1550;
     }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--dark);color:var(--text);font-family:'EB Garamond',Georgia,serif;font-size:18px;line-height:1.7;overflow-x:hidden}
+    ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dark2)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    /* ═══ TOPBAR NAV ═══ */
+    #topbar {
+      position:fixed;top:0;left:0;right:0;z-index:1000;
+      background:rgba(8,8,12,.96);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(201,168,76,.2);
+      height:58px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 1.5rem;
+      gap:.5rem;
+    }
+    .topbar-logo {
+      font-family:'Cinzel Decorative',serif;font-size:.82rem;
+      color:var(--gold);letter-spacing:.06em;white-space:nowrap;
+      cursor:pointer;flex-shrink:0;
+    }
+    .topbar-logo:hover{color:var(--gold-light)}
+    .nav-tabs {
+      display:flex;align-items:center;gap:.15rem;flex-wrap:nowrap;overflow-x:auto;
+      scrollbar-width:none;
+    }
+    .nav-tabs::-webkit-scrollbar{display:none}
+    .nav-tab {
+      padding:.35rem .65rem;
+      font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--text-dim);
+      background:none;border:none;cursor:pointer;
+      position:relative;white-space:nowrap;
+      transition:color .2s;
+    }
+    .nav-tab::after{
+      content:'';position:absolute;bottom:0;left:.65rem;right:.65rem;
+      height:1px;background:var(--gold);
+      transform:scaleX(0);transition:transform .25s;
+    }
+    .nav-tab:hover,.nav-tab.active{color:var(--gold)}
+    .nav-tab.active::after,.nav-tab:hover::after{transform:scaleX(1)}
+    .nav-auth-btn{
+      padding:.28rem .75rem;border:1px solid rgba(201,168,76,.4);
+      background:rgba(201,168,76,.07);color:var(--gold);
+      font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;
+      text-transform:uppercase;cursor:pointer;transition:all .2s;
+      white-space:nowrap;flex-shrink:0;
+    }
+    .nav-auth-btn:hover{background:var(--gold);color:var(--dark)}
 
-    html { scroll-behavior: smooth; }
+    /* ═══ PAGES SYSTEM ═══ */
+    .page{display:none;min-height:100vh;padding-top:58px;animation:pageIn .4s ease}
+    .page.active{display:block}
+    @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
 
-    body {
-      background: var(--dark);
-      color: var(--text);
-      font-family: 'EB Garamond', Georgia, serif;
-      font-size: 18px;
-      line-height: 1.7;
-      overflow-x: hidden;
+    /* ═══ HOME PAGE ═══ */
+    #page-home {
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      min-height:100vh;padding:0;position:relative;overflow:hidden;
     }
-
-    /* ══════════════════════ SCROLLBAR ══════════════════════ */
-    ::-webkit-scrollbar { width: 8px; }
-    ::-webkit-scrollbar-track { background: var(--dark2); }
-    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 4px; }
-
-    /* ══════════════════════ NAV ══════════════════════ */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-      background: linear-gradient(180deg, rgba(0,0,0,.95) 0%, rgba(10,10,14,.85) 100%);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(201,168,76,.25);
-      padding: 0 2rem;
-      display: flex; align-items: center; justify-content: space-between;
-      height: 64px;
+    .home-bg {
+      position:absolute;inset:0;z-index:0;
+      background:url('Portada.png') center center/cover no-repeat;
+      filter:brightness(.45) saturate(.8);
+      transform:scale(1.04);
     }
-    .nav-logo {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: 1rem;
-      color: var(--gold);
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-    }
-    .nav-links {
-      display: flex; gap: 0.1rem; list-style: none;
-      flex-wrap: wrap; justify-content: flex-end;
-    }
-    .nav-links a {
-      display: block; padding: 0.4rem 0.65rem;
-      font-family: 'Cinzel', serif; font-size: 0.72rem; letter-spacing: 0.1em;
-      color: var(--text-dim); text-decoration: none; text-transform: uppercase;
-      transition: color .2s;
-      position: relative;
-    }
-    .nav-links a::after {
-      content: ''; position: absolute; bottom: 2px; left: 50%; right: 50%;
-      height: 1px; background: var(--gold);
-      transition: left .25s, right .25s;
-    }
-    .nav-links a:hover { color: var(--gold); }
-    .nav-links a:hover::after { left: 0.65rem; right: 0.65rem; }
-    .nav-auth-btn { padding:.3rem .9rem; border:1px solid rgba(201,168,76,.4); background:rgba(201,168,76,.08); color:var(--gold); font-family:"Cinzel",serif; font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; cursor:pointer; transition:all .2s; white-space:nowrap; margin-left:.5rem; }
-    .nav-auth-btn:hover { background:var(--gold); color:var(--dark); }
-
-    /* ══════════════════════ HERO ══════════════════════ */
-    #hero {
-      position: relative; min-height: 100vh;
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      text-align: center; overflow: hidden;
-      padding: 80px 2rem 4rem;
-    }
-    #hero::before {
-      content: '';
-      position: absolute; inset: 0;
+    .home-bg::after{
+      content:'';position:absolute;inset:0;
       background:
-        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(107,63,160,.18) 0%, transparent 70%),
-        radial-gradient(ellipse 60% 80% at 20% 80%, rgba(139,32,32,.12) 0%, transparent 60%),
-        linear-gradient(180deg, rgba(0,0,0,.6) 0%, rgba(10,10,14,.4) 50%, rgba(10,10,14,1) 100%);
-      z-index: 1;
+        radial-gradient(ellipse 70% 60% at 50% 45%,rgba(90,45,138,.15),transparent 70%),
+        linear-gradient(180deg,rgba(8,8,12,.3) 0%,rgba(8,8,12,.2) 40%,rgba(8,8,12,.85) 85%,var(--dark) 100%);
     }
-    .hero-cover {
-      position: absolute; inset: 0; z-index: 0;
-      background: url('Portada.png') center center / cover no-repeat;
-      transform: scale(1.05);
-      filter: saturate(.8) brightness(.55);
+    .home-content{
+      position:relative;z-index:1;text-align:center;
+      display:flex;flex-direction:column;align-items:center;
+      padding:6rem 2rem 3rem;max-width:900px;
     }
-    .hero-content { position: relative; z-index: 2; max-width: 860px; }
-    .hero-eyebrow {
-      font-family: 'Cinzel', serif; font-size: .8rem; letter-spacing: .4em;
-      color: var(--gold); text-transform: uppercase; margin-bottom: 1.2rem;
-      opacity: 0; animation: fadeUp .8s .2s ease forwards;
+    .home-eyebrow{
+      font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.5em;
+      color:var(--gold);text-transform:uppercase;margin-bottom:1.4rem;
+      opacity:0;animation:fadeUp .8s .3s ease forwards;
     }
-    .hero-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(2.2rem, 7vw, 5.5rem);
-      font-weight: 900; line-height: 1.1;
-      background: linear-gradient(135deg, #fff 0%, var(--gold-light) 50%, var(--gold) 100%);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
-      text-shadow: none; margin-bottom: .6rem;
-      opacity: 0; animation: fadeUp .9s .4s ease forwards;
+    .home-title{
+      font-family:'Cinzel Decorative',serif;
+      font-size:clamp(2.8rem,9vw,7rem);
+      font-weight:900;line-height:1.05;
+      background:linear-gradient(160deg,#fff 0%,var(--gold-light) 45%,var(--gold) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      margin-bottom:.5rem;
+      opacity:0;animation:fadeUp 1s .5s ease forwards;
     }
-    .hero-subtitle {
-      font-family: 'Cinzel', serif; font-size: clamp(1rem, 2.5vw, 1.5rem);
-      color: var(--gold-light); letter-spacing: .2em; text-transform: uppercase;
-      opacity: 0; animation: fadeUp .9s .6s ease forwards;
-      margin-bottom: 2.5rem;
+    .home-subtitle{
+      font-family:'Cinzel',serif;font-size:clamp(.9rem,2vw,1.3rem);
+      color:var(--gold-light);letter-spacing:.25em;text-transform:uppercase;
+      margin-bottom:2.5rem;
+      opacity:0;animation:fadeUp .9s .7s ease forwards;
     }
-    .hero-divider {
-      width: 180px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto 2.5rem;
-      opacity: 0; animation: fadeIn 1s .8s ease forwards;
+    .home-divider{
+      width:200px;height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      margin:0 auto 3rem;
+      opacity:0;animation:fadeIn 1s .9s ease forwards;
     }
-    .btn-primary {
-      display: inline-block;
-      padding: .85rem 2.4rem;
-      border: 1px solid var(--gold);
-      color: var(--gold); font-family: 'Cinzel', serif;
-      font-size: .85rem; letter-spacing: .2em; text-transform: uppercase;
-      text-decoration: none;
-      background: rgba(201,168,76,.08);
-      transition: all .3s;
-      opacity: 0; animation: fadeUp .9s 1s ease forwards;
-      cursor: pointer;
+    /* Big nav buttons on home */
+    .home-nav-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:.8rem;width:100%;max-width:780px;
+      opacity:0;animation:fadeUp .9s 1.1s ease forwards;
     }
-    .btn-primary:hover {
-      background: var(--gold); color: var(--dark);
+    .home-nav-btn{
+      padding:.9rem .5rem;
+      border:1px solid rgba(201,168,76,.25);
+      background:rgba(201,168,76,.05);
+      color:var(--text-dim);
+      font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.15em;
+      text-transform:uppercase;cursor:pointer;
+      transition:all .3s;position:relative;overflow:hidden;
     }
+    .home-nav-btn::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(201,168,76,.1),transparent);
+      opacity:0;transition:opacity .3s;
+    }
+    .home-nav-btn:hover{
+      border-color:var(--gold);color:var(--gold);
+      transform:translateY(-2px);
+      box-shadow:0 8px 24px rgba(201,168,76,.15);
+    }
+    .home-nav-btn:hover::before{opacity:1}
+    .home-nav-icon{font-size:1.3rem;display:block;margin-bottom:.4rem}
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(24px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeIn {
-      from { opacity: 0; } to { opacity: 1; }
-    }
+    /* ═══ SECTION PAGES SHARED ═══ */
+    .page-inner{max-width:1200px;margin:0 auto;padding:4rem 2rem 6rem}
+    .page-header{text-align:center;margin-bottom:3.5rem;padding-top:1rem}
+    .page-label{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:.7rem}
+    .page-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,5vw,3.2rem);color:#fff;margin-bottom:1rem}
+    .page-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto}
 
-    /* ══════════════════════ SECTIONS BASE ══════════════════════ */
-    section {
-      padding: 6rem 2rem;
-      max-width: 1200px; margin: 0 auto;
+    /* ═══ SINOPSIS ═══ */
+    #page-sinopsis{background:var(--dark)}
+    .synopsis-layout{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
+    .synopsis-text p{margin-bottom:1.2rem;font-size:1.05rem}
+    .synopsis-text p.lead{
+      font-size:1.2rem;font-style:italic;color:var(--gold-light);
+      border-left:2px solid var(--gold);padding-left:1.4rem;margin-bottom:2rem;
     }
-    .section-full { max-width: 100%; padding-left: 0; padding-right: 0; }
-    .section-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    .synopsis-quote{
+      background:linear-gradient(145deg,var(--dark3),var(--mid));
+      border:1px solid rgba(201,168,76,.2);padding:2.5rem 2rem;
+      position:relative;top:0;
+      clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+    }
+    .synopsis-quote::before{
+      content:'"';font-family:'Cinzel Decorative',serif;font-size:7rem;
+      color:var(--gold);opacity:.12;line-height:1;
+      position:absolute;top:-8px;left:14px;
+    }
+    .synopsis-quote blockquote{font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.85;position:relative;z-index:1}
+    .synopsis-quote cite{display:block;margin-top:1rem;font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-style:normal}
+    .faction-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
+    .faction-tag{padding:.28rem .8rem;border:1px solid rgba(201,168,76,.28);font-family:'Cinzel',serif;font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);background:rgba(201,168,76,.05)}
 
-    .section-header { text-align: center; margin-bottom: 4rem; }
-    .section-label {
-      font-family: 'Cinzel', serif; font-size: .72rem; letter-spacing: .4em;
-      color: var(--gold); text-transform: uppercase; margin-bottom: .8rem;
+    /* ═══ PERSONAJES ═══ */
+    #page-personajes{background:var(--dark2)}
+    .chars-layout{display:flex;flex-direction:column;align-items:center;gap:2.5rem}
+    .char-row{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;width:100%}
+    .char-row-3 .char-card{width:calc(33.333% - 1.4rem);min-width:190px;max-width:260px}
+    .char-row-2 .char-card{width:calc(25% - 1rem);min-width:190px;max-width:260px}
+    .char-card{
+      background:linear-gradient(180deg,var(--dark3),var(--dark2));
+      border:1px solid rgba(201,168,76,.13);
+      overflow:hidden;flex-shrink:0;
+      transition:transform .3s,border-color .3s,box-shadow .3s;cursor:default;
     }
-    .section-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.6rem, 4vw, 2.8rem);
-      color: #fff; margin-bottom: 1rem;
-    }
-    .section-rule {
-      width: 100px; height: 1px;
-      background: linear-gradient(90deg, transparent, var(--gold), transparent);
-      margin: 0 auto;
-    }
+    .char-card:hover{transform:translateY(-7px);border-color:rgba(201,168,76,.5);box-shadow:0 16px 40px rgba(201,168,76,.1)}
+    .char-img-wrap{position:relative;overflow:hidden;aspect-ratio:3/4}
+    .char-img-wrap img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%) contrast(1.05);transition:transform .5s,filter .3s}
+    .char-card:hover .char-img-wrap img{transform:scale(1.07);filter:grayscale(0%) contrast(1.1)}
+    .char-img-overlay{position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.88))}
+    .char-name-badge{position:absolute;bottom:0;left:0;right:0;padding:.9rem 1rem}
+    .char-name{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:#fff;display:block}
+    .char-body{padding:.9rem 1.1rem 1.3rem;font-size:.87rem;color:var(--text-dim);line-height:1.65}
 
-    .section-bg-alt { background: var(--dark2); }
-    .section-bg-dark3 { background: var(--dark3); }
-
-    /* ══════════════════════ SINOPSIS ══════════════════════ */
-    #sinopsis .synopsis-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 4rem; align-items: center; margin-top: 3rem;
+    /* ═══ GALERÍA ═══ */
+    #page-galeria{background:var(--dark)}
+    .gallery-tabs{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:2rem}
+    .gtab{
+      padding:.45rem 1.1rem;border:1px solid rgba(201,168,76,.22);background:transparent;
+      color:var(--text-dim);font-family:'Cinzel',serif;font-size:.72rem;
+      letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .22s;
     }
-    #sinopsis .synopsis-text p { margin-bottom: 1.2rem; font-size: 1.05rem; }
-    #sinopsis .synopsis-text p.lead {
-      font-size: 1.25rem; font-style: italic;
-      color: var(--gold-light); border-left: 2px solid var(--gold);
-      padding-left: 1.5rem; margin-bottom: 2rem;
+    .gtab.active,.gtab:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.07)}
+    .gallery-panel{display:none}
+    .gallery-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
+    .gal-item{
+      position:relative;overflow:hidden;cursor:pointer;
+      background:var(--dark3);
+      border:1px solid rgba(201,168,76,.1);
+      transition:border-color .3s,transform .3s;
     }
-    #sinopsis .synopsis-quote {
-      background: linear-gradient(135deg, var(--dark3), var(--mid));
-      border: 1px solid rgba(201,168,76,.2);
-      padding: 3rem 2.5rem; position: relative;
-      clip-path: polygon(0 0, calc(100% - 24px) 0, 100% 24px, 100% 100%, 24px 100%, 0 calc(100% - 24px));
+    .gal-item:hover{border-color:rgba(201,168,76,.5);transform:translateY(-3px)}
+    .gal-item img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;transition:transform .4s}
+    .gal-item:hover img{transform:scale(1.06)}
+    .gal-overlay{
+      position:absolute;inset:0;background:rgba(0,0,0,0);
+      transition:background .3s;
+      display:flex;align-items:center;justify-content:center;
     }
-    #sinopsis .synopsis-quote::before {
-      content: '"';
-      font-family: 'Cinzel Decorative', serif; font-size: 8rem;
-      color: var(--gold); opacity: .15; line-height: 1;
-      position: absolute; top: -10px; left: 16px;
-    }
-    #sinopsis .synopsis-quote blockquote {
-      font-size: 1.2rem; font-style: italic; color: var(--text);
-      line-height: 1.8; position: relative; z-index: 1;
-    }
-    #sinopsis .synopsis-quote cite {
-      display: block; margin-top: 1.2rem;
-      font-family: 'Cinzel', serif; font-size: .78rem;
-      color: var(--gold); letter-spacing: .2em; text-transform: uppercase;
-      font-style: normal;
-    }
-    .faction-tags { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 2rem; }
-    .faction-tag {
-      padding: .3rem .9rem;
-      border: 1px solid rgba(201,168,76,.3);
-      font-family: 'Cinzel', serif; font-size: .7rem;
-      letter-spacing: .12em; text-transform: uppercase;
-      color: var(--gold-light); background: rgba(201,168,76,.06);
-    }
-
-    /* ══════════════════════ PERSONAJES ══════════════════════ */
-    #personajes .characters-grid {
-      display: flex; flex-direction: column; align-items: center; gap: 2.5rem;
-    }
-    .char-row { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; width: 100%; }
-    .char-row-3 .char-card { width: calc(33.333% - 1.4rem); min-width: 180px; max-width: 240px; }
-    .char-row-2 .char-card { width: calc(25% - 1rem); min-width: 180px; max-width: 240px; }
-    .char-card {
-      background: linear-gradient(180deg, var(--dark3) 0%, var(--dark2) 100%);
-      border: 1px solid rgba(201,168,76,.15);
-      overflow: hidden; position: relative;
-      transition: transform .3s, border-color .3s;
-      cursor: pointer;
-    }
-    .char-card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(201,168,76,.5);
-    }
-    .char-img-wrap {
-      position: relative; overflow: hidden;
-      aspect-ratio: 3/4;
-    }
-    .char-img-wrap img {
-      width: 100%; height: 100%; object-fit: cover;
-      filter: grayscale(20%) contrast(1.05);
-      transition: transform .5s, filter .3s;
-    }
-    .char-card:hover .char-img-wrap img {
-      transform: scale(1.06);
-      filter: grayscale(0%) contrast(1.1);
-    }
-    .char-img-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 50%, rgba(0,0,0,.85) 100%);
-    }
-    .char-name-badge {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 1rem;
-    }
-    .char-name {
-      font-family: 'Cinzel', serif; font-size: 1rem; font-weight: 600;
-      color: #fff; display: block;
-    }
-    .char-faction {
-      font-size: .72rem; color: var(--gold);
-      font-family: 'Cinzel', serif; letter-spacing: .15em; text-transform: uppercase;
-    }
-    .char-body {
-      padding: 1rem 1.2rem 1.4rem;
-      font-size: .88rem; color: var(--text-dim); line-height: 1.6;
-    }
-    .char-faction { display: none; }
-
-    /* ══════════════════════ GALERÍA ══════════════════════ */
-    #galeria .faction-tabs {
-      display: flex; flex-wrap: wrap; gap: .5rem; justify-content: center;
-      margin-bottom: 2.5rem;
-    }
-    .tab-btn {
-      padding: .5rem 1.2rem;
-      border: 1px solid rgba(201,168,76,.25);
-      background: transparent;
-      color: var(--text-dim); font-family: 'Cinzel', serif;
-      font-size: .75rem; letter-spacing: .12em; text-transform: uppercase;
-      cursor: pointer; transition: all .25s;
-    }
-    .tab-btn.active, .tab-btn:hover {
-      border-color: var(--gold); color: var(--gold);
-      background: rgba(201,168,76,.08);
-    }
-    .faction-gallery { display: none; }
-    .faction-gallery.active { display: grid; }
-    .faction-gallery {
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.2rem;
-    }
-    .gallery-item {
-      overflow: hidden; position: relative;
-      aspect-ratio: 16/10;
-      cursor: pointer;
-    }
-    .gallery-item img {
-      width: 100%; height: 100%; object-fit: cover;
-      transition: transform .5s;
-    }
-    .gallery-item:hover img { transform: scale(1.07); }
-    .gallery-item .gallery-overlay {
-      position: absolute; inset: 0;
-      background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,.7) 100%);
-    }
+    .gal-item:hover .gal-overlay{background:rgba(0,0,0,.35)}
+    .gal-zoom{color:rgba(255,255,255,0);font-size:2.5rem;transition:color .3s;line-height:1}
+    .gal-item:hover .gal-zoom{color:rgba(255,255,255,.95)}
 
     /* Lightbox */
-    .lightbox {
-      display: none; position: fixed; inset: 0; z-index: 9999;
-      background: rgba(0,0,0,.95); align-items: center; justify-content: center;
-    }
-    .lightbox.open { display: flex; }
-    .lightbox img { max-width: 92vw; max-height: 92vh; object-fit: contain; box-shadow: 0 0 60px rgba(201,168,76,.15); }
-    .lightbox-close {
-      position: absolute; top: 1.5rem; right: 2rem;
-      font-size: 2.5rem; color: var(--gold);
-      cursor: pointer; background: none; border: none; line-height: 1;
-    }
+    .lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.97);align-items:center;justify-content:center}
+    .lightbox.open{display:flex}
+    .lightbox img{max-width:94vw;max-height:94vh;object-fit:contain;box-shadow:0 0 80px rgba(201,168,76,.12)}
+    .lb-close{position:absolute;top:1.2rem;right:1.8rem;font-size:2.8rem;color:var(--gold);cursor:pointer;background:none;border:none;line-height:1}
+    .lb-close:hover{color:#fff}
 
-    /* ══════════════════════ ENCUESTAS ══════════════════════ */
-    #encuestas .polls-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: 2rem;
-    }
-    .poll-card {
-      background: var(--dark3); border: 1px solid rgba(201,168,76,.15);
-      padding: 2rem;
-    }
-    .poll-question {
-      font-family: 'Cinzel', serif; font-size: 1rem; color: var(--gold-light);
-      margin-bottom: 1.5rem; line-height: 1.5;
-    }
-    .poll-options { display: flex; flex-direction: column; gap: .7rem; }
-    .poll-option {
-      position: relative; cursor: pointer;
-      border: 1px solid rgba(201,168,76,.2);
-      overflow: hidden;
-      transition: border-color .2s;
-    }
-    .poll-option:hover { border-color: var(--gold); }
-    .poll-bar {
-      position: absolute; inset-y: 0; left: 0;
-      background: rgba(201,168,76,.12);
-      transition: width .6s ease;
-    }
-    .poll-option label {
-      display: flex; justify-content: space-between;
-      padding: .6rem 1rem; position: relative; z-index: 1;
-      cursor: pointer; font-size: .9rem;
-    }
-    .poll-pct { color: var(--gold); font-family: 'Cinzel', serif; font-size: .8rem; }
-    .poll-vote-btn {
-      margin-top: 1.2rem; width: 100%;
-      padding: .6rem; background: rgba(201,168,76,.1);
-      border: 1px solid var(--gold); color: var(--gold);
-      font-family: 'Cinzel', serif; font-size: .75rem; letter-spacing: .12em;
-      text-transform: uppercase; cursor: pointer; transition: all .2s;
-    }
-    .poll-vote-btn:hover { background: var(--gold); color: var(--dark); }
+    /* ═══ ENCUESTAS ═══ */
+    #page-encuestas{background:var(--dark3)}
+    .polls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}
+    .poll-card{background:var(--dark2);border:1px solid rgba(201,168,76,.13);padding:2rem}
+    .poll-question{font-family:'Cinzel',serif;font-size:.95rem;color:var(--gold-light);margin-bottom:1.4rem;line-height:1.5}
+    .poll-options{display:flex;flex-direction:column;gap:.6rem}
+    .poll-option{position:relative;border:1px solid rgba(201,168,76,.18);overflow:hidden;transition:border-color .2s;cursor:pointer}
+    .poll-option:hover{border-color:var(--gold)}
+    .poll-bar{position:absolute;inset-y:0;left:0;background:rgba(201,168,76,.1);transition:width .6s ease}
+    .poll-option label{display:flex;justify-content:space-between;padding:.55rem 1rem;position:relative;z-index:1;cursor:pointer;font-size:.88rem}
+    .poll-pct{color:var(--gold);font-family:'Cinzel',serif;font-size:.78rem}
+    .poll-vote-btn{margin-top:1.1rem;width:100%;padding:.55rem;background:rgba(201,168,76,.08);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+    .poll-vote-btn:hover{background:var(--gold);color:var(--dark)}
 
-    /* ══════════════════════ CAPÍTULOS ══════════════════════ */
-    #capitulos .chapters-list { max-width: 760px; margin: 0 auto; }
-    .chapter-item {
-      display: flex; align-items: center; gap: 1.5rem;
-      padding: 1.4rem 1.8rem;
-      border-bottom: 1px solid rgba(201,168,76,.1);
-      transition: background .2s;
-      cursor: pointer;
-    }
-    .chapter-item:hover { background: rgba(201,168,76,.04); }
-    .chap-num {
-      font-family: 'Cinzel Decorative', serif; font-size: 1.6rem;
-      color: rgba(201,168,76,.3); min-width: 3rem; text-align: center;
-      line-height: 1;
-    }
-    .chap-info { flex: 1; }
-    .chap-title {
-      font-family: 'Cinzel', serif; font-size: 1rem; color: #fff;
-      margin-bottom: .25rem;
-    }
-    .chap-excerpt { font-size: .88rem; color: var(--text-dim); }
-    .chap-status {
-      font-family: 'Cinzel', serif; font-size: .65rem; letter-spacing: .1em;
-      text-transform: uppercase; padding: .25rem .7rem;
-      border: 1px solid;
-    }
-    .chap-status.available { color: #5fa85f; border-color: #5fa85f; background: rgba(95,168,95,.08); }
-    .chap-status.coming   { color: var(--text-dim); border-color: rgba(255,255,255,.2); }
-    .chapter-placeholder {
-      text-align: center; padding: 4rem 2rem;
-      border: 1px dashed rgba(201,168,76,.2);
-      color: var(--text-dim); font-style: italic; margin-top: 2rem;
-    }
-    .chapter-placeholder p { margin-bottom: 1rem; }
-    .add-chapter-note {
-      font-family: 'Cinzel', serif; font-size: .8rem;
-      color: var(--gold); letter-spacing: .1em;
-    }
+    /* ═══ CAPÍTULOS ═══ */
+    #page-capitulos{background:var(--dark)}
+    .chapters-list{max-width:760px;margin:0 auto}
+    .chapter-item{display:flex;align-items:center;gap:1.4rem;padding:1.3rem 1.6rem;border-bottom:1px solid rgba(201,168,76,.09);transition:background .2s;cursor:default}
+    .chapter-item:hover{background:rgba(201,168,76,.03)}
+    .chap-num{font-family:'Cinzel Decorative',serif;font-size:1.5rem;color:rgba(201,168,76,.28);min-width:2.8rem;text-align:center;line-height:1}
+    .chap-info{flex:1}
+    .chap-title{font-family:'Cinzel',serif;font-size:.95rem;color:#fff;margin-bottom:.2rem}
+    .chap-excerpt{font-size:.85rem;color:var(--text-dim)}
+    .chap-status{font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;padding:.22rem .65rem;border:1px solid}
+    .chap-status.coming{color:var(--text-dim);border-color:rgba(255,255,255,.18)}
+    .chap-status.available{color:#5fa85f;border-color:#5fa85f;background:rgba(95,168,95,.07)}
+    .chapter-placeholder{text-align:center;padding:3.5rem 2rem;border:1px dashed rgba(201,168,76,.18);color:var(--text-dim);font-style:italic;margin-top:2rem}
+    .chapter-placeholder p{margin-bottom:.8rem}
+    .add-chapter-note{font-family:'Cinzel',serif;font-size:.78rem;color:var(--gold);letter-spacing:.1em}
 
-    /* ══════════════════════ MAPA ══════════════════════ */
-    #mapa .map-container {
-      position: relative; background: var(--dark3);
-      border: 1px solid rgba(201,168,76,.2);
-      overflow: hidden; border-radius: 2px;
-      min-height: 520px;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .map-frame {
-      width: 100%; position: relative;
-    }
-    .map-placeholder {
-      display: flex; flex-direction: column; align-items: center;
-      justify-content: center; padding: 4rem; text-align: center; gap: 1rem;
-    }
-    .map-placeholder svg { width: 80px; opacity: .25; }
-    .map-placeholder p { color: var(--text-dim); font-style: italic; }
-    .map-controls {
-      display: flex; gap: 1rem; justify-content: center; margin-top: 1.5rem;
-    }
-    .map-btn {
-      padding: .5rem 1.2rem;
-      border: 1px solid rgba(201,168,76,.3); background: transparent;
-      color: var(--text-dim); font-family: 'Cinzel', serif;
-      font-size: .72rem; letter-spacing: .1em; text-transform: uppercase;
-      cursor: pointer; transition: all .2s;
-    }
-    .map-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(201,168,76,.06); }
-    /* Interactive SVG map */
-    #map-svg { width: 100%; max-width: 900px; cursor: grab; user-select: none; }
-    .map-region { transition: opacity .2s, filter .2s; cursor: pointer; }
-    .map-region:hover { filter: brightness(1.3); opacity: .9; }
-    .map-tooltip {
-      position: absolute; background: rgba(0,0,0,.92);
-      border: 1px solid var(--gold); padding: .5rem 1rem;
-      font-family: 'Cinzel', serif; font-size: .8rem; color: var(--gold);
-      pointer-events: none; display: none; z-index: 10;
-      white-space: nowrap;
-    }
+    /* ═══ MAPA ═══ */
+    #page-mapa{background:var(--dark2)}
+    .map-container{position:relative;background:var(--dark3);border:1px solid rgba(201,168,76,.18);overflow:hidden;min-height:520px;display:flex;align-items:center;justify-content:center}
+    .map-controls{display:flex;gap:1rem;justify-content:center;margin-top:1.4rem}
+    .map-btn{padding:.45rem 1.1rem;border:1px solid rgba(201,168,76,.28);background:transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+    .map-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.05)}
+    #map-svg{width:100%;max-width:900px;cursor:grab;user-select:none}
+    .map-region{transition:opacity .2s,filter .2s;cursor:pointer}.map-region:hover{filter:brightness(1.35);opacity:.88}
+    .map-tooltip{position:absolute;background:rgba(0,0,0,.93);border:1px solid var(--gold);padding:.45rem .9rem;font-family:'Cinzel',serif;font-size:.78rem;color:var(--gold);pointer-events:none;display:none;z-index:10;white-space:nowrap}
 
-    /* ══════════════════════ COMENTARIOS ══════════════════════ */
-    #comentarios .comments-wrap { max-width: 740px; margin: 0 auto; }
-    .comment-form {
-      background: var(--dark3); border: 1px solid rgba(201,168,76,.15);
-      padding: 2.5rem; margin-bottom: 3rem;
-    }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-    .form-field { display: flex; flex-direction: column; gap: .4rem; }
-    .form-field.full { grid-column: 1 / -1; }
-    .form-field label {
-      font-family: 'Cinzel', serif; font-size: .72rem;
-      letter-spacing: .15em; text-transform: uppercase; color: var(--gold);
-    }
-    .form-field input, .form-field textarea, .form-field select {
-      background: rgba(0,0,0,.4); border: 1px solid rgba(201,168,76,.2);
-      color: var(--text); padding: .7rem 1rem;
-      font-family: 'EB Garamond', serif; font-size: .95rem;
-      transition: border-color .2s; outline: none; resize: vertical;
-    }
-    .form-field input:focus, .form-field textarea:focus, .form-field select:focus {
-      border-color: var(--gold);
-    }
-    .form-field textarea { min-height: 120px; }
-    .form-note {
-      font-size: .82rem; color: var(--text-dim); font-style: italic;
-      margin-top: 1.2rem; padding: .8rem; border-left: 2px solid rgba(201,168,76,.3);
-    }
-    .btn-submit {
-      width: 100%; padding: .85rem; margin-top: 1.5rem;
-      background: rgba(201,168,76,.1); border: 1px solid var(--gold);
-      color: var(--gold); font-family: 'Cinzel', serif;
-      font-size: .82rem; letter-spacing: .2em; text-transform: uppercase;
-      cursor: pointer; transition: all .25s;
-    }
-    .btn-submit:hover { background: var(--gold); color: var(--dark); }
-    .comment-list { display: flex; flex-direction: column; gap: 1.5rem; }
-    .comment-card {
-      background: var(--dark3); border: 1px solid rgba(201,168,76,.1);
-      padding: 1.5rem 2rem; position: relative;
-    }
-    .comment-header {
-      display: flex; justify-content: space-between;
-      align-items: baseline; margin-bottom: .8rem;
-    }
-    .comment-author {
-      font-family: 'Cinzel', serif; font-size: .9rem; color: var(--gold);
-    }
-    .comment-date { font-size: .78rem; color: var(--text-dim); }
-    .comment-text { font-size: .95rem; line-height: 1.7; }
-    .success-msg {
-      display: none; text-align: center; padding: 1.5rem;
-      background: rgba(95,168,95,.08); border: 1px solid rgba(95,168,95,.3);
-      color: #5fa85f; font-family: 'Cinzel', serif; font-size: .9rem; margin-top: 1rem;
-    }
+    /* ═══ COMENTARIOS ═══ */
+    #page-comentarios{background:var(--dark3)}
+    .comments-wrap{max-width:720px;margin:0 auto}
+    .comment-form{background:var(--dark2);border:1px solid rgba(201,168,76,.13);padding:2.3rem;margin-bottom:2.5rem}
+    .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+    .form-field{display:flex;flex-direction:column;gap:.35rem}
+    .form-field.full{grid-column:1/-1}
+    .form-field label{font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+    .form-field input,.form-field textarea,.form-field select{background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.18);color:var(--text);padding:.65rem .9rem;font-family:'EB Garamond',serif;font-size:.92rem;transition:border-color .2s;outline:none;resize:vertical}
+    .form-field input:focus,.form-field textarea:focus,.form-field select:focus{border-color:var(--gold)}
+    .form-field textarea{min-height:110px}
+    .form-note{font-size:.8rem;color:var(--text-dim);font-style:italic;margin-top:1rem;padding:.7rem;border-left:2px solid rgba(201,168,76,.25)}
+    .btn-submit{width:100%;padding:.8rem;margin-top:1.3rem;background:rgba(201,168,76,.08);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .22s}
+    .btn-submit:hover{background:var(--gold);color:var(--dark)}
+    .comment-list{display:flex;flex-direction:column;gap:1.3rem}
+    .comment-card{background:var(--dark2);border:1px solid rgba(201,168,76,.09);padding:1.4rem 1.8rem}
+    .comment-header{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:.7rem}
+    .comment-author{font-family:'Cinzel',serif;font-size:.88rem;color:var(--gold)}
+    .comment-date{font-size:.75rem;color:var(--text-dim)}
+    .comment-text{font-size:.92rem;line-height:1.7}
+    .success-msg{display:none;text-align:center;padding:1.3rem;background:rgba(95,168,95,.07);border:1px solid rgba(95,168,95,.28);color:#5fa85f;font-family:'Cinzel',serif;font-size:.88rem;margin-top:.9rem}
+    .login-required-box{background:rgba(201,168,76,.04);border:1px dashed rgba(201,168,76,.28);padding:1.8rem;text-align:center;margin-bottom:2rem}
+    .login-required-box p{color:var(--text-dim);font-style:italic;margin-bottom:.9rem}
+    .login-required-box button{padding:.55rem 1.8rem;border:1px solid var(--gold);background:rgba(201,168,76,.08);color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+    .login-required-box button:hover{background:var(--gold);color:var(--dark)}
 
-    /* ══════════════════════ REDES SOCIALES ══════════════════════ */
-    #redes {
-      background: linear-gradient(135deg, var(--dark2) 0%, var(--accent2) 50%, var(--dark2) 100%);
-      padding: 5rem 2rem;
-    }
-    .redes-inner { max-width: 800px; margin: 0 auto; text-align: center; }
-    .redes-title {
-      font-family: 'Cinzel Decorative', serif;
-      font-size: clamp(1.4rem, 3vw, 2.2rem); color: #fff; margin-bottom: .5rem;
-    }
-    .redes-subtitle { color: var(--text-dim); margin-bottom: 3rem; font-size: 1rem; }
-    .social-grid {
-      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 1.2rem;
-    }
-    .social-card {
-      display: flex; flex-direction: column; align-items: center; gap: .8rem;
-      padding: 2rem 1rem;
-      border: 1px solid rgba(255,255,255,.1);
-      background: rgba(0,0,0,.25);
-      text-decoration: none; color: var(--text);
-      transition: all .3s;
-    }
-    .social-card:hover {
-      border-color: var(--gold); color: var(--gold);
-      background: rgba(201,168,76,.06); transform: translateY(-4px);
-    }
-    .social-icon {
-      width: 48px; height: 48px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; background: rgba(255,255,255,.06);
-    }
-    .social-name { font-family: 'Cinzel', serif; font-size: .85rem; letter-spacing: .1em; }
-    .social-handle { font-size: .78rem; color: var(--text-dim); }
+    /* ═══ REDES ═══ */
+    #page-redes{background:linear-gradient(160deg,var(--dark2),var(--accent2) 50%,var(--dark2))}
+    .social-intro{text-align:center;max-width:560px;margin:0 auto 3rem;color:var(--text-dim);font-style:italic}
+    .social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.2rem;max-width:900px;margin:0 auto}
+    .social-card{display:flex;flex-direction:column;align-items:center;gap:.75rem;padding:2rem 1rem;border:1px solid rgba(255,255,255,.09);background:rgba(0,0,0,.22);text-decoration:none;color:var(--text);transition:all .3s}
+    .social-card:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.07);transform:translateY(-5px);box-shadow:0 12px 30px rgba(201,168,76,.12)}
+    .social-icon{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.05)}
+    .social-name{font-family:'Cinzel',serif;font-size:.82rem;letter-spacing:.1em}
+    .social-handle{font-size:.75rem;color:var(--text-dim)}
+    .social-divider{grid-column:1/-1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent);margin:.5rem 0}
+    .social-divider-label{grid-column:1/-1;text-align:center;font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;opacity:.7}
+    /* Amazon / Apple special styling */
+    .social-card.purchase{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.04)}
+    .social-card.purchase:hover{background:rgba(201,168,76,.12)}
 
-    /* ══════════════════════ FOOTER ══════════════════════ */
-    footer {
-      background: var(--dark); border-top: 1px solid rgba(201,168,76,.1);
-      padding: 3rem 2rem; text-align: center;
-    }
-    footer .footer-title {
-      font-family: 'Cinzel Decorative', serif; font-size: 1.1rem;
-      color: var(--gold); margin-bottom: .5rem;
-    }
-    footer p { font-size: .82rem; color: var(--text-dim); }
-
-    /* ══════════════════════ RESPONSIVE ══════════════════════ */
-    @media (max-width: 768px) {
-      nav { padding: 0 1rem; }
-      .nav-logo { display: none; }
-      .nav-links a { font-size: .62rem; padding: .3rem .45rem; }
-      #sinopsis .synopsis-grid { grid-template-columns: 1fr; }
-      .form-grid { grid-template-columns: 1fr; }
-    }
-
-    /* Decorative ornament */
-    .ornament {
-      text-align: center; margin: 0 auto 2rem;
-      color: var(--gold); font-size: 1.4rem; opacity: .5; letter-spacing: .5em;
-    }
-
-    /* Hover glow */
-    .glow-on-hover { position: relative; z-index: 0; }
-    .glow-on-hover::after {
-      content: '';
-      position: absolute; inset: -1px;
-      background: linear-gradient(135deg, rgba(201,168,76,.0), rgba(201,168,76,.3), rgba(201,168,76,.0));
-      z-index: -1; opacity: 0; transition: opacity .3s;
-    }
-    .glow-on-hover:hover::after { opacity: 1; }
-
-    /* AUTH MODAL */
-    .auth-overlay{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.88);backdrop-filter:blur(6px);align-items:center;justify-content:center}
+    /* ═══ AUTH MODAL ═══ */
+    .auth-overlay{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.9);backdrop-filter:blur(8px);align-items:center;justify-content:center}
     .auth-overlay.open{display:flex}
-    .auth-modal{background:var(--dark3);border:1px solid rgba(201,168,76,.35);padding:3rem 2.5rem;width:100%;max-width:420px;position:relative}
-    .auth-modal-title{font-family:"Cinzel Decorative",serif;font-size:1.3rem;color:var(--gold);text-align:center;margin-bottom:.4rem}
-    .auth-modal-sub{text-align:center;font-size:.85rem;color:var(--text-dim);margin-bottom:2rem;font-style:italic}
-    .auth-tabs{display:flex;margin-bottom:2rem;border-bottom:1px solid rgba(201,168,76,.2)}
-    .auth-tab{flex:1;padding:.6rem;background:none;border:none;font-family:"Cinzel",serif;font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+    .auth-modal{background:var(--dark3);border:1px solid rgba(201,168,76,.32);padding:2.8rem 2.4rem;width:100%;max-width:400px;position:relative}
+    .auth-modal-title{font-family:'Cinzel Decorative',serif;font-size:1.2rem;color:var(--gold);text-align:center;margin-bottom:.35rem}
+    .auth-modal-sub{text-align:center;font-size:.82rem;color:var(--text-dim);margin-bottom:1.8rem;font-style:italic}
+    .auth-tabs{display:flex;margin-bottom:1.8rem;border-bottom:1px solid rgba(201,168,76,.18)}
+    .auth-tab{flex:1;padding:.55rem;background:none;border:none;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
     .auth-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
     .auth-panel{display:none}.auth-panel.active{display:block}
-    .auth-field{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem}
-    .auth-field label{font-family:"Cinzel",serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
-    .auth-field input{background:rgba(0,0,0,.5);border:1px solid rgba(201,168,76,.2);color:var(--text);padding:.7rem 1rem;font-family:"EB Garamond",serif;font-size:1rem;outline:none;transition:border-color .2s}
+    .auth-field{display:flex;flex-direction:column;gap:.35rem;margin-bottom:1.1rem}
+    .auth-field label{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+    .auth-field input{background:rgba(0,0,0,.5);border:1px solid rgba(201,168,76,.18);color:var(--text);padding:.65rem .9rem;font-family:'EB Garamond',serif;font-size:.95rem;outline:none;transition:border-color .2s}
     .auth-field input:focus{border-color:var(--gold)}
-    .auth-btn{width:100%;padding:.8rem;background:rgba(201,168,76,.1);border:1px solid var(--gold);color:var(--gold);font-family:"Cinzel",serif;font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .25s;margin-top:.5rem}
+    .auth-btn{width:100%;padding:.75rem;background:rgba(201,168,76,.08);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .22s;margin-top:.4rem}
     .auth-btn:hover{background:var(--gold);color:var(--dark)}
-    .auth-msg{text-align:center;font-size:.85rem;margin-top:1rem;padding:.6rem;font-family:"Cinzel",serif}
-    .auth-msg.error{color:#c05050;border:1px solid rgba(192,80,80,.3)}.auth-msg.success{color:#5fa85f;border:1px solid rgba(95,168,95,.3)}
-    .auth-close{position:absolute;top:1rem;right:1.2rem;font-size:1.6rem;color:var(--text-dim);cursor:pointer;background:none;border:none;line-height:1}
+    .auth-msg{text-align:center;font-size:.82rem;margin-top:.9rem;padding:.55rem;font-family:'Cinzel',serif}
+    .auth-msg.error{color:#c05050;border:1px solid rgba(192,80,80,.28)}.auth-msg.success{color:#5fa85f;border:1px solid rgba(95,168,95,.28)}
+    .auth-close{position:absolute;top:.9rem;right:1.1rem;font-size:1.5rem;color:var(--text-dim);cursor:pointer;background:none;border:none;line-height:1}
     .auth-close:hover{color:var(--gold)}
-    .auth-contact{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(201,168,76,.1);text-align:center;font-size:.78rem;color:var(--text-dim)}
+    .auth-contact{margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid rgba(201,168,76,.1);text-align:center;font-size:.75rem;color:var(--text-dim)}
     .auth-contact a{color:var(--gold);text-decoration:none}
-    .login-required-box{background:rgba(201,168,76,.05);border:1px dashed rgba(201,168,76,.3);padding:2rem;text-align:center;margin-bottom:2rem}
-    .login-required-box p{color:var(--text-dim);font-style:italic;margin-bottom:1rem}
-    .login-required-box button{padding:.6rem 2rem;border:1px solid var(--gold);background:rgba(201,168,76,.1);color:var(--gold);font-family:"Cinzel",serif;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-    .login-required-box button:hover{background:var(--gold);color:var(--dark)}
+
+    /* ═══ FOOTER ═══ */
+    .page-footer{background:var(--dark);border-top:1px solid rgba(201,168,76,.1);padding:2.5rem 2rem;text-align:center}
+    .page-footer .ft{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);margin-bottom:.4rem}
+    .page-footer p{font-size:.78rem;color:var(--text-dim)}
+
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+    /* ═══ RESPONSIVE ═══ */
+    @media(max-width:900px){
+      .synopsis-layout{grid-template-columns:1fr}
+      .home-nav-grid{grid-template-columns:repeat(4,1fr)}
+    }
+    @media(max-width:620px){
+      .home-nav-grid{grid-template-columns:repeat(2,1fr)}
+      .char-row-3 .char-card,.char-row-2 .char-card{width:calc(50% - 1rem)}
+      .form-grid{grid-template-columns:1fr}
+      .nav-tabs{gap:0}
+      .nav-tab{font-size:.56rem;padding:.3rem .45rem}
+    }
+    @media(max-width:420px){
+      .char-row-3 .char-card,.char-row-2 .char-card{width:100%;max-width:280px}
+    }
+
+    /* Reveal animation */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.shown{opacity:1;transform:translateY(0)}
   </style>
 </head>
 <body>
@@ -602,7 +374,7 @@
   <div class="auth-modal">
     <button class="auth-close" onclick="closeAuth()">&#215;</button>
     <h2 class="auth-modal-title">El Legado de Gaia</h2>
-    <p class="auth-modal-sub">Accede para votar y dejar comentarios</p>
+    <p class="auth-modal-sub">Accede para votar y comentar</p>
     <div class="auth-tabs">
       <button class="auth-tab active" onclick="switchTab('login',this)">Iniciar Sesi&#243;n</button>
       <button class="auth-tab" onclick="switchTab('register',this)">Registrarse</button>
@@ -620,715 +392,506 @@
       <button class="auth-btn" onclick="doRegister()">Crear Cuenta</button>
       <div class="auth-msg" id="reg-msg"></div>
     </div>
-    <div class="auth-contact">&#191;Problemas? Contacta al escritor:<br/><a href="mailto:stan.e.s@gmail.com">stan.e.s@gmail.com</a></div>
+    <div class="auth-contact">&#191;Problemas? Escribe al autor:<br/><a href="mailto:stan.e.s@gmail.com">stan.e.s@gmail.com</a></div>
   </div>
 </div>
 
-<!-- ══════════ LIGHTBOX ══════════ -->
+<!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox">
-  <button class="lightbox-close" onclick="closeLightbox()">×</button>
-  <img id="lightbox-img" src="" alt=""/>
+  <button class="lb-close" onclick="closeLb()">&#215;</button>
+  <img id="lb-img" src="" alt=""/>
 </div>
 
-<!-- ══════════ NAV ══════════ -->
-<nav>
-  <div class="nav-logo">El Legado de Gaia</div>
-  <ul class="nav-links">
-    <li><a href="#sinopsis">Sinopsis</a></li>
-    <li><a href="#personajes">Personajes</a></li>
-    <li><a href="#galeria">Galería</a></li>
-    <li><a href="#encuestas">Encuestas</a></li>
-    <li><a href="#capitulos">Capítulos</a></li>
-    <li><a href="#mapa">Mapa</a></li>
-    <li><a href="#comentarios">Comentarios</a></li>
-    <li><a href="#redes">Redes</a></li>
-  </ul>
+<!-- TOPBAR -->
+<div id="topbar">
+  <div class="topbar-logo" onclick="showPage('home')">El Legado de Gaia</div>
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab" onclick="showPage('sinopsis')">Sinopsis</button>
+    <button class="nav-tab" onclick="showPage('personajes')">Personajes</button>
+    <button class="nav-tab" onclick="showPage('galeria')">Galer&#237;a</button>
+    <button class="nav-tab" onclick="showPage('encuestas')">Encuestas</button>
+    <button class="nav-tab" onclick="showPage('capitulos')">Cap&#237;tulos</button>
+    <button class="nav-tab" onclick="showPage('mapa')">Mapa</button>
+    <button class="nav-tab" onclick="showPage('comentarios')">Comentarios</button>
+    <button class="nav-tab" onclick="showPage('redes')">Redes</button>
+  </div>
   <button class="nav-auth-btn" id="navAuthBtn" onclick="openAuth()">Iniciar Sesi&#243;n</button>
-</nav>
-
-<!-- ══════════ HERO ══════════ -->
-<section id="hero">
-  <div class="hero-cover"></div>
-  <div class="hero-content">
-    <p class="hero-eyebrow">✦ &nbsp; Una novela de fantasía épica &nbsp; ✦</p>
-    <h1 class="hero-title">El Legado<br/>de Gaia</h1>
-    <p class="hero-subtitle">El Continente tras el Muro</p>
-    <div class="hero-divider"></div>
-    <a href="#sinopsis" class="btn-primary">Explorar el Mundo</a>
-  </div>
-</section>
-
-<!-- ══════════ SINOPSIS ══════════ -->
-<section id="sinopsis">
-  <div class="section-header">
-    <p class="section-label">✦ El Mundo ✦</p>
-    <h2 class="section-title">Sinopsis</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="synopsis-grid">
-    <div class="synopsis-text">
-      <p class="lead">Más allá del Muro de Hielo que divide el mundo conocido, hay una verdad que los poderosos llevan siglos enterrando.</p>
-      <p><strong>Pangea</strong> siempre creyó que era el único continente que importaba. Sus dioses, sus guerras, sus reglas. Pero al otro lado del Muro existe <strong>Panasea</strong>, una tierra vasta y salvaje que guarda secretos más antiguos que cualquier trono.</p>
-      <p><strong>Río, Amaya y Rayen</strong> no planeaban cruzar. Huyeron. Y en esa huida descubrieron que el mundo era mucho más grande, y mucho más peligroso, de lo que jamás les habían dicho.</p>
-      <p>Perseguidos por el implacable <strong>General Reiner</strong> y su primer oficial <strong>Rollo</strong>, los tres se adentran en Panasea sin mapas ni aliados, arrastrados hacia el centro de una guerra que lleva milenios gestándose en silencio. Porque en estas tierras no solo chocan ejércitos: chocan dioses. Los guerreros de <strong>Valhalla</strong>, las deidades del <strong>Olimpo</strong> y los señores de <strong>Khamet</strong> se enfrentan a una alianza impensable: ángeles y demonios, enemigos eternos, unidos por primera vez ante una amenaza común.</p>
-      <p>Las <em>Abominaciones</em>. Hijos del mestizaje entre razas que los cielos y los infiernos condenan por igual. Seres de poder inmenso que durante siglos aprendieron a esconderse, a callar, a sobrevivir en las sombras. Pero el silencio tiene un límite. Y ese límite ya fue cruzado.</p>
-      <p>Ya no quieren sobrevivir. <em>Quieren su lugar en el mapa. Y están dispuestos a tomarlo.</em></p>
-      <div class="faction-tags">
-        <span class="faction-tag">Valhalla</span>
-        <span class="faction-tag">Ciudadela</span>
-        <span class="faction-tag">Valle de los Condenados</span>
-        <span class="faction-tag">Olimpo</span>
-        <span class="faction-tag">Khamet</span>
-        <span class="faction-tag">Inframundo</span>
-        <span class="faction-tag">Resistencia</span>
-      </div>
-    </div>
-    <div class="synopsis-quote">
-      <blockquote>
-        "El Muro no fue construido para mantener algo fuera. Fue construido para que nadie dentro recordara lo que alguna vez estuvo al otro lado."
-        <cite>— Fragmento del Libro Sellado de Gaia</cite>
-      </blockquote>
-    </div>
-  </div>
-</section>
-      </blockquote>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ PERSONAJES ══════════ -->
-<div class="section-bg-alt">
-<section id="personajes">
-  <div class="section-header">
-    <p class="section-label">✦ Almas del Continente ✦</p>
-    <h2 class="section-title">Personajes</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="characters-grid">
-  <!-- FILA 1: Rio Amaya Rayen -->
-    <div class="char-row char-row-3">
-      <div class="char-card glow-on-hover"><div class="char-img-wrap"><img src="Rio.png" alt="Rio"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rio</span></div></div><div class="char-body">18 años, marcado por ausencias que nadie supo explicarle. Un padre que desapareció sin dejar rastro y una madre que jamás conoció. Cuando Reiner y las Sombras lo obligan a cruzar el Muro, Río no huye hacia el peligro... huye hacia las únicas respuestas que le quedan.</div></div>
-      <div class="char-card glow-on-hover"><div class="char-img-wrap"><img src="Amaya.png" alt="Amaya"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Amaya</span></div></div><div class="char-body">Criada junto a Río como si fueran hermanos de sangre, Amaya es la calma antes de la tormenta. Fanática del anime y los cómics por fuera, guerrera brutal e instintiva por dentro. La mano derecha de Río no pide permiso para proteger a los suyos.</div></div>
-      <div class="char-card glow-on-hover"><div class="char-img-wrap"><img src="Rayen.png" alt="Rayen"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rayen</span></div></div><div class="char-body">Dulce, tranquila, aparentemente inofensiva. Rayen lleva consigo un secreto tan pesado que ha aprendido a sonreír para no derrumbarse. Este viaje no le dará otra opción: tarde o temprano, la verdad de quién es saldrá a la luz.</div></div>
-    </div>
-    <!-- FILA 2: Reiner Rollo -->
-    <div class="char-row char-row-2">
-      <div class="char-card glow-on-hover"><div class="char-img-wrap"><img src="Reiner.png" alt="Reiner"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Reiner</span></div></div><div class="char-body">General del ejército controlado por Las Siete Sombras, guardianes del secreto más grande de la historia: la existencia de Panasea. Cuando Stan desapareció llevándose parte de esa verdad, Reiner no solo recibió órdenes de recuperarla. También decidió usarla para sus propios fines.</div></div>
-      <div class="char-card glow-on-hover"><div class="char-img-wrap"><img src="Rollo.png" alt="Rollo"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rollo</span></div></div><div class="char-body">Primer oficial de Reiner. Imbatible en combate, de mente afilada y lealtad inquebrantable... o casi. Rollo sigue órdenes porque cree en la misión, pero hay momentos en que la misión y la conciencia no señalan en la misma dirección. Y esa grieta, tarde o temprano, alguien la va a explotar.</div></div>
-    </div>
-    <!-- FILA 3: Draven Still -->
-    <div class="char-row char-row-2">
-      <div class="char-card glow-on-hover"><div class="char-img-wrap"><img src="Draven.jpg" alt="Draven"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Draven</span></div></div><div class="char-body">Hijo de un ángel y un demonio, Draven es exactamente lo que ambos mundos juraron que nunca debía existir. Una Abominación. Pero en Panasea, será él quien guíe a los protagonistas hacia el corazón de la guerra santa, porque conoce este continente mejor que nadie... y sus secretos podrían costarte la vida.</div></div>
-      <div class="char-card glow-on-hover"><div class="char-img-wrap"><img src="Still.png" alt="Still"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Still</span></div></div><div class="char-body">La leyenda. El ser más poderoso de la creación, hijo de una diosa vikinga y un ángel de alto rango. Por su mera existencia se dictó la Ley contra las Abominaciones. Still no busca poder, no necesita buscarlo. Lo que él decida en esta guerra determinará el destino de todo lo que respira en Panasea.</div></div>
-    </div>
-  </div>
-</section>
 </div>
 
-<!-- ══════════ GALERÍA ══════════ -->
-<section id="galeria">
-  <div class="section-header">
-    <p class="section-label">✦ Las Facciones ✦</p>
-    <h2 class="section-title">Galería</h2>
-    <div class="section-rule"></div>
-  </div>
-
-  <div class="faction-tabs">
-    <button class="tab-btn active" onclick=\"showFaction('valhalla',this)\">Valhalla</button>
-    <button class="tab-btn" onclick=\"showFaction('ciudadela',this)\">Ciudadela</button>
-    <button class="tab-btn" onclick=\"showFaction('valle',this)\">Valle de los Condenados</button>
-    <button class="tab-btn" onclick=\"showFaction('olimpo',this)\">Olimpo</button>
-    <button class="tab-btn" onclick=\"showFaction('khamet',this)\">Khamet</button>
-    <button class="tab-btn" onclick=\"showFaction('inframundo',this)\">Inframundo</button>
-    <button class="tab-btn" onclick=\"showFaction('resistencia',this)\">Resistencia</button>
-    <button class="tab-btn" onclick=\"showFaction('still',this)\">Castillo de Still</button>
-  </div>
-
-  <div id="gallery-valhalla" class="faction-gallery active">
-    <div class="gallery-item" onclick="openLightbox('Valhalla1.jpeg')">
-      <img src="Valhalla1.jpeg" alt="Valhalla"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('Valhalla2.png')">
-      <img src="Valhalla2.png" alt="Valhalla"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
+<!-- ═══════════ HOME ═══════════ -->
+<div id="page-home" class="page active">
+  <div class="home-bg"></div>
+  <div class="home-content">
+    <p class="home-eyebrow">&#10022; &nbsp; Una novela de fantas&#237;a &#233;pica &nbsp; &#10022;</p>
+    <h1 class="home-title">El Legado<br/>de Gaia</h1>
+    <p class="home-subtitle">El Continente tras el Muro</p>
+    <div class="home-divider"></div>
+    <div class="home-nav-grid">
+      <button class="home-nav-btn" onclick="showPage('sinopsis')"><span class="home-nav-icon">&#128366;</span>Sinopsis</button>
+      <button class="home-nav-btn" onclick="showPage('personajes')"><span class="home-nav-icon">&#9876;</span>Personajes</button>
+      <button class="home-nav-btn" onclick="showPage('galeria')"><span class="home-nav-icon">&#128444;</span>Galer&#237;a</button>
+      <button class="home-nav-btn" onclick="showPage('encuestas')"><span class="home-nav-icon">&#128202;</span>Encuestas</button>
+      <button class="home-nav-btn" onclick="showPage('capitulos')"><span class="home-nav-icon">&#128218;</span>Cap&#237;tulos</button>
+      <button class="home-nav-btn" onclick="showPage('mapa')"><span class="home-nav-icon">&#127757;</span>Mapa</button>
+      <button class="home-nav-btn" onclick="showPage('comentarios')"><span class="home-nav-icon">&#128172;</span>Comentarios</button>
+      <button class="home-nav-btn" onclick="showPage('redes')"><span class="home-nav-icon">&#127760;</span>Redes</button>
     </div>
   </div>
-
-  <div id="gallery-ciudadela" class="faction-gallery">
-    <div class="gallery-item" onclick="openLightbox('Ciudadela1.jpeg')">
-      <img src="Ciudadela1.jpeg" alt="Ciudadela"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('Ciudadela2.png')">
-      <img src="Ciudadela2.png" alt="Ciudadela"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-  </div>
-
-  <div id="gallery-valle" class="faction-gallery">
-    <div class="gallery-item" onclick="openLightbox('Valledeloscondenados1.jpeg')">
-      <img src="Valledeloscondenados1.jpeg" alt="Valle de los Condenados"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('Valle2.png')">
-      <img src="Valle2.png" alt="Valle de los Condenados"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-  </div>
-
-  <div id="gallery-olimpo" class="faction-gallery">
-    <div class="gallery-item" onclick="openLightbox('Olimpo1.jpeg')">
-      <img src="Olimpo1.jpeg" alt="Olimpo"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('Olimpo2.png')">
-      <img src="Olimpo2.png" alt="Olimpo"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-  </div>
-
-  <div id="gallery-khamet" class="faction-gallery">
-    <div class="gallery-item" onclick="openLightbox('Khamet1.jpeg')">
-      <img src="Khamet1.jpeg" alt="Khamet"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('Khamet2.png')">
-      <img src="Khamet2.png" alt="Khamet"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-  </div>
-
-  <div id="gallery-inframundo" class="faction-gallery">
-    <div class="gallery-item" onclick="openLightbox('Inframundo1.jpeg')">
-      <img src="Inframundo1.jpeg" alt="Inframundo"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-    <div class="gallery-item" onclick="openLightbox('Inframundo2.png')">
-      <img src="Inframundo2.png" alt="Inframundo"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-  </div>
-
-  <div id="gallery-resistencia" class="faction-gallery">
-    <div class="gallery-item" onclick="openLightbox('Resistencia.jpeg')">
-      <img src="Resistencia.jpeg" alt="Resistencia"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-  </div>
-
-  <div id="gallery-still" class="faction-gallery">
-    <div class="gallery-item" onclick="openLightbox('Castillostill2.png')">
-      <img src="Castillostill2.png" alt="Castillo de Still"/>
-      <div class="gallery-overlay"><span class="gallery-zoom-icon">&#8853;</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════ ENCUESTAS ══════════ -->
-<div class="section-bg-dark3">
-<section id="encuestas">
-  <div class="section-header">
-    <p class="section-label">✦ Tu Voz ✦</p>
-    <h2 class="section-title">Encuestas</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="polls-grid">
-
-    <div class="poll-card">
-      <p class="poll-question">¿A cuál facción pertenecerías en el Continente de Gaia?</p>
-      <div class="poll-options" id="poll1">
-        <div class="poll-option"><div class="poll-bar" style="width:34%"></div><label><span>⚔ Valhalla</span><span class="poll-pct">34%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:20%"></div><label><span>🏛 Olimpo</span><span class="poll-pct">20%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:15%"></div><label><span>☠ Inframundo</span><span class="poll-pct">15%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:12%"></div><label><span>🏰 Ciudadela</span><span class="poll-pct">12%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:10%"></div><label><span>🔥 Khamet</span><span class="poll-pct">10%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:5%"></div><label><span>🌑 Valle de los Condenados</span><span class="poll-pct">5%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:4%"></div><label><span>✊ Resistencia</span><span class="poll-pct">4%</span></label></div>
-      </div>
-      <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
-    </div>
-
-    <div class="poll-card">
-      <p class="poll-question">¿Cuál es tu personaje favorito hasta ahora?</p>
-      <div class="poll-options" id="poll2">
-        <div class="poll-option"><div class="poll-bar" style="width:28%"></div><label><span>Amaya</span><span class="poll-pct">28%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:24%"></div><label><span>Draven</span><span class="poll-pct">24%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:18%"></div><label><span>Rayen</span><span class="poll-pct">18%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:14%"></div><label><span>Reiner</span><span class="poll-pct">14%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:10%"></div><label><span>Río</span><span class="poll-pct">10%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:6%"></div><label></label></div><div class="poll-option"><div class="poll-bar" style="width:4%"></div><label><span>Rollo</span><span class="poll-pct">4%</span></label></div><div class="poll-option"><div class="poll-bar" style="width:2%"></div><label><span>Still</span><span class="poll-pct">2%</label></div>
-      </div>
-      <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
-    </div>
-
-    <div class="poll-card">
-      <p class="poll-question">¿Qué esperas más de la historia?</p>
-      <div class="poll-options" id="poll3">
-        <div class="poll-option"><div class="poll-bar" style="width:38%"></div><label><span>Guerras entre facciones</span><span class="poll-pct">38%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:30%"></div><label><span>Revelaciones del Muro</span><span class="poll-pct">30%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:20%"></div><label><span>Romance y traiciones</span><span class="poll-pct">20%</span></label></div>
-        <div class="poll-option"><div class="poll-bar" style="width:12%"></div><label><span>Magia y misterios</span><span class="poll-pct">12%</span></label></div>
-      </div>
-      <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
-    </div>
-
-  </div>
-</section>
 </div>
 
-<!-- ══════════ CAPÍTULOS ══════════ -->
-<section id="capitulos">
-  <div class="section-header">
-    <p class="section-label">✦ La Historia ✦</p>
-    <h2 class="section-title">Capítulos</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="chapters-list">
-    <div class="chapter-item">
-      <div class="chap-num">I</div>
-      <div class="chap-info">
-        <p class="chap-title">Prólogo — El Día que el Muro Habló</p>
-        <p class="chap-excerpt">Antes del comienzo, hubo una advertencia. Nadie la escuchó.</p>
-      </div>
-      <span class="chap-status coming">Próximamente</span>
+<!-- ═══════════ SINOPSIS ═══════════ -->
+<div id="page-sinopsis" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; El Mundo &#10022;</p>
+      <h2 class="page-title">Sinopsis</h2>
+      <div class="page-rule"></div>
     </div>
-    <div class="chapter-item">
-      <div class="chap-num">II</div>
-      <div class="chap-info">
-        <p class="chap-title">Capítulo 1 — Cenizas en Valhalla</p>
-        <p class="chap-excerpt">El fuego que nadie encendió arde en el corazón del Norte.</p>
+    <div class="synopsis-layout">
+      <div class="synopsis-text reveal">
+        <p class="lead">M&#225;s all&#225; del Muro de Hielo que divide el mundo conocido, hay una verdad que los poderosos llevan siglos enterrando.</p>
+        <p><strong>Pangea</strong> siempre crey&#243; que era el &#250;nico continente que importaba. Sus dioses, sus guerras, sus reglas. Pero al otro lado del Muro existe <strong>Panasea</strong>, una tierra vasta y salvaje que guarda secretos m&#225;s antiguos que cualquier trono.</p>
+        <p><strong>R&#237;o, Amaya y Rayen</strong> no planeaban cruzar. Huyeron. Y en esa huida descubrieron que el mundo era mucho m&#225;s grande, y mucho m&#225;s peligroso, de lo que jam&#225;s les hab&#237;an dicho.</p>
+        <p>Perseguidos por el implacable <strong>General Reiner</strong> y su primer oficial <strong>Rollo</strong>, los tres se adentran en Panasea sin mapas ni aliados, arrastrados hacia el centro de una guerra que lleva milenios gest&#225;ndose en silencio. Porque en estas tierras no solo chocan ej&#233;rcitos: chocan dioses. Los guerreros de <strong>Valhalla</strong>, las deidades del <strong>Olimpo</strong> y los se&#241;ores de <strong>Khamet</strong> se enfrentan a una alianza impensable: &#225;ngeles y demonios, enemigos eternos, unidos por primera vez ante una amenaza com&#250;n.</p>
+        <p>Las <em>Abominaciones</em>. Hijos del mestizaje entre razas que los cielos y los infiernos condenan por igual. Seres de poder inmenso que durante siglos aprendieron a esconderse, a callar, a sobrevivir en las sombras. Pero el silencio tiene un l&#237;mite. Y ese l&#237;mite ya fue cruzado.</p>
+        <p>Ya no quieren sobrevivir. <em>Quieren su lugar en el mapa. Y est&#225;n dispuestos a tomarlo.</em></p>
+        <div class="faction-tags">
+          <span class="faction-tag">Valhalla</span><span class="faction-tag">Ciudadela</span>
+          <span class="faction-tag">Valle de los Condenados</span><span class="faction-tag">Olimpo</span>
+          <span class="faction-tag">Khamet</span><span class="faction-tag">Inframundo</span>
+          <span class="faction-tag">Resistencia</span>
+        </div>
       </div>
-      <span class="chap-status coming">Próximamente</span>
-    </div>
-    <div class="chapter-item">
-      <div class="chap-num">III</div>
-      <div class="chap-info">
-        <p class="chap-title">Capítulo 2 — Las Puertas de la Ciudadela</p>
-        <p class="chap-excerpt">El orden siempre tuvo un precio. Hoy, alguien se niega a pagarlo.</p>
+      <div class="synopsis-quote reveal">
+        <blockquote>
+          "El Muro no fue construido para mantener algo fuera. Fue construido para que nadie dentro recordara lo que alguna vez estuvo al otro lado."
+          <cite>&#8212; Fragmento del Libro Sellado de Gaia</cite>
+        </blockquote>
       </div>
-      <span class="chap-status coming">Próximamente</span>
-    </div>
-    <div class="chapter-placeholder">
-      <p>Los capítulos serán publicados aquí a medida que avance la historia.</p>
-      <p class="add-chapter-note">✦ Cada nueva entrega será anunciada en redes sociales ✦</p>
     </div>
   </div>
-</section>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+</div>
 
-<!-- ══════════ MAPA ══════════ -->
-<div class="section-bg-alt">
-<section id="mapa" class="section-full">
-  <div class="section-inner">
-    <div class="section-header">
-      <p class="section-label">✦ El Continente ✦</p>
-      <h2 class="section-title">Mapa de Gaia</h2>
-      <div class="section-rule"></div>
+<!-- ═══════════ PERSONAJES ═══════════ -->
+<div id="page-personajes" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; Almas del Continente &#10022;</p>
+      <h2 class="page-title">Personajes</h2>
+      <div class="page-rule"></div>
+    </div>
+    <div class="chars-layout">
+      <!-- FILA 1 -->
+      <div class="char-row char-row-3">
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Rio.png" alt="Rio" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">R&#237;o</span></div></div>
+          <div class="char-body">18 a&#241;os, marcado por ausencias que nadie supo explicarle. Un padre que desapareci&#243; sin dejar rastro y una madre que jam&#225;s conoci&#243;. Cuando Reiner y las Sombras lo obligan a cruzar el Muro, R&#237;o no huye hacia el peligro&#8230; huye hacia las &#250;nicas respuestas que le quedan.</div>
+        </div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Amaya.png" alt="Amaya" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Amaya</span></div></div>
+          <div class="char-body">Criada junto a R&#237;o como si fueran hermanos de sangre, Amaya es la calma antes de la tormenta. Fan&#225;tica del anime y los c&#243;mics por fuera, guerrera brutal e instintiva por dentro. La mano derecha de R&#237;o no pide permiso para proteger a los suyos.</div>
+        </div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Rayen.png" alt="Rayen" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rayen</span></div></div>
+          <div class="char-body">Dulce, tranquila, aparentemente inofensiva. Rayen lleva consigo un secreto tan pesado que ha aprendido a sonre&#237;r para no derrumbarse. Este viaje no le dar&#225; otra opci&#243;n: tarde o temprano, la verdad de qui&#233;n es saldr&#225; a la luz.</div>
+        </div>
+      </div>
+      <!-- FILA 2 -->
+      <div class="char-row char-row-2">
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Reiner.png" alt="Reiner" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Reiner</span></div></div>
+          <div class="char-body">General del ej&#233;rcito controlado por Las Siete Sombras, guardianes del secreto m&#225;s grande de la historia: la existencia de Panasea. Cuando Stan desapareci&#243; llev&#225;ndose parte de esa verdad, Reiner no solo recibi&#243; &#243;rdenes de recuperarla. Tambi&#233;n decidi&#243; usarla para sus propios fines.</div>
+        </div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Rollo.png" alt="Rollo" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rollo</span></div></div>
+          <div class="char-body">Primer oficial de Reiner. Imbatible en combate, de mente afilada y lealtad inquebrantable&#8230; o casi. Rollo sigue &#243;rdenes porque cree en la misi&#243;n, pero hay momentos en que la misi&#243;n y la conciencia no se&#241;alan en la misma direcci&#243;n. Y esa grieta, tarde o temprano, alguien la va a explotar.</div>
+        </div>
+      </div>
+      <!-- FILA 3 -->
+      <div class="char-row char-row-2">
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Draven.jpg" alt="Draven" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Draven</span></div></div>
+          <div class="char-body">Hijo de un &#225;ngel y un demonio, Draven es exactamente lo que ambos mundos juraron que nunca deb&#237;a existir. Una Abominaci&#243;n. Pero en Panasea, ser&#225; &#233;l quien gu&#237;e a los protagonistas hacia el coraz&#243;n de la guerra santa, porque conoce este continente mejor que nadie&#8230; y sus secretos podr&#237;an costarte la vida.</div>
+        </div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Still.png" alt="Still" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Still</span></div></div>
+          <div class="char-body">La leyenda. El ser m&#225;s poderoso de la creaci&#243;n, hijo de una diosa vikinga y un &#225;ngel de alto rango. Por su mera existencia se dict&#243; la Ley contra las Abominaciones. Still no busca poder, no necesita buscarlo. Lo que &#233;l decida en esta guerra determinar&#225; el destino de todo lo que respira en Panasea.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+</div>
+
+<!-- ═══════════ GALERÍA ═══════════ -->
+<div id="page-galeria" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; Las Facciones &#10022;</p>
+      <h2 class="page-title">Galer&#237;a</h2>
+      <div class="page-rule"></div>
+    </div>
+    <div class="gallery-tabs">
+      <button class="gtab active" onclick="showGallery('valhalla',this)">Valhalla</button>
+      <button class="gtab" onclick="showGallery('ciudadela',this)">Ciudadela</button>
+      <button class="gtab" onclick="showGallery('valle',this)">Valle de los Condenados</button>
+      <button class="gtab" onclick="showGallery('olimpo',this)">Olimpo</button>
+      <button class="gtab" onclick="showGallery('khamet',this)">Khamet</button>
+      <button class="gtab" onclick="showGallery('inframundo',this)">Inframundo</button>
+      <button class="gtab" onclick="showGallery('resistencia',this)">Resistencia</button>
+      <button class="gtab" onclick="showGallery('still',this)">Castillo de Still</button>
+    </div>
+    <div id="gal-valhalla" class="gallery-panel active">
+      <div class="gal-item" onclick="openLb('Valhalla1.jpeg')"><img src="Valhalla1.jpeg" alt="Valhalla"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+      <div class="gal-item" onclick="openLb('Valhalla2.png')"><img src="Valhalla2.png" alt="Valhalla"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+    </div>
+    <div id="gal-ciudadela" class="gallery-panel">
+      <div class="gal-item" onclick="openLb('Ciudadela1.jpeg')"><img src="Ciudadela1.jpeg" alt="Ciudadela"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+      <div class="gal-item" onclick="openLb('Ciudadela2.png')"><img src="Ciudadela2.png" alt="Ciudadela"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+    </div>
+    <div id="gal-valle" class="gallery-panel">
+      <div class="gal-item" onclick="openLb('Valledeloscondenados1.jpeg')"><img src="Valledeloscondenados1.jpeg" alt="Valle"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+      <div class="gal-item" onclick="openLb('Valle2.png')"><img src="Valle2.png" alt="Valle"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+    </div>
+    <div id="gal-olimpo" class="gallery-panel">
+      <div class="gal-item" onclick="openLb('Olimpo1.jpeg')"><img src="Olimpo1.jpeg" alt="Olimpo"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+      <div class="gal-item" onclick="openLb('Olimpo2.png')"><img src="Olimpo2.png" alt="Olimpo"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+    </div>
+    <div id="gal-khamet" class="gallery-panel">
+      <div class="gal-item" onclick="openLb('Khamet1.jpeg')"><img src="Khamet1.jpeg" alt="Khamet"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+      <div class="gal-item" onclick="openLb('Khamet2.png')"><img src="Khamet2.png" alt="Khamet"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+    </div>
+    <div id="gal-inframundo" class="gallery-panel">
+      <div class="gal-item" onclick="openLb('Inframundo1.jpeg')"><img src="Inframundo1.jpeg" alt="Inframundo"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+      <div class="gal-item" onclick="openLb('Inframundo2.png')"><img src="Inframundo2.png" alt="Inframundo"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+    </div>
+    <div id="gal-resistencia" class="gallery-panel">
+      <div class="gal-item" onclick="openLb('Resistencia.jpeg')"><img src="Resistencia.jpeg" alt="Resistencia"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+    </div>
+    <div id="gal-still" class="gallery-panel">
+      <div class="gal-item" onclick="openLb('Castillostill2.png')"><img src="Castillostill2.png" alt="Castillo de Still"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+    </div>
+  </div>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+</div>
+
+<!-- ═══════════ ENCUESTAS ═══════════ -->
+<div id="page-encuestas" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; Tu Voz &#10022;</p>
+      <h2 class="page-title">Encuestas</h2>
+      <div class="page-rule"></div>
+    </div>
+    <div class="polls-grid">
+      <div class="poll-card reveal">
+        <p class="poll-question">&#191;A cu&#225;l facci&#243;n pertenecer&#237;as en el Continente de Gaia?</p>
+        <div class="poll-options">
+          <div class="poll-option"><div class="poll-bar" style="width:34%"></div><label><span>&#9876; Valhalla</span><span class="poll-pct">34%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:20%"></div><label><span>&#127963; Olimpo</span><span class="poll-pct">20%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:15%"></div><label><span>&#9760; Inframundo</span><span class="poll-pct">15%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:12%"></div><label><span>&#127984; Ciudadela</span><span class="poll-pct">12%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:10%"></div><label><span>&#128293; Khamet</span><span class="poll-pct">10%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:5%"></div><label><span>&#127763; Valle de los Condenados</span><span class="poll-pct">5%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:4%"></div><label><span>&#9994; Resistencia</span><span class="poll-pct">4%</span></label></div>
+        </div>
+        <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
+      </div>
+      <div class="poll-card reveal">
+        <p class="poll-question">&#191;Cu&#225;l es tu personaje favorito hasta ahora?</p>
+        <div class="poll-options">
+          <div class="poll-option"><div class="poll-bar" style="width:28%"></div><label><span>Amaya</span><span class="poll-pct">28%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:24%"></div><label><span>Draven</span><span class="poll-pct">24%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:18%"></div><label><span>Rayen</span><span class="poll-pct">18%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:14%"></div><label><span>Reiner</span><span class="poll-pct">14%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:10%"></div><label><span>R&#237;o</span><span class="poll-pct">10%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:4%"></div><label><span>Rollo</span><span class="poll-pct">4%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:2%"></div><label><span>Still</span><span class="poll-pct">2%</span></label></div>
+        </div>
+        <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
+      </div>
+      <div class="poll-card reveal">
+        <p class="poll-question">&#191;Qu&#233; esperas m&#225;s de la historia?</p>
+        <div class="poll-options">
+          <div class="poll-option"><div class="poll-bar" style="width:38%"></div><label><span>Guerras entre facciones</span><span class="poll-pct">38%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:30%"></div><label><span>Revelaciones del Muro</span><span class="poll-pct">30%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:20%"></div><label><span>Romance y traiciones</span><span class="poll-pct">20%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:12%"></div><label><span>Magia y misterios</span><span class="poll-pct">12%</span></label></div>
+        </div>
+        <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+</div>
+
+<!-- ═══════════ CAPÍTULOS ═══════════ -->
+<div id="page-capitulos" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; La Historia &#10022;</p>
+      <h2 class="page-title">Cap&#237;tulos</h2>
+      <div class="page-rule"></div>
+    </div>
+    <div class="chapters-list">
+      <div class="chapter-item reveal"><div class="chap-num">I</div><div class="chap-info"><p class="chap-title">Pr&#243;logo &#8212; El D&#237;a que el Muro Habl&#243;</p><p class="chap-excerpt">Antes del comienzo, hubo una advertencia. Nadie la escuch&#243;.</p></div><span class="chap-status coming">Pr&#243;ximamente</span></div>
+      <div class="chapter-item reveal"><div class="chap-num">II</div><div class="chap-info"><p class="chap-title">Cap&#237;tulo 1 &#8212; Cenizas en Valhalla</p><p class="chap-excerpt">El fuego que nadie encendi&#243; arde en el coraz&#243;n del Norte.</p></div><span class="chap-status coming">Pr&#243;ximamente</span></div>
+      <div class="chapter-item reveal"><div class="chap-num">III</div><div class="chap-info"><p class="chap-title">Cap&#237;tulo 2 &#8212; Las Puertas de la Ciudadela</p><p class="chap-excerpt">El orden siempre tuvo un precio. Hoy, alguien se niega a pagarlo.</p></div><span class="chap-status coming">Pr&#243;ximamente</span></div>
+      <div class="chapter-placeholder reveal"><p>Los cap&#237;tulos ser&#225;n publicados aqu&#237; a medida que avance la historia.</p><p class="add-chapter-note">&#10022; Cada nueva entrega ser&#225; anunciada en redes sociales &#10022;</p></div>
+    </div>
+  </div>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+</div>
+
+<!-- ═══════════ MAPA ═══════════ -->
+<div id="page-mapa" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; El Continente &#10022;</p>
+      <h2 class="page-title">Mapa de Gaia</h2>
+      <div class="page-rule"></div>
     </div>
     <div class="map-container" id="mapContainer">
       <div class="map-tooltip" id="mapTooltip"></div>
-      <!-- SVG Interactive Map -->
       <svg id="map-svg" viewBox="0 0 900 580" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <filter id="glow">
-            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
-            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-          <radialGradient id="bg-grad" cx="50%" cy="50%">
-            <stop offset="0%" stop-color="#1a2030"/>
-            <stop offset="100%" stop-color="#0a0a14"/>
-          </radialGradient>
-          <!-- ocean texture -->
-          <pattern id="ocean-pattern" width="20" height="20" patternUnits="userSpaceOnUse">
-            <rect width="20" height="20" fill="#0d1a2e"/>
-            <path d="M0 10 Q5 8 10 10 Q15 12 20 10" stroke="#162540" fill="none" stroke-width="0.8" opacity="0.5"/>
-          </pattern>
+          <filter id="glow"><feGaussianBlur stdDeviation="3" result="coloredBlur"/><feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+          <pattern id="ocean-pattern" width="20" height="20" patternUnits="userSpaceOnUse"><rect width="20" height="20" fill="#0d1a2e"/><path d="M0 10 Q5 8 10 10 Q15 12 20 10" stroke="#162540" fill="none" stroke-width="0.8" opacity="0.5"/></pattern>
         </defs>
-
-        <!-- Ocean background -->
         <rect width="900" height="580" fill="url(#ocean-pattern)"/>
-
-        <!-- Outer continent shape -->
-        <path d="M 80 80 Q 200 40 420 50 Q 640 40 820 100 Q 870 200 860 350 Q 840 480 700 530 Q 550 570 380 555 Q 200 540 100 470 Q 50 380 60 240 Z"
-              fill="#1c2218" stroke="rgba(201,168,76,0.15)" stroke-width="1.5"/>
-
-        <!-- VALHALLA – far North -->
-        <g class="map-region" data-name="Valhalla – El Norte Eterno"
-           onmouseenter="showTooltip(event,'Valhalla – El Norte Eterno')"
-           onmouseleave="hideTooltip()">
-          <ellipse cx="310" cy="120" rx="130" ry="70" fill="#2a3a4a" stroke="#5b8ab0" stroke-width="1.5"/>
-          <text x="310" y="115" text-anchor="middle" fill="#a8d8ff" font-family="Cinzel" font-size="13" font-weight="600">VALHALLA</text>
-          <text x="310" y="130" text-anchor="middle" fill="#5b8ab0" font-family="Cinzel" font-size="9">El Norte Eterno</text>
-          <!-- Snow peaks -->
-          <path d="M240 100 L255 78 L270 100" fill="white" opacity="0.6"/>
-          <path d="M270 95 L285 70 L300 95" fill="white" opacity="0.5"/>
-          <path d="M300 98 L315 73 L330 98" fill="white" opacity="0.45"/>
-        </g>
-
-        <!-- OLIMPO – East highlands -->
-        <g class="map-region" data-name="Olimpo – La Cima del Poder"
-           onmouseenter="showTooltip(event,'Olimpo – La Cima del Poder')"
-           onmouseleave="hideTooltip()">
-          <ellipse cx="660" cy="180" rx="120" ry="80" fill="#3a2f20" stroke="#c9a84c" stroke-width="1.5"/>
-          <text x="660" y="175" text-anchor="middle" fill="#e8c97a" font-family="Cinzel" font-size="13" font-weight="600">OLIMPO</text>
-          <text x="660" y="190" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="9">La Cima del Poder</text>
-          <!-- Pillars -->
-          <rect x="622" y="155" width="5" height="20" fill="#c9a84c" opacity="0.5"/>
-          <rect x="634" y="155" width="5" height="20" fill="#c9a84c" opacity="0.5"/>
-          <rect x="646" y="155" width="5" height="20" fill="#c9a84c" opacity="0.5"/>
-        </g>
-
-        <!-- CIUDADELA – Center -->
-        <g class="map-region" data-name="La Ciudadela – El Corazón del Orden"
-           onmouseenter="showTooltip(event,'La Ciudadela – El Corazón del Orden')"
-           onmouseleave="hideTooltip()">
-          <rect x="340" y="220" width="180" height="110" rx="4" fill="#28282e" stroke="#9090b0" stroke-width="1.5"/>
-          <text x="430" y="270" text-anchor="middle" fill="#d0d0e8" font-family="Cinzel" font-size="12" font-weight="600">CIUDADELA</text>
-          <text x="430" y="284" text-anchor="middle" fill="#9090b0" font-family="Cinzel" font-size="9">Corazón del Orden</text>
-          <!-- castle battlements -->
-          <rect x="358" y="226" width="8" height="10" fill="#9090b0" opacity="0.5"/>
-          <rect x="374" y="226" width="8" height="10" fill="#9090b0" opacity="0.5"/>
-          <rect x="390" y="226" width="8" height="10" fill="#9090b0" opacity="0.5"/>
-        </g>
-
-        <!-- KHAMET – South East desert -->
-        <g class="map-region" data-name="Khamet – Las Arenas Doradas"
-           onmouseenter="showTooltip(event,'Khamet – Las Arenas Doradas')"
-           onmouseleave="hideTooltip()">
-          <ellipse cx="650" cy="390" rx="110" ry="75" fill="#3a2c10" stroke="#d4a030" stroke-width="1.5"/>
-          <text x="650" y="385" text-anchor="middle" fill="#ffd060" font-family="Cinzel" font-size="13" font-weight="600">KHAMET</text>
-          <text x="650" y="400" text-anchor="middle" fill="#d4a030" font-family="Cinzel" font-size="9">Las Arenas Doradas</text>
-          <!-- pyramids -->
-          <polygon points="625,375 640,350 655,375" fill="#d4a030" opacity="0.4"/>
-          <polygon points="650,378 662,358 674,378" fill="#d4a030" opacity="0.35"/>
-        </g>
-
-        <!-- INFRAMUNDO – Center deep -->
-        <g class="map-region" data-name="Inframundo – Donde los Muertos Caminan"
-           onmouseenter="showTooltip(event,'Inframundo – Donde los Muertos Caminan')"
-           onmouseleave="hideTooltip()">
-          <ellipse cx="430" cy="400" rx="100" ry="65" fill="#1a0a0a" stroke="#6b2020" stroke-width="1.5"/>
-          <text x="430" y="395" text-anchor="middle" fill="#c05050" font-family="Cinzel" font-size="12" font-weight="600">INFRAMUNDO</text>
-          <text x="430" y="410" text-anchor="middle" fill="#6b2020" font-family="Cinzel" font-size="9">Donde los Muertos Caminan</text>
-          <!-- crack lines -->
-          <path d="M390 380 Q410 395 390 415" stroke="#6b2020" fill="none" stroke-width="1" opacity="0.7"/>
-          <path d="M460 378 Q445 400 465 418" stroke="#6b2020" fill="none" stroke-width="1" opacity="0.7"/>
-        </g>
-
-        <!-- VALLE DE LOS CONDENADOS – South West -->
-        <g class="map-region" data-name="Valle de los Condenados"
-           onmouseenter="showTooltip(event,'Valle de los Condenados')"
-           onmouseleave="hideTooltip()">
-          <ellipse cx="185" cy="390" rx="100" ry="70" fill="#202518" stroke="#5a6a30" stroke-width="1.5"/>
-          <text x="185" y="380" text-anchor="middle" fill="#90a050" font-family="Cinzel" font-size="10" font-weight="600">VALLE DE LOS</text>
-          <text x="185" y="394" text-anchor="middle" fill="#90a050" font-family="Cinzel" font-size="10" font-weight="600">CONDENADOS</text>
-          <text x="185" y="408" text-anchor="middle" fill="#5a6a30" font-family="Cinzel" font-size="8">Tierra sin Retorno</text>
-        </g>
-
-        <!-- RESISTENCIA – scattered West -->
-        <g class="map-region" data-name="La Resistencia – Sin Hogar, Sin Amo"
-           onmouseenter="showTooltip(event,'La Resistencia – Sin Hogar, Sin Amo')"
-           onmouseleave="hideTooltip()">
-          <ellipse cx="150" cy="240" rx="75" ry="55" fill="#1e1e18" stroke="#8a8a30" stroke-width="1.5" stroke-dasharray="5,3"/>
-          <text x="150" y="236" text-anchor="middle" fill="#b0b050" font-family="Cinzel" font-size="11" font-weight="600">RESISTENCIA</text>
-          <text x="150" y="250" text-anchor="middle" fill="#8a8a30" font-family="Cinzel" font-size="8">Sin Hogar, Sin Amo</text>
-        </g>
-
-        <!-- EL MURO – dramatic dividing line -->
-        <path d="M 80 80 Q 200 40 420 50 Q 640 40 820 100"
-              stroke="rgba(201,168,76,0.6)" stroke-width="3" fill="none"
-              stroke-dasharray="12,4" filter="url(#glow)"/>
-        <text x="450" y="38" text-anchor="middle" fill="rgba(201,168,76,0.7)"
-              font-family="Cinzel" font-size="10" letter-spacing="4">– EL MURO –</text>
-
-        <!-- Compass -->
-        <g transform="translate(828,480)">
-          <circle cx="0" cy="0" r="28" fill="rgba(0,0,0,0.6)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/>
-          <text x="0" y="-14" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="10">N</text>
-          <text x="0" y="18"  text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="10">S</text>
-          <text x="-18" y="4" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="10">O</text>
-          <text x="18"  y="4" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="10">E</text>
-          <path d="M0 -10 L3 0 L0 3 L-3 0 Z" fill="#c9a84c"/>
-        </g>
-
-        <!-- Scale -->
-        <g transform="translate(50,540)">
-          <line x1="0" y1="0" x2="80" y2="0" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
-          <line x1="0" y1="-4" x2="0" y2="4" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
-          <line x1="80" y1="-4" x2="80" y2="4" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/>
-          <text x="40" y="-6" text-anchor="middle" fill="rgba(201,168,76,0.5)" font-family="Cinzel" font-size="8">500 leguas</text>
-        </g>
+        <path d="M 80 80 Q 200 40 420 50 Q 640 40 820 100 Q 870 200 860 350 Q 840 480 700 530 Q 550 570 380 555 Q 200 540 100 470 Q 50 380 60 240 Z" fill="#1c2218" stroke="rgba(201,168,76,0.15)" stroke-width="1.5"/>
+        <g class="map-region" onmouseenter="showTT(event,'Valhalla – El Norte Eterno')" onmouseleave="hideTT()"><ellipse cx="310" cy="120" rx="130" ry="70" fill="#2a3a4a" stroke="#5b8ab0" stroke-width="1.5"/><text x="310" y="115" text-anchor="middle" fill="#a8d8ff" font-family="Cinzel" font-size="13" font-weight="600">VALHALLA</text><text x="310" y="130" text-anchor="middle" fill="#5b8ab0" font-family="Cinzel" font-size="9">El Norte Eterno</text><path d="M240 100 L255 78 L270 100" fill="white" opacity="0.6"/><path d="M270 95 L285 70 L300 95" fill="white" opacity="0.5"/><path d="M300 98 L315 73 L330 98" fill="white" opacity="0.45"/></g>
+        <g class="map-region" onmouseenter="showTT(event,'Olimpo – La Cima del Poder')" onmouseleave="hideTT()"><ellipse cx="660" cy="180" rx="120" ry="80" fill="#3a2f20" stroke="#c9a84c" stroke-width="1.5"/><text x="660" y="175" text-anchor="middle" fill="#e8c97a" font-family="Cinzel" font-size="13" font-weight="600">OLIMPO</text><text x="660" y="190" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="9">La Cima del Poder</text><rect x="622" y="155" width="5" height="20" fill="#c9a84c" opacity="0.5"/><rect x="634" y="155" width="5" height="20" fill="#c9a84c" opacity="0.5"/><rect x="646" y="155" width="5" height="20" fill="#c9a84c" opacity="0.5"/></g>
+        <g class="map-region" onmouseenter="showTT(event,'La Ciudadela – El Corazón del Orden')" onmouseleave="hideTT()"><rect x="340" y="220" width="180" height="110" rx="4" fill="#28282e" stroke="#9090b0" stroke-width="1.5"/><text x="430" y="270" text-anchor="middle" fill="#d0d0e8" font-family="Cinzel" font-size="12" font-weight="600">CIUDADELA</text><text x="430" y="284" text-anchor="middle" fill="#9090b0" font-family="Cinzel" font-size="9">Corazón del Orden</text><rect x="358" y="226" width="8" height="10" fill="#9090b0" opacity="0.5"/><rect x="374" y="226" width="8" height="10" fill="#9090b0" opacity="0.5"/><rect x="390" y="226" width="8" height="10" fill="#9090b0" opacity="0.5"/></g>
+        <g class="map-region" onmouseenter="showTT(event,'Khamet – Las Arenas Doradas')" onmouseleave="hideTT()"><ellipse cx="650" cy="390" rx="110" ry="75" fill="#3a2c10" stroke="#d4a030" stroke-width="1.5"/><text x="650" y="385" text-anchor="middle" fill="#ffd060" font-family="Cinzel" font-size="13" font-weight="600">KHAMET</text><text x="650" y="400" text-anchor="middle" fill="#d4a030" font-family="Cinzel" font-size="9">Las Arenas Doradas</text><polygon points="625,375 640,350 655,375" fill="#d4a030" opacity="0.4"/><polygon points="650,378 662,358 674,378" fill="#d4a030" opacity="0.35"/></g>
+        <g class="map-region" onmouseenter="showTT(event,'Inframundo – Donde los Muertos Caminan')" onmouseleave="hideTT()"><ellipse cx="430" cy="400" rx="100" ry="65" fill="#1a0a0a" stroke="#6b2020" stroke-width="1.5"/><text x="430" y="395" text-anchor="middle" fill="#c05050" font-family="Cinzel" font-size="12" font-weight="600">INFRAMUNDO</text><text x="430" y="410" text-anchor="middle" fill="#6b2020" font-family="Cinzel" font-size="9">Donde los Muertos Caminan</text><path d="M390 380 Q410 395 390 415" stroke="#6b2020" fill="none" stroke-width="1" opacity="0.7"/><path d="M460 378 Q445 400 465 418" stroke="#6b2020" fill="none" stroke-width="1" opacity="0.7"/></g>
+        <g class="map-region" onmouseenter="showTT(event,'Valle de los Condenados')" onmouseleave="hideTT()"><ellipse cx="185" cy="390" rx="100" ry="70" fill="#202518" stroke="#5a6a30" stroke-width="1.5"/><text x="185" y="380" text-anchor="middle" fill="#90a050" font-family="Cinzel" font-size="10" font-weight="600">VALLE DE LOS</text><text x="185" y="394" text-anchor="middle" fill="#90a050" font-family="Cinzel" font-size="10" font-weight="600">CONDENADOS</text><text x="185" y="408" text-anchor="middle" fill="#5a6a30" font-family="Cinzel" font-size="8">Tierra sin Retorno</text></g>
+        <g class="map-region" onmouseenter="showTT(event,'La Resistencia – Sin Hogar, Sin Amo')" onmouseleave="hideTT()"><ellipse cx="150" cy="240" rx="75" ry="55" fill="#1e1e18" stroke="#8a8a30" stroke-width="1.5" stroke-dasharray="5,3"/><text x="150" y="236" text-anchor="middle" fill="#b0b050" font-family="Cinzel" font-size="11" font-weight="600">RESISTENCIA</text><text x="150" y="250" text-anchor="middle" fill="#8a8a30" font-family="Cinzel" font-size="8">Sin Hogar, Sin Amo</text></g>
+        <path d="M 80 80 Q 200 40 420 50 Q 640 40 820 100" stroke="rgba(201,168,76,0.6)" stroke-width="3" fill="none" stroke-dasharray="12,4" filter="url(#glow)"/>
+        <text x="450" y="38" text-anchor="middle" fill="rgba(201,168,76,0.7)" font-family="Cinzel" font-size="10" letter-spacing="4">– EL MURO –</text>
+        <g transform="translate(828,480)"><circle cx="0" cy="0" r="28" fill="rgba(0,0,0,0.6)" stroke="rgba(201,168,76,0.3)" stroke-width="1"/><text x="0" y="-14" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="10">N</text><text x="0" y="18" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="10">S</text><text x="-18" y="4" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="10">O</text><text x="18" y="4" text-anchor="middle" fill="#c9a84c" font-family="Cinzel" font-size="10">E</text><path d="M0 -10 L3 0 L0 3 L-3 0 Z" fill="#c9a84c"/></g>
+        <g transform="translate(50,540)"><line x1="0" y1="0" x2="80" y2="0" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/><line x1="0" y1="-4" x2="0" y2="4" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/><line x1="80" y1="-4" x2="80" y2="4" stroke="rgba(201,168,76,0.5)" stroke-width="1.5"/><text x="40" y="-6" text-anchor="middle" fill="rgba(201,168,76,0.5)" font-family="Cinzel" font-size="8">500 leguas</text></g>
       </svg>
     </div>
     <div class="map-controls">
-      <button class="map-btn" onclick="document.getElementById('map-svg').style.transform='scale(1)';document.getElementById('map-svg').style.transformOrigin='center';">⊞ Restablecer</button>
-      <p style="color:var(--text-dim);font-size:.82rem;font-style:italic;align-self:center;">
-        Pasa el cursor sobre cada región para ver su nombre. Puedes cargar tu mapa personalizado como imagen.
-      </p>
+      <button class="map-btn" onclick="document.getElementById('map-svg').style.transform='scale(1)'">&#8862; Restablecer</button>
+      <p style="color:var(--text-dim);font-size:.8rem;font-style:italic;align-self:center">Pasa el cursor sobre cada regi&#243;n para ver su nombre.</p>
     </div>
   </div>
-</section>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
 </div>
 
-<!-- ══════════ COMENTARIOS ══════════ -->
-<section id="comentarios">
-  <div class="section-header">
-    <p class="section-label">✦ Comunidad ✦</p>
-    <h2 class="section-title">Comentarios</h2>
-    <div class="section-rule"></div>
-  </div>
-  <div class="comments-wrap">
-    <div class="login-required-box" id="comment-login-required"><p>Debes iniciar sesi&#243;n para dejar un comentario.</p><button onclick="openAuth()">&#10022; Iniciar Sesi&#243;n / Registrarse &#10022;</button></div>
-    <div class="comment-form" id="comment-form-box" style="display:none;">
-      <p class="section-label" style="margin-bottom:1.5rem;">Deja tu opinión sobre el libro</p>
-      <div class="form-grid">
-        <div class="form-field">
-          <label>Nombre / Apodo</label>
-          <input type="text" id="cmt-name" placeholder="Tu nombre o alias..."/>
-        </div>
-        <div class="form-field">
-          <label>Correo electrónico *</label>
-          <input type="email" id="cmt-email" placeholder="tu@correo.com (no se publicará)"/>
-        </div>
-        <div class="form-field">
-          <label>Capítulo o Sección</label>
-          <input type="text" id="cmt-chapter" placeholder="Ej: Capítulo 1, Personajes..."/>
-        </div>
-        <div class="form-field">
-          <label>Valoración</label>
-          <select id="cmt-rating">
-            <option>⭐⭐⭐⭐⭐ – Épico</option>
-            <option>⭐⭐⭐⭐ – Muy bueno</option>
-            <option>⭐⭐⭐ – Bueno</option>
-            <option>⭐⭐ – Regular</option>
-          </select>
-        </div>
-        <div class="form-field full">
-          <label>Comentario</label>
-          <textarea id="cmt-text" placeholder="Comparte tu opinión, teorías, predicciones..."></textarea>
-        </div>
-      </div>
-      <p class="form-note">
-        🔒 Tu correo electrónico es requerido únicamente para verificación. Tu comentario será revisado antes de publicarse. No compartimos tu información con terceros.
-      </p>
-      <button class="btn-submit" onclick="submitComment()">Enviar Comentario</button>
-      <div class="success-msg" id="success-msg">
-        ✦ ¡Gracias por tu comentario! Será revisado y publicado pronto. ✦
-      </div>
+<!-- ═══════════ COMENTARIOS ═══════════ -->
+<div id="page-comentarios" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; Comunidad &#10022;</p>
+      <h2 class="page-title">Comentarios</h2>
+      <div class="page-rule"></div>
     </div>
-
-    <!-- Sample approved comments -->
-    <div class="comment-list">
-      <div class="comment-card">
-        <div class="comment-header">
-          <span class="comment-author">Valeria M.</span>
-          <span class="comment-date">Febrero 2025</span>
-        </div>
-        <p class="comment-text">El worldbuilding de Gaia es increíble. La forma en que cada facción tiene su propia cultura, su propio idioma casi... me transporté completamente. ¡Necesito más capítulos ya!</p>
+    <div class="comments-wrap">
+      <div class="login-required-box" id="comment-login-required">
+        <p>Debes iniciar sesi&#243;n para dejar un comentario.</p>
+        <button onclick="openAuth()">&#10022; Iniciar Sesi&#243;n / Registrarse &#10022;</button>
       </div>
-      <div class="comment-card">
-        <div class="comment-header">
-          <span class="comment-author">Rodrigo K.</span>
-          <span class="comment-date">Enero 2025</span>
+      <div class="comment-form" id="comment-form-box" style="display:none;">
+        <p class="page-label" style="margin-bottom:1.4rem;">Deja tu opini&#243;n sobre el libro</p>
+        <div class="form-grid">
+          <div class="form-field"><label>Nombre / Apodo</label><input type="text" id="cmt-name" placeholder="Tu nombre o alias..."/></div>
+          <div class="form-field"><label>Cap&#237;tulo o Secci&#243;n</label><input type="text" id="cmt-chapter" placeholder="Ej: Cap&#237;tulo 1..."/></div>
+          <div class="form-field"><label>Valoraci&#243;n</label><select id="cmt-rating"><option>&#11088;&#11088;&#11088;&#11088;&#11088; &#8211; &#201;pico</option><option>&#11088;&#11088;&#11088;&#11088; &#8211; Muy bueno</option><option>&#11088;&#11088;&#11088; &#8211; Bueno</option><option>&#11088;&#11088; &#8211; Regular</option></select></div>
+          <div class="form-field full"><label>Comentario</label><textarea id="cmt-text" placeholder="Comparte tu opini&#243;n, teor&#237;as, predicciones..."></textarea></div>
         </div>
-        <p class="comment-text">Draven tiene que ser el personaje más complejo que he leído en mucho tiempo en fantasía en español. No sabes si amarlo u odiarlo, y eso es exactamente lo que hace un gran personaje.</p>
+        <p class="form-note">&#128274; Tu comentario ser&#225; revisado antes de publicarse. Contacto del escritor: <strong>stan.e.s@gmail.com</strong></p>
+        <button class="btn-submit" onclick="submitComment()">Enviar Comentario</button>
+        <div class="success-msg" id="success-msg">&#10022; &#161;Gracias por tu comentario! Ser&#225; revisado y publicado pronto. &#10022;</div>
       </div>
-      <div class="comment-card">
-        <div class="comment-header">
-          <span class="comment-author">Sofía del Valle</span>
-          <span class="comment-date">Diciembre 2024</span>
-        </div>
-        <p class="comment-text">El Muro, el nombre del libro, los nombres de los personajes... todo tiene un simbolismo tan bien pensado. Se nota que la autora/autor construyó este mundo con mucho amor.</p>
+      <div class="comment-list">
+        <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Valeria M.</span><span class="comment-date">Febrero 2025</span></div><p class="comment-text">El worldbuilding de Gaia es incre&#237;ble. La forma en que cada facci&#243;n tiene su propia cultura, su propio idioma casi... me transport&#233; completamente. &#161;Necesito m&#225;s cap&#237;tulos ya!</p></div>
+        <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Rodrigo K.</span><span class="comment-date">Enero 2025</span></div><p class="comment-text">Draven tiene que ser el personaje m&#225;s complejo que he le&#237;do en mucho tiempo en fantas&#237;a en espa&#241;ol. No sabes si amarlo u odiarlo, y eso es exactamente lo que hace un gran personaje.</p></div>
+        <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Sof&#237;a del Valle</span><span class="comment-date">Diciembre 2024</span></div><p class="comment-text">El Muro, el nombre del libro, los nombres de los personajes... todo tiene un simbolismo tan bien pensado. Se nota que la autora/autor construy&#243; este mundo con mucho amor.</p></div>
       </div>
     </div>
   </div>
-</section>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+</div>
 
-<!-- ══════════ REDES SOCIALES ══════════ -->
-<div id="redes" class="section-bg-dark3">
-<div class="redes-inner" style="padding:5rem 2rem; max-width:800px; margin:0 auto; text-align:center;">
-  <p class="section-label">✦ Síguenos ✦</p>
-  <h2 class="redes-title">Redes Sociales</h2>
-  <p class="redes-subtitle">Únete a la comunidad de Gaia y no te pierdas ninguna novedad</p>
-  <div class="social-grid">
-    <a href="https://www.instagram.com/escritor_stan.e.s_oficial?igsh=MTRvbjQzeWM3M3p4ag%3D%3D&utm_source=qr" class="social-card" target="_blank">
-      <div class="social-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      </div>
-      <span class="social-name">Instagram</span>
-      <span class="social-handle">@ellegadodegaia</span>
-    </a>
-    <a href="https://x.com/escritorstanes?s=21" class="social-card" target="_blank">
-      <div class="social-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-      </div>
-      <span class="social-name">Twitter / X</span>
-      <span class="social-handle">@legadodegaia</span>
-    </a>
-    <a href="#" class="social-card" target="_blank">
-      <div class="social-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-      </div>
-      <span class="social-name">Facebook</span>
-      <span class="social-handle">El Legado de Gaia</span>
-    </a>
-    <a href="https://www.tiktok.com/@stan.e..silva?_r=1&_t=ZS-94PWgUWUYBJ" class="social-card" target="_blank">
-      <div class="social-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg>
-      </div>
-      <span class="social-name">TikTok</span>
-      <span class="social-handle">@ellegadodegaia</span>
-    </a>
-    <a href="#" class="social-card" target="_blank">
-      <div class="social-icon">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.014 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.014 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg>
-      </div>
-      <span class="social-name">Wattpad</span>
-      <span class="social-handle">El Legado de Gaia</span>
-    </a>
+<!-- ═══════════ REDES ═══════════ -->
+<div id="page-redes" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; S&#237;guenos &#10022;</p>
+      <h2 class="page-title">Redes Sociales</h2>
+      <div class="page-rule"></div>
+    </div>
+    <p class="social-intro">&#218;nete a la comunidad de Gaia y no te pierdas ninguna novedad del continente.</p>
+    <div class="social-grid">
+      <!-- REDES -->
+      <a href="https://www.instagram.com/escritor_stan.e.s_oficial?igsh=MTRvbjQzeWM3M3p4ag%3D%3D&utm_source=qr" class="social-card" target="_blank">
+        <div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+        <span class="social-name">Instagram</span><span class="social-handle">@escritor_stan.e.s_oficial</span>
+      </a>
+      <a href="https://x.com/escritorstanes?s=21" class="social-card" target="_blank">
+        <div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></div>
+        <span class="social-name">Twitter / X</span><span class="social-handle">@escritorstanes</span>
+      </a>
+      <a href="https://www.tiktok.com/@stan.e..silva?_r=1&_t=ZS-94PWgUWUYBJ" class="social-card" target="_blank">
+        <div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg></div>
+        <span class="social-name">TikTok</span><span class="social-handle">@stan.e..silva</span>
+      </a>
+      <a href="#" class="social-card" target="_blank">
+        <div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.014 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.014 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></div>
+        <span class="social-name">Wattpad</span><span class="social-handle">El Legado de Gaia</span>
+      </a>
+      <!-- DIVIDER COMPRA -->
+      <div class="social-divider"></div>
+      <div class="social-divider-label">&#10022; &nbsp; Adquiere el libro &nbsp; &#10022;</div>
+      <div class="social-divider"></div>
+      <!-- AMAZON -->
+      <a href="#" class="social-card purchase" target="_blank">
+        <div class="social-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a18.5 18.5 0 01-4.72.612c-3.764 0-7.15-.98-10.156-2.94-.27-.17-.34-.38-.2-.59l-.41.65zm20.784-2.655c-.17-.23-.496-.28-.976-.17-1.966.463-3.913.695-5.845.695-2.04 0-3.97-.28-5.794-.843-1.16-.36-2.264-.844-3.317-1.45-.274-.16-.48-.19-.623-.1-.14.09-.175.258-.11.498.112.398.35.763.72 1.097 1.7 1.53 3.785 2.665 6.25 3.4a17.5 17.5 0 004.793.663c1.5 0 2.98-.186 4.437-.558 1.456-.373 2.68-.898 3.673-1.577.3-.204.47-.452.513-.748.04-.295-.04-.56-.24-.8l-.48.893zM12.1 9.27c0-1.036.37-1.89 1.107-2.563.738-.673 1.675-1.01 2.812-1.01.5 0 .964.093 1.39.28.425.186.774.444 1.048.773.275.33.413.694.413 1.09 0 .404-.106.762-.317 1.075a4.026 4.026 0 01-.85.877c-.345.25-.864.573-1.557.968a48.5 48.5 0 01-1.3.668c-.198.093-.388.13-.57.11l-.24-.032c-.103-.024-.18-.08-.232-.17-.05-.09-.065-.194-.05-.315.016-.12.06-.228.13-.32.07-.093.17-.176.295-.25l.556-.32c.56-.32 1.005-.614 1.334-.88.33-.267.58-.536.754-.808.174-.272.26-.556.26-.85 0-.414-.152-.762-.457-1.044-.305-.283-.677-.424-1.117-.424-.553 0-.99.17-1.31.51-.32.34-.48.786-.48 1.337v.26c0 .14-.043.254-.13.34-.087.087-.2.13-.34.13-.13 0-.24-.043-.327-.13-.087-.086-.13-.2-.13-.34v-.26z"/></svg>
+        </div>
+        <span class="social-name">Amazon</span><span class="social-handle">Comprar el libro</span>
+      </a>
+      <!-- APPLE BOOKS -->
+      <a href="#" class="social-card purchase" target="_blank">
+        <div class="social-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        </div>
+        <span class="social-name">Apple Books</span><span class="social-handle">Comprar el libro</span>
+      </a>
+    </div>
   </div>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p style="color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.18em;margin:.3rem 0">El Continente tras el Muro</p><p>Todos los derechos reservados &middot; Obra original de ficci&#243;n &nbsp; &#10022; &middot; &#10022; &middot; &#10022;</p></div>
 </div>
-</div>
-
-<!-- ══════════ FOOTER ══════════ -->
-<footer>
-  <p class="footer-title">El Legado de Gaia</p>
-  <p style="color:var(--gold);margin-bottom:.5rem;font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.2em;">El Continente tras el Muro</p>
-  <p>Todos los derechos reservados · Obra original de ficción</p>
-  <p style="margin-top:.5rem;">
-    <span style="color:rgba(201,168,76,0.4);">✦ · ✦ · ✦</span>
-  </p>
-</footer>
 
 <script>
-  /* AUTH */
-  function getUsers(){return JSON.parse(localStorage.getItem('gaia_users')||'[]')}
-  function saveUsers(u){localStorage.setItem('gaia_users',JSON.stringify(u))}
-  function getSession(){return JSON.parse(localStorage.getItem('gaia_session')||'null')}
-  function setSession(u){localStorage.setItem('gaia_session',JSON.stringify(u))}
-  function clearSession(){localStorage.removeItem('gaia_session')}
-  function openAuth(){document.getElementById('authOverlay').classList.add('open');clearMsgs()}
-  function closeAuth(){document.getElementById('authOverlay').classList.remove('open')}
-  function switchTab(tab,el){
-    document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
-    document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active'));
-    document.getElementById('panel-'+tab).classList.add('active');
-    if(el)el.classList.add('active'); clearMsgs();
-  }
-  function clearMsgs(){['login-msg','reg-msg'].forEach(id=>{const e=document.getElementById(id);if(e){e.textContent='';e.className='auth-msg'}})}
-  function showMsg(el,txt,type){el.textContent=txt;el.className='auth-msg '+type}
-  function doRegister(){
-    const name=document.getElementById('reg-name').value.trim();
-    const email=document.getElementById('reg-email').value.trim().toLowerCase();
-    const pass=document.getElementById('reg-pass').value;
-    const msg=document.getElementById('reg-msg');
-    if(!name||!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return}
-    if(pass.length<6){showMsg(msg,'La contraseña debe tener al menos 6 caracteres.','error');return}
-    const users=getUsers();
-    if(users.find(u=>u.email===email)){showMsg(msg,'Este correo ya está registrado.','error');return}
-    users.push({name,email,password:pass});saveUsers(users);setSession({name,email});
-    showMsg(msg,'¡Bienvenido/a a Gaia, '+name+'!','success');
-    setTimeout(()=>{closeAuth();updateUI()},1200);
-  }
-  function doLogin(){
-    const email=document.getElementById('login-email').value.trim().toLowerCase();
-    const pass=document.getElementById('login-pass').value;
-    const msg=document.getElementById('login-msg');
-    if(!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return}
-    const user=getUsers().find(u=>u.email===email&&u.password===pass);
-    if(!user){showMsg(msg,'Correo o contraseña incorrectos.','error');return}
-    setSession(user);showMsg(msg,'¡Bienvenido/a de vuelta, '+user.name+'!','success');
-    setTimeout(()=>{closeAuth();updateUI()},1000);
-  }
-  function doLogout(){clearSession();updateUI()}
-  function updateUI(){
-    const s=getSession();
-    const btn=document.getElementById('navAuthBtn');
-    const req=document.getElementById('comment-login-required');
-    const frm=document.getElementById('comment-form-box');
-    if(s){
-      btn.textContent='✦ '+s.name+' · Salir';btn.onclick=doLogout;
-      if(req)req.style.display='none';if(frm)frm.style.display='block';
-    }else{
-      btn.textContent='Iniciar Sesión';btn.onclick=openAuth;
-      if(req)req.style.display='block';if(frm)frm.style.display='none';
-    }
-  }
-  document.getElementById('authOverlay').addEventListener('click',function(e){if(e.target===this)closeAuth()});
-
-  /* Gallery Tabs */
-  function showFaction(id,btn){
-    document.querySelectorAll('.faction-gallery').forEach(el=>el.classList.remove('active'));
-    document.querySelectorAll('.tab-btn').forEach(el=>el.classList.remove('active'));
-    document.getElementById('gallery-'+id).classList.add('active');
-    if(btn)btn.classList.add('active');
-  }
-
-  /* ── Lightbox ── */
-  function openLightbox(src) {
-    document.getElementById('lightbox-img').src = src;
-    document.getElementById('lightbox').classList.add('open');
-  }
-  function closeLightbox() {
-    document.getElementById('lightbox').classList.remove('open');
-  }
-  document.getElementById('lightbox').addEventListener('click', function(e) {
-    if (e.target === this) closeLightbox();
+/* ═══ PAGE ROUTER ═══ */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  const pg=document.getElementById('page-'+id);
+  if(pg){pg.classList.add('active');window.scrollTo(0,0)}
+  document.querySelectorAll('.nav-tab').forEach(t=>{
+    if(t.getAttribute('onclick')&&t.getAttribute('onclick').includes("'"+id+"'"))t.classList.add('active');
   });
-
-  /* ── Map Tooltip ── */
-  function showTooltip(event, name) {
-    const tt = document.getElementById('mapTooltip');
-    tt.textContent = name;
-    tt.style.display = 'block';
-    tt.style.left = (event.offsetX + 14) + 'px';
-    tt.style.top  = (event.offsetY - 10) + 'px';
-  }
-  function hideTooltip() {
-    document.getElementById('mapTooltip').style.display = 'none';
-  }
-
-  /* Poll vote - requires login */
-  function handleVote(btn){
-    if(!getSession()){openAuth();return}
-    btn.textContent='✦ Voto registrado';btn.disabled=true;btn.style.opacity='.5';
-  }
-
-  /* ── Comment submit ── */
-  function submitComment() {
-    const name  = document.getElementById('cmt-name').value.trim();
-    const email = document.getElementById('cmt-email').value.trim();
-    const text  = document.getElementById('cmt-text').value.trim();
-    if (!email || !text) {
-      alert('Por favor completa el correo y el comentario.');
-      return;
-    }
-    document.getElementById('success-msg').style.display = 'block';
-    ['cmt-name','cmt-email','cmt-chapter','cmt-text'].forEach(id => {
-      document.getElementById(id).value = '';
+  // Trigger reveal animations
+  setTimeout(()=>{
+    pg.querySelectorAll('.reveal').forEach((el,i)=>{
+      setTimeout(()=>el.classList.add('shown'),i*80);
     });
-    // In production: send to your backend or a service like Formspree
-    // fetch('https://formspree.io/f/YOUR_ID', { method:'POST', body: new FormData() })
+  },50);
+}
+
+/* ═══ AUTH ═══ */
+function getUsers(){return JSON.parse(localStorage.getItem('gaia_users')||'[]')}
+function saveUsers(u){localStorage.setItem('gaia_users',JSON.stringify(u))}
+function getSession(){return JSON.parse(localStorage.getItem('gaia_session')||'null')}
+function setSession(u){localStorage.setItem('gaia_session',JSON.stringify(u))}
+function clearSession(){localStorage.removeItem('gaia_session')}
+function openAuth(){document.getElementById('authOverlay').classList.add('open');clearMsgs()}
+function closeAuth(){document.getElementById('authOverlay').classList.remove('open')}
+function switchTab(tab,el){
+  document.querySelectorAll('.auth-tab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.auth-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+tab).classList.add('active');
+  if(el)el.classList.add('active');clearMsgs();
+}
+function clearMsgs(){['login-msg','reg-msg'].forEach(id=>{const e=document.getElementById(id);if(e){e.textContent='';e.className='auth-msg'}})}
+function showMsg(el,txt,type){el.textContent=txt;el.className='auth-msg '+type}
+function doRegister(){
+  const name=document.getElementById('reg-name').value.trim();
+  const email=document.getElementById('reg-email').value.trim().toLowerCase();
+  const pass=document.getElementById('reg-pass').value;
+  const msg=document.getElementById('reg-msg');
+  if(!name||!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return}
+  if(pass.length<6){showMsg(msg,'La contrase\u00f1a debe tener m\u00ednimo 6 caracteres.','error');return}
+  const users=getUsers();
+  if(users.find(u=>u.email===email)){showMsg(msg,'Este correo ya est\u00e1 registrado.','error');return}
+  users.push({name,email,password:pass});saveUsers(users);setSession({name,email});
+  showMsg(msg,'\u00a1Bienvenido/a a Gaia, '+name+'!','success');
+  setTimeout(()=>{closeAuth();updateUI()},1200);
+}
+function doLogin(){
+  const email=document.getElementById('login-email').value.trim().toLowerCase();
+  const pass=document.getElementById('login-pass').value;
+  const msg=document.getElementById('login-msg');
+  if(!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return}
+  const user=getUsers().find(u=>u.email===email&&u.password===pass);
+  if(!user){showMsg(msg,'Correo o contrase\u00f1a incorrectos.','error');return}
+  setSession(user);showMsg(msg,'\u00a1Bienvenido/a de vuelta, '+user.name+'!','success');
+  setTimeout(()=>{closeAuth();updateUI()},1000);
+}
+function doLogout(){clearSession();updateUI()}
+function updateUI(){
+  const s=getSession();
+  const btn=document.getElementById('navAuthBtn');
+  const req=document.getElementById('comment-login-required');
+  const frm=document.getElementById('comment-form-box');
+  if(s){
+    btn.textContent='\u2726 '+s.name+' \u00b7 Salir';btn.onclick=doLogout;
+    if(req)req.style.display='none';if(frm)frm.style.display='block';
+  }else{
+    btn.textContent='Iniciar Sesi\u00f3n';btn.onclick=openAuth;
+    if(req)req.style.display='block';if(frm)frm.style.display='none';
   }
+}
+document.getElementById('authOverlay').addEventListener('click',function(e){if(e.target===this)closeAuth()});
 
-  /* ── Scroll reveal ── */
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.style.opacity = '1';
-        e.target.style.transform = 'translateY(0)';
-      }
-    });
-  }, { threshold: 0.1 });
+/* ═══ GALLERY ═══ */
+function showGallery(id,btn){
+  document.querySelectorAll('.gallery-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.gtab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('gal-'+id).classList.add('active');
+  if(btn)btn.classList.add('active');
+}
 
-  updateUI();
+/* ═══ LIGHTBOX ═══ */
+function openLb(src){
+  document.getElementById('lb-img').src=src;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeLb(){
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLb()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLb()});
 
-  document.querySelectorAll('.char-card, .poll-card, .chapter-item, .comment-card, .gallery-item').forEach(el => {
-    el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    observer.observe(el);
+/* ═══ MAP TOOLTIP ═══ */
+function showTT(event,name){
+  const tt=document.getElementById('mapTooltip');
+  tt.textContent=name;tt.style.display='block';
+  tt.style.left=(event.offsetX+14)+'px';tt.style.top=(event.offsetY-10)+'px';
+}
+function hideTT(){document.getElementById('mapTooltip').style.display='none'}
+
+/* ═══ POLLS ═══ */
+function handleVote(btn){
+  if(!getSession()){openAuth();return}
+  btn.textContent='\u2726 Voto registrado';btn.disabled=true;btn.style.opacity='.5';
+}
+
+/* ═══ COMMENTS ═══ */
+function submitComment(){
+  if(!getSession()){openAuth();return}
+  const text=document.getElementById('cmt-text').value.trim();
+  if(!text){alert('Por favor escribe un comentario.');return}
+  document.getElementById('success-msg').style.display='block';
+  ['cmt-name','cmt-chapter','cmt-text'].forEach(id=>{document.getElementById(id).value=''});
+}
+
+/* ═══ INIT ═══ */
+updateUI();
+// Show home reveals on load
+setTimeout(()=>{
+  document.getElementById('page-home').querySelectorAll('.reveal').forEach((el,i)=>{
+    setTimeout(()=>el.classList.add('shown'),i*80);
   });
+},100);
 </script>
 </body>
 </html>
