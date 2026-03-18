@@ -214,7 +214,7 @@
       <button class="auth-btn" onclick="doRegister()">Crear Cuenta</button>
       <div class="auth-msg" id="reg-msg"></div>
     </div>
-    <div class="auth-contact">&#191;Problemas? Escribe al autor:<br/><a href="mailto:stan.e.s@gmail.com">stan.e.s@gmail.com</a></div>
+    <div class="auth-contact">&#191;Problemas? Escribe al autor:<br/><a href="/cdn-cgi/l/email-protection#592a2d3837773c772a193e34383035773a3634"><span class="__cf_email__" data-cfemail="0d7e796c632368237e4d6a606c6461236e6260">[email&#160;protected]</span></a></div>
   </div>
 </div>
 
@@ -426,17 +426,59 @@
 <div id="page-mapa" class="page">
   <div class="page-inner">
     <div class="page-header"><p class="page-label">&#10022; El Continente &#10022;</p><h2 class="page-title">Mapa de Gaia</h2><div class="page-rule"></div></div>
-    <div class="map-container" style="min-height:500px;display:flex;align-items:center;justify-content:center;position:relative;">
-      <img src="mapa1.png" alt="Mapa de Gaia"
+    <!-- Pestañas de mapa -->
+    <div style="display:flex;gap:.5rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap;">
+      <button id="mapTab1" onclick="switchMap('mapa1')"
+        style="padding:.45rem 1.4rem;border:1px solid var(--gold);background:rgba(201,168,76,.12);color:var(--gold);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;">
+        &#127757; Mapa del Mundo
+      </button>
+      <button id="mapTab2" onclick="switchMap('panasea')"
+        style="padding:.45rem 1.4rem;border:1px solid rgba(201,168,76,.3);background:transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;">
+        &#128506; Mapa de Panasea
+      </button>
+    </div>
+
+    <!-- Mapa del Mundo -->
+    <div id="map-mapa1" class="map-container" style="min-height:500px;display:flex;align-items:center;justify-content:center;position:relative;">
+      <img src="mapa1.png" alt="Mapa del Mundo"
            onclick="openLb('mapa1.png')"
            style="width:100%;height:auto;max-height:620px;object-fit:contain;cursor:zoom-in;display:block;"
-           onerror="this.outerHTML='<div style=\'padding:3rem;text-align:center;color:#7a7470;font-style:italic;\'><p style=\'margin-bottom:1rem;\'>&#128506; Sube el archivo <strong style=\'color:#c9a84c;\'>mapa1.png</strong> a tu repositorio de GitHub</p><p style=\'font-size:.82rem;\'>El mapa aparecer&#225; aqu&#237; autom&#225;ticamente</p></div>'"
+           onerror="this.outerHTML='<div style=\'padding:3rem;text-align:center;color:#7a7470;font-style:italic;\'><p style=\'margin-bottom:1rem;\'>Sube <strong style=\'color:#c9a84c;\'>mapa1.png</strong> a tu repositorio</p></div>'"
       />
       <div style="position:absolute;bottom:.7rem;right:1rem;font-family:Cinzel,serif;font-size:.6rem;color:rgba(201,168,76,.4);letter-spacing:.1em;pointer-events:none;">CLIC PARA AMPLIAR</div>
     </div>
+
+    <!-- Mapa de Panasea -->
+    <div id="map-panasea" class="map-container" style="min-height:500px;display:none;align-items:center;justify-content:center;position:relative;">
+      <img src="Mapa Panasea.png" alt="Mapa de Panasea"
+           onclick="openLb('Mapa Panasea.png')"
+           style="width:100%;height:auto;max-height:620px;object-fit:contain;cursor:zoom-in;display:block;"
+           onerror="this.outerHTML='<div style=\'padding:3rem;text-align:center;color:#7a7470;font-style:italic;\'><p style=\'margin-bottom:1rem;\'>Sube <strong style=\'color:#c9a84c;\'>Mapa Panasea.png</strong> a tu repositorio</p></div>'"
+      />
+      <div style="position:absolute;bottom:.7rem;right:1rem;font-family:Cinzel,serif;font-size:.6rem;color:rgba(201,168,76,.4);letter-spacing:.1em;pointer-events:none;">CLIC PARA AMPLIAR</div>
+    </div>
+
     <div class="map-controls">
       <p style="color:var(--text-dim);font-size:.8rem;font-style:italic;">Haz clic en el mapa para verlo en pantalla completa.</p>
     </div>
+
+    <script>
+    function switchMap(id){
+      var m1=document.getElementById('map-mapa1');
+      var m2=document.getElementById('map-panasea');
+      var t1=document.getElementById('mapTab1');
+      var t2=document.getElementById('mapTab2');
+      if(id==='mapa1'){
+        m1.style.display='flex'; m2.style.display='none';
+        t1.style.background='rgba(201,168,76,.12)'; t1.style.borderColor='var(--gold)'; t1.style.color='var(--gold)';
+        t2.style.background='transparent'; t2.style.borderColor='rgba(201,168,76,.3)'; t2.style.color='var(--text-dim)';
+      } else {
+        m1.style.display='none'; m2.style.display='flex';
+        t2.style.background='rgba(201,168,76,.12)'; t2.style.borderColor='var(--gold)'; t2.style.color='var(--gold)';
+        t1.style.background='transparent'; t1.style.borderColor='rgba(201,168,76,.3)'; t1.style.color='var(--text-dim)';
+      }
+    }
+    </script>
   </div>
   <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
 </div>
@@ -458,7 +500,7 @@
           <div class="form-field"><label>Valoraci&#243;n</label><select id="cmt-rating"><option>&#11088;&#11088;&#11088;&#11088;&#11088; &#8211; &#201;pico</option><option>&#11088;&#11088;&#11088;&#11088; &#8211; Muy bueno</option><option>&#11088;&#11088;&#11088; &#8211; Bueno</option><option>&#11088;&#11088; &#8211; Regular</option></select></div>
           <div class="form-field full"><label>Comentario</label><textarea id="cmt-text" placeholder="Comparte tu opini&#243;n, teor&#237;as, predicciones..."></textarea></div>
         </div>
-        <p class="form-note">&#128274; Tu comentario ser&#225; revisado antes de publicarse. Contacto: <strong>stan.e.s@gmail.com</strong></p>
+        <p class="form-note">&#128274; Tu comentario ser&#225; revisado antes de publicarse. Contacto: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="7e0d0a1f10501b500d3e19131f1712501d1113">[email&#160;protected]</a></strong></p>
         <button class="btn-submit" onclick="submitComment()">Enviar Comentario</button>
         <div class="success-msg" id="success-msg">&#10022; &#161;Gracias por tu comentario! Ser&#225; revisado y publicado pronto. &#10022;</div>
       </div>
@@ -510,7 +552,7 @@
   <div class="page-footer"><p class="ft">El Legado de Gaia</p><p style="color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.18em;margin:.3rem 0">El Continente tras el Muro</p><p>Todos los derechos reservados &middot; Obra original de ficci&#243;n &nbsp; &#10022; &middot; &#10022; &middot; &#10022;</p></div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══ PAGE ROUTER ═══ */
 function showPage(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
@@ -782,6 +824,7 @@ document.addEventListener('touchstart',function(e){
     btn.title='Música / Silencio';
     btn.style.cssText='position:fixed;bottom:1.3rem;right:1.3rem;z-index:9990;width:46px;height:46px;border-radius:50%;border:1px solid rgba(201,168,76,.45);background:rgba(8,8,12,.92);color:#c9a84c;font-size:1.2rem;cursor:pointer;box-shadow:0 3px 16px rgba(0,0,0,.6);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;transition:opacity .25s;';
     btn.addEventListener('click',function(e){
+            btn.addEventListener('click',function(e){
       e.stopPropagation();
       muted=!muted;
       if(muted){
