@@ -642,6 +642,7 @@ function showPage(id){
   var pg=document.getElementById('page-'+id);
   if(!pg) return;
   pg.classList.add('active');
+  if(id==='comentarios') setTimeout(loadComments, 200);
   window.scrollTo(0,0);
   document.documentElement.scrollTop=0;
   document.body.scrollTop=0;
@@ -742,7 +743,6 @@ auth.onAuthStateChanged(function(user){
     btn.onclick = doLogout;
     if(req) req.style.display='none';
     if(frm) frm.style.display='block';
-    loadComments();
     loadVotes(user.uid);
   } else {
     btn.textContent = 'Iniciar Sesión';
@@ -915,8 +915,8 @@ function escHtml(str){
     .replace(/"/g,'&quot;');
 }
 
-// Cargar comentarios al iniciar
-loadComments();
+// Cargar comentarios al iniciar (con delay para que Firebase esté listo)
+setTimeout(loadComments, 800);
 
 /* Cargar conteos reales de votos en tiempo real */
 [1,2,3].forEach(function(pn){
