@@ -4,6 +4,25 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>El Legado de Gaia – El Continente tras el Muro</title>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+  <!-- Firebase Config -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyBDpDBaD2SCrE1K_ClY--EEDDiTny-WfBQ",
+      authDomain: "el-legado-de-gaia.firebaseapp.com",
+      databaseURL: "https://el-legado-de-gaia-default-rtdb.firebaseio.com",
+      projectId: "el-legado-de-gaia",
+      storageBucket: "el-legado-de-gaia.firebasestorage.app",
+      messagingSenderId: "978874073000",
+      appId: "1:978874073000:web:e620557b0b903597b4e79d"
+    };
+    firebase.initializeApp(firebaseConfig);
+    var db   = firebase.database();
+    var auth = firebase.auth();
+  </script>
   <meta name="description" content="El Legado de Gaia: El Viaje – Una novela de fantasía épica de Stan E.S. Más allá del Muro de Hielo, Río, Amaya y Rayen descubren el continente de Panasea. Disponible en Amazon y Apple Books."/>
   <meta name="keywords" content="El Legado de Gaia, Stan E.S., novela fantasía, libro fantasy español, Panasea, Pangea, fantasía épica, libro chileno"/>
   <meta name="author" content="Stan E.S."/>
@@ -422,7 +441,7 @@
     <div class="polls-grid">
       <div class="poll-card reveal">
         <p class="poll-question">&#191;A cu&#225;l facci&#243;n pertenecer&#237;as en el Continente de Gaia?</p>
-        <div class="poll-options">
+        <div class="poll-options" id="pollopt1">
           <div class="poll-option"><div class="poll-bar" style="width:34%"></div><label><span>&#9876; Valhalla</span><span class="poll-pct">34%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:20%"></div><label><span>&#127963; Olimpo</span><span class="poll-pct">20%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:15%"></div><label><span>&#9760; Inframundo</span><span class="poll-pct">15%</span></label></div>
@@ -431,11 +450,11 @@
           <div class="poll-option"><div class="poll-bar" style="width:5%"></div><label><span>&#127763; Valle de los Condenados</span><span class="poll-pct">5%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:4%"></div><label><span>&#9994; Resistencia</span><span class="poll-pct">4%</span></label></div>
         </div>
-        <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
+        <button id="pollbtn1" class="poll-vote-btn" onclick="handleVote(this,1)">Votar</button>
       </div>
       <div class="poll-card reveal">
         <p class="poll-question">&#191;Cu&#225;l es tu personaje favorito hasta ahora?</p>
-        <div class="poll-options">
+        <div class="poll-options" id="pollopt2">
           <div class="poll-option"><div class="poll-bar" style="width:28%"></div><label><span>Amaya</span><span class="poll-pct">28%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:24%"></div><label><span>Draven</span><span class="poll-pct">24%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:18%"></div><label><span>Rayen</span><span class="poll-pct">18%</span></label></div>
@@ -444,17 +463,17 @@
           <div class="poll-option"><div class="poll-bar" style="width:4%"></div><label><span>Rollo</span><span class="poll-pct">4%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:2%"></div><label><span>Still</span><span class="poll-pct">2%</span></label></div>
         </div>
-        <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
+        <button id="pollbtn2" class="poll-vote-btn" onclick="handleVote(this,2)">Votar</button>
       </div>
       <div class="poll-card reveal">
         <p class="poll-question">&#191;Qu&#233; esperas m&#225;s de la historia?</p>
-        <div class="poll-options">
+        <div class="poll-options" id="pollopt3">
           <div class="poll-option"><div class="poll-bar" style="width:38%"></div><label><span>Guerras entre facciones</span><span class="poll-pct">38%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:30%"></div><label><span>Revelaciones del Muro</span><span class="poll-pct">30%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:20%"></div><label><span>Romance y traiciones</span><span class="poll-pct">20%</span></label></div>
           <div class="poll-option"><div class="poll-bar" style="width:12%"></div><label><span>Magia y misterios</span><span class="poll-pct">12%</span></label></div>
         </div>
-        <button class="poll-vote-btn" onclick="handleVote(this)">Votar</button>
+        <button id="pollbtn3" class="poll-vote-btn" onclick="handleVote(this,3)">Votar</button>
       </div>
     </div>
   </div>
@@ -557,8 +576,8 @@
         <button class="btn-submit" onclick="submitComment()">Enviar Comentario</button>
         <div class="success-msg" id="success-msg">&#10022; &#161;Gracias por tu comentario! Ser&#225; revisado y publicado pronto. &#10022;</div>
       </div>
-      <div class="comment-list">
-        <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Valeria M.</span><span class="comment-date">Febrero 2025</span></div><p class="comment-text">El worldbuilding de Gaia es incre&#237;ble. La forma en que cada facci&#243;n tiene su propia cultura&#8230; me transport&#233; completamente. &#161;Necesito m&#225;s cap&#237;tulos ya!</p></div>
+      <div class="comment-list" id="comments-dynamic"></div>
+        <div class="comment-list" style="display:none"><div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Valeria M.</span><span class="comment-date">Febrero 2025</span></div><p class="comment-text">El worldbuilding de Gaia es incre&#237;ble. La forma en que cada facci&#243;n tiene su propia cultura&#8230; me transport&#233; completamente. &#161;Necesito m&#225;s cap&#237;tulos ya!</p></div>
         <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Rodrigo K.</span><span class="comment-date">Enero 2025</span></div><p class="comment-text">Draven tiene que ser el personaje m&#225;s complejo que he le&#237;do en fantas&#237;a en espa&#241;ol. No sabes si amarlo u odiarlo, y eso es exactamente lo que hace un gran personaje.</p></div>
         <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Sof&#237;a del Valle</span><span class="comment-date">Diciembre 2024</span></div><p class="comment-text">El Muro, el nombre del libro, los nombres de los personajes&#8230; todo tiene un simbolismo tan bien pensado. Se nota que el autor construy&#243; este mundo con mucho amor.</p></div>
       </div>
@@ -614,11 +633,13 @@
 </div>
 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ═══ PAGE ROUTER ═══ */
+/* ═══════════════════════════════
+   PAGE ROUTER
+═══════════════════════════════ */
 function showPage(id){
   document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
   document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
-  var pg = document.getElementById('page-'+id);
+  var pg=document.getElementById('page-'+id);
   if(!pg) return;
   pg.classList.add('active');
   window.scrollTo(0,0);
@@ -634,14 +655,12 @@ function showPage(id){
     });
   },60);
 }
-/* ═══ AUTH ═══ */
-function getUsers(){return JSON.parse(localStorage.getItem('gaia_users')||'[]')}
-function saveUsers(u){localStorage.setItem('gaia_users',JSON.stringify(u))}
-function getSession(){return JSON.parse(localStorage.getItem('gaia_session')||'null')}
-function setSession(u){localStorage.setItem('gaia_session',JSON.stringify(u))}
-function clearSession(){localStorage.removeItem('gaia_session')}
-function openAuth(){document.getElementById('authOverlay').classList.add('open');clearMsgs()}
-function closeAuth(){document.getElementById('authOverlay').classList.remove('open')}
+
+/* ═══════════════════════════════
+   FIREBASE AUTH
+═══════════════════════════════ */
+function openAuth(){document.getElementById('authOverlay').classList.add('open');clearMsgs();}
+function closeAuth(){document.getElementById('authOverlay').classList.remove('open');}
 function switchTab(tab,el){
   document.querySelectorAll('.auth-tab').forEach(function(t){t.classList.remove('active')});
   document.querySelectorAll('.auth-panel').forEach(function(p){p.classList.remove('active')});
@@ -649,46 +668,97 @@ function switchTab(tab,el){
   if(el) el.classList.add('active');
   clearMsgs();
 }
-function clearMsgs(){['login-msg','reg-msg'].forEach(function(id){var e=document.getElementById(id);if(e){e.textContent='';e.className='auth-msg'}})}
-function showMsg(el,txt,type){el.textContent=txt;el.className='auth-msg '+type}
+function clearMsgs(){
+  ['login-msg','reg-msg'].forEach(function(id){
+    var e=document.getElementById(id);
+    if(e){e.textContent='';e.className='auth-msg';}
+  });
+}
+function showMsg(el,txt,type){el.textContent=txt;el.className='auth-msg '+type;}
+
+/* REGISTRO REAL con Firebase */
 function doRegister(){
-  var name=document.getElementById('reg-name').value.trim();
-  var email=document.getElementById('reg-email').value.trim().toLowerCase();
-  var pass=document.getElementById('reg-pass').value;
-  var msg=document.getElementById('reg-msg');
-  if(!name||!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return}
-  if(pass.length<6){showMsg(msg,'La contraseña debe tener mínimo 6 caracteres.','error');return}
-  var users=getUsers();
-  if(users.find(function(u){return u.email===email})){showMsg(msg,'Este correo ya está registrado.','error');return}
-  users.push({name:name,email:email,password:pass});saveUsers(users);setSession({name:name,email:email});
-  showMsg(msg,'¡Bienvenido/a a Gaia, '+name+'!','success');
-  setTimeout(function(){closeAuth();updateUI()},1200);
+  var name  = document.getElementById('reg-name').value.trim();
+  var email = document.getElementById('reg-email').value.trim();
+  var pass  = document.getElementById('reg-pass').value;
+  var msg   = document.getElementById('reg-msg');
+  if(!name||!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return;}
+  if(pass.length<6){showMsg(msg,'La contraseña debe tener mínimo 6 caracteres.','error');return;}
+  showMsg(msg,'Creando cuenta...','');
+  auth.createUserWithEmailAndPassword(email,pass)
+    .then(function(cred){
+      return cred.user.updateProfile({displayName:name}).then(function(){
+        return db.ref('usuarios/'+cred.user.uid).set({
+          nombre:name, email:email, fechaRegistro: new Date().toISOString()
+        });
+      });
+    })
+    .then(function(){
+      showMsg(msg,'¡Bienvenido/a a Gaia, '+name+'!','success');
+      setTimeout(function(){closeAuth();},1200);
+    })
+    .catch(function(err){
+      var errores = {
+        'auth/email-already-in-use':'Este correo ya está registrado.',
+        'auth/invalid-email':'Correo inválido.',
+        'auth/weak-password':'Contraseña muy débil.'
+      };
+      showMsg(msg, errores[err.code]||err.message, 'error');
+    });
 }
+
+/* LOGIN REAL con Firebase */
 function doLogin(){
-  var email=document.getElementById('login-email').value.trim().toLowerCase();
-  var pass=document.getElementById('login-pass').value;
-  var msg=document.getElementById('login-msg');
-  if(!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return}
-  var user=getUsers().find(function(u){return u.email===email&&u.password===pass});
-  if(!user){showMsg(msg,'Correo o contraseña incorrectos.','error');return}
-  setSession(user);showMsg(msg,'¡Bienvenido/a de vuelta, '+user.name+'!','success');
-  setTimeout(function(){closeAuth();updateUI()},1000);
+  var email = document.getElementById('login-email').value.trim();
+  var pass  = document.getElementById('login-pass').value;
+  var msg   = document.getElementById('login-msg');
+  if(!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return;}
+  showMsg(msg,'Entrando...','');
+  auth.signInWithEmailAndPassword(email,pass)
+    .then(function(){
+      showMsg(msg,'¡Bienvenido/a de vuelta!','success');
+      setTimeout(function(){closeAuth();},1000);
+    })
+    .catch(function(err){
+      var errores = {
+        'auth/user-not-found':'Correo no registrado.',
+        'auth/wrong-password':'Contraseña incorrecta.',
+        'auth/invalid-credential':'Correo o contraseña incorrectos.'
+      };
+      showMsg(msg, errores[err.code]||err.message, 'error');
+    });
 }
-function doLogout(){clearSession();updateUI()}
-function updateUI(){
-  var s=getSession();
-  var btn=document.getElementById('navAuthBtn');
-  var req=document.getElementById('comment-login-required');
-  var frm=document.getElementById('comment-form-box');
-  if(s){
-    btn.textContent='✦ '+s.name+' · Salir';btn.onclick=doLogout;
-    if(req)req.style.display='none';if(frm)frm.style.display='block';
-  }else{
-    btn.textContent='Iniciar Sesión';btn.onclick=openAuth;
-    if(req)req.style.display='block';if(frm)frm.style.display='none';
+
+function doLogout(){auth.signOut();}
+
+/* Escuchar cambios de sesión en tiempo real */
+auth.onAuthStateChanged(function(user){
+  var btn = document.getElementById('navAuthBtn');
+  var req = document.getElementById('comment-login-required');
+  var frm = document.getElementById('comment-form-box');
+  if(user){
+    var name = user.displayName || user.email.split('@')[0];
+    btn.textContent = '✦ '+name+' · Salir';
+    btn.onclick = doLogout;
+    if(req) req.style.display='none';
+    if(frm) frm.style.display='block';
+    loadComments();
+    loadVotes(user.uid);
+  } else {
+    btn.textContent = 'Iniciar Sesión';
+    btn.onclick = openAuth;
+    if(req) req.style.display='block';
+    if(frm) frm.style.display='none';
   }
-}
-document.getElementById('authOverlay').addEventListener('click',function(e){if(e.target===this)closeAuth()});
+});
+
+document.getElementById('authOverlay').addEventListener('click',function(e){
+  if(e.target===this) closeAuth();
+});
+
+/* ═══════════════════════════════
+   GALERÍA
+═══════════════════════════════ */
 function showGallery(id,btn){
   document.querySelectorAll('.gallery-panel').forEach(function(p){p.classList.remove('active')});
   document.querySelectorAll('.gtab').forEach(function(t){t.classList.remove('active')});
@@ -706,18 +776,152 @@ function closeLb(){
 }
 document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLb()});
 document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLb()});
-function handleVote(btn){
-  if(!getSession()){openAuth();return}
-  btn.textContent='✦ Voto registrado';btn.disabled=true;btn.style.opacity='.5';
+
+/* ═══════════════════════════════
+   ENCUESTAS REALES con Firebase
+   Un voto por usuario por encuesta
+═══════════════════════════════ */
+function loadVotes(uid){
+  if(!uid) return;
+  // Cargar votos previos del usuario y bloquear los botones si ya votó
+  [1,2,3].forEach(function(pollNum){
+    db.ref('votos/poll'+pollNum+'/'+uid).once('value').then(function(snap){
+      if(snap.exists()){
+        var btn = document.getElementById('pollbtn'+pollNum);
+        if(btn){
+          btn.textContent = '✦ Ya votaste';
+          btn.disabled = true;
+          btn.style.opacity = '.5';
+        }
+        // Mostrar opción seleccionada
+        var optIdx = snap.val().opcion;
+        var options = document.querySelectorAll('#pollopt'+pollNum+' .poll-option');
+        if(options[optIdx]) options[optIdx].style.borderColor='var(--gold)';
+      }
+    });
+  });
 }
+
+function handleVote(btn, pollNum){
+  var user = auth.currentUser;
+  if(!user){ openAuth(); return; }
+
+  // Ver cuál opción está seleccionada
+  var options = document.querySelectorAll('#pollopt'+pollNum+' .poll-option');
+  var selected = -1;
+  options.forEach(function(opt,i){
+    if(opt.classList.contains('selected')) selected=i;
+  });
+  if(selected === -1){
+    // Si no seleccionó nada, votar la primera
+    selected = 0;
+  }
+
+  db.ref('votos/poll'+pollNum+'/'+user.uid).set({
+    opcion: selected,
+    fecha: new Date().toISOString()
+  }).then(function(){
+    // Incrementar contador
+    db.ref('conteo/poll'+pollNum+'/'+selected).transaction(function(val){
+      return (val||0)+1;
+    });
+    btn.textContent = '✦ Voto registrado';
+    btn.disabled = true;
+    btn.style.opacity = '.5';
+    options[selected].style.borderColor='var(--gold)';
+  }).catch(function(err){ alert('Error al votar: '+err.message); });
+}
+
+// Seleccionar opción al hacer click
+document.addEventListener('click',function(e){
+  var opt = e.target.closest('.poll-option');
+  if(!opt) return;
+  var pollWrap = opt.closest('.poll-options');
+  if(!pollWrap) return;
+  pollWrap.querySelectorAll('.poll-option').forEach(function(o){o.classList.remove('selected');o.style.borderColor='';});
+  opt.classList.add('selected');
+  opt.style.borderColor='var(--gold)';
+});
+
+/* ═══════════════════════════════
+   COMENTARIOS REALES con Firebase
+   Moderación: solo aparecen aprobados
+═══════════════════════════════ */
 function submitComment(){
-  if(!getSession()){openAuth();return}
-  var text=document.getElementById('cmt-text').value.trim();
-  if(!text){alert('Por favor escribe un comentario.');return}
-  document.getElementById('success-msg').style.display='block';
-  ['cmt-name','cmt-chapter','cmt-text'].forEach(function(id){document.getElementById(id).value=''});
+  var user = auth.currentUser;
+  if(!user){ openAuth(); return; }
+  var text    = document.getElementById('cmt-text').value.trim();
+  var chapter = document.getElementById('cmt-chapter').value.trim();
+  var rating  = document.getElementById('cmt-rating').value;
+  if(!text){ alert('Por favor escribe un comentario.'); return; }
+
+  db.ref('comentarios').push({
+    autor:    user.displayName || user.email.split('@')[0],
+    texto:    text,
+    capitulo: chapter,
+    rating:   rating,
+    fecha:    new Date().toISOString(),
+    aprobado: false  // esperan aprobación del autor
+  }).then(function(){
+    document.getElementById('success-msg').style.display='block';
+    ['cmt-name','cmt-chapter','cmt-text'].forEach(function(id){
+      var el=document.getElementById(id); if(el) el.value='';
+    });
+  }).catch(function(err){ alert('Error: '+err.message); });
 }
-updateUI();
+
+/* Cargar comentarios aprobados */
+function loadComments(){
+  db.ref('comentarios').orderByChild('aprobado').equalTo(true)
+    .on('value', function(snap){
+      var list = document.getElementById('comments-dynamic');
+      if(!list) return;
+      list.innerHTML='';
+      var data = snap.val();
+      if(!data){
+        list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:1rem;">Sé el primero en comentar.</p>';
+        return;
+      }
+      // Ordenar por fecha descendente
+      var arr = Object.values(data).sort(function(a,b){
+        return new Date(b.fecha)-new Date(a.fecha);
+      });
+      arr.forEach(function(c){
+        var d = new Date(c.fecha);
+        var fecha = d.toLocaleDateString('es-CL',{year:'numeric',month:'long'});
+        list.innerHTML += '<div class="comment-card reveal shown">'
+          +'<div class="comment-header">'
+          +'<span class="comment-author">'+c.autor+'</span>'
+          +'<span class="comment-date">'+fecha+'</span>'
+          +'</div>'
+          +(c.rating?'<p style="font-size:.78rem;color:var(--gold);margin-bottom:.4rem;">'+c.rating+'</p>':'')
+          +'<p class="comment-text">'+c.texto+'</p>'
+          +'</div>';
+      });
+    });
+}
+
+// Cargar comentarios aprobados al iniciar (usuarios no logueados también los ven)
+loadComments();
+
+/* ═══ MAPAS ═══ */
+function switchMap(id){
+  var m1=document.getElementById('map-mapa1');
+  var m2=document.getElementById('map-panasea');
+  var t1=document.getElementById('mapTab1');
+  var t2=document.getElementById('mapTab2');
+  if(id==='mapa1'){
+    m1.style.display='flex'; m2.style.display='none';
+    t1.style.background='rgba(201,168,76,.12)'; t1.style.borderColor='var(--gold)'; t1.style.color='var(--gold)';
+    t2.style.background='transparent'; t2.style.borderColor='rgba(201,168,76,.3)'; t2.style.color='var(--text-dim)';
+  } else {
+    m1.style.display='none'; m2.style.display='flex';
+    t2.style.background='rgba(201,168,76,.12)'; t2.style.borderColor='var(--gold)'; t2.style.color='var(--gold)';
+    t1.style.background='transparent'; t1.style.borderColor='rgba(201,168,76,.3)'; t1.style.color='var(--text-dim)';
+  }
+}
+
+/* ═══ INIT ═══ */
 setTimeout(function(){
   document.getElementById('page-home').querySelectorAll('.reveal').forEach(function(el,i){
     setTimeout(function(){el.classList.add('shown')},i*80);
@@ -730,169 +934,223 @@ document.addEventListener('touchstart',function(e){
 </script>
 
 <script>
-/* ═══════════════════════════════════════
-   AUDIO ENGINE – El Legado de Gaia
-   Funciona en Chrome, Firefox, Safari iOS/Mac
-═══════════════════════════════════════ */
 (function(){
-  var AC = null, masterG = null, musicOn = false, muted = false;
+  var AC=null, masterG=null, musicOn=false, muted=false;
 
-  function initAC(){
+  function init(){
     if(AC) return;
     try{
-      AC = new (window.AudioContext || window.webkitAudioContext)();
+      AC = new (window.AudioContext||window.webkitAudioContext)();
       masterG = AC.createGain();
       masterG.gain.value = 0;
+      // Reverb simulado con delay
+      var rev = AC.createDelay(0.5);
+      rev.delayTime.value = 0.28;
+      var revG = AC.createGain();
+      revG.gain.value = 0.22;
       masterG.connect(AC.destination);
+      masterG.connect(rev);
+      rev.connect(revG);
+      revG.connect(AC.destination);
     }catch(e){}
   }
 
-  function startMusic(){
-    if(!AC || musicOn) return;
-    musicOn = true;
-    // Fade in en 5 segundos
-    masterG.gain.setValueAtTime(0, AC.currentTime);
-    masterG.gain.linearRampToValueAtTime(0.08, AC.currentTime + 5);
+  /* Nota de gaita: sawtooth + square + vibrato LFO */
+  function pipe(freq, t, dur, vol){
+    if(!AC) return;
+    vol = vol||0.15;
+    var g   = AC.createGain();
+    var lp  = AC.createBiquadFilter();
+    lp.type='lowpass'; lp.frequency.value=2200; lp.Q.value=1.2;
 
-    // DRONE GRAVE (continuo)
-    var d1=AC.createOscillator(), d1g=AC.createGain(), d1f=AC.createBiquadFilter();
-    d1f.type='lowpass'; d1f.frequency.value=250;
-    d1.type='sine'; d1.frequency.value=55;
-    d1g.gain.value=0.6;
-    d1.connect(d1f); d1f.connect(d1g); d1g.connect(masterG); d1.start();
-
-    // DRONE MEDIO
-    var d2=AC.createOscillator(), d2g=AC.createGain();
-    d2.type='sine'; d2.frequency.value=82.5;
-    d2g.gain.value=0.2;
-    d2.connect(d2g); d2g.connect(masterG); d2.start();
-
-    // ACORDES DE CUERDAS
-    var chords=[[110,138.6,165],[98,123.5,147],[130.8,164.8,196],[116.5,146.8,175]];
-    var ci=0;
-    function chord(){
-      if(!AC||muted){setTimeout(chord,4200);return;}
-      chords[ci++%chords.length].forEach(function(f){
-        var o=AC.createOscillator(),g=AC.createGain(),lp=AC.createBiquadFilter();
-        lp.type='lowpass'; lp.frequency.value=800;
-        o.type='sawtooth'; o.frequency.value=f;
-        g.gain.setValueAtTime(0,AC.currentTime);
-        g.gain.linearRampToValueAtTime(0.11,AC.currentTime+0.8);
-        g.gain.linearRampToValueAtTime(0.04,AC.currentTime+3);
-        g.gain.linearRampToValueAtTime(0,AC.currentTime+4.2);
-        o.connect(lp); lp.connect(g); g.connect(masterG);
-        o.start(); o.stop(AC.currentTime+4.5);
-      });
-      setTimeout(chord,4200);
-    }
-
-    // TIMPANI PERCUSIVO
-    function timpani(){
-      if(!AC){return;}
-      var len=Math.floor(AC.sampleRate*0.45);
-      var buf=AC.createBuffer(1,len,AC.sampleRate);
-      var d=buf.getChannelData(0);
-      for(var i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.exp(-i/(AC.sampleRate*0.07));
-      var s=AC.createBufferSource(),g=AC.createGain(),lp=AC.createBiquadFilter();
-      lp.type='lowpass'; lp.frequency.value=130;
-      s.buffer=buf; g.gain.value=0.42;
-      s.connect(lp); lp.connect(g); g.connect(masterG); s.start();
-      setTimeout(timpani,2400);
-    }
-
-    // NOTAS DE VIOLIN ESPORÁDICAS
-    function violin(){
-      if(!AC||muted){setTimeout(violin,4000+Math.random()*3000);return;}
-      var freqs=[329.6,392,440,493.9,523.3];
-      var f=freqs[Math.floor(Math.random()*freqs.length)];
-      var o=AC.createOscillator(),g=AC.createGain(),lp=AC.createBiquadFilter();
-      lp.type='lowpass'; lp.frequency.value=3000;
-      o.type='sawtooth'; o.frequency.value=f;
-      g.gain.setValueAtTime(0,AC.currentTime);
-      g.gain.linearRampToValueAtTime(0.035,AC.currentTime+0.5);
-      g.gain.linearRampToValueAtTime(0.015,AC.currentTime+1.8);
-      g.gain.linearRampToValueAtTime(0,AC.currentTime+2.8);
-      o.connect(lp); lp.connect(g); g.connect(masterG);
-      o.start(); o.stop(AC.currentTime+3);
-      setTimeout(violin,3500+Math.random()*3000);
-    }
-
-    setTimeout(chord,1000);
-    setTimeout(timpani,2000);
-    setTimeout(violin,4000);
-  }
-
-  // CHOQUE DE ESPADAS
-  function sword(){
-    if(!AC||muted) return;
-    if(AC.state==='suspended') AC.resume();
-    var sg=AC.createGain(); sg.gain.value=0.55; sg.connect(AC.destination);
-    [880,1320,2200,3520,5000].forEach(function(f,i){
-      var o=AC.createOscillator(),g=AC.createGain();
-      o.type=(i%2)?'square':'sawtooth';
-      o.frequency.value=f*(1+(Math.random()-0.5)*0.05);
-      g.gain.setValueAtTime(0.18/(i+1),AC.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.001,AC.currentTime+0.28+i*0.01);
-      o.connect(g); g.connect(sg); o.start(); o.stop(AC.currentTime+0.33);
+    // 3 osciladores: fundamental + octava + quinta
+    [[1,0.55],[2.0,0.18],[1.498,0.12]].forEach(function(h){
+      var o = AC.createOscillator();
+      o.type = h[0]===1 ? 'sawtooth' : 'square';
+      o.frequency.value = freq * h[0];
+      // vibrato
+      var lfo=AC.createOscillator(), lfog=AC.createGain();
+      lfo.frequency.value=5.8+(Math.random()*0.4);
+      lfog.gain.value=freq*0.012;
+      lfo.connect(lfog); lfog.connect(o.frequency);
+      lfo.start(t); lfo.stop(t+dur+0.1);
+      var og=AC.createGain(); og.gain.value=h[1];
+      o.connect(og); og.connect(lp);
+      o.start(t); o.stop(t+dur+0.05);
     });
-    var blen=Math.floor(AC.sampleRate*0.2);
-    var bbuf=AC.createBuffer(1,blen,AC.sampleRate);
-    var bd=bbuf.getChannelData(0);
-    for(var i=0;i<blen;i++) bd[i]=(Math.random()*2-1)*Math.exp(-i/(AC.sampleRate*0.025));
-    var ns=AC.createBufferSource(),ng=AC.createGain(),nf=AC.createBiquadFilter();
-    nf.type='bandpass'; nf.frequency.value=3500; nf.Q.value=0.7;
-    ns.buffer=bbuf; ng.gain.value=0.65;
-    ns.connect(nf); nf.connect(ng); ng.connect(sg); ns.start();
-    var lo=AC.createOscillator(),lg=AC.createGain();
-    lo.type='sine';
-    lo.frequency.setValueAtTime(200,AC.currentTime);
-    lo.frequency.exponentialRampToValueAtTime(55,AC.currentTime+0.18);
-    lg.gain.setValueAtTime(0.5,AC.currentTime);
-    lg.gain.exponentialRampToValueAtTime(0.001,AC.currentTime+0.22);
-    lo.connect(lg); lg.connect(sg); lo.start(); lo.stop(AC.currentTime+0.25);
+
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(vol, t+0.08);
+    g.gain.setValueAtTime(vol, t+dur-0.12);
+    g.gain.linearRampToValueAtTime(0, t+dur);
+    lp.connect(g); g.connect(masterG);
   }
 
-  // UNLOCK: primer toque del usuario
+  /* Nota de cuerda/arpa suave */
+  function str(freq, t, dur, vol){
+    if(!AC) return;
+    vol=vol||0.045;
+    var o=AC.createOscillator(), g=AC.createGain(), lp=AC.createBiquadFilter();
+    lp.type='lowpass'; lp.frequency.value=900;
+    o.type='triangle'; o.frequency.value=freq;
+    g.gain.setValueAtTime(0,t);
+    g.gain.linearRampToValueAtTime(vol,t+0.3);
+    g.gain.linearRampToValueAtTime(vol*0.5,t+dur-0.4);
+    g.gain.linearRampToValueAtTime(0,t+dur);
+    o.connect(lp); lp.connect(g); g.connect(masterG);
+    o.start(t); o.stop(t+dur+0.1);
+  }
+
+  /* Drone de gaita (La + Mi + La octava) */
+  function drone(){
+    if(!AC) return;
+    [[110,0.28],[165,0.12],[220,0.09],[82.5,0.18]].forEach(function(d){
+      var o=AC.createOscillator(), g=AC.createGain(), lp=AC.createBiquadFilter();
+      lp.type='lowpass'; lp.frequency.value=400;
+      o.type='sawtooth'; o.frequency.value=d[0];
+      g.gain.setValueAtTime(0,AC.currentTime);
+      g.gain.linearRampToValueAtTime(d[1],AC.currentTime+6);
+      o.connect(lp); lp.connect(g); g.connect(masterG);
+      o.start();
+    });
+  }
+
+  /*
+    MELODÍA PRINCIPAL
+    Basada en escala de Re menor / La menor – pentatónica celta
+    Estilo "A Gift of a Thistle" (Braveheart) – James Horner
+    Notas: D4=294 E4=330 F4=349 A4=440 C5=523 D5=587 E5=659 F5=698 A5=880
+  */
+  function melody(){
+    if(!AC||muted) return;
+    var t = AC.currentTime + 0.2;
+    var q = 0.62; // negra
+
+    // Notas: [freq, duracion_en_negras]
+    var tune = [
+      // Frase 1 – intro suave, ascendente
+      [294, 2  ], // D  – larga
+      [330, 1  ], // E
+      [349, 1  ], // F
+      [440, 2.5], // A  – suspira
+      [392, 0.5], // G
+      [349, 3  ], // F  – reposa
+      [0,   1  ], // silencio
+
+      // Frase 2 – sube con emoción
+      [440, 1.5], // A
+      [494, 0.5], // B
+      [523, 2  ], // C
+      [587, 1  ], // D5
+      [523, 1  ], // C
+      [494, 1  ], // B
+      [440, 3  ], // A  – reposa
+      [0,   1  ],
+
+      // Frase 3 – el "corazon" de la melodia
+      [523, 1  ], // C
+      [587, 2  ], // D5
+      [659, 1.5], // E5 – clímax suave
+      [587, 0.5], // D5
+      [523, 1  ], // C
+      [494, 1  ], // B
+      [440, 4  ], // A  – largo, emocionante
+      [0,   1  ],
+
+      // Frase 4 – descenso romántico
+      [440, 1  ], // A
+      [392, 1  ], // G
+      [349, 1.5], // F
+      [330, 0.5], // E
+      [294, 2  ], // D
+      [330, 1  ], // E
+      [349, 4  ], // F  – suspiro final
+      [0,   2  ],
+
+      // Frase 5 – vuelta al tema, más íntima
+      [294, 1.5], // D
+      [349, 0.5], // F
+      [440, 2  ], // A
+      [523, 1  ], // C
+      [494, 1  ], // B
+      [440, 1  ], // A
+      [392, 1  ], // G
+      [349, 4  ], // F  – cierre
+      [0,   3  ], // pausa larga antes de repetir
+    ];
+
+    // Gaita para la melodía
+    tune.forEach(function(n){
+      if(n[0]>0) pipe(n[0], t, n[1]*q, 0.13);
+      t += n[1]*q;
+    });
+
+    // Cuerdas de acompañamiento (acordes debajo)
+    var ct = AC.currentTime + 0.2;
+    var chords = [
+      [[147,185,220,294], 4 ], // Dm
+      [[196,247,294,392], 4 ], // Gm
+      [[175,220,262,349], 4 ], // F
+      [[196,247,294,392], 4 ], // Gm
+      [[175,220,262,349], 4 ], // F
+      [[165,207,247,330], 4 ], // Em
+      [[147,185,220,294], 6 ], // Dm largo
+      [[175,220,262,349], 4 ], // F
+      [[196,247,294,392], 4 ], // Gm
+      [[147,185,220,294], 6 ], // Dm cierre
+      [[175,220,262,349], 4 ], // F
+      [[147,185,220,294], 8 ], // Dm final largo
+    ];
+    chords.forEach(function(c){
+      c[0].forEach(function(f){ str(f, ct, c[1]*q*0.92, 0.038); });
+      ct += c[1]*q;
+    });
+
+    // Repetir en bucle
+    var total = 0;
+    tune.forEach(function(n){ total += n[1]*q; });
+    setTimeout(melody, (total+1)*1000);
+  }
+
+  function start(){
+    if(!AC||musicOn) return;
+    musicOn = true;
+    masterG.gain.setValueAtTime(0, AC.currentTime);
+    masterG.gain.linearRampToValueAtTime(0.65, AC.currentTime+9);
+    drone();
+    setTimeout(melody, 2000);
+  }
+
   var unlocked=false;
   function unlock(){
     if(unlocked) return; unlocked=true;
-    initAC();
+    init();
     if(!AC) return;
     var p=(AC.state==='suspended')?AC.resume():Promise.resolve();
     p.then(function(){
-      // Buffer silencioso (desbloquea iOS)
       var b=AC.createBuffer(1,1,AC.sampleRate);
-      var s=AC.createBufferSource(); s.buffer=b; s.connect(AC.destination); s.start(0);
-      setTimeout(startMusic,100);
+      var s=AC.createBufferSource(); s.buffer=b;
+      s.connect(AC.destination); s.start(0);
+      setTimeout(start,300);
     });
   }
   document.addEventListener('click',unlock);
   document.addEventListener('touchend',unlock,{passive:true});
   document.addEventListener('keydown',unlock);
 
-  // Sword en clicks de botones
-  document.addEventListener('click',function(e){
-    if(!AC||!unlocked) return;
-    if(e.target.closest('.nav-tab,.home-nav-btn,.gtab,.poll-vote-btn,.gal-item,.social-card,.auth-btn,.btn-submit,.login-required-box button')){
-      sword();
-    }
-  });
-
-  // Botón mute flotante
   window.addEventListener('load',function(){
     var btn=document.createElement('button');
     btn.innerHTML='&#127925;';
     btn.title='Música / Silencio';
     btn.style.cssText='position:fixed;bottom:1.3rem;right:1.3rem;z-index:9990;width:46px;height:46px;border-radius:50%;border:1px solid rgba(201,168,76,.45);background:rgba(8,8,12,.92);color:#c9a84c;font-size:1.2rem;cursor:pointer;box-shadow:0 3px 16px rgba(0,0,0,.6);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;transition:opacity .25s;';
     btn.addEventListener('click',function(e){
-            btn.addEventListener('click',function(e){
       e.stopPropagation();
       muted=!muted;
       if(muted){
         if(AC) AC.suspend();
         btn.innerHTML='&#128263;'; btn.style.opacity='0.38';
-      }else{
-        if(AC) AC.resume().then(function(){if(!musicOn)startMusic();});
+      } else {
+        if(AC) AC.resume().then(function(){if(!musicOn)start();});
         btn.innerHTML='&#127925;'; btn.style.opacity='1';
       }
     });
