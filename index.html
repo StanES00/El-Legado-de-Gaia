@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>El Legado de Gaia – El Continente tras el Muro</title>
+  <title>E.S. Stan – Escritor de Fantasía Épica</title>
+  <meta name="description" content="E.S. Stan – Escritor chileno de fantasía épica. Autor de El Legado de Gaia, Crónicas de Tierras Desconocidas, Peter Knight y El Trato."/>
+  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
@@ -18,139 +20,193 @@
       appId: "1:978874073000:web:e620557b0b903597b4e79d"
     };
     firebase.initializeApp(firebaseConfig);
-    var db = firebase.database();
+    var db   = firebase.database();
     var auth = firebase.auth();
   </script>
-  <meta name="description" content="El Legado de Gaia: El Viaje – Una novela de fantasía épica de Stan E.S."/>
-  <meta name="author" content="Stan E.S."/>
-  <meta name="robots" content="index, follow"/>
-  <link rel="canonical" href="https://stanes00.github.io/El-Legado-de-Gaia/"/>
-  <meta property="og:type" content="book"/>
-  <meta property="og:title" content="El Legado de Gaia: El Viaje – Stan E.S."/>
-  <meta property="og:image" content="https://stanes00.github.io/El-Legado-de-Gaia/Portada.png"/>
-  <meta property="og:url" content="https://stanes00.github.io/El-Legado-de-Gaia/"/>
-  <meta name="twitter:card" content="summary_large_image"/>
-  <meta name="twitter:site" content="@escritorstanes"/>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
 
   <style>
-    :root{
-      --gold:#c9a84c;--gold-light:#e8c97a;--dark:#08080c;--dark2:#0f0f18;
-      --dark3:#161622;--mid:#1e1e2e;--text:#d8d3c8;--text-dim:#7a7470;
-      --accent:#5a2d8a;--accent2:#2e1550;--topbar-h:58px;
+    :root {
+      --gold:#c9a84c; --gold-light:#e8c97a; --dark:#08080c; --dark2:#0f0f18;
+      --dark3:#161622; --mid:#1e1e2e; --text:#d8d3c8; --text-dim:#7a7470;
+      --accent:#5a2d8a; --accent2:#2e1550;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
     html{scroll-behavior:smooth}
     body{background:var(--dark);color:var(--text);font-family:'EB Garamond',Georgia,serif;font-size:18px;line-height:1.7;overflow-x:hidden}
     ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dark2)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
 
-    /* ══════════════════════════════
-       TOPBAR — siempre fijo arriba
-    ══════════════════════════════ */
-    #topbar{
+    /* ═══ TOPBAR NAV ═══ */
+    #topbar {
       position:fixed;top:0;left:0;right:0;z-index:1000;
-      background:rgba(8,8,12,.96);backdrop-filter:blur(16px);
+      background:rgba(8,8,12,.96);
+      backdrop-filter:blur(16px);
       border-bottom:1px solid rgba(201,168,76,.2);
-      height:var(--topbar-h);
+      height:58px;
       display:flex;align-items:center;justify-content:space-between;
-      padding:0 1.5rem;gap:.5rem;
+      padding:0 1.5rem;
+      gap:.5rem;
     }
-    .topbar-logo{font-family:'Cinzel Decorative',serif;font-size:.82rem;color:var(--gold);letter-spacing:.06em;white-space:nowrap;cursor:pointer;flex-shrink:0;}
+    .topbar-logo {
+      font-family:'Cinzel Decorative',serif;font-size:.82rem;
+      color:var(--gold);letter-spacing:.06em;white-space:nowrap;
+      cursor:pointer;flex-shrink:0;
+    }
     .topbar-logo:hover{color:var(--gold-light)}
-    .nav-tabs{display:flex;align-items:center;gap:.15rem;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;}
-    .nav-tabs::-webkit-scrollbar{display:none}
-    .nav-tab{
-      padding:.35rem .65rem;font-family:'Cinzel',serif;font-size:.62rem;
-      letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);
-      background:none;border:none;cursor:pointer;position:relative;
-      white-space:nowrap;transition:color .2s;
+    .nav-tabs {
+      display:flex;align-items:center;gap:.15rem;flex-wrap:nowrap;overflow-x:auto;
+      scrollbar-width:none;
     }
-    .nav-tab::after{content:'';position:absolute;bottom:0;left:.65rem;right:.65rem;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .25s;}
+    .nav-tabs::-webkit-scrollbar{display:none}
+    .nav-tab {
+      padding:.35rem .65rem;
+      font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.1em;
+      text-transform:uppercase;color:var(--text-dim);
+      background:none;border:none;cursor:pointer;
+      position:relative;white-space:nowrap;
+      transition:color .2s;
+    }
+    .nav-tab::after{
+      content:'';position:absolute;bottom:0;left:.65rem;right:.65rem;
+      height:1px;background:var(--gold);
+      transform:scaleX(0);transition:transform .25s;
+    }
     .nav-tab:hover,.nav-tab.active{color:var(--gold)}
     .nav-tab.active::after,.nav-tab:hover::after{transform:scaleX(1)}
     .nav-auth-btn{
       padding:.28rem .75rem;border:1px solid rgba(201,168,76,.4);
-      background:rgba(201,168,76,.07);color:var(--gold);font-family:'Cinzel',serif;
-      font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;
-      cursor:pointer;transition:all .2s;white-space:nowrap;flex-shrink:0;
+      background:rgba(201,168,76,.07);color:var(--gold);
+      font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;
+      text-transform:uppercase;cursor:pointer;transition:all .2s;
+      white-space:nowrap;flex-shrink:0;
     }
     .nav-auth-btn:hover{background:var(--gold);color:var(--dark)}
 
-    /* ══════════════════════════════
-       HOME — SIEMPRE VISIBLE
-       No participa en el toggle de páginas
-    ══════════════════════════════ */
-    #page-home{
-      display:flex;               /* siempre visible */
-      flex-direction:column;
-      align-items:center;
-      justify-content:center;
-      min-height:100vh;
-      padding-top:var(--topbar-h);
-      position:relative;
-      overflow:hidden;
+    /* ═══ PAGES SYSTEM ═══ */
+    .page{display:none;min-height:100vh;padding-top:58px;animation:pageIn .4s ease}
+    .page.active{display:block}
+    @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+
+    /* ═══ HOME PAGE ═══ */
+    #page-home {
+      display:flex;flex-direction:column;align-items:center;justify-content:center;
+      min-height:100vh;padding:0;position:relative;overflow:hidden;
     }
-    .home-bg{position:absolute;inset:0;z-index:0;background:url('Portada.png') center center/cover no-repeat;filter:brightness(.45) saturate(.8);transform:scale(1.04);}
-    .home-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 45%,rgba(90,45,138,.15),transparent 70%),linear-gradient(180deg,rgba(8,8,12,.3) 0%,rgba(8,8,12,.2) 40%,rgba(8,8,12,.85) 85%,var(--dark) 100%);}
-    .home-content{position:relative;z-index:1;text-align:center;display:flex;flex-direction:column;align-items:center;padding:6rem 2rem 3rem;max-width:900px;}
-    .home-eyebrow{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:1.4rem;opacity:0;animation:fadeUp .8s .3s ease forwards;}
-    .home-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2.8rem,9vw,7rem);font-weight:900;line-height:1.05;background:linear-gradient(160deg,#fff 0%,var(--gold-light) 45%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem;opacity:0;animation:fadeUp 1s .5s ease forwards;}
-    .home-subtitle{font-family:'Cinzel',serif;font-size:clamp(.9rem,2vw,1.3rem);color:var(--gold-light);letter-spacing:.25em;text-transform:uppercase;margin-bottom:2.5rem;opacity:0;animation:fadeUp .9s .7s ease forwards;}
-    .home-divider{width:200px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto 1rem;opacity:0;animation:fadeIn 1s .9s ease forwards;}
-    .home-music-hint{font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.22em;color:rgba(201,168,76,.45);text-transform:uppercase;margin-bottom:2rem;opacity:0;animation:fadeIn 1.2s 1.5s ease forwards;}
-    .home-nav-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;width:100%;max-width:780px;opacity:0;animation:fadeUp .9s 1.1s ease forwards;}
+    .home-bg {
+      position:absolute;inset:0;z-index:0;
+      background:url('Portada.png') center center/cover no-repeat;
+      filter:brightness(.45) saturate(.8);
+      transform:scale(1.04);
+    }
+    .home-bg::after{
+      content:'';position:absolute;inset:0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 45%,rgba(90,45,138,.15),transparent 70%),
+        linear-gradient(180deg,rgba(8,8,12,.3) 0%,rgba(8,8,12,.2) 40%,rgba(8,8,12,.85) 85%,var(--dark) 100%);
+    }
+    .home-content{
+      position:relative;z-index:1;text-align:center;
+      display:flex;flex-direction:column;align-items:center;
+      padding:6rem 2rem 3rem;max-width:900px;
+    }
+    .home-eyebrow{
+      font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.5em;
+      color:var(--gold);text-transform:uppercase;margin-bottom:1.4rem;
+      opacity:0;animation:fadeUp .8s .3s ease forwards;
+    }
+    .home-title{
+      font-family:'Cinzel Decorative',serif;
+      font-size:clamp(2.8rem,9vw,7rem);
+      font-weight:900;line-height:1.05;
+      background:linear-gradient(160deg,#fff 0%,var(--gold-light) 45%,var(--gold) 100%);
+      -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+      margin-bottom:.5rem;
+      opacity:0;animation:fadeUp 1s .5s ease forwards;
+    }
+    .home-subtitle{
+      font-family:'Cinzel',serif;font-size:clamp(.9rem,2vw,1.3rem);
+      color:var(--gold-light);letter-spacing:.25em;text-transform:uppercase;
+      margin-bottom:2.5rem;
+      opacity:0;animation:fadeUp .9s .7s ease forwards;
+    }
+    .home-divider{
+      width:200px;height:1px;
+      background:linear-gradient(90deg,transparent,var(--gold),transparent);
+      margin:0 auto 3rem;
+      opacity:0;animation:fadeIn 1s .9s ease forwards;
+    }
+    /* Big nav buttons on home */
+    .home-nav-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:.8rem;width:100%;max-width:780px;
+      opacity:0;animation:fadeUp .9s 1.1s ease forwards;
+    }
     .home-nav-btn{
-      padding:.9rem .5rem;border:1px solid rgba(201,168,76,.25);
-      background:rgba(201,168,76,.05);color:var(--text-dim);
+      padding:.9rem .5rem;
+      border:1px solid rgba(201,168,76,.25);
+      background:rgba(201,168,76,.05);
+      color:var(--text-dim);
       font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.15em;
-      text-transform:uppercase;cursor:pointer;transition:all .3s;
-      position:relative;overflow:hidden;
+      text-transform:uppercase;cursor:pointer;
+      transition:all .3s;position:relative;overflow:hidden;
     }
-    .home-nav-btn.active-section{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.12);}
-    .home-nav-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.1),transparent);opacity:0;transition:opacity .3s;}
-    .home-nav-btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.15);}
+    .home-nav-btn::before{
+      content:'';position:absolute;inset:0;
+      background:linear-gradient(135deg,rgba(201,168,76,.1),transparent);
+      opacity:0;transition:opacity .3s;
+    }
+    .home-nav-btn:hover{
+      border-color:var(--gold);color:var(--gold);
+      transform:translateY(-2px);
+      box-shadow:0 8px 24px rgba(201,168,76,.15);
+    }
     .home-nav-btn:hover::before{opacity:1}
     .home-nav-icon{font-size:1.3rem;display:block;margin-bottom:.4rem}
 
-    /* ══════════════════════════════
-       SECCIONES — aparecen DEBAJO del home
-    ══════════════════════════════ */
-    .page{
-      display:none;         /* ocultas por defecto */
-      scroll-margin-top:var(--topbar-h);
-      animation:pageIn .4s ease;
-    }
-    .page.active{display:block;}
-
-    @keyframes pageIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
-    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
+    /* ═══ SECTION PAGES SHARED ═══ */
     .page-inner{max-width:1200px;margin:0 auto;padding:4rem 2rem 6rem}
     .page-header{text-align:center;margin-bottom:3.5rem;padding-top:1rem}
     .page-label{font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:.7rem}
     .page-title{font-family:'Cinzel Decorative',serif;font-size:clamp(1.8rem,5vw,3.2rem);color:#fff;margin-bottom:1rem}
     .page-rule{width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:0 auto}
 
-    /* SINOPSIS */
+    /* ═══ SINOPSIS ═══ */
     #page-sinopsis{background:var(--dark)}
     .synopsis-layout{display:grid;grid-template-columns:1fr 380px;gap:4rem;align-items:start}
     .synopsis-text p{margin-bottom:1.2rem;font-size:1.05rem}
-    .synopsis-text p.lead{font-size:1.2rem;font-style:italic;color:var(--gold-light);border-left:2px solid var(--gold);padding-left:1.4rem;margin-bottom:2rem;}
-    .synopsis-quote{background:linear-gradient(145deg,var(--dark3),var(--mid));border:1px solid rgba(201,168,76,.2);padding:2.5rem 2rem;position:relative;clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));}
-    .synopsis-quote::before{content:'"';font-family:'Cinzel Decorative',serif;font-size:7rem;color:var(--gold);opacity:.12;line-height:1;position:absolute;top:-8px;left:14px;}
+    .synopsis-text p.lead{
+      font-size:1.2rem;font-style:italic;color:var(--gold-light);
+      border-left:2px solid var(--gold);padding-left:1.4rem;margin-bottom:2rem;
+    }
+    .synopsis-quote{
+      background:linear-gradient(145deg,var(--dark3),var(--mid));
+      border:1px solid rgba(201,168,76,.2);padding:2.5rem 2rem;
+      position:relative;top:0;
+      clip-path:polygon(0 0,calc(100% - 20px) 0,100% 20px,100% 100%,20px 100%,0 calc(100% - 20px));
+    }
+    .synopsis-quote::before{
+      content:'"';font-family:'Cinzel Decorative',serif;font-size:7rem;
+      color:var(--gold);opacity:.12;line-height:1;
+      position:absolute;top:-8px;left:14px;
+    }
     .synopsis-quote blockquote{font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.85;position:relative;z-index:1}
     .synopsis-quote cite{display:block;margin-top:1rem;font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.18em;text-transform:uppercase;font-style:normal}
     .faction-tags{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:2rem}
     .faction-tag{padding:.28rem .8rem;border:1px solid rgba(201,168,76,.28);font-family:'Cinzel',serif;font-size:.67rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-light);background:rgba(201,168,76,.05)}
 
-    /* PERSONAJES */
+    /* ═══ PERSONAJES ═══ */
     #page-personajes{background:var(--dark2)}
     .chars-layout{display:flex;flex-direction:column;align-items:center;gap:2.5rem}
     .char-row{display:flex;justify-content:center;gap:2rem;flex-wrap:wrap;width:100%}
     .char-row-3 .char-card{width:calc(33.333% - 1.4rem);min-width:190px;max-width:260px}
     .char-row-2 .char-card{width:calc(25% - 1rem);min-width:190px;max-width:260px}
-    .char-card{background:linear-gradient(180deg,var(--dark3),var(--dark2));border:1px solid rgba(201,168,76,.13);overflow:hidden;flex-shrink:0;transition:transform .3s,border-color .3s,box-shadow .3s;}
+    .char-card{
+      background:linear-gradient(180deg,var(--dark3),var(--dark2));
+      border:1px solid rgba(201,168,76,.13);
+      overflow:hidden;flex-shrink:0;
+      transition:transform .3s,border-color .3s,box-shadow .3s;cursor:default;
+    }
     .char-card:hover{transform:translateY(-7px);border-color:rgba(201,168,76,.5);box-shadow:0 16px 40px rgba(201,168,76,.1)}
     .char-img-wrap{position:relative;overflow:hidden;aspect-ratio:3/4}
     .char-img-wrap img{width:100%;height:100%;object-fit:cover;filter:grayscale(15%) contrast(1.05);transition:transform .5s,filter .3s}
@@ -160,30 +216,43 @@
     .char-name{font-family:'Cinzel',serif;font-size:1rem;font-weight:700;color:#fff;display:block}
     .char-body{padding:.9rem 1.1rem 1.3rem;font-size:.87rem;color:var(--text-dim);line-height:1.65}
 
-    /* GALERÍA */
+    /* ═══ GALERÍA ═══ */
     #page-galeria{background:var(--dark)}
     .gallery-tabs{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:2rem}
-    .gtab{padding:.45rem 1.1rem;border:1px solid rgba(201,168,76,.22);background:transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .22s;}
+    .gtab{
+      padding:.45rem 1.1rem;border:1px solid rgba(201,168,76,.22);background:transparent;
+      color:var(--text-dim);font-family:'Cinzel',serif;font-size:.72rem;
+      letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .22s;
+    }
     .gtab.active,.gtab:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.07)}
     .gallery-panel{display:none}
     .gallery-panel.active{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
-    .gal-item{position:relative;overflow:hidden;cursor:pointer;background:var(--dark3);border:1px solid rgba(201,168,76,.1);transition:border-color .3s,transform .3s;}
+    .gal-item{
+      position:relative;overflow:hidden;cursor:pointer;
+      background:var(--dark3);
+      border:1px solid rgba(201,168,76,.1);
+      transition:border-color .3s,transform .3s;
+    }
     .gal-item:hover{border-color:rgba(201,168,76,.5);transform:translateY(-3px)}
     .gal-item img{width:100%;height:100%;object-fit:cover;display:block;aspect-ratio:4/3;transition:transform .4s}
     .gal-item:hover img{transform:scale(1.06)}
-    .gal-overlay{position:absolute;inset:0;background:rgba(0,0,0,0);transition:background .3s;display:flex;align-items:center;justify-content:center;}
+    .gal-overlay{
+      position:absolute;inset:0;background:rgba(0,0,0,0);
+      transition:background .3s;
+      display:flex;align-items:center;justify-content:center;
+    }
     .gal-item:hover .gal-overlay{background:rgba(0,0,0,.35)}
     .gal-zoom{color:rgba(255,255,255,0);font-size:2.5rem;transition:color .3s;line-height:1}
     .gal-item:hover .gal-zoom{color:rgba(255,255,255,.95)}
 
-    /* LIGHTBOX */
+    /* Lightbox */
     .lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.97);align-items:center;justify-content:center}
     .lightbox.open{display:flex}
     .lightbox img{max-width:94vw;max-height:94vh;object-fit:contain;box-shadow:0 0 80px rgba(201,168,76,.12)}
     .lb-close{position:absolute;top:1.2rem;right:1.8rem;font-size:2.8rem;color:var(--gold);cursor:pointer;background:none;border:none;line-height:1}
     .lb-close:hover{color:#fff}
 
-    /* ENCUESTAS */
+    /* ═══ ENCUESTAS ═══ */
     #page-encuestas{background:var(--dark3)}
     .polls-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:2rem}
     .poll-card{background:var(--dark2);border:1px solid rgba(201,168,76,.13);padding:2rem}
@@ -197,10 +266,10 @@
     .poll-vote-btn{margin-top:1.1rem;width:100%;padding:.55rem;background:rgba(201,168,76,.08);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s}
     .poll-vote-btn:hover{background:var(--gold);color:var(--dark)}
 
-    /* CAPÍTULOS */
+    /* ═══ CAPÍTULOS ═══ */
     #page-capitulos{background:var(--dark)}
     .chapters-list{max-width:760px;margin:0 auto}
-    .chapter-item{display:flex;align-items:center;gap:1.4rem;padding:1.3rem 1.6rem;border-bottom:1px solid rgba(201,168,76,.09);transition:background .2s;}
+    .chapter-item{display:flex;align-items:center;gap:1.4rem;padding:1.3rem 1.6rem;border-bottom:1px solid rgba(201,168,76,.09);transition:background .2s;cursor:default}
     .chapter-item:hover{background:rgba(201,168,76,.03)}
     .chap-num{font-family:'Cinzel Decorative',serif;font-size:1.5rem;color:rgba(201,168,76,.28);min-width:2.8rem;text-align:center;line-height:1}
     .chap-info{flex:1}
@@ -213,11 +282,17 @@
     .chapter-placeholder p{margin-bottom:.8rem}
     .add-chapter-note{font-family:'Cinzel',serif;font-size:.78rem;color:var(--gold);letter-spacing:.1em}
 
-    /* MAPA */
+    /* ═══ MAPA ═══ */
     #page-mapa{background:var(--dark2)}
     .map-container{position:relative;background:var(--dark3);border:1px solid rgba(201,168,76,.18);overflow:hidden;min-height:520px;display:flex;align-items:center;justify-content:center}
+    .map-controls{display:flex;gap:1rem;justify-content:center;margin-top:1.4rem}
+    .map-btn{padding:.45rem 1.1rem;border:1px solid rgba(201,168,76,.28);background:transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+    .map-btn:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.05)}
+    #map-svg{width:100%;max-width:900px;cursor:grab;user-select:none}
+    .map-region{transition:opacity .2s,filter .2s;cursor:pointer}.map-region:hover{filter:brightness(1.35);opacity:.88}
+    .map-tooltip{position:absolute;background:rgba(0,0,0,.93);border:1px solid var(--gold);padding:.45rem .9rem;font-family:'Cinzel',serif;font-size:.78rem;color:var(--gold);pointer-events:none;display:none;z-index:10;white-space:nowrap}
 
-    /* COMENTARIOS */
+    /* ═══ COMENTARIOS ═══ */
     #page-comentarios{background:var(--dark3)}
     .comments-wrap{max-width:720px;margin:0 auto}
     .comment-form{background:var(--dark2);border:1px solid rgba(201,168,76,.13);padding:2.3rem;margin-bottom:2.5rem}
@@ -243,7 +318,7 @@
     .login-required-box button{padding:.55rem 1.8rem;border:1px solid var(--gold);background:rgba(201,168,76,.08);color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
     .login-required-box button:hover{background:var(--gold);color:var(--dark)}
 
-    /* REDES */
+    /* ═══ REDES ═══ */
     #page-redes{background:linear-gradient(160deg,var(--dark2),var(--accent2) 50%,var(--dark2))}
     .social-intro{text-align:center;max-width:560px;margin:0 auto 3rem;color:var(--text-dim);font-style:italic}
     .social-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1.2rem;max-width:900px;margin:0 auto}
@@ -254,70 +329,11 @@
     .social-handle{font-size:.75rem;color:var(--text-dim)}
     .social-divider{grid-column:1/-1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.2),transparent);margin:.5rem 0}
     .social-divider-label{grid-column:1/-1;text-align:center;font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;opacity:.7}
+    /* Amazon / Apple special styling */
     .social-card.purchase{border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.04)}
     .social-card.purchase:hover{background:rgba(201,168,76,.12)}
 
-    /* RECOMENDADOS */
-    #page-recomendados{background:var(--dark2)}
-    .rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2.5rem}
-    .rec-card{background:var(--dark3);border:1px solid rgba(201,168,76,.18);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;}
-    .rec-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.5);box-shadow:0 18px 40px rgba(201,168,76,.1)}
-    .rec-cover-wrap{position:relative;overflow:hidden;max-height:420px;min-height:200px;cursor:zoom-in;background:var(--dark);display:flex;align-items:center;justify-content:center;}
-    .rec-cover-wrap img{width:100%;height:auto;max-height:420px;object-fit:contain;display:block;transition:transform .5s}
-    .rec-card:hover .rec-cover-wrap img{transform:scale(1.03)}
-    .rec-cover-shine{position:absolute;inset:0;background:linear-gradient(180deg,transparent 70%,rgba(0,0,0,.5) 100%);pointer-events:none;}
-    .rec-body{padding:1.5rem 1.6rem}
-    .rec-title{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.25rem;line-height:1.3}
-    .rec-author{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.1rem}
-    .rec-synopsis{font-size:.9rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.3rem}
-    /* Links de compra mejorados */
-    .rec-links{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:.55rem;margin-bottom:1.1rem}
-    .rec-link{display:flex;align-items:center;gap:.45rem;padding:.5rem .7rem;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.06);color:var(--gold);font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;transition:all .2s;border-radius:2px;}
-    .rec-link:hover{background:var(--gold);color:var(--dark);border-color:var(--gold)}
-    .rec-link svg{flex-shrink:0;width:16px;height:16px}
-    .rec-link.amazon{border-color:rgba(255,153,0,.4);color:#ff9900;}
-    .rec-link.amazon:hover{background:#ff9900;color:#111}
-    .rec-link.apple{border-color:rgba(200,200,200,.3);color:#bbb;}
-    .rec-link.apple:hover{background:#e0e0e0;color:#111}
-    .rec-link.wattpad{border-color:rgba(255,136,0,.4);color:#ff8800;}
-    .rec-link.wattpad:hover{background:#ff8800;color:#fff}
-    .rec-link.goodreads{border-color:rgba(99,68,41,.6);color:#c2873d;}
-    .rec-link.goodreads:hover{background:#c2873d;color:#fff}
-    .rec-link.web{border-color:rgba(100,180,255,.3);color:#80bfff;}
-    .rec-link.web:hover{background:#5599ee;color:#fff}
-    .rec-excerpt-btn{width:100%;padding:.6rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);color:var(--gold-light);font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:.5rem;}
-    .rec-excerpt-btn:hover{background:rgba(201,168,76,.15);border-color:var(--gold)}
-    .rec-empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;border:1px dashed rgba(201,168,76,.2);color:var(--text-dim);font-style:italic;}
-    .rec-empty p{margin-bottom:.8rem}
-
-    /* ADMIN */
-    #page-admin{background:var(--dark2)}
-    .admin-section{background:var(--dark3);border:1px solid rgba(201,168,76,.2);padding:2rem;margin-bottom:2rem}
-    .admin-section h3{font-family:'Cinzel',serif;font-size:.9rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;padding-bottom:.8rem;border-bottom:1px solid rgba(201,168,76,.15)}
-    .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-    .admin-field{display:flex;flex-direction:column;gap:.35rem}
-    .admin-field.full{grid-column:1/-1}
-    .admin-field label{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
-    .admin-field input,.admin-field textarea{background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.2);color:var(--text);padding:.65rem .9rem;font-family:'EB Garamond',serif;font-size:.92rem;outline:none;transition:border-color .2s;resize:vertical}
-    .admin-field input:focus,.admin-field textarea:focus{border-color:var(--gold)}
-    .admin-field textarea{min-height:100px}
-    .admin-btn{padding:.7rem 1.8rem;border:1px solid var(--gold);background:rgba(201,168,76,.1);color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
-    .admin-btn:hover{background:var(--gold);color:var(--dark)}
-    .admin-msg{padding:.6rem 1rem;font-family:'Cinzel',serif;font-size:.78rem;margin-top:.8rem;display:none}
-    .admin-msg.ok{color:#5fa85f;border:1px solid rgba(95,168,95,.3);background:rgba(95,168,95,.06)}
-    .admin-msg.err{color:#c05050;border:1px solid rgba(192,80,80,.3)}
-    .admin-list{display:flex;flex-direction:column;gap:.8rem;margin-top:1rem}
-    .admin-item{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.1)}
-    .admin-item-info{flex:1}
-    .admin-item-title{font-family:'Cinzel',serif;font-size:.85rem;color:#fff}
-    .admin-item-sub{font-size:.78rem;color:var(--text-dim)}
-    .admin-item-actions{display:flex;gap:.5rem;flex-shrink:0}
-    .admin-approve{padding:.3rem .7rem;border:1px solid #5fa85f;background:rgba(95,168,95,.08);color:#5fa85f;font-family:'Cinzel',serif;font-size:.65rem;cursor:pointer;transition:all .2s}
-    .admin-approve:hover{background:#5fa85f;color:#fff}
-    .admin-delete{padding:.3rem .7rem;border:1px solid #c05050;background:rgba(192,80,80,.08);color:#c05050;font-family:'Cinzel',serif;font-size:.65rem;cursor:pointer;transition:all .2s}
-    .admin-delete:hover{background:#c05050;color:#fff}
-
-    /* AUTH MODAL */
+    /* ═══ AUTH MODAL ═══ */
     .auth-overlay{display:none;position:fixed;inset:0;z-index:9998;background:rgba(0,0,0,.9);backdrop-filter:blur(8px);align-items:center;justify-content:center}
     .auth-overlay.open{display:flex}
     .auth-modal{background:var(--dark3);border:1px solid rgba(201,168,76,.32);padding:2.8rem 2.4rem;width:100%;max-width:400px;position:relative}
@@ -334,49 +350,155 @@
     .auth-btn{width:100%;padding:.75rem;background:rgba(201,168,76,.08);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;transition:all .22s;margin-top:.4rem}
     .auth-btn:hover{background:var(--gold);color:var(--dark)}
     .auth-msg{text-align:center;font-size:.82rem;margin-top:.9rem;padding:.55rem;font-family:'Cinzel',serif}
-    .auth-msg.error{color:#c05050;border:1px solid rgba(192,80,80,.28)}
-    .auth-msg.success{color:#5fa85f;border:1px solid rgba(95,168,95,.28)}
+    .auth-msg.error{color:#c05050;border:1px solid rgba(192,80,80,.28)}.auth-msg.success{color:#5fa85f;border:1px solid rgba(95,168,95,.28)}
     .auth-close{position:absolute;top:.9rem;right:1.1rem;font-size:1.5rem;color:var(--text-dim);cursor:pointer;background:none;border:none;line-height:1}
     .auth-close:hover{color:var(--gold)}
     .auth-contact{margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid rgba(201,168,76,.1);text-align:center;font-size:.75rem;color:var(--text-dim)}
     .auth-contact a{color:var(--gold);text-decoration:none}
 
-    /* MODAL EXTRACTO */
-    .excerpt-modal{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.95);backdrop-filter:blur(8px);align-items:center;justify-content:center;}
-    .excerpt-modal.open{display:flex}
-    .excerpt-box{background:var(--dark3);border:1px solid rgba(201,168,76,.3);padding:2.5rem 2.2rem;width:100%;max-width:680px;max-height:85vh;overflow-y:auto;position:relative;}
-    .excerpt-box::-webkit-scrollbar{width:4px}
-    .excerpt-box::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
-    .excerpt-close{position:absolute;top:.9rem;right:1.1rem;font-size:1.6rem;color:var(--text-dim);cursor:pointer;background:none;border:none;line-height:1}
-    .excerpt-close:hover{color:var(--gold)}
-    .excerpt-box h3{font-family:'Cinzel Decorative',serif;font-size:1.15rem;color:var(--gold);margin-bottom:.3rem;}
-    .exc-author{font-family:'Cinzel',serif;font-size:.72rem;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.8rem;}
-    .exc-text p{font-size:.95rem;line-height:1.9;margin-bottom:1rem;color:var(--text);}
-
-    /* FOOTER */
+    /* ═══ FOOTER ═══ */
     .page-footer{background:var(--dark);border-top:1px solid rgba(201,168,76,.1);padding:2.5rem 2rem;text-align:center}
     .page-footer .ft{font-family:'Cinzel Decorative',serif;font-size:1rem;color:var(--gold);margin-bottom:.4rem}
     .page-footer p{font-size:.78rem;color:var(--text-dim)}
 
-    .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
-    .reveal.shown{opacity:1;transform:translateY(0)}
+    /* ═══ ANIMATIONS ═══ */
+    @keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+    @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-    @media(max-width:900px){.synopsis-layout{grid-template-columns:1fr}.home-nav-grid{grid-template-columns:repeat(4,1fr)}}
+    /* ═══ RESPONSIVE ═══ */
+    @media(max-width:900px){
+      .synopsis-layout{grid-template-columns:1fr}
+      .home-nav-grid{grid-template-columns:repeat(4,1fr)}
+    }
     @media(max-width:620px){
       .home-nav-grid{grid-template-columns:repeat(2,1fr)}
       .char-row-3 .char-card,.char-row-2 .char-card{width:calc(50% - 1rem)}
       .form-grid{grid-template-columns:1fr}
-      .nav-tabs{gap:0}.nav-tab{font-size:.56rem;padding:.3rem .45rem}
-      .admin-grid{grid-template-columns:1fr}
+      .nav-tabs{gap:0}
+      .nav-tab{font-size:.56rem;padding:.3rem .45rem}
     }
-    @media(max-width:420px){.char-row-3 .char-card,.char-row-2 .char-card{width:100%;max-width:280px}}
+    @media(max-width:420px){
+      .char-row-3 .char-card,.char-row-2 .char-card{width:100%;max-width:280px}
+    }
+
+    /* Reveal animation */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity .5s ease,transform .5s ease}
+    .reveal.shown{opacity:1;transform:translateY(0)}
   
+    /* ═══ AUTOR ═══ */
+    #page-autor{background:var(--dark)}
+    .autor-layout{display:grid;grid-template-columns:300px 1fr;gap:4rem;align-items:start}
+    .autor-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:top;border:1px solid rgba(201,168,76,.3);box-shadow:0 20px 50px rgba(0,0,0,.5);display:block}
+    .autor-quote{margin-top:1.5rem;padding:1.2rem;border-left:2px solid var(--gold);font-style:italic;font-size:.92rem;color:var(--text-dim);line-height:1.7}
+    .autor-bio p{margin-bottom:1.2rem;font-size:1.05rem;line-height:1.8}
+    .autor-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+    .autor-stat{text-align:center;padding:1.2rem;border:1px solid rgba(201,168,76,.15);background:rgba(201,168,76,.04)}
+    .autor-stat-num{font-family:'Cinzel Decorative',serif;font-size:2rem;color:var(--gold);display:block;line-height:1}
+    .autor-stat-label{font-family:'Cinzel',serif;font-size:.62rem;color:var(--text-dim);letter-spacing:.12em;text-transform:uppercase;display:block;margin-top:.4rem}
+
+    /* ═══ SAGAS / OBRAS ═══ */
+    #page-obras{background:var(--dark2)}
+    .saga-section{margin-bottom:4rem}
+    .saga-header{display:flex;align-items:center;gap:1.2rem;margin-bottom:2rem;padding-bottom:1rem;border-bottom:1px solid rgba(201,168,76,.2);}
+    .saga-icon{font-size:1.8rem}
+    .saga-name{font-family:'Cinzel Decorative',serif;font-size:1.2rem;color:#fff;margin-bottom:.2rem}
+    .saga-count{font-family:'Cinzel',serif;font-size:.68rem;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase}
+    .saga-books{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:1.4rem}
+    .book-card{background:var(--dark3);border:1px solid rgba(201,168,76,.12);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;cursor:pointer}
+    .book-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.45);box-shadow:0 16px 35px rgba(0,0,0,.5)}
+    .book-cover{aspect-ratio:2/3;overflow:hidden;background:var(--dark);position:relative}
+    .book-cover img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+    .book-card:hover .book-cover img{transform:scale(1.06)}
+    .book-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;text-align:center;background:linear-gradient(160deg,var(--dark3),var(--dark))}
+    .book-placeholder-num{font-family:'Cinzel Decorative',serif;font-size:2.8rem;color:rgba(201,168,76,.2);line-height:1}
+    .book-placeholder-title{font-family:'Cinzel',serif;font-size:.65rem;color:rgba(201,168,76,.4);margin-top:.5rem;line-height:1.4}
+    .book-info{padding:.8rem .9rem 1rem}
+    .book-num-label{font-family:'Cinzel',serif;font-size:.58rem;color:var(--text-dim);letter-spacing:.15em;text-transform:uppercase;margin-bottom:.2rem}
+    .book-title-small{font-family:'Cinzel',serif;font-size:.8rem;color:#fff;margin-bottom:.55rem;line-height:1.3}
+    .estado-tag{display:inline-block;font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.1em;text-transform:uppercase;padding:.18rem .6rem;border:1px solid;font-weight:600}
+    .estado-publicado{color:#4caf7d;border-color:#4caf7d;background:rgba(76,175,125,.12)}
+    .estado-derechos{color:#ffd700;border-color:#ffd700;background:rgba(255,215,0,.1)}
+    .estado-maquetado{color:#64b5f6;border-color:#64b5f6;background:rgba(100,181,246,.1)}
+    .estado-edicion{color:#ba68c8;border-color:#ba68c8;background:rgba(186,104,200,.1)}
+    .estado-correccion{color:#ff9800;border-color:#ff9800;background:rgba(255,152,0,.1)}
+    .estado-borrador{color:#90a4ae;border-color:#90a4ae;background:rgba(144,164,174,.1)}
+    .estado-por-escribir{color:#546e7a;border-color:#546e7a;background:rgba(84,110,122,.08)}
+    .progress-bar{height:3px;background:rgba(255,255,255,.07);margin-top:.55rem;border-radius:2px}
+    .progress-fill{height:100%;border-radius:2px}
+    .progress-publicado{background:#4caf7d;width:100%}
+    .progress-derechos{background:#ffd700;width:85%}
+    .progress-maquetado{background:#64b5f6;width:70%}
+    .progress-edicion{background:#ba68c8;width:55%}
+    .progress-correccion{background:#ff9800;width:40%}
+    .progress-borrador{background:#90a4ae;width:20%}
+    .progress-por-escribir{background:#546e7a;width:5%}
+    .estado-legend{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid rgba(201,168,76,.1)}
+    .obra-btn{display:inline-block;padding:.4rem 1rem;border:1px solid rgba(201,168,76,.35);background:rgba(201,168,76,.07);color:var(--gold);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;text-decoration:none;transition:all .2s}
+    .obra-btn:hover{background:var(--gold);color:var(--dark)}
+
+    /* ═══ RESPONSIVE AUTOR/OBRAS ═══ */
+    @media(max-width:850px){
+      .autor-layout{grid-template-columns:1fr}
+      #page-home .home-content{flex-direction:column !important;text-align:center !important;align-items:center !important;gap:2rem !important}
+      #page-home h1,#page-home .home-eyebrow,#page-home .home-subtitle,#page-home .home-music-hint{text-align:center !important}
+      #page-home .home-divider{margin:1.5rem auto !important}
+      #page-home .home-nav-grid{margin:1.5rem auto 0 !important}
+    }
+    @media(max-width:620px){
+      .saga-books{grid-template-columns:repeat(3,1fr)}
+      #page-home .home-content > div:first-child{width:160px !important;height:205px !important}
+    }
+    @media(max-width:400px){
+      .saga-books{grid-template-columns:repeat(2,1fr)}
+    }
+  
+    .rec-cover-wrap{position:relative;overflow:hidden;aspect-ratio:3/4;max-height:360px;cursor:zoom-in;background:var(--dark);}
+    .rec-cover-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+    .rec-card:hover .rec-cover-wrap img{transform:scale(1.04)}
+    .rec-cover-shine{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.7));}
+    .rec-body{padding:1.5rem 1.6rem}
+    .rec-title{font-family:'Cinzel',serif;font-size:1.05rem;font-weight:700;color:#fff;margin-bottom:.25rem;line-height:1.3}
+    .rec-author{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1rem}
+    .rec-synopsis{font-size:.9rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.2rem}
+    .rec-links{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1rem}
+    .rec-link{padding:.3rem .85rem;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.06);color:var(--gold);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+    .rec-link:hover{background:var(--gold);color:var(--dark)}
+    .rec-excerpt-btn{width:100%;padding:.6rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);color:var(--gold-light);font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .25s;margin-top:.8rem;}
+    .rec-excerpt-btn:hover{background:rgba(201,168,76,.15);border-color:var(--gold)}
     .rec-chapter{margin-top:1rem;border-top:1px solid rgba(201,168,76,.15);}
-    .rec-chapter-inner{padding:1.5rem;background:rgba(0,0,0,.25);max-height:420px;overflow-y:auto;}
+    .rec-chapter-inner{padding:1.5rem;background:rgba(0,0,0,.3);max-height:420px;overflow-y:auto;}
     .rec-chapter-inner::-webkit-scrollbar{width:4px}
     .rec-chapter-inner::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
     .rec-chap-title{font-family:'Cinzel',serif;font-size:.85rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.2rem;}
-    .rec-chap-text p{font-size:.92rem;color:var(--text);line-height:1.85;margin-bottom:1rem;}
+    .rec-chap-text p{font-size:.93rem;color:var(--text);line-height:1.88;margin-bottom:1rem;}
+    .rec-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2.5rem}
+    .rec-card{background:var(--dark3);border:1px solid rgba(201,168,76,.18);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;}
+    .rec-card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.5);box-shadow:0 18px 40px rgba(201,168,76,.1)}
+    .rec-empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;border:1px dashed rgba(201,168,76,.2);color:var(--text-dim);font-style:italic;}
+    /* Admin CSS */
+    .admin-section{background:var(--dark3);border:1px solid rgba(201,168,76,.2);padding:2rem;margin-bottom:2rem}
+    .admin-section h3{font-family:'Cinzel',serif;font-size:.9rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.5rem;padding-bottom:.8rem;border-bottom:1px solid rgba(201,168,76,.15)}
+    .admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .admin-field{display:flex;flex-direction:column;gap:.35rem}
+    .admin-field.full{grid-column:1/-1}
+    .admin-field label{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
+    .admin-field input,.admin-field textarea{background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.2);color:var(--text);padding:.65rem .9rem;font-family:'EB Garamond',serif;font-size:.92rem;outline:none;transition:border-color .2s;resize:vertical}
+    .admin-field input:focus,.admin-field textarea:focus{border-color:var(--gold)}
+    .admin-btn{padding:.7rem 1.8rem;border:1px solid var(--gold);background:rgba(201,168,76,.1);color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+    .admin-btn:hover{background:var(--gold);color:var(--dark)}
+    .admin-msg{padding:.6rem 1rem;font-family:'Cinzel',serif;font-size:.78rem;margin-top:.8rem;display:none}
+    .admin-msg.ok{color:#5fa85f;border:1px solid rgba(95,168,95,.3)}
+    .admin-msg.err{color:#c05050;border:1px solid rgba(192,80,80,.3)}
+    .admin-list{display:flex;flex-direction:column;gap:.8rem;margin-top:1rem}
+    .admin-item{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.8rem 1rem;background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.1)}
+    .admin-item-info{flex:1}
+    .admin-item-title{font-family:'Cinzel',serif;font-size:.85rem;color:#fff;margin-bottom:.2rem}
+    .admin-item-sub{font-size:.78rem;color:var(--text-dim)}
+    .admin-item-actions{display:flex;gap:.5rem;flex-shrink:0}
+    .admin-approve{padding:.3rem .7rem;border:1px solid #5fa85f;background:rgba(95,168,95,.08);color:#5fa85f;font-family:'Cinzel',serif;font-size:.65rem;cursor:pointer;transition:all .2s}
+    .admin-approve:hover{background:#5fa85f;color:#fff}
+    .admin-delete{padding:.3rem .7rem;border:1px solid #c05050;background:rgba(192,80,80,.08);color:#c05050;font-family:'Cinzel',serif;font-size:.65rem;cursor:pointer;transition:all .2s}
+    .admin-delete:hover{background:#c05050;color:#fff}
   </style>
 </head>
 <body>
@@ -392,29 +514,19 @@
       <button class="auth-tab" onclick="switchTab('register',this)">Registrarse</button>
     </div>
     <div class="auth-panel active" id="panel-login">
-      <div class="auth-field"><label>Correo</label><input type="email" id="login-email" placeholder="tu@correo.com"/></div>
+      <div class="auth-field"><label>Correo electr&#243;nico</label><input type="email" id="login-email" placeholder="tu@correo.com"/></div>
       <div class="auth-field"><label>Contrase&#241;a</label><input type="password" id="login-pass" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;"/></div>
       <button class="auth-btn" onclick="doLogin()">Entrar al Continente</button>
       <div class="auth-msg" id="login-msg"></div>
     </div>
     <div class="auth-panel" id="panel-register">
       <div class="auth-field"><label>Nombre o Alias</label><input type="text" id="reg-name" placeholder="Tu nombre en Gaia..."/></div>
-      <div class="auth-field"><label>Correo</label><input type="email" id="reg-email" placeholder="tu@correo.com"/></div>
+      <div class="auth-field"><label>Correo electr&#243;nico</label><input type="email" id="reg-email" placeholder="tu@correo.com"/></div>
       <div class="auth-field"><label>Contrase&#241;a</label><input type="password" id="reg-pass" placeholder="M&#237;nimo 6 caracteres"/></div>
       <button class="auth-btn" onclick="doRegister()">Crear Cuenta</button>
       <div class="auth-msg" id="reg-msg"></div>
     </div>
-    <div class="auth-contact">&#191;Problemas? <a href="/cdn-cgi/l/email-protection#8dfef9ece3a3e8a3fecdeae0ece4e1a3eee2e0"><span class="__cf_email__" data-cfemail="dfacabbeb1f1baf1ac9fb8b2beb6b3f1bcb0b2">[email&#160;protected]</span></a></div>
-  </div>
-</div>
-
-<!-- MODAL EXTRACTO -->
-<div class="excerpt-modal" id="excerptModal">
-  <div class="excerpt-box">
-    <button class="excerpt-close" onclick="closeExcerpt()">&#215;</button>
-    <h3 id="exc-title"></h3>
-    <p class="exc-author" id="exc-author"></p>
-    <div class="exc-text" id="exc-text"></div>
+    <div class="auth-contact">&#191;Problemas? Escribe al autor:<br/><a href="/cdn-cgi/l/email-protection#f18285909fdf94df82b1969c90989ddf929e9c"><span class="__cf_email__" data-cfemail="7c0f081d125219520f3c1b111d1510521f1311">[email&#160;protected]</span></a></div>
   </div>
 </div>
 
@@ -426,61 +538,357 @@
 
 <!-- TOPBAR -->
 <div id="topbar">
-  <div class="topbar-logo" onclick="showPage('home')">El Legado de Gaia</div>
-  <div class="nav-tabs">
+  <div class="topbar-logo" onclick="showPage('home')">E.S. Stan</div>
+  <div class="nav-tabs" id="navTabs">
+    <button class="nav-tab" onclick="showPage('autor')">El Autor</button>
+    <button class="nav-tab" onclick="showPage('obras')">Mis Obras</button>
     <button class="nav-tab" onclick="showPage('sinopsis')">Sinopsis</button>
     <button class="nav-tab" onclick="showPage('personajes')">Personajes</button>
     <button class="nav-tab" onclick="showPage('galeria')">Galer&#237;a</button>
-    <button class="nav-tab" onclick="showPage('encuestas')">Encuestas</button>
     <button class="nav-tab" onclick="showPage('capitulos')">Cap&#237;tulos</button>
-    <button class="nav-tab" onclick="showPage('mapa')">Mapa</button>
+    <button class="nav-tab" onclick="showPage('mapa')">Mapas</button>
+    <button class="nav-tab" onclick="showPage('encuestas')">Encuestas</button>
+    <button class="nav-tab" onclick="showPage('recomendados')">Recomendados</button>
     <button class="nav-tab" onclick="showPage('comentarios')">Comentarios</button>
     <button class="nav-tab" onclick="showPage('redes')">Redes</button>
-    <button class="nav-tab" onclick="showPage('recomendados')">Recomendados</button>
     <button class="nav-tab" id="adminTab" onclick="showPage('admin')" style="display:none;color:#c9a84c;">&#9881; Admin</button>
   </div>
   <button class="nav-auth-btn" id="navAuthBtn" onclick="openAuth()">Iniciar Sesi&#243;n</button>
 </div>
 
-<!-- ══════════════════════════════════════
-     HOME — SIEMPRE VISIBLE, nunca se oculta
-══════════════════════════════════════ -->
-<div id="page-home">
-  <div class="home-bg"></div>
-  <div class="home-content">
-    <p class="home-eyebrow">&#10022; &nbsp; Una novela de fantas&#237;a &#233;pica &nbsp; &#10022;</p>
-    <h1 class="home-title">El Legado<br/>de Gaia</h1>
-    <p class="home-subtitle">El Continente tras el Muro</p>
-    <div class="home-divider"></div>
-    <p class="home-music-hint">&#127925; Toca un bot&#243;n para activar la m&#250;sica</p>
-    <div class="home-nav-grid">
-      <button class="home-nav-btn" id="btn-sinopsis"    onclick="showPage('sinopsis')"><span class="home-nav-icon">&#128366;</span>Sinopsis</button>
-      <button class="home-nav-btn" id="btn-personajes"  onclick="showPage('personajes')"><span class="home-nav-icon">&#9876;</span>Personajes</button>
-      <button class="home-nav-btn" id="btn-galeria"     onclick="showPage('galeria')"><span class="home-nav-icon">&#128444;</span>Galer&#237;a</button>
-      <button class="home-nav-btn" id="btn-encuestas"   onclick="showPage('encuestas')"><span class="home-nav-icon">&#128202;</span>Encuestas</button>
-      <button class="home-nav-btn" id="btn-capitulos"   onclick="showPage('capitulos')"><span class="home-nav-icon">&#128218;</span>Cap&#237;tulos</button>
-      <button class="home-nav-btn" id="btn-mapa"        onclick="showPage('mapa')"><span class="home-nav-icon">&#127757;</span>Mapa</button>
-      <button class="home-nav-btn" id="btn-comentarios" onclick="showPage('comentarios')"><span class="home-nav-icon">&#128172;</span>Comentarios</button>
-      <button class="home-nav-btn" id="btn-redes"       onclick="showPage('redes')"><span class="home-nav-icon">&#127760;</span>Redes</button>
-      <button class="home-nav-btn" id="btn-recomendados" onclick="showPage('recomendados')"><span class="home-nav-icon">&#128218;</span>Recomendados</button>
+<!-- ═══════════ HOME ═══════════ -->
+<div id="page-home" class="page active">
+  <div class="home-bg" style="background:url('autor.png') center top/cover no-repeat;filter:brightness(.28) saturate(.7);"></div>
+  <div style="position:absolute;inset:0;background:linear-gradient(160deg,rgba(8,8,12,.75) 0%,rgba(8,8,12,.35) 40%,rgba(8,8,12,.88) 82%,var(--dark) 100%);z-index:0;pointer-events:none;"></div>
+  <div class="home-content" style="flex-direction:row;align-items:center;justify-content:center;gap:3.5rem;max-width:1100px;padding:5rem 2rem 3rem;text-align:left;">
+    <div style="flex-shrink:0;position:relative;z-index:1;opacity:0;animation:fadeUp 1s .3s ease forwards;">
+      <div style="width:210px;height:270px;border:2px solid rgba(201,168,76,.4);overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.8);">
+        <img src="autor.png" alt="E.S. Stan" style="width:100%;height:100%;object-fit:cover;object-position:center top;" onerror="this.style.background='var(--dark3)'"/>
+      </div>
+      <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,transparent,var(--gold),transparent);"></div>
+    </div>
+    <div style="position:relative;z-index:1;flex:1;min-width:0;">
+      <p class="home-eyebrow" style="text-align:left;letter-spacing:.4em;">&#10022; &nbsp; Escritor de Fantas&#237;a &#201;pica &nbsp; &#10022;</p>
+      <h1 class="home-title" style="text-align:left;font-size:clamp(2.5rem,8vw,5.5rem);">E.S. Stan</h1>
+      <p class="home-subtitle" style="text-align:left;font-size:clamp(.8rem,1.8vw,1.05rem);letter-spacing:.2em;">Forjador de mundos &nbsp;&#10022;&nbsp; Narrador de leyendas</p>
+      <div class="home-divider" style="margin:1.5rem 0;width:160px;"></div>
+      <p class="home-music-hint" style="text-align:left;">&#127925; Toca un bot&#243;n para activar la m&#250;sica</p>
+      <div class="home-nav-grid" style="grid-template-columns:repeat(3,1fr);max-width:500px;margin-top:1.5rem;gap:.65rem;">
+        <button class="home-nav-btn" onclick="showPage('autor')"><span class="home-nav-icon">&#9997;</span>El Autor</button>
+        <button class="home-nav-btn" onclick="showPage('obras')"><span class="home-nav-icon">&#128218;</span>Mis Obras</button>
+        <button class="home-nav-btn" onclick="showPage('sinopsis')"><span class="home-nav-icon">&#128366;</span>Sinopsis</button>
+        <button class="home-nav-btn" onclick="showPage('personajes')"><span class="home-nav-icon">&#9876;</span>Personajes</button>
+        <button class="home-nav-btn" onclick="showPage('galeria')"><span class="home-nav-icon">&#128444;</span>Galer&#237;a</button>
+        <button class="home-nav-btn" onclick="showPage('encuestas')"><span class="home-nav-icon">&#128202;</span>Encuestas</button>
+        <button class="home-nav-btn" onclick="showPage('recomendados')"><span class="home-nav-icon">&#10022;</span>Recomendados</button>
+        <button class="home-nav-btn" onclick="showPage('comentarios')"><span class="home-nav-icon">&#128172;</span>Comentarios</button>
+        <button class="home-nav-btn" onclick="showPage('redes')"><span class="home-nav-icon">&#127760;</span>Redes</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════
-     SECCIONES — aparecen DEBAJO del home
-══════════════════════════════════════ -->
+
+<!-- AUTOR -->
+<div id="page-autor" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; El Cronista &#10022;</p>
+      <h2 class="page-title">E.S. Stan</h2>
+      <div class="page-rule"></div>
+    </div>
+    <div class="autor-layout">
+      <div class="reveal">
+        <img class="autor-photo" src="autor.png" alt="E.S. Stan" onerror="this.style.background='var(--dark3)'"/>
+        <div class="autor-quote">
+          "Las historias no se inventan. Se descubren en los lugares donde la realidad termina y el mito comienza."
+          <cite style="display:block;margin-top:.7rem;font-family:'Cinzel',serif;font-size:.68rem;color:var(--gold);font-style:normal;letter-spacing:.1em;">&#8212; E.S. Stan</cite>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="autor-bio">
+          <p>Escritor chileno de fantas&#237;a &#233;pica, apasionado por los mundos donde los l&#237;mites entre lo divino y lo mortal se desvanecen. Desde peque&#241;o encontr&#243; en las historias un idioma universal capaz de cruzar cualquier muro.</p>
+          <p>Su obra principal, <strong style="color:var(--gold-light)">El Legado de Gaia</strong>, naci&#243; de una pregunta simple: &#191;y si el mundo que conocemos no fuera el &#250;nico? Esa pregunta se convirti&#243; en un continente, en una guerra entre dioses, y en personajes que viven en las p&#225;ginas con la misma intensidad con que respiran los humanos.</p>
+          <p>Actualmente trabaja en tres universos paralelos: la secuela <strong style="color:var(--gold-light)">Cr&#243;nicas de Tierras Desconocidas</strong>, la saga de acci&#243;n <strong style="color:var(--gold-light)">Peter Knight</strong> y la novela de terror <strong style="color:var(--gold-light)">El Trato</strong>.</p>
+          <p>Cree que la fantas&#237;a no es un escape de la realidad, sino la forma m&#225;s honesta de entenderla.</p>
+        </div>
+        <div class="autor-stats">
+          <div class="autor-stat"><span class="autor-stat-num">16</span><span class="autor-stat-label">Libros planeados</span></div>
+          <div class="autor-stat"><span class="autor-stat-num">4</span><span class="autor-stat-label">Sagas activas</span></div>
+          <div class="autor-stat"><span class="autor-stat-num">&#9733;</span><span class="autor-stat-label">5.0 Goodreads</span></div>
+        </div>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.5rem;">
+          <button class="obra-btn" onclick="showPage('obras')">&#128218; Ver todas mis obras</button>
+          <button class="obra-btn" onclick="showPage('redes')">&#127760; Redes sociales</button>
+          <a href="/cdn-cgi/l/email-protection#d0a3a4b1befeb5fea390b7bdb1b9bcfeb3bfbd" class="obra-btn">&#9993; Contacto</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>Escritor de Fantas&#237;a &#201;pica &middot; Chile</p></div>
+</div>
+
+<!-- MIS OBRAS -->
+<div id="page-obras" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; Universos Creados &#10022;</p>
+      <h2 class="page-title">Mis Obras</h2>
+      <div class="page-rule"></div>
+      <p style="color:var(--text-dim);font-size:.95rem;margin-top:1rem;font-style:italic;">Cada saga es un universo. Cada libro, una puerta hacia lo desconocido.</p>
+    </div>
+    <div class="estado-legend reveal">
+      <span class="estado-tag estado-publicado">✦ Publicado</span>
+      <span class="estado-tag estado-derechos">⏳ Derechos de autor</span>
+      <span class="estado-tag estado-maquetado">📐 Maquetado</span>
+      <span class="estado-tag estado-edicion">✏️ En edición</span>
+      <span class="estado-tag estado-correccion">🔍 Corrección</span>
+      <span class="estado-tag estado-borrador">📝 Borrador</span>
+      <span class="estado-tag estado-por-escribir">🖊 Por escribir</span>
+    </div>
+    <div class="saga-section reveal">
+      <div class="saga-header">
+        <span class="saga-icon">⚔️</span>
+        <div><h3 class="saga-name">El Legado de Gaia</h3><p class="saga-count">7 Libros &middot; Fantasía Épica</p></div>
+      </div>
+      <div class="saga-books">
+      <div class="book-card reveal" onclick="openLb('Portada.png')">
+        <div class="book-cover"><img src="Portada.png" alt="El Viaje" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">1</span><p class="book-placeholder-title">El Viaje</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 1</p>
+          <p class="book-title-small">El Viaje</p>
+          <span class="estado-tag estado-publicado">✦ Publicado</span>
+          <div class="progress-bar"><div class="progress-fill progress-publicado" style="width:100%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('Portada2.png')">
+        <div class="book-cover"><img src="Portada2.png" alt="El Continente" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">2</span><p class="book-placeholder-title">El Continente</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 2</p>
+          <p class="book-title-small">El Continente</p>
+          <span class="estado-tag estado-derechos">⏳ Derechos de autor</span>
+          <div class="progress-bar"><div class="progress-fill progress-derechos" style="width:85%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('Portada3.png')">
+        <div class="book-cover"><img src="Portada3.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">3</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 3</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('Portada4.png')">
+        <div class="book-cover"><img src="Portada4.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">4</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 4</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('Portada5.png')">
+        <div class="book-cover"><img src="Portada5.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">5</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 5</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('Portada6.png')">
+        <div class="book-cover"><img src="Portada6.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">6</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 6</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-por-escribir">🖊 Por escribir</span>
+          <div class="progress-bar"><div class="progress-fill progress-por-escribir" style="width:5%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('Portada7.png')">
+        <div class="book-cover"><img src="Portada7.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">7</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 7</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-por-escribir">🖊 Por escribir</span>
+          <div class="progress-bar"><div class="progress-fill progress-por-escribir" style="width:5%"></div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="saga-section reveal">
+      <div class="saga-header">
+        <span class="saga-icon">&#128506;</span>
+        <div><h3 class="saga-name">Crónicas de Tierras Desconocidas</h3><p class="saga-count">3 Libros &middot; Secuela de El Legado de Gaia</p></div>
+      </div>
+      <div class="saga-books">
+      <div class="book-card reveal" onclick="openLb('CronicasPortada1.png')">
+        <div class="book-cover"><img src="CronicasPortada1.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">1</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 1</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('CronicasPortada2.png')">
+        <div class="book-cover"><img src="CronicasPortada2.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">2</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 2</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="">
+        <div class="book-cover"><div class="book-placeholder"><span class="book-placeholder-num">3</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 3</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-por-escribir">🖊 Por escribir</span>
+          <div class="progress-bar"><div class="progress-fill progress-por-escribir" style="width:5%"></div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="saga-section reveal">
+      <div class="saga-header">
+        <span class="saga-icon">&#9876;</span>
+        <div><h3 class="saga-name">Peter Knight</h3><p class="saga-count">5 Libros &middot; Nueva Saga</p></div>
+      </div>
+      <div class="saga-books">
+      <div class="book-card reveal" onclick="openLb('PeterPortada1.png')">
+        <div class="book-cover"><img src="PeterPortada1.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">1</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 1</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('PeterPortada2.png')">
+        <div class="book-cover"><img src="PeterPortada2.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">2</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 2</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('PeterPortada3.png')">
+        <div class="book-cover"><img src="PeterPortada3.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">3</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 3</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="openLb('PeterPortada4.png')">
+        <div class="book-cover"><img src="PeterPortada4.png" alt="Título por confirmar" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">4</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 4</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-borrador">📝 Borrador</span>
+          <div class="progress-bar"><div class="progress-fill progress-borrador" style="width:20%"></div></div>
+        </div>
+      </div>
+      <div class="book-card reveal" onclick="">
+        <div class="book-cover"><div class="book-placeholder"><span class="book-placeholder-num">5</span><p class="book-placeholder-title">Título por confirmar</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 5</p>
+          <p class="book-title-small">Título por confirmar</p>
+          <span class="estado-tag estado-por-escribir">🖊 Por escribir</span>
+          <div class="progress-bar"><div class="progress-fill progress-por-escribir" style="width:5%"></div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+    <div class="saga-section reveal">
+      <div class="saga-header">
+        <span class="saga-icon">&#128683;</span>
+        <div><h3 class="saga-name">El Trato</h3><p class="saga-count">1 Libro &middot; Terror</p></div>
+      </div>
+      <div class="saga-books">
+      <div class="book-card reveal" onclick="openLb('TratoPortada.png')">
+        <div class="book-cover"><img src="TratoPortada.png" alt="El Trato" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-placeholder" style="display:none"><span class="book-placeholder-num">1</span><p class="book-placeholder-title">El Trato</p></div></div>
+        <div class="book-info">
+          <p class="book-num-label">Libro 1</p>
+          <p class="book-title-small">El Trato</p>
+          <span class="estado-tag estado-edicion">✏️ En edición</span>
+          <div class="progress-bar"><div class="progress-fill progress-edicion" style="width:55%"></div></div>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>Todas las obras &middot; Todos los mundos</p></div>
+</div>
+
+<!-- RECOMENDADOS -->
+<div id="page-recomendados" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; Comunidad de Escritores &#10022;</p>
+      <h2 class="page-title">Libros Recomendados</h2>
+      <div class="page-rule"></div>
+      <p style="color:var(--text-dim);font-size:.95rem;margin-top:1rem;font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;">Escritores amigos que vale la pena conocer.</p>
+    </div>
+    <div class="rec-grid" id="rec-grid">
+<!-- ╔══════════════════════════════════════════════╗
+     PARA AGREGAR UN LIBRO:
+     1. Copia el bloque <div class="rec-card">
+     2. Pégalo ANTES de este comentario
+     3. Reemplaza los textos en MAYÚSCULAS
+     4. Guarda y sube a GitHub
+     ╚══════════════════════════════════════════════╝
+
+<div class="rec-card reveal">
+  <div class="rec-cover-wrap">
+    <img src="URL_PORTADA" alt="TITULO" onclick="openLb('URL_PORTADA')" onerror="this.style.background='var(--dark3)'"/>
+    <div class="rec-cover-shine"></div>
+  </div>
+  <div class="rec-body">
+    <h3 class="rec-title">TITULO DEL LIBRO</h3>
+    <p class="rec-author">Por NOMBRE DEL AUTOR</p>
+    <p class="rec-synopsis">SINOPSIS DEL LIBRO.</p>
+    <div class="rec-links">
+      <a href="LINK_AMAZON" class="rec-link" target="_blank">Amazon</a>
+    </div>
+    <button class="rec-excerpt-btn" onclick="toggleCap(this)">&#128214; Leer Cap&#237;tulo 1</button>
+    <div class="rec-chapter" style="display:none;">
+      <div class="rec-chapter-inner">
+        <h4 class="rec-chap-title">Cap&#237;tulo 1</h4>
+        <div class="rec-chap-text">
+          <p>TEXTO DEL CAPITULO.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+FIN PLANTILLA -->
+      <div class="rec-empty"><p>&#128218; Pr&#243;ximamente libros recomendados de amigos escritores.</p></div>
+    </div>
+  </div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>Comunidad de Escritores</p></div>
+</div>
 
 <div id="page-sinopsis" class="page">
   <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#10022; El Mundo &#10022;</p><h2 class="page-title">Sinopsis</h2><div class="page-rule"></div></div>
+    <div class="page-header">
+      <p class="page-label">&#10022; El Legado de Gaia &#10022;</p>
+      <h2 class="page-title">Sinopsis</h2>
+      <div class="page-rule"></div>
+    </div>
     <div class="synopsis-layout">
       <div class="synopsis-text reveal">
         <p class="lead">M&#225;s all&#225; del Muro de Hielo que divide el mundo conocido, hay una verdad que los poderosos llevan siglos enterrando.</p>
-        <p><strong>Pangea</strong> siempre crey&#243; que era el &#250;nico continente que importaba. Pero al otro lado del Muro existe <strong>Panasea</strong>, una tierra vasta y salvaje que guarda secretos m&#225;s antiguos que cualquier trono.</p>
+        <p><strong>Pangea</strong> siempre crey&#243; que era el &#250;nico continente que importaba. Sus dioses, sus guerras, sus reglas. Pero al otro lado del Muro existe <strong>Panasea</strong>, una tierra vasta y salvaje que guarda secretos m&#225;s antiguos que cualquier trono.</p>
         <p><strong>R&#237;o, Amaya y Rayen</strong> no planeaban cruzar. Huyeron. Y en esa huida descubrieron que el mundo era mucho m&#225;s grande, y mucho m&#225;s peligroso, de lo que jam&#225;s les hab&#237;an dicho.</p>
-        <p>Perseguidos por el implacable <strong>General Reiner</strong> y su primer oficial <strong>Rollo</strong>, los tres se adentran en Panasea sin mapas ni aliados. Los guerreros de <strong>Valhalla</strong>, las deidades del <strong>Olimpo</strong> y los se&#241;ores de <strong>Khamet</strong> se enfrentan a una alianza impensable: &#225;ngeles y demonios, enemigos eternos, unidos por primera vez ante una amenaza com&#250;n.</p>
-        <p>Las <em>Abominaciones</em>. Ya no quieren sobrevivir. <em>Quieren su lugar en el mapa. Y est&#225;n dispuestos a tomarlo.</em></p>
+        <p>Perseguidos por el implacable <strong>General Reiner</strong> y su primer oficial <strong>Rollo</strong>, los tres se adentran en Panasea sin mapas ni aliados, arrastrados hacia el centro de una guerra que lleva milenios gest&#225;ndose en silencio. Porque en estas tierras no solo chocan ej&#233;rcitos: chocan dioses. Los guerreros de <strong>Valhalla</strong>, las deidades del <strong>Olimpo</strong> y los se&#241;ores de <strong>Khamet</strong> se enfrentan a una alianza impensable: &#225;ngeles y demonios, enemigos eternos, unidos por primera vez ante una amenaza com&#250;n.</p>
+        <p>Las <em>Abominaciones</em>. Hijos del mestizaje entre razas que los cielos y los infiernos condenan por igual. Seres de poder inmenso que durante siglos aprendieron a esconderse, a callar, a sobrevivir en las sombras. Pero el silencio tiene un l&#237;mite. Y ese l&#237;mite ya fue cruzado.</p>
+        <p>Ya no quieren sobrevivir. <em>Quieren su lugar en el mapa. Y est&#225;n dispuestos a tomarlo.</em></p>
         <div class="faction-tags">
           <span class="faction-tag">Valhalla</span><span class="faction-tag">Ciudadela</span>
           <span class="faction-tag">Valle de los Condenados</span><span class="faction-tag">Olimpo</span>
@@ -489,40 +897,75 @@
         </div>
       </div>
       <div class="synopsis-quote reveal">
-        <blockquote>"El Muro no fue construido para mantener algo fuera. Fue construido para que nadie dentro recordara lo que alguna vez estuvo al otro lado."
+        <blockquote>
+          "El Muro no fue construido para mantener algo fuera. Fue construido para que nadie dentro recordara lo que alguna vez estuvo al otro lado."
           <cite>&#8212; Fragmento del Libro Sellado de Gaia</cite>
         </blockquote>
       </div>
     </div>
   </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>El Legado de Gaia &middot; El Continente tras el Muro</p></div>
 </div>
 
+<!-- ═══════════ PERSONAJES ═══════════ -->
 <div id="page-personajes" class="page">
   <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#10022; Almas del Continente &#10022;</p><h2 class="page-title">Personajes</h2><div class="page-rule"></div></div>
+    <div class="page-header">
+      <p class="page-label">&#10022; El Legado de Gaia &#8212; Personajes &#10022;</p>
+      <h2 class="page-title">Personajes</h2>
+      <div class="page-rule"></div>
+    </div>
     <div class="chars-layout">
+      <!-- FILA 1 -->
       <div class="char-row char-row-3">
-        <div class="char-card reveal"><div class="char-img-wrap"><img src="Rio.png" alt="Rio" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">R&#237;o</span></div></div><div class="char-body">18 a&#241;os, marcado por ausencias que nadie supo explicarle. Cuando Reiner y las Sombras lo obligan a cruzar el Muro, R&#237;o no huye hacia el peligro&#8230; huye hacia las &#250;nicas respuestas que le quedan.</div></div>
-        <div class="char-card reveal"><div class="char-img-wrap"><img src="Amaya.png" alt="Amaya" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Amaya</span></div></div><div class="char-body">Fan&#225;tica del anime y los c&#243;mics por fuera, guerrera brutal e instintiva por dentro. La mano derecha de R&#237;o no pide permiso para proteger a los suyos.</div></div>
-        <div class="char-card reveal"><div class="char-img-wrap"><img src="Rayen.png" alt="Rayen" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rayen</span></div></div><div class="char-body">Dulce, tranquila, aparentemente inofensiva. Rayen lleva un secreto tan pesado que ha aprendido a sonre&#237;r para no derrumbarse.</div></div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Rio.png" alt="Rio" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">R&#237;o</span></div></div>
+          <div class="char-body">18 a&#241;os, marcado por ausencias que nadie supo explicarle. Un padre que desapareci&#243; sin dejar rastro y una madre que jam&#225;s conoci&#243;. Cuando Reiner y las Sombras lo obligan a cruzar el Muro, R&#237;o no huye hacia el peligro&#8230; huye hacia las &#250;nicas respuestas que le quedan.</div>
+        </div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Amaya.png" alt="Amaya" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Amaya</span></div></div>
+          <div class="char-body">Criada junto a R&#237;o como si fueran hermanos de sangre, Amaya es la calma antes de la tormenta. Fan&#225;tica del anime y los c&#243;mics por fuera, guerrera brutal e instintiva por dentro. La mano derecha de R&#237;o no pide permiso para proteger a los suyos.</div>
+        </div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Rayen.png" alt="Rayen" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rayen</span></div></div>
+          <div class="char-body">Dulce, tranquila, aparentemente inofensiva. Rayen lleva consigo un secreto tan pesado que ha aprendido a sonre&#237;r para no derrumbarse. Este viaje no le dar&#225; otra opci&#243;n: tarde o temprano, la verdad de qui&#233;n es saldr&#225; a la luz.</div>
+        </div>
       </div>
+      <!-- FILA 2 -->
       <div class="char-row char-row-2">
-        <div class="char-card reveal"><div class="char-img-wrap"><img src="Reiner.png" alt="Reiner" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Reiner</span></div></div><div class="char-body">General del ej&#233;rcito controlado por Las Siete Sombras. Cuando Stan desapareci&#243; llev&#225;ndose parte de esa verdad, Reiner decidi&#243; usarla para sus propios fines.</div></div>
-        <div class="char-card reveal"><div class="char-img-wrap"><img src="Rollo.png" alt="Rollo" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rollo</span></div></div><div class="char-body">Primer oficial de Reiner. Imbatible en combate, de mente afilada. Hay momentos en que la misi&#243;n y la conciencia no se&#241;alan en la misma direcci&#243;n.</div></div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Reiner.png" alt="Reiner" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Reiner</span></div></div>
+          <div class="char-body">General del ej&#233;rcito controlado por Las Siete Sombras, guardianes del secreto m&#225;s grande de la historia: la existencia de Panasea. Cuando Stan desapareci&#243; llev&#225;ndose parte de esa verdad, Reiner no solo recibi&#243; &#243;rdenes de recuperarla. Tambi&#233;n decidi&#243; usarla para sus propios fines.</div>
+        </div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Rollo.png" alt="Rollo" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rollo</span></div></div>
+          <div class="char-body">Primer oficial de Reiner. Imbatible en combate, de mente afilada y lealtad inquebrantable&#8230; o casi. Rollo sigue &#243;rdenes porque cree en la misi&#243;n, pero hay momentos en que la misi&#243;n y la conciencia no se&#241;alan en la misma direcci&#243;n. Y esa grieta, tarde o temprano, alguien la va a explotar.</div>
+        </div>
       </div>
+      <!-- FILA 3 -->
       <div class="char-row char-row-2">
-        <div class="char-card reveal"><div class="char-img-wrap"><img src="Draven.jpg" alt="Draven" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Draven</span></div></div><div class="char-body">Hijo de un &#225;ngel y un demonio, Draven es exactamente lo que ambos mundos juraron que nunca deb&#237;a existir. Una Abominaci&#243;n.</div></div>
-        <div class="char-card reveal"><div class="char-img-wrap"><img src="Still.png" alt="Still" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Still</span></div></div><div class="char-body">La leyenda. El ser m&#225;s poderoso de la creaci&#243;n, hijo de una diosa vikinga y un &#225;ngel de alto rango. Lo que &#233;l decida determinar&#225; el destino de todo lo que respira en Panasea.</div></div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Draven.jpg" alt="Draven" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Draven</span></div></div>
+          <div class="char-body">Hijo de un &#225;ngel y un demonio, Draven es exactamente lo que ambos mundos juraron que nunca deb&#237;a existir. Una Abominaci&#243;n. Pero en Panasea, ser&#225; &#233;l quien gu&#237;e a los protagonistas hacia el coraz&#243;n de la guerra santa, porque conoce este continente mejor que nadie&#8230; y sus secretos podr&#237;an costarte la vida.</div>
+        </div>
+        <div class="char-card reveal">
+          <div class="char-img-wrap"><img src="Still.png" alt="Still" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Still</span></div></div>
+          <div class="char-body">La leyenda. El ser m&#225;s poderoso de la creaci&#243;n, hijo de una diosa vikinga y un &#225;ngel de alto rango. Por su mera existencia se dict&#243; la Ley contra las Abominaciones. Still no busca poder, no necesita buscarlo. Lo que &#233;l decida en esta guerra determinar&#225; el destino de todo lo que respira en Panasea.</div>
+        </div>
       </div>
     </div>
   </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>El Legado de Gaia &middot; El Continente tras el Muro</p></div>
 </div>
 
+<!-- ═══════════ GALERÍA ═══════════ -->
 <div id="page-galeria" class="page">
   <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#10022; Las Facciones &#10022;</p><h2 class="page-title">Galer&#237;a</h2><div class="page-rule"></div></div>
+    <div class="page-header">
+      <p class="page-label">&#10022; El Legado de Gaia &#8212; Facciones &#10022;</p>
+      <h2 class="page-title">Galer&#237;a</h2>
+      <div class="page-rule"></div>
+    </div>
     <div class="gallery-tabs">
       <button class="gtab active" onclick="showGallery('valhalla',this)">Valhalla</button>
       <button class="gtab" onclick="showGallery('ciudadela',this)">Ciudadela</button>
@@ -564,57 +1007,67 @@
       <div class="gal-item" onclick="openLb('Castillostill2.png')"><img src="Castillostill2.png" alt="Castillo de Still"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
     </div>
   </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>El Legado de Gaia &middot; El Continente tras el Muro</p></div>
 </div>
 
+<!-- ═══════════ ENCUESTAS ═══════════ -->
 <div id="page-encuestas" class="page">
   <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#10022; Tu Voz &#10022;</p><h2 class="page-title">Encuestas</h2><div class="page-rule"></div></div>
+    <div class="page-header">
+      <p class="page-label">&#10022; Tu Voz &#10022;</p>
+      <h2 class="page-title">Encuestas</h2>
+      <div class="page-rule"></div>
+    </div>
     <div class="polls-grid">
       <div class="poll-card reveal">
         <p class="poll-question">&#191;A cu&#225;l facci&#243;n pertenecer&#237;as en el Continente de Gaia?</p>
         <div class="poll-options" id="pollopt1">
-          <div class="poll-option"><div class="poll-bar"></div><label><span>&#9876; Valhalla</span><span class="poll-pct" id="p1o0">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>&#127963; Olimpo</span><span class="poll-pct" id="p1o1">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>&#9760; Inframundo</span><span class="poll-pct" id="p1o2">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>&#127984; Ciudadela</span><span class="poll-pct" id="p1o3">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>&#128293; Khamet</span><span class="poll-pct" id="p1o4">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>&#127763; Valle de los Condenados</span><span class="poll-pct" id="p1o5">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>&#9994; Resistencia</span><span class="poll-pct" id="p1o6">0</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>&#9876; Valhalla</span><span class="poll-pct" id="p1o0">0</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:20%"></div><label><span>&#127963; Olimpo</span><span class="poll-pct">20%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:15%"></div><label><span>&#9760; Inframundo</span><span class="poll-pct">15%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:12%"></div><label><span>&#127984; Ciudadela</span><span class="poll-pct">12%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:10%"></div><label><span>&#128293; Khamet</span><span class="poll-pct">10%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:5%"></div><label><span>&#127763; Valle de los Condenados</span><span class="poll-pct">5%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:4%"></div><label><span>&#9994; Resistencia</span><span class="poll-pct">4%</span></label></div>
         </div>
         <button id="pollbtn1" class="poll-vote-btn" onclick="handleVote(this,1)">Votar</button>
       </div>
       <div class="poll-card reveal">
-        <p class="poll-question">&#191;Cu&#225;l es tu personaje favorito?</p>
+        <p class="poll-question">&#191;Cu&#225;l es tu personaje favorito hasta ahora?</p>
         <div class="poll-options" id="pollopt2">
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Amaya</span><span class="poll-pct" id="p2o0">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Draven</span><span class="poll-pct" id="p2o1">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Rayen</span><span class="poll-pct" id="p2o2">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Reiner</span><span class="poll-pct" id="p2o3">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>R&#237;o</span><span class="poll-pct" id="p2o4">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Rollo</span><span class="poll-pct" id="p2o5">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Still</span><span class="poll-pct" id="p2o6">0</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Amaya</span><span class="poll-pct">28%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:24%"></div><label><span>Draven</span><span class="poll-pct">24%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:18%"></div><label><span>Rayen</span><span class="poll-pct">18%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:14%"></div><label><span>Reiner</span><span class="poll-pct">14%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:10%"></div><label><span>R&#237;o</span><span class="poll-pct">10%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:4%"></div><label><span>Rollo</span><span class="poll-pct">4%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:2%"></div><label><span>Still</span><span class="poll-pct">2%</span></label></div>
         </div>
         <button id="pollbtn2" class="poll-vote-btn" onclick="handleVote(this,2)">Votar</button>
       </div>
       <div class="poll-card reveal">
         <p class="poll-question">&#191;Qu&#233; esperas m&#225;s de la historia?</p>
         <div class="poll-options" id="pollopt3">
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Guerras entre facciones</span><span class="poll-pct" id="p3o0">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Revelaciones del Muro</span><span class="poll-pct" id="p3o1">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Romance y traiciones</span><span class="poll-pct" id="p3o2">0</span></label></div>
-          <div class="poll-option"><div class="poll-bar"></div><label><span>Magia y misterios</span><span class="poll-pct" id="p3o3">0</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Guerras entre facciones</span><span class="poll-pct">38%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:30%"></div><label><span>Revelaciones del Muro</span><span class="poll-pct">30%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:20%"></div><label><span>Romance y traiciones</span><span class="poll-pct">20%</span></label></div>
+          <div class="poll-option"><div class="poll-bar" style="width:12%"></div><label><span>Magia y misterios</span><span class="poll-pct">12%</span></label></div>
         </div>
         <button id="pollbtn3" class="poll-vote-btn" onclick="handleVote(this,3)">Votar</button>
       </div>
     </div>
   </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>El Legado de Gaia &middot; El Continente tras el Muro</p></div>
 </div>
 
+<!-- ═══════════ CAPÍTULOS ═══════════ -->
 <div id="page-capitulos" class="page">
   <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#10022; La Historia &#10022;</p><h2 class="page-title">Cap&#237;tulos</h2><div class="page-rule"></div></div>
+    <div class="page-header">
+      <p class="page-label">&#10022; El Legado de Gaia &#10022;</p>
+      <h2 class="page-title">Cap&#237;tulos</h2>
+      <div class="page-rule"></div>
+    </div>
     <div class="chapters-list">
       <div class="chapter-item reveal"><div class="chap-num">I</div><div class="chap-info"><p class="chap-title">Pr&#243;logo &#8212; El D&#237;a que el Muro Habl&#243;</p><p class="chap-excerpt">Antes del comienzo, hubo una advertencia. Nadie la escuch&#243;.</p></div><span class="chap-status coming">Pr&#243;ximamente</span></div>
       <div class="chapter-item reveal"><div class="chap-num">II</div><div class="chap-info"><p class="chap-title">Cap&#237;tulo 1 &#8212; Cenizas en Valhalla</p><p class="chap-excerpt">El fuego que nadie encendi&#243; arde en el coraz&#243;n del Norte.</p></div><span class="chap-status coming">Pr&#243;ximamente</span></div>
@@ -622,32 +1075,50 @@
       <div class="chapter-placeholder reveal"><p>Los cap&#237;tulos ser&#225;n publicados aqu&#237; a medida que avance la historia.</p><p class="add-chapter-note">&#10022; Cada nueva entrega ser&#225; anunciada en redes sociales &#10022;</p></div>
     </div>
   </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>El Legado de Gaia &middot; El Continente tras el Muro</p></div>
 </div>
 
+<!-- ═══════════ MAPA ═══════════ -->
 <div id="page-mapa" class="page">
   <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#10022; El Continente &#10022;</p><h2 class="page-title">Mapas</h2><div class="page-rule"></div></div>
+    <div class="page-header">
+      <p class="page-label">&#10022; El Continente &#10022;</p>
+      <h2 class="page-title">Mapa de Gaia</h2>
+      <div class="page-rule"></div>
+    </div>
+    <!-- Pestañas -->
     <div style="display:flex;gap:.5rem;justify-content:center;margin-bottom:1.5rem;flex-wrap:wrap;">
-      <button id="mapTab1" onclick="switchMap('mapa1')" style="padding:.45rem 1.4rem;border:1px solid var(--gold);background:rgba(201,168,76,.12);color:var(--gold);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;">&#127757; Mapa del Mundo</button>
-      <button id="mapTab2" onclick="switchMap('panasea')" style="padding:.45rem 1.4rem;border:1px solid rgba(201,168,76,.3);background:transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;transition:all .2s;">&#128506; Mapa de Panasea</button>
+      <button id="mapTab1" onclick="switchMap('mapa1')" style="padding:.45rem 1.4rem;border:1px solid var(--gold);background:rgba(201,168,76,.12);color:var(--gold);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;">&#127757; Mapa del Mundo</button>
+      <button id="mapTab2" onclick="switchMap('panasea')" style="padding:.45rem 1.4rem;border:1px solid rgba(201,168,76,.3);background:transparent;color:var(--text-dim);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;">&#128506; Mapa de Panasea</button>
     </div>
-    <div id="map-mapa1" class="map-container" style="min-height:500px;display:flex;position:relative;">
-      <img src="mapa1.png" alt="Mapa del Mundo" onclick="openLb('mapa1.png')" style="width:100%;height:auto;max-height:620px;object-fit:contain;cursor:zoom-in;display:block;" onerror="this.outerHTML='<div style=\'padding:3rem;text-align:center;color:#7a7470;font-style:italic;\'><p>Sube <strong style=\'color:#c9a84c;\'>mapa1.png</strong> al repositorio</p></div>'"/>
-      <div style="position:absolute;bottom:.7rem;right:1rem;font-family:Cinzel,serif;font-size:.6rem;color:rgba(201,168,76,.4);letter-spacing:.1em;pointer-events:none;">CLIC PARA AMPLIAR</div>
+    <div id="map-mapa1" class="map-container" style="min-height:500px;display:flex;align-items:center;justify-content:center;position:relative;">
+      <img src="mapa1.png" alt="Mapa del Mundo" onclick="openLb('mapa1.png')"
+           style="width:100%;height:auto;max-height:620px;object-fit:contain;cursor:zoom-in;display:block;"
+           onerror="this.outerHTML='<div style='padding:3rem;text-align:center;color:#7a7470;'>Sube <strong style='color:#c9a84c;'>mapa1.png</strong> al repositorio</div>'"/>
+      <div style="position:absolute;bottom:.7rem;right:1rem;font-family:Cinzel,serif;font-size:.6rem;color:rgba(201,168,76,.4);pointer-events:none;">CLIC PARA AMPLIAR</div>
     </div>
-    <div id="map-panasea" class="map-container" style="min-height:500px;display:none;position:relative;">
-      <img src="Mapa Panasea.png" alt="Mapa de Panasea" onclick="openLb('Mapa Panasea.png')" style="width:100%;height:auto;max-height:620px;object-fit:contain;cursor:zoom-in;display:block;" onerror="this.outerHTML='<div style=\'padding:3rem;text-align:center;color:#7a7470;font-style:italic;\'><p>Sube <strong style=\'color:#c9a84c;\'>Mapa Panasea.png</strong> al repositorio</p></div>'"/>
-      <div style="position:absolute;bottom:.7rem;right:1rem;font-family:Cinzel,serif;font-size:.6rem;color:rgba(201,168,76,.4);letter-spacing:.1em;pointer-events:none;">CLIC PARA AMPLIAR</div>
+    <div id="map-panasea" class="map-container" style="min-height:500px;display:none;align-items:center;justify-content:center;position:relative;">
+      <img src="Mapa Panasea.png" alt="Mapa de Panasea" onclick="openLb('Mapa Panasea.png')"
+           style="width:100%;height:auto;max-height:620px;object-fit:contain;cursor:zoom-in;display:block;"
+           onerror="this.outerHTML='<div style='padding:3rem;text-align:center;color:#7a7470;'>Sube <strong style='color:#c9a84c;'>Mapa Panasea.png</strong> al repositorio</div>'"/>
+      <div style="position:absolute;bottom:.7rem;right:1rem;font-family:Cinzel,serif;font-size:.6rem;color:rgba(201,168,76,.4);pointer-events:none;">CLIC PARA AMPLIAR</div>
     </div>
-    <div style="text-align:center;margin-top:1rem;"><p style="color:var(--text-dim);font-size:.8rem;font-style:italic;">Haz clic en el mapa para verlo en pantalla completa.</p></div>
+    <div class="map-controls">
+      <button class="map-btn" onclick="document.getElementById('map-svg').style.transform='scale(1)'">&#8862; Restablecer</button>
+      <p style="color:var(--text-dim);font-size:.8rem;font-style:italic;align-self:center">Pasa el cursor sobre cada regi&#243;n para ver su nombre.</p>
+    </div>
   </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>El Legado de Gaia &middot; El Continente tras el Muro</p></div>
 </div>
 
+<!-- ═══════════ COMENTARIOS ═══════════ -->
 <div id="page-comentarios" class="page">
   <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#10022; Comunidad &#10022;</p><h2 class="page-title">Comentarios</h2><div class="page-rule"></div></div>
+    <div class="page-header">
+      <p class="page-label">&#10022; Comunidad &#10022;</p>
+      <h2 class="page-title">Comentarios</h2>
+      <div class="page-rule"></div>
+    </div>
     <div class="comments-wrap">
       <div class="login-required-box" id="comment-login-required">
         <p>Debes iniciar sesi&#243;n para dejar un comentario.</p>
@@ -661,535 +1132,218 @@
           <div class="form-field"><label>Valoraci&#243;n</label><select id="cmt-rating"><option>&#11088;&#11088;&#11088;&#11088;&#11088; &#8211; &#201;pico</option><option>&#11088;&#11088;&#11088;&#11088; &#8211; Muy bueno</option><option>&#11088;&#11088;&#11088; &#8211; Bueno</option><option>&#11088;&#11088; &#8211; Regular</option></select></div>
           <div class="form-field full"><label>Comentario</label><textarea id="cmt-text" placeholder="Comparte tu opini&#243;n, teor&#237;as, predicciones..."></textarea></div>
         </div>
-        <p class="form-note">&#128274; Tu comentario ser&#225; revisado antes de publicarse.</p>
+        <p class="form-note">&#128274; Tu comentario ser&#225; revisado antes de publicarse. Contacto del escritor: <strong><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="cdbeb9aca3e3a8e3be8daaa0aca4a1e3aea2a0">[email&#160;protected]</a></strong></p>
         <button class="btn-submit" onclick="submitComment()">Enviar Comentario</button>
         <div class="success-msg" id="success-msg">&#10022; &#161;Gracias por tu comentario! Ser&#225; revisado y publicado pronto. &#10022;</div>
       </div>
-      <div class="comment-list" id="comments-dynamic">
-        <p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">Cargando comentarios...</p>
+      <div class="comment-list">
+        <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Valeria M.</span><span class="comment-date">Febrero 2025</span></div><p class="comment-text">El worldbuilding de Gaia es incre&#237;ble. La forma en que cada facci&#243;n tiene su propia cultura, su propio idioma casi... me transport&#233; completamente. &#161;Necesito m&#225;s cap&#237;tulos ya!</p></div>
+        <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Rodrigo K.</span><span class="comment-date">Enero 2025</span></div><p class="comment-text">Draven tiene que ser el personaje m&#225;s complejo que he le&#237;do en mucho tiempo en fantas&#237;a en espa&#241;ol. No sabes si amarlo u odiarlo, y eso es exactamente lo que hace un gran personaje.</p></div>
+        <div class="comment-card reveal"><div class="comment-header"><span class="comment-author">Sof&#237;a del Valle</span><span class="comment-date">Diciembre 2024</span></div><p class="comment-text">El Muro, el nombre del libro, los nombres de los personajes... todo tiene un simbolismo tan bien pensado. Se nota que la autora/autor construy&#243; este mundo con mucho amor.</p></div>
       </div>
     </div>
   </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
+  <div class="page-footer"><p class="ft">E.S. Stan</p><p>El Legado de Gaia &middot; El Continente tras el Muro</p></div>
 </div>
 
+<!-- ═══════════ REDES ═══════════ -->
 <div id="page-redes" class="page">
   <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#10022; S&#237;guenos &#10022;</p><h2 class="page-title">Redes Sociales</h2><div class="page-rule"></div></div>
+    <div class="page-header">
+      <p class="page-label">&#10022; S&#237;guenos &#10022;</p>
+      <h2 class="page-title">Redes Sociales</h2>
+      <div class="page-rule"></div>
+    </div>
     <p class="social-intro">&#218;nete a la comunidad de Gaia y no te pierdas ninguna novedad del continente.</p>
     <div class="social-grid">
-      <a href="https://www.instagram.com/escritor_stan.e.s_oficial?igsh=MTRvbjQzeWM3M3p4ag%3D%3D&utm_source=qr" class="social-card" target="_blank"><div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div><span class="social-name">Instagram</span><span class="social-handle">@escritor_stan.e.s_oficial</span></a>
-      <a href="https://x.com/escritorstanes?s=21" class="social-card" target="_blank"><div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></div><span class="social-name">Twitter / X</span><span class="social-handle">@escritorstanes</span></a>
-      <a href="https://www.tiktok.com/@stan.e..silva?_r=1&_t=ZS-94PWgUWUYBJ" class="social-card" target="_blank"><div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg></div><span class="social-name">TikTok</span><span class="social-handle">@stan.e..silva</span></a>
-      <a href="#" class="social-card" target="_blank"><div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.014 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.014 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></div><span class="social-name">Wattpad</span><span class="social-handle">El Legado de Gaia</span></a>
+      <!-- REDES -->
+      <a href="https://www.instagram.com/escritor_stan.e.s_oficial?igsh=MTRvbjQzeWM3M3p4ag%3D%3D&utm_source=qr" class="social-card" target="_blank">
+        <div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></div>
+        <span class="social-name">Instagram</span><span class="social-handle">@escritor_stan.e.s_oficial</span>
+      </a>
+      <a href="https://x.com/escritorstanes?s=21" class="social-card" target="_blank">
+        <div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg></div>
+        <span class="social-name">Twitter / X</span><span class="social-handle">@escritorstanes</span>
+      </a>
+      <a href="https://www.tiktok.com/@stan.e..silva?_r=1&_t=ZS-94PWgUWUYBJ" class="social-card" target="_blank">
+        <div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.27 8.27 0 004.84 1.55V6.79a4.85 4.85 0 01-1.07-.1z"/></svg></div>
+        <span class="social-name">TikTok</span><span class="social-handle">@stan.e..silva</span>
+      </a>
+      <a href="#" class="social-card" target="_blank">
+        <div class="social-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C8.74 0 8.333.015 7.053.072 5.775.132 4.905.333 4.14.63c-.789.306-1.459.717-2.126 1.384S.935 3.35.63 4.14C.333 4.905.131 5.775.072 7.053.012 8.333 0 8.74 0 12c0 3.259.014 3.668.072 4.948.06 1.277.261 2.148.558 2.913.306.788.717 1.459 1.384 2.126.667.666 1.336 1.079 2.126 1.384.766.296 1.636.499 2.913.558C8.333 23.988 8.74 24 12 24c3.259 0 3.668-.014 4.948-.072 1.277-.06 2.148-.262 2.913-.558.788-.306 1.459-.718 2.126-1.384.666-.667 1.079-1.335 1.384-2.126.296-.765.499-1.636.558-2.913.06-1.28.072-1.689.072-4.948 0-3.259-.014-3.667-.072-4.947-.06-1.277-.262-2.149-.558-2.913-.306-.789-.718-1.459-1.384-2.126C21.319 1.347 20.651.935 19.86.63c-.765-.297-1.636-.499-2.913-.558C15.667.012 15.26 0 12 0zm0 2.16c3.203 0 3.585.016 4.85.071 1.17.055 1.805.249 2.227.415.562.217.96.477 1.382.896.419.42.679.819.896 1.381.164.422.36 1.057.413 2.227.057 1.266.07 1.646.07 4.85s-.015 3.585-.074 4.85c-.061 1.17-.256 1.805-.421 2.227-.224.562-.479.96-.899 1.382-.419.419-.824.679-1.38.896-.42.164-1.065.36-2.235.413-1.274.057-1.649.07-4.859.07-3.211 0-3.586-.015-4.859-.074-1.171-.061-1.816-.256-2.236-.421-.569-.224-.96-.479-1.379-.899-.421-.419-.69-.824-.9-1.38-.165-.42-.359-1.065-.42-2.235-.045-1.26-.061-1.649-.061-4.844 0-3.196.016-3.586.061-4.861.061-1.17.255-1.814.42-2.234.21-.57.479-.96.9-1.381.419-.419.81-.689 1.379-.898.42-.166 1.051-.361 2.221-.421 1.275-.045 1.65-.06 4.859-.06l.045.03zm0 3.678c-3.405 0-6.162 2.76-6.162 6.162 0 3.405 2.76 6.162 6.162 6.162 3.405 0 6.162-2.76 6.162-6.162 0-3.405-2.76-6.162-6.162-6.162zM12 16c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4zm7.846-10.405c0 .795-.646 1.44-1.44 1.44-.795 0-1.44-.646-1.44-1.44 0-.794.646-1.439 1.44-1.439.793-.001 1.44.645 1.44 1.439z"/></svg></div>
+        <span class="social-name">Wattpad</span><span class="social-handle">El Legado de Gaia</span>
+      </a>
+      <!-- DIVIDER COMPRA -->
       <div class="social-divider"></div>
       <div class="social-divider-label">&#10022; &nbsp; Adquiere el libro &nbsp; &#10022;</div>
       <div class="social-divider"></div>
-      <a href="https://www.amazon.com/El-Legado-Gaia-Viaje-Spanish-ebook/dp/B0FWG33CBP" class="social-card purchase" target="_blank"><div class="social-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a18.5 18.5 0 01-4.72.612c-3.764 0-7.15-.98-10.156-2.94-.27-.17-.34-.38-.2-.59l-.41.65z"/></svg></div><span class="social-name">Amazon</span><span class="social-handle">Comprar el libro</span></a>
-      <a href="https://books.apple.com/us/book/el-legado-de-gaia/id6753955177" class="social-card purchase" target="_blank"><div class="social-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg></div><span class="social-name">Apple Books</span><span class="social-handle">Comprar el libro</span></a>
-      <a href="https://www.goodreads.com/book/show/242829685-el-legado-de-gaia" class="social-card purchase" target="_blank"><div class="social-icon"><svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M11.43 23.995c-3.608-.208-6.274-1.596-7.993-4.15C2.38 18.215 2 16.783 2 14.896c0-2.03.418-3.61 1.254-4.743C4.516 8.453 6.104 7.5 8.051 7.5c1.415 0 2.56.437 3.438 1.312.406.406.718.875.938 1.407V7.5h2.203v9.234c0 .906.016 1.563.047 1.969.03.406.095.797.188 1.172-.188.016-.376.023-.563.023-.812 0-1.407-.25-1.781-.75a3.95 3.95 0 01-.438-.984c-.5.625-1.078 1.094-1.734 1.406-.657.313-1.4.47-2.235.47-1.875 0-3.328-.688-4.36-2.063C2.718 16.607 2.2 14.942 2.2 12.94c0-2.094.547-3.797 1.64-5.11C4.938 6.52 6.375 5.86 8.157 5.86c1.25 0 2.374.36 3.28 1.078.407.329.766.72 1.079 1.172V0h2.203z"/></svg></div><span class="social-name">Goodreads</span><span class="social-handle">&#11088; 5.0 &middot; Rese&#241;ar el libro</span></a>
+      <!-- AMAZON -->
+      <a href="#" class="social-card purchase" target="_blank">
+        <div class="social-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a18.5 18.5 0 01-4.72.612c-3.764 0-7.15-.98-10.156-2.94-.27-.17-.34-.38-.2-.59l-.41.65zm20.784-2.655c-.17-.23-.496-.28-.976-.17-1.966.463-3.913.695-5.845.695-2.04 0-3.97-.28-5.794-.843-1.16-.36-2.264-.844-3.317-1.45-.274-.16-.48-.19-.623-.1-.14.09-.175.258-.11.498.112.398.35.763.72 1.097 1.7 1.53 3.785 2.665 6.25 3.4a17.5 17.5 0 004.793.663c1.5 0 2.98-.186 4.437-.558 1.456-.373 2.68-.898 3.673-1.577.3-.204.47-.452.513-.748.04-.295-.04-.56-.24-.8l-.48.893zM12.1 9.27c0-1.036.37-1.89 1.107-2.563.738-.673 1.675-1.01 2.812-1.01.5 0 .964.093 1.39.28.425.186.774.444 1.048.773.275.33.413.694.413 1.09 0 .404-.106.762-.317 1.075a4.026 4.026 0 01-.85.877c-.345.25-.864.573-1.557.968a48.5 48.5 0 01-1.3.668c-.198.093-.388.13-.57.11l-.24-.032c-.103-.024-.18-.08-.232-.17-.05-.09-.065-.194-.05-.315.016-.12.06-.228.13-.32.07-.093.17-.176.295-.25l.556-.32c.56-.32 1.005-.614 1.334-.88.33-.267.58-.536.754-.808.174-.272.26-.556.26-.85 0-.414-.152-.762-.457-1.044-.305-.283-.677-.424-1.117-.424-.553 0-.99.17-1.31.51-.32.34-.48.786-.48 1.337v.26c0 .14-.043.254-.13.34-.087.087-.2.13-.34.13-.13 0-.24-.043-.327-.13-.087-.086-.13-.2-.13-.34v-.26z"/></svg>
+        </div>
+        <span class="social-name">Amazon</span><span class="social-handle">Comprar el libro</span>
+      </a>
+      <!-- APPLE BOOKS -->
+      <a href="#" class="social-card purchase" target="_blank">
+        <div class="social-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+        </div>
+        <span class="social-name">Apple Books</span><span class="social-handle">Comprar el libro</span>
+      </a>
     </div>
   </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p style="color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.18em;margin:.3rem 0">El Continente tras el Muro</p><p>Todos los derechos reservados &#10022;</p></div>
+  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p style="color:var(--gold);font-family:'Cinzel',serif;font-size:.75rem;letter-spacing:.18em;margin:.3rem 0">El Continente tras el Muro</p><p>Todos los derechos reservados &middot; Obra original de ficci&#243;n &nbsp; &#10022; &middot; &#10022; &middot; &#10022;</p></div>
 </div>
 
-<div id="page-recomendados" class="page">
-  <div class="page-inner">
-    <div class="page-header">
-      <p class="page-label">&#10022; Comunidad de Escritores &#10022;</p>
-      <h2 class="page-title">Libros Recomendados</h2>
-      <div class="page-rule"></div>
-      <p style="color:var(--text-dim);font-size:.95rem;margin-top:1.2rem;font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;">Escritores amigos que vale la pena conocer.</p>
-    </div>
-    <div class="rec-grid" id="rec-grid">
-
-        <div class="rec-card reveal">
-
-  <!-- PORTADA -->
-  <div class="rec-cover-wrap" onclick="openLb('Lament1.jpeg')">
-    <img src="Lament1.jpeg" alt="Lament of a Demon – El Legado"
-         onerror="this.parentElement.style.background='var(--dark3)'"/>
-    <div class="rec-cover-shine"></div>
-  </div>
-
-  <div class="rec-body">
-
-    <h3 class="rec-title">Lament of a Demon – El Legado</h3>
-    <p class="rec-author">Por W.A. Erazo</p>
-
-    <p class="rec-synopsis">En un mundo fracturado por guerras antiguas entre fuerzas divinas, demoníacas y humanas, el dolor puede corromper incluso a los seres más puros. A través de tragedias, traiciones y vínculos prohibidos, cada personaje enfrenta decisiones que definen el destino de mundos enteros. Las líneas entre héroe y villano se desvanecen, revelando la complejidad de la condición humana en su forma más cruda: el poder de la redención, el costo del orgullo, el peso del sacrificio… y la posibilidad de transformación a través del sufrimiento.</p>
-
-    <!-- LINKS DE COMPRA CON ICONOS -->
-    <div class="rec-links">
-      <a href="https://www.amazon.com/dp/B0GKHPVWNP?ref=cm_sw_r_ffobk_cso_cp_mwn_dp_Z4CY9KAH1SFCV3J7KMMC&bestFormat=true"
-         class="rec-link amazon" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a18.5 18.5 0 01-4.72.612c-3.764 0-7.15-.98-10.156-2.94-.27-.17-.34-.38-.2-.59z"/>
-          <path d="M21.186 15.785c-.388-.299-.811-.186-1.254.04-.882.455-1.814.75-2.794.882-.522.07-.96-.06-1.315-.388-.354-.327-.496-.768-.424-1.32.186-1.406 1.274-2.38 3.263-2.917.354-.098.706-.163 1.055-.198V11.6c0-.624-.133-1.07-.4-1.34-.266-.27-.717-.405-1.35-.405-.91 0-1.713.478-2.41 1.433-.07.097-.163.14-.276.13-.114-.01-.196-.063-.247-.16l-.8-1.59c-.05-.097-.043-.198.02-.302.91-1.202 2.243-1.803 4-1.803 1.164 0 2.072.32 2.723.96.65.64.977 1.565.977 2.774v4.56c0 .408.17.612.512.612.17 0 .328-.04.477-.12.097-.053.185-.04.264.04l.566.97c.08.13.06.262-.06.396-.584.53-1.3.796-2.147.796-.664 0-1.19-.2-1.578-.6z"/>
-        </svg>
-        Amazon
-      </a>
-      <a href="https://articulo.mercadolibre.com.co/MCO-3353882128-lament-of-a-demon-el-legado-libro-1--_JM" class="rec-link apple" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
-        </svg>
-        Apple Books
-      </a>
-      <a href="https://www.goodreads.com/user/show/198117212-w-a-erazo" class="rec-link goodreads" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M11.43 23.995c-3.608-.208-6.274-1.596-7.993-4.15C2.38 18.215 2 16.783 2 14.896c0-2.03.418-3.61 1.254-4.743C4.516 8.453 6.104 7.5 8.051 7.5c1.415 0 2.56.437 3.438 1.312.406.406.718.875.938 1.407V7.5h2.203v9.234c0 .906.016 1.563.047 1.969.03.406.095.797.188 1.172-.188.016-.376.023-.563.023-.812 0-1.407-.25-1.781-.75a3.95 3.95 0 01-.438-.984c-.5.625-1.078 1.094-1.734 1.406-.657.313-1.4.47-2.235.47-1.875 0-3.328-.688-4.36-2.063C2.718 16.607 2.2 14.942 2.2 12.94c0-2.094.547-3.797 1.64-5.11C4.938 6.52 6.375 5.86 8.157 5.86c1.25 0 2.374.36 3.28 1.078.407.329.766.72 1.079 1.172V0h2.203z"/>
-        </svg>
-        Goodreads
-      </a>
-      <a href="https://www.wattpad.com/story/401106624-lament-of-a-demon?utm_source=android&utm_medium=link&utm_content=story_info&wp_page=story_details_button&wp_uname=WillErazo" class="rec-link wattpad" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor">
-          <path d="M4 2h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2zm8 3c-3.86 0-7 3.14-7 7 0 2.96 1.84 5.5 4.46 6.56L11 12.5V17h2l1.5-5.5 1 4.5h2l-2-9c-.5-1.5-1.5-2-3.5-2z"/>
-        </svg>
-        Wattpad
-      </a>
-    </div>
-
-    <!-- BOTÓN CAPÍTULO -->
-    <button class="rec-excerpt-btn" onclick="toggleCap(this)">
-      &#128214; Leer Capítulo 12
-    </button>
-
-    <!-- CAPÍTULO INLINE (se despliega aquí, sin modal negro) -->
-    <div class="rec-chapter" style="display:none;">
-      <div class="rec-chapter-inner">
-        <h4 class="rec-chap-title">Capítulo XII — El Despertar</h4>
-        <div class="rec-chap-text">
-
-          <p>Sentía que había algo más que libros… Observé todo lo que me rodeaba en la biblioteca: columnas antiguas decoradas con grabados arcanos, vitrinas oxidadas con manuscritos sellados en símbolos prohibidos, pero algo me llamaba más allá. Alcé la vista y fue entonces cuando lo noté: unas escaleras circulares de piedra, viejas como el mundo mismo, que descendían en espiral hacia el centro de un pasaje olvidado por el tiempo.</p>
-
-          <p>Una brisa extraña me envolvió al bajar; era como si el aire murmurara en un lenguaje que mi alma comprendía, pero mi mente no podía traducir. En cada escalón aparecían imágenes fugaces de mi padre, fragmentos, ecos, sombras que no asustaban, sino que consolaban. Él ya había estado allí. Lo sabía, lo sentía.</p>
-
-          <p>Al final del descenso, el pasillo desembocaba en una puerta rústica de madera carcomida y metal ennegrecido. Giré la perilla y crujió como una criatura herida al abrirse. Dentro, la penumbra me tragó por completo: una habitación circular con paredes desnudas y el suelo cubierto de espejos rotos, astillas negras y filosas como garras congeladas en el tiempo.</p>
-
-          <p>Me agaché frente a uno cuya superficie seguía parcialmente intacta. En su base, grabadas a fuego, unas palabras me dejaron helado: <em>«Aquellos que logren combatir su oscuridad, serán dueños del poder infinito».</em></p>
-
-          <p>—¿Qué demonios significa esto? —murmuré.</p>
-
-          <p>Apenas parpadeé y la habitación cambió por completo. Los cristales en el suelo se elevaron, volviendo a sus formas originales. Pero su reflejo no era el mío. Me rodeaban espejos altos y en todos ellos el ser reflejado era otro: un demonio hecho humo, con alas, cuernos encorvados, garras negras y unos ojos vacíos, sin temor, sin dolor.</p>
-
-          <p>El reflejo desenfundó mi propia Necrosaw y salió del espejo. El cristal no se rompió; se abrió como agua negra para dejarlo salir.</p>
-
-          <p>—¡Whaoo! Eso no se ve todos los días —dije con una sonrisa nerviosa.</p>
-
-          <p>La sombra no me dio tregua. El impacto del primer choque fue tan brutal que un corte profundo me surcó la mejilla. Esto era real, y si no tenía cuidado, podía morir. Usé fuego: esferas, chorros ígneos… pero era demasiado astuto. Los esquivaba, los partía en dos, incluso los absorbía como si le dieran más fuerza.</p>
-
-          <p>Entonces lo recordé: la técnica donde la fricción de mi espada generaba una llama capaz de explotar al contacto. Solo una oportunidad.</p>
-
-          <p>Grité y corrí hacia él. En el instante exacto en que las armas chocaron, generé la vibración. Una explosión incandescente estalló entre nosotros, lanzándonos en direcciones opuestas. Rodé por el suelo, golpeado, con cortes en brazos y pecho… pero respirando. Vivo.</p>
-
-          <p>Entonces sentí un calor punzante atravesarme la espalda. Bajé la vista y vi cómo la hoja espectral de la Necrosaw emergía por mi vientre, ensangrentada.</p>
-
-          <p>—Mierda… —logré decir con la voz rota.</p>
-
-          <p>Me desplomé de rodillas, pero no caí. No aún.</p>
-
-          <p>—Este no es el final —murmuré—. Maldito demonio, es hora de que cooperes. Si yo muero… ¡tú mueres!</p>
-
-          <p>Una cortina de sombras emergió del suelo cubriéndome por completo. Todo a mi alrededor se desvaneció. Flotaba en la nada, y fue entonces que dos ojos aparecieron: grandes, de un rojo encendido, brillando como brasas recién avivadas. Una sonrisa ancha, de dientes largos y afilados como cuchillas.</p>
-
-          <p>—<em>Daaante…</em> —susurró aquella voz con un eco que erizaba la piel.</p>
-
-          <p>—¿Quién eres? —pregunté.</p>
-
-          <p>—¿En serio, muchacho? Soy la razón por la que respiras cuando estás al borde de la muerte, el rugido que te empuja cuando todo parece perdido. Abrimos los ojos el mismo día, Dante. Yo estuve ahí… siempre.</p>
-
-          <p>—¿Eres tú…? ¿El demonio que habita en mi interior?</p>
-
-          <p>—Bingo. Soy eso que susurra cuando estás a punto de matar, eso que sonríe cuando todo arde. Soy tú, pero sin las malditas reglas. Y ahora voy a ayudarte, no porque me importes… sino porque morir contigo suena demasiado mediocre.</p>
-
-          <p>Las sombras se desvanecieron y sentí cómo algo se rompía dentro de mí: algo viejo, algo sellado. Una onda de fuerza brutal emergió de mi cuerpo. La mayoría de los espejos estallaron en mil pedazos. Mi sombra cayó de rodillas. Mis heridas comenzaron a cerrarse, los músculos se tensaron, la sangre dejó de brotar.</p>
-
-          <p>Miré mis manos. Las uñas habían crecido, más afiladas, más negras. Y mis ojos… estaban inundados en rojo, como los de una bestia.</p>
-
-          <p>—¡Felicitaciones! —interrumpió el demonio—. Has alcanzado la versión 2.0 de ti mismo.</p>
-
-          <p>El contraataque fue implacable. Cada golpe, cada estocada acorralaba a la sombra. Lancé la Necrosaw con precisión milimétrica, clavándola en el último espejo intacto. Luego, una gigantesca esfera de fuego se estrelló contra el cristal, rompiendo su última defensa.</p>
-
-          <p>La sombra cayó de rodillas: rota, derrotada. Nuestros ojos se cruzaron… y sonrió. No con burla, sino con resignación. Se desmaterializó en humo negro que se fundió con mi cuerpo. No dolió. Fue como una aceptación mutua.</p>
-
-          <p>—Papá… siempre tuviste razón —murmuré—. Reprimir el demonio interno no era destruirlo… era aceptarlo, controlarlo.</p>
-
-          <p>La habitación comenzó a reconstruirse sola. Los espejos rotos se alzaron, las grietas desaparecieron. La puerta reapareció. Respiré profundo, puse la espada al hombro y salí.</p>
-
-          <p>Justo afuera, Tang devoraba libros con tal emoción que su cola se movía como un metrónomo, con un pergamino pegado en la cara y otro atrapado entre las patas.</p>
-
-          <p>—¿En serio, Tang? —dije con una sonrisa inevitable.</p>
-
-          <p>—¡Miau! ¡Mi señor! ¡Encontré un papiro que habla de armas que caminan solas… y este tiene dibujos de comida!</p>
-
-          <p>Me acerqué y le acaricié la cabeza.</p>
-
-          <p>—Vamos, amigo. Tenemos una biblioteca entera que explorar y un nuevo destino por encontrar.</p>
-
-          <p>—¡Sí, miau-amo! ¡Y esta vez yo elijo el camino!</p>
-
-          <p>—Dios nos libre… —dijo la voz interna con tono teatral—. Vamos a morir. Pero al menos… moriremos entretenidos.</p>
-
-          <p>Y con ese pensamiento, nos adentramos entre estanterías, antiguos manuscritos y pasillos ocultos. Porque sabíamos que el viaje apenas comenzaba.</p>
-
-        </div>
-      </div>
-    </div><!-- /rec-chapter -->
-
-  </div><!-- /rec-body -->
-</div><!-- /rec-card -->
-          
-      </div>
-
-      <!-- ╔═══════════════════════════════════════════════════════════╗
-           ║  PARA AGREGAR UN LIBRO NUEVO:                            ║
-           ║  1. Copia el bloque que empieza en la linea de abajo     ║
-           ║  2. Pégalo justo antes del comentario "FIN LIBROS"       ║
-           ║  3. Reemplaza los textos en MAYUSCULAS con los reales    ║
-           ╚═══════════════════════════════════════════════════════════╝
-
-      EJEMPLO — borra estas 2 lineas cuando lo actives quitando los simbolos menor y mayor:
-
-      <div class="rec-card reveal">
-        <div class="rec-cover-wrap" onclick="openLb('URL_IMAGEN_PORTADA')">
-          <img src="URL_IMAGEN_PORTADA" alt="TITULO DEL LIBRO"
-               onerror="this.parentElement.style.background='var(--dark3)'"/>
-          <div class="rec-cover-shine"></div>
-        </div>
-        <div class="rec-body">
-          <h3 class="rec-title">TITULO DEL LIBRO</h3>
-          <p class="rec-author">Por NOMBRE DEL AUTOR</p>
-          <p class="rec-synopsis">SINOPSIS DEL LIBRO AQUI. PUEDES ESCRIBIR TODO LO QUE QUIERAS.</p>
-          <div class="rec-links">
-            <a href="LINK_AMAZON" class="rec-link" target="_blank">Amazon</a>
-            <a href="LINK_APPLE" class="rec-link" target="_blank">Apple Books</a>
-            <a href="LINK_GOODREADS" class="rec-link" target="_blank">Goodreads</a>
-          </div>
-          <button class="rec-excerpt-btn" onclick="toggleCap(this)">
-            &#128214; Leer Cap&#237;tulo 1
-          </button>
-          <div class="rec-chapter" style="display:none;">
-            <div class="rec-chapter-inner">
-              <h4 class="rec-chap-title">Cap&#237;tulo 1</h4>
-              <div class="rec-chap-text">
-                <p>PRIMER PARRAFO DEL CAPITULO 1.</p>
-                <p>SEGUNDO PARRAFO.</p>
-                <p>TERCER PARRAFO.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      FIN LIBROS — LOS LIBROS VAN ARRIBA DE ESTA LINEA -->
-
-      <div class="rec-empty">
-        <p>&#128218; Pr&#243;ximamente libros recomendados de amigos escritores.</p>
-        <p style="font-size:.82rem;margin-top:.5rem;">Cada libro tendr&#225; portada, sinopsis y cap&#237;tulo para leer.</p>
-      </div>
-
-    </div>
-  </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
-</div>
-
-<div id="page-admin" class="page">
-  <div class="page-inner">
-    <div class="page-header"><p class="page-label">&#9881; Panel de Administrador</p><h2 class="page-title">Administrar Sitio</h2><div class="page-rule"></div></div>
-    <div class="admin-section">
-      <h3>&#128218; Agregar Libro Recomendado</h3>
-      <div class="admin-grid">
-        <div class="admin-field"><label>T&#237;tulo *</label><input type="text" id="rec-titulo" placeholder="Nombre del libro..."/></div>
-        <div class="admin-field"><label>Autor *</label><input type="text" id="rec-autor" placeholder="Nombre del autor..."/></div>
-        <div class="admin-field full"><label>Sinopsis *</label><textarea id="rec-sinopsis" placeholder="Descripci&#243;n del libro..."></textarea></div>
-        <div class="admin-field full"><label>URL Portada</label><input type="text" id="rec-portada" placeholder="https://..."/></div>
-        <div class="admin-field"><label>Amazon</label><input type="text" id="rec-amazon" placeholder="https://amazon.com/..."/></div>
-        <div class="admin-field"><label>Apple Books</label><input type="text" id="rec-apple" placeholder="https://books.apple.com/..."/></div>
-        <div class="admin-field"><label>Goodreads</label><input type="text" id="rec-goodreads" placeholder="https://goodreads.com/..."/></div>
-        <div class="admin-field"><label>Wattpad</label><input type="text" id="rec-wattpad" placeholder="https://wattpad.com/..."/></div>
-        <div class="admin-field"><label>Sitio web</label><input type="text" id="rec-web" placeholder="https://..."/></div>
-        <div class="admin-field full"><label>Extracto Cap&#237;tulo 1</label><textarea id="rec-extracto" style="min-height:160px;" placeholder="Texto del cap&#237;tulo 1...&#10;&#10;Segundo p&#225;rrafo..."></textarea></div>
-      </div>
-      <button class="admin-btn" onclick="adminAddBook()" style="margin-top:1rem;">&#10022; Publicar Libro</button>
-      <div class="admin-msg" id="rec-msg"></div>
-    </div>
-    <div class="admin-section">
-      <h3>&#128172; Gestionar Comentarios</h3>
-      <div class="admin-list" id="admin-comments-list"><p style="color:var(--text-dim);font-style:italic;">Cargando...</p></div>
-    </div>
-    <div class="admin-section">
-      <h3>&#128218; Libros Publicados</h3>
-      <div class="admin-list" id="admin-books-list"><p style="color:var(--text-dim);font-style:italic;">Cargando...</p></div>
-    </div>
-  </div>
-  <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>Panel de Administrador</p></div>
-</div>
-
-<!-- ══════════════════════════════════════
-     SCRIPTS
-══════════════════════════════════════ -->
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-/* ═══════════════════════════════════════════════════
-   NUEVO SISTEMA DE NAVEGACIÓN
-   - El home SIEMPRE está visible arriba
-   - Las secciones aparecen DEBAJO y se hace scroll
-   - El botón del home queda resaltado al seleccionar
-═══════════════════════════════════════════════════ */
-var currentPage = null;
-
-function showPage(id) {
-  // Ocultar todas las secciones
-  document.querySelectorAll('.page').forEach(function(p){ p.classList.remove('active'); });
-
-  // Limpiar resaltado de botones del home y tabs
-  document.querySelectorAll('.home-nav-btn').forEach(function(b){ b.classList.remove('active-section'); });
-  document.querySelectorAll('.nav-tab').forEach(function(t){ t.classList.remove('active'); });
-
-  // Si se pide "home", solo volver arriba
-  if(id === 'home') {
-    currentPage = null;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    return;
-  }
-
-  var pg = document.getElementById('page-' + id);
+/* ═══ PAGE ROUTER ═══ */
+function showPage(id){
+  document.querySelectorAll('.page').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.nav-tab').forEach(function(t){t.classList.remove('active')});
+  var pg=document.getElementById('page-'+id);
   if(!pg) return;
-
-  currentPage = id;
   pg.classList.add('active');
-
-  // Cargas especiales
-  if(id === 'comentarios') setTimeout(loadComments, 200);
-  if(id === 'recomendados') setTimeout(loadRecomendados, 200);
-  if(id === 'admin'){ setTimeout(loadAdminComments, 200); setTimeout(loadAdminBooks, 200); }
-
-  // Resaltar botón del home correspondiente
-  var homeBtn = document.getElementById('btn-' + id);
-  if(homeBtn) homeBtn.classList.add('active-section');
-
-  // Resaltar tab del topbar correspondiente
+  window.scrollTo(0,0); document.documentElement.scrollTop=0; document.body.scrollTop=0;
+  setTimeout(function(){window.scrollTo(0,0);},80);
   document.querySelectorAll('.nav-tab').forEach(function(t){
-    if(t.getAttribute('onclick') && t.getAttribute('onclick').indexOf("'"+id+"'") > -1)
-      t.classList.add('active');
+    if(t.getAttribute('onclick')&&t.getAttribute('onclick').indexOf("'"+id+"'")>-1) t.classList.add('active');
   });
-
-  // Scroll suave hasta la sección (debajo del home)
+  if(id==='comentarios') setTimeout(loadComments,200);
+  if(id==='recomendados') setTimeout(function(){},200);
+  if(id==='admin'){setTimeout(loadAdminComments,200);setTimeout(loadAdminBooks,200);}
   setTimeout(function(){
-    pg.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }, 50);
-
-  // Animación reveal
-  setTimeout(function(){
-    pg.querySelectorAll('.reveal').forEach(function(el, i){
-      setTimeout(function(){ el.classList.add('shown'); }, i * 80);
+    pg.querySelectorAll('.reveal').forEach(function(el,i){
+      setTimeout(function(){el.classList.add('shown')},i*80);
     });
-  }, 200);
+  },60);
 }
-
 /* ═══ AUTH ═══ */
-function openAuth(){ document.getElementById('authOverlay').classList.add('open'); clearMsgs(); }
-function closeAuth(){ document.getElementById('authOverlay').classList.remove('open'); }
-function switchTab(tab, el){
-  document.querySelectorAll('.auth-tab').forEach(function(t){ t.classList.remove('active'); });
-  document.querySelectorAll('.auth-panel').forEach(function(p){ p.classList.remove('active'); });
+function openAuth(){document.getElementById('authOverlay').classList.add('open');clearMsgs();}
+function closeAuth(){document.getElementById('authOverlay').classList.remove('open');}
+function switchTab(tab,el){
+  document.querySelectorAll('.auth-tab').forEach(function(t){t.classList.remove('active')});
+  document.querySelectorAll('.auth-panel').forEach(function(p){p.classList.remove('active')});
   document.getElementById('panel-'+tab).classList.add('active');
-  if(el) el.classList.add('active');
-  clearMsgs();
+  if(el) el.classList.add('active'); clearMsgs();
 }
-function clearMsgs(){
-  ['login-msg','reg-msg'].forEach(function(id){
-    var e=document.getElementById(id); if(e){e.textContent='';e.className='auth-msg';}
-  });
-}
-function showMsg(el,txt,type){ el.textContent=txt; el.className='auth-msg '+type; }
-
+function clearMsgs(){['login-msg','reg-msg'].forEach(function(id){var e=document.getElementById(id);if(e){e.textContent='';e.className='auth-msg';}})}
+function showMsg(el,txt,type){el.textContent=txt;el.className='auth-msg '+type;}
 function doRegister(){
-  var name=document.getElementById('reg-name').value.trim();
-  var email=document.getElementById('reg-email').value.trim();
-  var pass=document.getElementById('reg-pass').value;
-  var msg=document.getElementById('reg-msg');
+  var name=document.getElementById('reg-name').value.trim(),email=document.getElementById('reg-email').value.trim(),pass=document.getElementById('reg-pass').value,msg=document.getElementById('reg-msg');
   if(!name||!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return;}
   if(pass.length<6){showMsg(msg,'La contraseña debe tener mínimo 6 caracteres.','error');return;}
   showMsg(msg,'Creando cuenta...','');
-  auth.createUserWithEmailAndPassword(email,pass)
-    .then(function(cred){
-      return cred.user.updateProfile({displayName:name}).then(function(){
-        return db.ref('usuarios/'+cred.user.uid).set({nombre:name,email:email,fechaRegistro:new Date().toISOString()});
-      });
-    })
-    .then(function(){ showMsg(msg,'¡Bienvenido/a a Gaia!','success'); setTimeout(closeAuth,1200); })
-    .catch(function(err){
-      var e={'auth/email-already-in-use':'Correo ya registrado.','auth/invalid-email':'Correo inválido.','auth/weak-password':'Contraseña débil.'};
-      showMsg(msg,e[err.code]||err.message,'error');
+  auth.createUserWithEmailAndPassword(email,pass).then(function(c){
+    return c.user.updateProfile({displayName:name}).then(function(){
+      return db.ref('usuarios/'+c.user.uid).set({nombre:name,email:email,fechaRegistro:new Date().toISOString()});
     });
+  }).then(function(){showMsg(msg,'¡Bienvenido/a, '+name+'!','success');setTimeout(function(){closeAuth();},1200);})
+  .catch(function(e){var er={'auth/email-already-in-use':'Correo ya registrado.','auth/invalid-email':'Correo inválido.','auth/weak-password':'Contraseña muy débil.'};showMsg(msg,er[e.code]||e.message,'error');});
 }
-
 function doLogin(){
-  var email=document.getElementById('login-email').value.trim();
-  var pass=document.getElementById('login-pass').value;
-  var msg=document.getElementById('login-msg');
-  if(!email||!pass){showMsg(msg,'Completa todos los campos.','error');return;}
+  var email=document.getElementById('login-email').value.trim(),pass=document.getElementById('login-pass').value,msg=document.getElementById('login-msg');
+  if(!email||!pass){showMsg(msg,'Por favor completa todos los campos.','error');return;}
   showMsg(msg,'Entrando...','');
-  auth.signInWithEmailAndPassword(email,pass)
-    .then(function(){ showMsg(msg,'¡Bienvenido/a de vuelta!','success'); setTimeout(closeAuth,1000); })
-    .catch(function(err){
-      var e={'auth/user-not-found':'Correo no registrado.','auth/wrong-password':'Contraseña incorrecta.','auth/invalid-credential':'Correo o contraseña incorrectos.'};
-      showMsg(msg,e[err.code]||err.message,'error');
-    });
+  auth.signInWithEmailAndPassword(email,pass).then(function(){showMsg(msg,'¡Bienvenido/a de vuelta!','success');setTimeout(function(){closeAuth();},1000);})
+  .catch(function(e){var er={'auth/user-not-found':'Correo no registrado.','auth/wrong-password':'Contraseña incorrecta.','auth/invalid-credential':'Correo o contraseña incorrectos.'};showMsg(msg,er[e.code]||e.message,'error');});
 }
-function doLogout(){ auth.signOut(); }
-
+function doLogout(){auth.signOut();}
+var ADMIN_EMAIL='stan.e.s@gmail.com';
 auth.onAuthStateChanged(function(user){
-  var btn=document.getElementById('navAuthBtn');
-  var req=document.getElementById('comment-login-required');
-  var frm=document.getElementById('comment-form-box');
+  var btn=document.getElementById('navAuthBtn'),req=document.getElementById('comment-login-required'),frm=document.getElementById('comment-form-box'),tab=document.getElementById('adminTab');
   if(user){
     var name=user.displayName||user.email.split('@')[0];
     btn.textContent='✦ '+name+' · Salir'; btn.onclick=doLogout;
     if(req) req.style.display='none'; if(frm) frm.style.display='block';
-    loadVotes(user.uid); checkAdmin(user);
+    if(tab) tab.style.display=(user.email.toLowerCase()===ADMIN_EMAIL)?'block':'none';
+    loadVotes(user.uid);
   } else {
     btn.textContent='Iniciar Sesión'; btn.onclick=openAuth;
     if(req) req.style.display='block'; if(frm) frm.style.display='none';
+    if(tab) tab.style.display='none';
   }
 });
-document.getElementById('authOverlay').addEventListener('click',function(e){ if(e.target===this) closeAuth(); });
-
+document.getElementById('authOverlay').addEventListener('click',function(e){if(e.target===this)closeAuth();});
 /* ═══ GALERÍA ═══ */
-
-function toggleCap(btn){
-  var chapter = btn.nextElementSibling;
-  if(!chapter) return;
-  if(chapter.style.display==='none'||chapter.style.display===''){
-    chapter.style.display='block';
-    btn.innerHTML='&#9650; Cerrar Cap&#237;tulo 1';
-    btn.style.color='var(--gold)';
-  } else {
-    chapter.style.display='none';
-    btn.innerHTML='&#128214; Leer Cap&#237;tulo 1';
-    btn.style.color='';
-  }
-}
 function showGallery(id,btn){
-  document.querySelectorAll('.gallery-panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.gtab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.gallery-panel').forEach(function(p){p.classList.remove('active')});
+  document.querySelectorAll('.gtab').forEach(function(t){t.classList.remove('active')});
   document.getElementById('gal-'+id).classList.add('active');
   if(btn) btn.classList.add('active');
 }
-function openLb(src){ if(!src) return; document.getElementById('lb-img').src=src; document.getElementById('lightbox').classList.add('open'); document.body.style.overflow='hidden'; }
-function closeLb(){ document.getElementById('lightbox').classList.remove('open'); document.body.style.overflow=''; }
-document.getElementById('lightbox').addEventListener('click',function(e){ if(e.target===this) closeLb(); });
-document.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closeLb(); closeExcerpt(); } });
-
-/* ═══ ENCUESTAS ═══ */
+function openLb(src){if(!src)return;document.getElementById('lb-img').src=src;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';}
+function closeLb(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('lightbox').addEventListener('click',function(e){if(e.target===this)closeLb();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){closeLb();}});
+/* ═══ POLLS ═══ */
 function loadVotes(uid){
   if(!uid) return;
   [1,2,3].forEach(function(pn){
     db.ref('votos/poll'+pn+'/'+uid).once('value').then(function(snap){
-      if(snap.exists()){
-        var btn=document.getElementById('pollbtn'+pn);
-        if(btn){btn.textContent='✦ Ya votaste';btn.disabled=true;btn.style.opacity='.5';}
-        var oi=snap.val().opcion;
-        var opts=document.querySelectorAll('#pollopt'+pn+' .poll-option');
-        if(opts[oi]) opts[oi].style.borderColor='var(--gold)';
-      }
+      if(snap.exists()){var btn=document.getElementById('pollbtn'+pn);if(btn){btn.textContent='✦ Ya votaste';btn.disabled=true;btn.style.opacity='.5';}}
     });
   });
 }
-function handleVote(btn,pn){
+function handleVote(btn,pollNum){
   var user=auth.currentUser; if(!user){openAuth();return;}
-  var opts=document.querySelectorAll('#pollopt'+pn+' .poll-option');
-  var sel=-1; opts.forEach(function(o,i){ if(o.classList.contains('selected')) sel=i; });
-  if(sel===-1) sel=0;
-  db.ref('votos/poll'+pn+'/'+user.uid).set({opcion:sel,fecha:new Date().toISOString()})
-    .then(function(){
-      db.ref('conteo/poll'+pn+'/'+sel).transaction(function(v){ return (v||0)+1; });
-      btn.textContent='✦ Voto registrado'; btn.disabled=true; btn.style.opacity='.5';
-      opts[sel].style.borderColor='var(--gold)';
-    }).catch(function(err){ alert('Error: '+err.message); });
+  var opts=document.querySelectorAll('#pollopt'+pollNum+' .poll-option'),selected=-1;
+  opts.forEach(function(o,i){if(o.classList.contains('selected'))selected=i;});
+  if(selected===-1) selected=0;
+  db.ref('votos/poll'+pollNum+'/'+user.uid).set({opcion:selected,fecha:new Date().toISOString()}).then(function(){
+    db.ref('conteo/poll'+pollNum+'/'+selected).transaction(function(v){return(v||0)+1;});
+    btn.textContent='✦ Voto registrado'; btn.disabled=true; btn.style.opacity='.5';
+  });
 }
 document.addEventListener('click',function(e){
   var opt=e.target.closest('.poll-option'); if(!opt) return;
-  var wrap=opt.closest('.poll-options'); if(!wrap) return;
-  wrap.querySelectorAll('.poll-option').forEach(function(o){o.classList.remove('selected');o.style.borderColor='';});
+  var pw=opt.closest('.poll-options'); if(!pw) return;
+  pw.querySelectorAll('.poll-option').forEach(function(o){o.classList.remove('selected');o.style.borderColor='';});
   opt.classList.add('selected'); opt.style.borderColor='var(--gold)';
 });
 [1,2,3].forEach(function(pn){
   db.ref('conteo/poll'+pn).on('value',function(snap){
-    var data=snap.val()||{}, total=0;
+    var data=snap.val()||{},total=0;
     Object.values(data).forEach(function(v){total+=v;});
     document.querySelectorAll('#pollopt'+pn+' .poll-option').forEach(function(opt,i){
-      var v=data[i]||0, pct=total>0?Math.round((v/total)*100):0;
-      var bar=opt.querySelector('.poll-bar'), lbl=opt.querySelector('.poll-pct');
+      var v=data[i]||0,pct=total>0?Math.round((v/total)*100):0;
+      var bar=opt.querySelector('.poll-bar'),lbl=opt.querySelector('.poll-pct');
       if(bar) bar.style.width=pct+'%';
       if(lbl) lbl.textContent=total>0?pct+'% ('+v+')':'0';
     });
   });
 });
-
-/* ═══ COMENTARIOS ═══ */
-function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+/* ═══ COMMENTS ═══ */
+function escHtml(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
 function submitComment(){
   var user=auth.currentUser; if(!user){openAuth();return;}
   var text=document.getElementById('cmt-text').value.trim();
   if(!text){alert('Por favor escribe un comentario.');return;}
-  db.ref('comentarios').push({
-    autor:user.displayName||user.email.split('@')[0],
-    texto:text,capitulo:document.getElementById('cmt-chapter').value.trim(),
-    rating:document.getElementById('cmt-rating').value,
-    fecha:new Date().toISOString(),aprobado:false
-  }).then(function(){
+  db.ref('comentarios').push({autor:user.displayName||user.email.split('@')[0],texto:text,capitulo:document.getElementById('cmt-chapter').value.trim(),rating:document.getElementById('cmt-rating').value,fecha:new Date().toISOString(),aprobado:false}).then(function(){
     document.getElementById('success-msg').style.display='block';
-    ['cmt-name','cmt-chapter','cmt-text'].forEach(function(id){ var e=document.getElementById(id);if(e)e.value=''; });
-  }).catch(function(err){alert('Error: '+err.message);});
+    ['cmt-name','cmt-chapter','cmt-text'].forEach(function(id){var el=document.getElementById(id);if(el)el.value='';});
+  });
 }
 function loadComments(){
   var list=document.getElementById('comments-dynamic'); if(!list) return;
   db.ref('comentarios').on('value',function(snap){
-    list.innerHTML='';
-    var data=snap.val();
-    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:1.5rem;">Aún no hay comentarios.</p>';return;}
-    var arr=[]; Object.values(data).forEach(function(c){if(c.aprobado===true)arr.push(c);});
+    list.innerHTML=''; var data=snap.val();
+    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:1.5rem;">Sé el primero en comentar.</p>';return;}
+    var arr=[];
+    Object.values(data).forEach(function(c){if(c.aprobado===true) arr.push(c);});
     if(arr.length===0){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:1.5rem;">Sé el primero en comentar.</p>';return;}
     arr.sort(function(a,b){return new Date(b.fecha)-new Date(a.fecha);});
     arr.forEach(function(c){
-      var fecha=new Date(c.fecha).toLocaleDateString('es-CL',{year:'numeric',month:'long'});
-      list.innerHTML+='<div class="comment-card">'
-        +'<div class="comment-header"><span class="comment-author">'+escHtml(c.autor||'Anónimo')+'</span><span class="comment-date">'+fecha+'</span></div>'
-        +(c.rating?'<p style="font-size:.78rem;color:var(--gold);margin-bottom:.4rem;">'+escHtml(c.rating)+'</p>':'')
-        +'<p class="comment-text">'+escHtml(c.texto)+'</p></div>';
+      var d=new Date(c.fecha),fecha=d.toLocaleDateString('es-CL',{year:'numeric',month:'long'});
+      list.innerHTML+='<div class="comment-card reveal shown"><div class="comment-header"><span class="comment-author">'+escHtml(c.autor||'Anónimo')+'</span><span class="comment-date">'+fecha+'</span></div>'+(c.rating?'<p style="font-size:.78rem;color:var(--gold);margin-bottom:.4rem;">'+escHtml(c.rating)+'</p>':'')+'<p class="comment-text">'+escHtml(c.texto)+'</p></div>';
     });
   });
 }
-
 /* ═══ ADMIN ═══ */
-var ADMIN_EMAIL='stan.e.s@gmail.com';
-function checkAdmin(user){
-  var tab=document.getElementById('adminTab');
-  if(user&&user.email.toLowerCase()===ADMIN_EMAIL){if(tab)tab.style.display='block';}
-  else{if(tab)tab.style.display='none';}
-}
 function adminAddBook(){
-  var titulo=document.getElementById('rec-titulo').value.trim();
-  var autor=document.getElementById('rec-autor').value.trim();
-  var sinopsis=document.getElementById('rec-sinopsis').value.trim();
-  var msg=document.getElementById('rec-msg');
+  var titulo=document.getElementById('rec-titulo').value.trim(),autor=document.getElementById('rec-autor').value.trim(),sinopsis=document.getElementById('rec-sinopsis').value.trim(),msg=document.getElementById('rec-msg');
   if(!titulo||!autor||!sinopsis){msg.textContent='Completa Título, Autor y Sinopsis.';msg.className='admin-msg err';msg.style.display='block';return;}
-  db.ref('recomendados').push({
-    titulo:titulo,autorNombre:autor,sinopsis:sinopsis,
-    portada:document.getElementById('rec-portada').value.trim(),
-    amazon:document.getElementById('rec-amazon').value.trim(),
-    apple:document.getElementById('rec-apple').value.trim(),
-    goodreads:document.getElementById('rec-goodreads').value.trim(),
-    wattpad:document.getElementById('rec-wattpad').value.trim(),
-    web:document.getElementById('rec-web').value.trim(),
-    extracto:document.getElementById('rec-extracto').value.trim(),
-    activo:true,fechaAgregado:new Date().toISOString()
-  }).then(function(){
-    msg.textContent='✦ Libro publicado!'; msg.className='admin-msg ok'; msg.style.display='block';
-    ['rec-titulo','rec-autor','rec-sinopsis','rec-portada','rec-amazon','rec-apple','rec-goodreads','rec-wattpad','rec-web','rec-extracto'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
-    loadAdminBooks();
-  }).catch(function(err){msg.textContent='Error: '+err.message;msg.className='admin-msg err';msg.style.display='block';});
+  db.ref('recomendados').push({titulo:titulo,autorNombre:autor,sinopsis:sinopsis,portada:document.getElementById('rec-portada').value.trim(),amazon:document.getElementById('rec-amazon').value.trim(),goodreads:document.getElementById('rec-goodreads').value.trim(),extracto:document.getElementById('rec-extracto').value.trim(),activo:true,fechaAgregado:new Date().toISOString()}).then(function(){msg.textContent='✦ Libro publicado!';msg.className='admin-msg ok';msg.style.display='block';});
 }
 function loadAdminComments(){
   var list=document.getElementById('admin-comments-list'); if(!list) return;
@@ -1198,301 +1352,53 @@ function loadAdminComments(){
     if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;">No hay comentarios.</p>';return;}
     var entries=Object.entries(data);
     entries.sort(function(a,b){return a[1].aprobado===b[1].aprobado?0:a[1].aprobado?1:-1;});
-    entries.forEach(function(entry){
-      var key=entry[0],c=entry[1];
-      var fecha=new Date(c.fecha).toLocaleDateString('es-CL',{month:'short',day:'numeric'});
-      var estado=c.aprobado?'<span style="color:#5fa85f;font-size:.7rem;">✔ Aprobado</span>':'<span style="color:#e8a020;font-size:.7rem;">● Pendiente</span>';
-      list.innerHTML+='<div class="admin-item"><div class="admin-item-info"><p class="admin-item-title">'+escHtml(c.autor||'?')+' <span style="font-weight:normal;color:var(--text-dim);">'+fecha+'</span> '+estado+'</p><p class="admin-item-sub">'+escHtml((c.texto||'').substring(0,80))+'</p></div><div class="admin-item-actions">'+(!c.aprobado?'<button class="admin-approve" onclick="approveComment(\''+key+'\')">Aprobar</button>':'')+'<button class="admin-delete" onclick="deleteComment(\''+key+'\')">Eliminar</button></div></div>';
+    entries.forEach(function(e){
+      var key=e[0],c=e[1],d=new Date(c.fecha),fecha=d.toLocaleDateString('es-CL',{month:'short',day:'numeric'});
+      var estado=c.aprobado?'<span style="color:#5fa85f;font-size:.7rem;">&#10004; Aprobado</span>':'<span style="color:#e8a020;font-size:.7rem;">&#9679; Pendiente</span>';
+      list.innerHTML+='<div class="admin-item"><div class="admin-item-info"><p class="admin-item-title">'+escHtml(c.autor||'?')+' '+fecha+' '+estado+'</p><p class="admin-item-sub">'+escHtml((c.texto||'').substring(0,80))+'</p></div><div class="admin-item-actions">'+(!c.aprobado?'<button class="admin-approve" onclick="db.ref('comentarios/'+key+'/aprobado').set(true)">Aprobar</button>':'')+'<button class="admin-delete" onclick="if(confirm('¿Eliminar?'))db.ref('comentarios/'+key+'').remove()">Eliminar</button></div></div>';
     });
   });
 }
-function approveComment(key){ db.ref('comentarios/'+key+'/aprobado').set(true); }
-function deleteComment(key){ if(confirm('¿Eliminar?')) db.ref('comentarios/'+key).remove(); }
 function loadAdminBooks(){
   var list=document.getElementById('admin-books-list'); if(!list) return;
   db.ref('recomendados').once('value',function(snap){
     var data=snap.val(); list.innerHTML='';
-    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;">No hay libros.</p>';return;}
-    Object.entries(data).forEach(function(entry){
-      var key=entry[0],b=entry[1];
-      list.innerHTML+='<div class="admin-item"><div class="admin-item-info"><p class="admin-item-title">'+escHtml(b.titulo)+'</p><p class="admin-item-sub">Por '+escHtml(b.autorNombre)+'</p></div><div class="admin-item-actions"><button class="admin-delete" onclick="deleteBook(\''+key+'\')">Eliminar</button></div></div>';
+    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;">No hay libros aún.</p>';return;}
+    Object.entries(data).forEach(function(e){
+      var key=e[0],b=e[1];
+      list.innerHTML+='<div class="admin-item"><div class="admin-item-info"><p class="admin-item-title">'+escHtml(b.titulo)+'</p><p class="admin-item-sub">Por '+escHtml(b.autorNombre)+'</p></div><div class="admin-item-actions"><button class="admin-delete" onclick="if(confirm('¿Eliminar?'))db.ref('recomendados/'+key+'').remove().then(loadAdminBooks)">Eliminar</button></div></div>';
     });
   });
 }
-function deleteBook(key){ if(confirm('¿Eliminar?')) db.ref('recomendados/'+key).remove().then(loadAdminBooks); }
-
-/* ═══ RECOMENDADOS ═══ */
-var STORE_ICONS = {
-  amazon:    '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a18.5 18.5 0 01-4.72.612c-3.764 0-7.15-.98-10.156-2.94-.27-.17-.34-.38-.2-.59zm21.647-3.956c-.145-.116-.708-.055-.988.036-.28.09-1.056.436-1.354.89-.082.12-.037.165.062.11.26-.13.836-.375 1.13-.452.293-.077.536-.037.586.056.05.094-.046.556-.09.762-.043.206.055.243.215.103.495-.438.683-1.23.529-1.39-.046-.048-.09-.115-.09-.115z"/><path d="M6.57 9.37c0 .636.17 1.136.51 1.5.34.365.803.548 1.388.548.36 0 .692-.057.996-.17l.09-.035c.108-.044.14-.01.1.1-.23.63-.587 1.14-1.068 1.527-.48.385-1.066.66-1.757.824-.215.05-.27.14-.16.264.108.122.258.1.45.053 1.088-.27 1.97-.788 2.647-1.554.676-.766 1.014-1.678 1.014-2.737 0-.805-.23-1.457-.69-1.955-.46-.497-1.054-.746-1.783-.746-.65 0-1.18.22-1.59.66-.41.44-.615 1-.615 1.68z"/></svg>',
-  apple:     '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>',
-  wattpad:   '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 2h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2zm8 3c-3.86 0-7 3.14-7 7 0 2.96 1.84 5.5 4.46 6.56L11 12.5V17h2l1.5-5.5 1 4.5h2l-2-9c-.5-1.5-1.5-2-3.5-2z"/></svg>',
-  goodreads: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.43 23.995c-3.608-.208-6.274-1.596-7.993-4.15C2.38 18.215 2 16.783 2 14.896c0-2.03.418-3.61 1.254-4.743C4.516 8.453 6.104 7.5 8.051 7.5c1.415 0 2.56.437 3.438 1.312.406.406.718.875.938 1.407V7.5h2.203v9.234c0 .906.016 1.563.047 1.969.03.406.095.797.188 1.172-.188.016-.376.023-.563.023-.812 0-1.407-.25-1.781-.75a3.95 3.95 0 01-.438-.984c-.5.625-1.078 1.094-1.734 1.406-.657.313-1.4.47-2.235.47-1.875 0-3.328-.688-4.36-2.063C2.718 16.607 2.2 14.942 2.2 12.94c0-2.094.547-3.797 1.64-5.11C4.938 6.52 6.375 5.86 8.157 5.86c1.25 0 2.374.36 3.28 1.078.407.329.766.72 1.079 1.172V0h2.203z"/></svg>',
-  web:       '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>'
-};
-var STORE_LABELS = {amazon:'Amazon',apple:'Apple Books',wattpad:'Wattpad',goodreads:'Goodreads',web:'Sitio Web'};
-
-function buildLinks(book){
-  var out = '';
-  ['amazon','apple','wattpad','goodreads','web'].forEach(function(k){
-    if(book[k]) out += '<a href="'+escHtml(book[k])+'" class="rec-link '+k+'" target="_blank" rel="noopener">'+STORE_ICONS[k]+STORE_LABELS[k]+'</a>';
-  });
-  return out;
-}
-
-function toggleCap(btn){
-  var chapter = btn.nextElementSibling;
-  if(!chapter) return;
-  var isOpen = chapter.style.display !== 'none';
-  chapter.style.display = isOpen ? 'none' : 'block';
-  btn.innerHTML = (isOpen ? '&#128214; Leer Cap&#237;tulo 1' : '&#10005; Cerrar Cap&#237;tulo');
-  btn.style.borderColor = isOpen ? '' : 'var(--gold)';
-}
-
-function loadRecomendados(){
-  var grid=document.getElementById('rec-grid'); if(!grid) return;
-  db.ref('recomendados').on('value',function(snap){
-    var data=snap.val(); grid.innerHTML='';
-    if(!data){grid.innerHTML='<div class="rec-empty"><p>&#128218; Próximamente libros recomendados de amigos escritores.</p></div>';return;}
-    var arr=Object.values(data).filter(function(b){return b.activo!==false;});
-    if(arr.length===0){grid.innerHTML='<div class="rec-empty"><p>&#128218; Próximamente libros recomendados.</p></div>';return;}
-    arr.forEach(function(book){
-      var links = buildLinks(book);
-      var card=document.createElement('div'); card.className='rec-card reveal';
-      var coverHtml=book.portada?'<div class="rec-cover-wrap" onclick="openLb(\''+escHtml(book.portada)+'\')"><img src="'+escHtml(book.portada)+'" alt="'+escHtml(book.titulo)+'"/><div class="rec-cover-shine"></div></div>':'';
-      var excerptBtn=''; var excerptInline='';
-      if(book.extracto){
-        excerptBtn='<button class="rec-excerpt-btn" onclick="toggleCap(this)">&#128214; Leer Cap&#237;tulo 1</button>';
-        var paras = book.extracto.split('\n\n').map(function(p){return '<p>'+escHtml(p)+'</p>';}).join('');
-        excerptInline='<div class="rec-chapter" style="display:none;"><div class="rec-chapter-inner"><h4 class="rec-chap-title">'+escHtml(book.titulo)+' &#8212; Cap&#237;tulo 1</h4><div class="rec-chap-text">'+paras+'</div></div></div>';
-      }
-      card.innerHTML=coverHtml+'<div class="rec-body"><h3 class="rec-title">'+escHtml(book.titulo)+'</h3><p class="rec-author">Por '+escHtml(book.autorNombre)+'</p><p class="rec-synopsis">'+escHtml(book.sinopsis)+'</p>'+(links?'<div class="rec-links">'+links+'</div>':'')+excerptBtn+excerptInline+'</div>';
-      grid.appendChild(card);
-    });
-  });
-}
-
-/* ═══ MAPA ═══ */
-function switchMap(id){
-  var m1=document.getElementById('map-mapa1'),m2=document.getElementById('map-panasea');
-  var t1=document.getElementById('mapTab1'),t2=document.getElementById('mapTab2');
-  if(id==='mapa1'){
-    m1.style.display='flex';m2.style.display='none';
-    t1.style.cssText='padding:.45rem 1.4rem;border:1px solid var(--gold);background:rgba(201,168,76,.12);color:var(--gold);font-family:Cinzel,serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;';
-    t2.style.cssText='padding:.45rem 1.4rem;border:1px solid rgba(201,168,76,.3);background:transparent;color:var(--text-dim);font-family:Cinzel,serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;';
-  } else {
-    m1.style.display='none';m2.style.display='flex';
-    t2.style.cssText='padding:.45rem 1.4rem;border:1px solid var(--gold);background:rgba(201,168,76,.12);color:var(--gold);font-family:Cinzel,serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;';
-    t1.style.cssText='padding:.45rem 1.4rem;border:1px solid rgba(201,168,76,.3);background:transparent;color:var(--text-dim);font-family:Cinzel,serif;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;';
-  }
-}
-
+function toggleCap(btn){var ch=btn.nextElementSibling;if(!ch)return;if(ch.style.display==='none'||!ch.style.display){ch.style.display='block';btn.innerHTML='&#9650; Cerrar Capítulo 1';}else{ch.style.display='none';btn.innerHTML='&#128214; Leer Capítulo 1';}}
+function switchMap(id){var m1=document.getElementById('map-mapa1'),m2=document.getElementById('map-panasea'),t1=document.getElementById('mapTab1'),t2=document.getElementById('mapTab2');if(!m1||!m2)return;if(id==='mapa1'){m1.style.display='flex';m2.style.display='none';t1.style.background='rgba(201,168,76,.12)';t1.style.borderColor='var(--gold)';t1.style.color='var(--gold)';t2.style.background='transparent';t2.style.borderColor='rgba(201,168,76,.3)';t2.style.color='var(--text-dim)';}else{m1.style.display='none';m2.style.display='flex';t2.style.background='rgba(201,168,76,.12)';t2.style.borderColor='var(--gold)';t2.style.color='var(--gold)';t1.style.background='transparent';t1.style.borderColor='rgba(201,168,76,.3)';t1.style.color='var(--text-dim)';}}
 /* ═══ INIT ═══ */
-setTimeout(loadComments, 800);
-document.addEventListener('touchstart',function(e){
-  var btn=e.target.closest('.nav-tab,.home-nav-btn,.gtab');
-  if(btn){btn.style.opacity='0.55';setTimeout(function(){btn.style.opacity='';},200);}
-},{passive:true});
+setTimeout(loadComments,800);
+setTimeout(function(){document.getElementById('page-home').querySelectorAll('.reveal').forEach(function(el,i){setTimeout(function(){el.classList.add('shown')},i*80);});},100);
+document.addEventListener('touchstart',function(e){var btn=e.target.closest('.nav-tab,.home-nav-btn,.gtab');if(btn){btn.style.opacity='0.55';setTimeout(function(){btn.style.opacity=''},200);}},{passive:true});
 </script>
 
-<!-- ═══ MÚSICA AMBIENT ═══ (Gaitas Escocesas Románticas) ═══ -->
-<script>
-(function(){
-  var AC=null,masterG=null,reverbNode=null,musicOn=false,muted=false;
 
-  function init(){
-    if(AC)return;
-    try{
-      AC=new(window.AudioContext||window.webkitAudioContext)();
-      masterG=AC.createGain();
-      masterG.gain.value=0;
-
-      // Reverb de sala grande (convolución simulada con delay+feedback)
-      var rev1=AC.createDelay(0.08); rev1.delayTime.value=0.07;
-      var rev2=AC.createDelay(0.14); rev2.delayTime.value=0.13;
-      var rev3=AC.createDelay(0.22); rev3.delayTime.value=0.21;
-      var rg1=AC.createGain(); rg1.gain.value=0.28;
-      var rg2=AC.createGain(); rg2.gain.value=0.18;
-      var rg3=AC.createGain(); rg3.gain.value=0.10;
-      masterG.connect(AC.destination);
-      masterG.connect(rev1); rev1.connect(rg1); rg1.connect(AC.destination);
-      masterG.connect(rev2); rev2.connect(rg2); rg2.connect(AC.destination);
-      masterG.connect(rev3); rev3.connect(rg3); rg3.connect(AC.destination);
-    }catch(e){}
-  }
-
-  // Sintetizador de gaita: chanter (melódico) con vibrato y armónicos de caña
-  function bagpipe(freq, t, dur, vol){
-    if(!AC) return;
-    vol = vol || 0.18;
-    var g = AC.createGain();
-    var hp = AC.createBiquadFilter(); hp.type='highpass'; hp.frequency.value=200;
-    var lp = AC.createBiquadFilter(); lp.type='lowpass';  lp.frequency.value=3500; lp.Q.value=0.8;
-
-    // Capas de armónicos típicos de gaita (sawtooth + square mezclados)
-    var harmonics = [[1,0.60],[2,0.22],[3,0.14],[4,0.07],[5,0.04],[6,0.02]];
-    harmonics.forEach(function(h){
-      var o = AC.createOscillator();
-      o.type = (h[0] % 2 === 0) ? 'square' : 'sawtooth';
-      o.frequency.value = freq * h[0];
-
-      // Vibrato suave (característica de gaita)
-      var lfo = AC.createOscillator();
-      var lfog = AC.createGain();
-      lfo.frequency.value = 5.2 + Math.random()*0.6;
-      lfog.gain.value = freq * 0.013;
-      lfo.connect(lfog); lfog.connect(o.frequency);
-      lfo.start(t); lfo.stop(t+dur+0.2);
-
-      var og = AC.createGain(); og.gain.value = h[1];
-      o.connect(og); og.connect(hp); hp.connect(lp);
-      o.start(t); o.stop(t+dur+0.1);
-    });
-
-    // Envelope de gaita: ataque rápido, sostenido, caída suave
-    g.gain.setValueAtTime(0, t);
-    g.gain.linearRampToValueAtTime(vol, t+0.04);
-    g.gain.setValueAtTime(vol, t+dur-0.08);
-    g.gain.linearRampToValueAtTime(0, t+dur);
-    lp.connect(g); g.connect(masterG);
-  }
-
-  // Drone de gaita (bordones: tónica + quinta + octava)
-  function bagpipeDrone(){
-    if(!AC) return;
-    // Tonalidad: D (Re) — típica de gaita escocesa
-    // Bordones: D2=73.4Hz, D3=146.8Hz, A2=110Hz
-    [[73.4,0.22],[146.8,0.15],[110,0.10]].forEach(function(d){
-      var o = AC.createOscillator();
-      var g = AC.createGain();
-      var lp = AC.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=600; lp.Q.value=1.5;
-      o.type = 'sawtooth';
-      o.frequency.value = d[0];
-
-      // Leve ondulación en el drone
-      var lfo = AC.createOscillator(); var lfog = AC.createGain();
-      lfo.frequency.value = 0.3; lfog.gain.value = d[0]*0.004;
-      lfo.connect(lfog); lfog.connect(o.frequency); lfo.start();
-
-      g.gain.setValueAtTime(0, AC.currentTime);
-      g.gain.linearRampToValueAtTime(d[1], AC.currentTime+8);
-      o.connect(lp); lp.connect(g); g.connect(masterG);
-      o.start();
-    });
-  }
-
-  // Arpa celta suave de fondo (acompañamiento romántico)
-  function harp(freq, t, vol){
-    if(!AC) return;
-    vol = vol||0.035;
-    var o=AC.createOscillator(), g=AC.createGain();
-    var lp=AC.createBiquadFilter(); lp.type='lowpass'; lp.frequency.value=2200;
-    o.type='triangle'; o.frequency.value=freq;
-    g.gain.setValueAtTime(vol*0.8,t);
-    g.gain.exponentialRampToValueAtTime(0.001, t+2.8);
-    o.connect(lp); lp.connect(g); g.connect(masterG);
-    o.start(t); o.stop(t+3.0);
-  }
-
-  function melody(){
-    if(!AC||muted) return;
-    var t = AC.currentTime+0.3;
-    var q = 0.72; // tempo lento y romántico
-
-    // Melodía estilo "Brave/Corazón Valiente" en escala D pentatónica menor
-    // D E F# A B (Ré Mi Fa# La Si) - modal mixolidio escocés
-    // Frecuencias: D4=293.66, E4=329.63, F#4=369.99, A4=440, B4=493.88, D5=587.33
-    var tune = [
-      [293.66,3],[329.63,1],[369.99,2],[440,2],
-      [493.88,2],[440,1],[369.99,1],[329.63,3],[0,1],
-      [440,2],[493.88,1],[587.33,3],[493.88,1],[440,2],
-      [369.99,1],[329.63,1],[293.66,4],[0,2],
-      [369.99,2],[440,1],[493.88,2],[587.33,2],
-      [493.88,1],[440,1],[369.99,2],[293.66,1],[329.63,4],[0,2],
-      [293.66,2],[369.99,1],[440,3],[493.88,1],[440,2],
-      [369.99,2],[329.63,1],[293.66,4],[0,3],
-      // Segunda frase - más lírica
-      [493.88,2],[587.33,2],[659.25,3],[587.33,1],
-      [493.88,2],[440,2],[369.99,4],[0,2],
-      [440,2],[493.88,1],[587.33,2],[493.88,1],[440,2],
-      [329.63,2],[293.66,5],[0,3]
-    ];
-
-    var total = 0;
-    tune.forEach(function(n){
-      if(n[0]>0) bagpipe(n[0], t, n[1]*q*0.92, 0.17);
-      t += n[1]*q;
-      total += n[1]*q;
-    });
-
-    // Arpa acompañando con acordes (Dm - F - C - G - Dm)
-    var ct = AC.currentTime+0.3;
-    var chords = [
-      [[146.83,220,293.66,369.99],6], // Dm
-      [[174.61,220,261.63,349.23],4], // F
-      [[130.81,196,261.63,329.63],4], // C
-      [[98,146.83,196,246.94],4],      // Gm
-      [[146.83,220,293.66,369.99],8]  // Dm
-    ];
-    chords.forEach(function(c){
-      // Arpegio de arpa
-      c[0].forEach(function(f,i){
-        harp(f, ct + i*0.08, 0.032);
-        harp(f*2, ct + i*0.08 + 0.04, 0.018);
-      });
-      ct += c[1]*q;
-    });
-
-    setTimeout(melody, (total+2)*1000);
-  }
-
-  function start(){
-    if(!AC||musicOn) return;
-    musicOn=true;
-    masterG.gain.setValueAtTime(0,AC.currentTime);
-    masterG.gain.linearRampToValueAtTime(0.58, AC.currentTime+10);
-    bagpipeDrone();
-    setTimeout(melody, 2500);
-  }
-
-  var unlocked=false;
-  function unlock(){
-    if(unlocked) return; unlocked=true; init();
-    if(!AC) return;
-    var p=(AC.state==='suspended')?AC.resume():Promise.resolve();
-    p.then(function(){
-      var b=AC.createBuffer(1,1,AC.sampleRate);
-      var s=AC.createBufferSource(); s.buffer=b;
-      s.connect(AC.destination); s.start(0);
-      setTimeout(start,300);
-    });
-  }
-
-  document.addEventListener('click',unlock);
-  document.addEventListener('touchend',unlock,{passive:true});
-  document.addEventListener('keydown',unlock);
-
-  window.addEventListener('load',function(){
-    var btn=document.createElement('button');
-    btn.innerHTML='&#127990;'; btn.title='Gaitas / Silencio';
-    btn.style.cssText='position:fixed;bottom:1.3rem;right:1.3rem;z-index:9990;width:46px;height:46px;border-radius:50%;border:1px solid rgba(201,168,76,.45);background:rgba(8,8,12,.92);color:#c9a84c;font-size:1.2rem;cursor:pointer;box-shadow:0 3px 16px rgba(0,0,0,.6);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;transition:all .25s;';
-    btn.addEventListener('click',function(e){
-      e.stopPropagation();
-      muted=!muted;
-      if(muted){
-        if(AC) AC.suspend();
-        btn.style.opacity='0.4';
-        btn.title='Gaitas (silenciado)';
-      } else {
-        if(AC) AC.resume();
-        btn.style.opacity='1';
-        btn.title='Gaitas / Silencio';
-        if(!musicOn) start();
-      }
-    });
-    document.body.appendChild(btn);
-  });
-})();
-</script>
-
+<!-- ADMIN PAGE -->
+<div id="page-admin" class="page">
+  <div class="page-inner">
+    <div class="page-header"><p class="page-label">&#9881; Administrador</p><h2 class="page-title">Panel Admin</h2><div class="page-rule"></div></div>
+    <div class="admin-section">
+      <h3>&#128218; Agregar Libro Recomendado</h3>
+      <div class="admin-grid">
+        <div class="admin-field"><label>T&#237;tulo *</label><input type="text" id="rec-titulo" placeholder="Nombre del libro..."/></div>
+        <div class="admin-field"><label>Autor *</label><input type="text" id="rec-autor" placeholder="Nombre del autor..."/></div>
+        <div class="admin-field full"><label>Sinopsis *</label><textarea id="rec-sinopsis" placeholder="Descripci&#243;n..."></textarea></div>
+        <div class="admin-field full"><label>URL Portada</label><input type="text" id="rec-portada" placeholder="https://..."/></div>
+        <div class="admin-field"><label>Amazon</label><input type="text" id="rec-amazon" placeholder="https://..."/></div>
+        <div class="admin-field"><label>Goodreads</label><input type="text" id="rec-goodreads" placeholder="https://..."/></div>
+        <div class="admin-field full"><label>Extracto Cap&#237;tulo 1</label><textarea id="rec-extracto" style="min-height:120px;" placeholder="Texto del cap&#237;tulo..."></textarea></div>
+      </div>
+      <button class="admin-btn" onclick="adminAddBook()" style="margin-top:1rem;">&#10022; Publicar</button>
+      <div class="admin-msg" id="rec-msg"></div>
+    </div>
+    <div class="admin-section">
+      <h3>&#128172; Comentarios</h3>
+      <div class="admin-list" id="admin-comments-list"><p style="color:v
 </body>
 </html>
