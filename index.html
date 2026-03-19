@@ -1193,35 +1193,62 @@ function adminAddBook() {
     });
   }).catch(function(e) { msg.textContent = 'Error: ' + e.message; msg.className = 'admin-msg err'; msg.style.display = 'block'; });
 }
+function approveComment(key){ db.ref('comentarios/'+key+'/aprobado').set(true); }
+function deleteComment(key){ if(confirm('Eliminar?')) db.ref('comentarios/'+key).remove(); }
+function deleteBook(key){ if(confirm('Eliminar?')) db.ref('recomendados/'+key).remove().then(loadAdminBooks); }
+
 function loadAdminComments() {
-  var list = document.getElementById('admin-comments-list'); if (!list) return;
+  var list = document.getElementById('admin-comments-list');
+  if (!list) return;
   db.ref('comentarios').on('value', function(snap) {
     list.innerHTML = '';
     var data = snap.val();
-    if (!data) { list.innerHTML = '<p style="color:var(--text-dim);font-style:italic;">No hay comentarios.</p>'; return; }
+    if (!data) {
+      list.innerHTML = '<p style="color:var(--text-dim);font-style:italic;">No hay comentarios.</p>';
+      return;
+    }
     var entries = Object.entries(data);
-    entries.sort(function(a,b) { return a[1].aprobado === b[1].aprobado ? 0 : a[1].aprobado ? 1 : -1; });
+    entries.sort(function(a,b){ return a[1].aprobado===b[1].aprobado?0:a[1].aprobado?1:-1; });
     entries.forEach(function(e) {
-      var key = e[0], c = e[1];
-      var fecha = new Date(c.fecha).toLocaleDateString('es-CL', { month:'short', day:'numeric' });
-      var estado = c.aprobado ? '<span style="color:#5fa85f;font-size:.7rem;">✔ Aprobado</span>' : '<span style="color:#e8a020;font-size:.7rem;">● Pendiente</span>';
-      list.innerHTML += '<div class="admin-item"><div class="admin-item-info"><p class="admin-item-title">' + escHtml(c.autor || '?') + ' ' + fecha + ' ' + estado + '</p><p class="admin-item-sub">' + escHtml((c.texto || '').substring(0, 80)) + '</p></div>'
-        + '<div class="admin-item-actions">'
-        + (!c.aprobado ? '<button class="admin-approve" onclick="db.ref('comentarios/' + key + '/aprobado').set(true)">Aprobar</button>' : '')
-        + '<button class="admin-delete" onclick="if(confirm('¿Eliminar?'))db.ref('comentarios/' + key + '').remove()">Eliminar</button>'
-        + '</div></div>';
+      var key=e[0], c=e[1];
+      var fecha=new Date(c.fecha).toLocaleDateString('es-CL',{month:'short',day:'numeric'});
+      var estado=c.aprobado
+        ? '<span style="color:#5fa85f;font-size:.7rem;">&#10004; Aprobado</span>'
+        : '<span style="color:#e8a020;font-size:.7rem;">&#9679; Pendiente</span>';
+      var div=document.createElement('div');
+      div.className='admin-item';
+      div.innerHTML='<div class="admin-item-info"><p class="admin-item-title">'
+        +escHtml(c.autor||'?')+' '+fecha+' '+estado
+        +'</p><p class="admin-item-sub">'+escHtml((c.texto||'').substring(0,80))+'</p></div>'
+        +'<div class="admin-item-actions">'
+        +(!c.aprobado?'<button class="admin-approve" onclick="approveComment(this.dataset.key)">Aprobar</button>':'')
+        +'<button class="admin-delete" onclick="deleteComment(this.dataset.key)">Eliminar</button>'
+        +'</div>';
+      div.querySelectorAll('[onclick]').forEach(function(btn){btn.dataset.key=key;});
+      list.appendChild(div);
     });
   });
 }
+
 function loadAdminBooks() {
-  var list = document.getElementById('admin-books-list'); if (!list) return;
+  var list = document.getElementById('admin-books-list');
+  if (!list) return;
   db.ref('recomendados').once('value', function(snap) {
-    var data = snap.val(); list.innerHTML = '';
-    if (!data) { list.innerHTML = '<p style="color:var(--text-dim);font-style:italic;">No hay libros aún.</p>'; return; }
+    var data = snap.val();
+    list.innerHTML = '';
+    if (!data) {
+      list.innerHTML = '<p style="color:var(--text-dim);font-style:italic;">No hay libros aun.</p>';
+      return;
+    }
     Object.entries(data).forEach(function(e) {
       var key = e[0], b = e[1];
-      list.innerHTML += '<div class="admin-item"><div class="admin-item-info"><p class="admin-item-title">' + escHtml(b.titulo) + '</p><p class="admin-item-sub">Por ' + escHtml(b.autorNombre) + '</p></div>'
-        + '<div class="admin-item-actions"><button class="admin-delete" onclick="if(confirm('¿Eliminar?'))db.ref('recomendados/' + key + '').remove().then(loadAdminBooks)">Eliminar</button></div></div>';
+      var div = document.createElement('div');
+      div.className = 'admin-item';
+      div.innerHTML = '<div class="admin-item-info"><p class="admin-item-title">' + escHtml(b.titulo)
+        + '</p><p class="admin-item-sub">Por ' + escHtml(b.autorNombre) + '</p></div>'
+        + '<div class="admin-item-actions"><button class="admin-delete" onclick="deleteBook(this.dataset.key)">Eliminar</button></div>';
+      div.querySelector('.admin-delete').dataset.key = key;
+      list.appendChild(div);
     });
   });
 }
