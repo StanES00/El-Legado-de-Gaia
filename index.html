@@ -704,103 +704,140 @@
     <div class="rec-grid" id="rec-grid">
 
         <div class="rec-card reveal">
-        <div class="rec-cover-wrap" onclick="openLb('URL_IMAGEN_PORTADA')">
-          <img src="Lament1.jpeg" alt="LAMENT OF A DEMON EL LEGADO "
-               onerror="this.parentElement.style.background='var(--dark3)'"/>
-          <div class="rec-cover-shine"></div>
+
+  <!-- PORTADA -->
+  <div class="rec-cover-wrap" onclick="openLb('Lament1.jpeg')">
+    <img src="Lament1.jpeg" alt="Lament of a Demon – El Legado"
+         onerror="this.parentElement.style.background='var(--dark3)'"/>
+    <div class="rec-cover-shine"></div>
+  </div>
+
+  <div class="rec-body">
+
+    <h3 class="rec-title">Lament of a Demon – El Legado</h3>
+    <p class="rec-author">Por W.A. Erazo</p>
+
+    <p class="rec-synopsis">En un mundo fracturado por guerras antiguas entre fuerzas divinas, demoníacas y humanas, el dolor puede corromper incluso a los seres más puros. A través de tragedias, traiciones y vínculos prohibidos, cada personaje enfrenta decisiones que definen el destino de mundos enteros. Las líneas entre héroe y villano se desvanecen, revelando la complejidad de la condición humana en su forma más cruda: el poder de la redención, el costo del orgullo, el peso del sacrificio… y la posibilidad de transformación a través del sufrimiento.</p>
+
+    <!-- LINKS DE COMPRA CON ICONOS -->
+    <div class="rec-links">
+      <a href="https://www.amazon.com/dp/B0GKHPVWNP?ref=cm_sw_r_ffobk_cso_cp_mwn_dp_Z4CY9KAH1SFCV3J7KMMC&bestFormat=true"
+         class="rec-link amazon" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M.045 18.02c.072-.116.187-.124.348-.022 3.636 2.11 7.594 3.166 11.87 3.166 2.852 0 5.668-.533 8.447-1.595l.315-.14c.138-.06.234-.1.293-.13.226-.088.39-.046.525.13.12.174.09.336-.12.48-.256.19-.6.41-1.006.654-1.244.743-2.64 1.316-4.185 1.726a18.5 18.5 0 01-4.72.612c-3.764 0-7.15-.98-10.156-2.94-.27-.17-.34-.38-.2-.59z"/>
+          <path d="M21.186 15.785c-.388-.299-.811-.186-1.254.04-.882.455-1.814.75-2.794.882-.522.07-.96-.06-1.315-.388-.354-.327-.496-.768-.424-1.32.186-1.406 1.274-2.38 3.263-2.917.354-.098.706-.163 1.055-.198V11.6c0-.624-.133-1.07-.4-1.34-.266-.27-.717-.405-1.35-.405-.91 0-1.713.478-2.41 1.433-.07.097-.163.14-.276.13-.114-.01-.196-.063-.247-.16l-.8-1.59c-.05-.097-.043-.198.02-.302.91-1.202 2.243-1.803 4-1.803 1.164 0 2.072.32 2.723.96.65.64.977 1.565.977 2.774v4.56c0 .408.17.612.512.612.17 0 .328-.04.477-.12.097-.053.185-.04.264.04l.566.97c.08.13.06.262-.06.396-.584.53-1.3.796-2.147.796-.664 0-1.19-.2-1.578-.6z"/>
+        </svg>
+        Amazon
+      </a>
+      <a href="LINK_APPLE" class="rec-link apple" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+        </svg>
+        Apple Books
+      </a>
+      <a href="LINK_GOODREADS" class="rec-link goodreads" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M11.43 23.995c-3.608-.208-6.274-1.596-7.993-4.15C2.38 18.215 2 16.783 2 14.896c0-2.03.418-3.61 1.254-4.743C4.516 8.453 6.104 7.5 8.051 7.5c1.415 0 2.56.437 3.438 1.312.406.406.718.875.938 1.407V7.5h2.203v9.234c0 .906.016 1.563.047 1.969.03.406.095.797.188 1.172-.188.016-.376.023-.563.023-.812 0-1.407-.25-1.781-.75a3.95 3.95 0 01-.438-.984c-.5.625-1.078 1.094-1.734 1.406-.657.313-1.4.47-2.235.47-1.875 0-3.328-.688-4.36-2.063C2.718 16.607 2.2 14.942 2.2 12.94c0-2.094.547-3.797 1.64-5.11C4.938 6.52 6.375 5.86 8.157 5.86c1.25 0 2.374.36 3.28 1.078.407.329.766.72 1.079 1.172V0h2.203z"/>
+        </svg>
+        Goodreads
+      </a>
+      <a href="LINK_WATTPAD" class="rec-link wattpad" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M4 2h16a2 2 0 012 2v16a2 2 0 01-2 2H4a2 2 0 01-2-2V4a2 2 0 012-2zm8 3c-3.86 0-7 3.14-7 7 0 2.96 1.84 5.5 4.46 6.56L11 12.5V17h2l1.5-5.5 1 4.5h2l-2-9c-.5-1.5-1.5-2-3.5-2z"/>
+        </svg>
+        Wattpad
+      </a>
+    </div>
+
+    <!-- BOTÓN CAPÍTULO -->
+    <button class="rec-excerpt-btn" onclick="toggleCap(this)">
+      &#128214; Leer Capítulo 12
+    </button>
+
+    <!-- CAPÍTULO INLINE (se despliega aquí, sin modal negro) -->
+    <div class="rec-chapter" style="display:none;">
+      <div class="rec-chapter-inner">
+        <h4 class="rec-chap-title">Capítulo XII — El Despertar</h4>
+        <div class="rec-chap-text">
+
+          <p>Sentía que había algo más que libros… Observé todo lo que me rodeaba en la biblioteca: columnas antiguas decoradas con grabados arcanos, vitrinas oxidadas con manuscritos sellados en símbolos prohibidos, pero algo me llamaba más allá. Alcé la vista y fue entonces cuando lo noté: unas escaleras circulares de piedra, viejas como el mundo mismo, que descendían en espiral hacia el centro de un pasaje olvidado por el tiempo.</p>
+
+          <p>Una brisa extraña me envolvió al bajar; era como si el aire murmurara en un lenguaje que mi alma comprendía, pero mi mente no podía traducir. En cada escalón aparecían imágenes fugaces de mi padre, fragmentos, ecos, sombras que no asustaban, sino que consolaban. Él ya había estado allí. Lo sabía, lo sentía.</p>
+
+          <p>Al final del descenso, el pasillo desembocaba en una puerta rústica de madera carcomida y metal ennegrecido. Giré la perilla y crujió como una criatura herida al abrirse. Dentro, la penumbra me tragó por completo: una habitación circular con paredes desnudas y el suelo cubierto de espejos rotos, astillas negras y filosas como garras congeladas en el tiempo.</p>
+
+          <p>Me agaché frente a uno cuya superficie seguía parcialmente intacta. En su base, grabadas a fuego, unas palabras me dejaron helado: <em>«Aquellos que logren combatir su oscuridad, serán dueños del poder infinito».</em></p>
+
+          <p>—¿Qué demonios significa esto? —murmuré.</p>
+
+          <p>Apenas parpadeé y la habitación cambió por completo. Los cristales en el suelo se elevaron, volviendo a sus formas originales. Pero su reflejo no era el mío. Me rodeaban espejos altos y en todos ellos el ser reflejado era otro: un demonio hecho humo, con alas, cuernos encorvados, garras negras y unos ojos vacíos, sin temor, sin dolor.</p>
+
+          <p>El reflejo desenfundó mi propia Necrosaw y salió del espejo. El cristal no se rompió; se abrió como agua negra para dejarlo salir.</p>
+
+          <p>—¡Whaoo! Eso no se ve todos los días —dije con una sonrisa nerviosa.</p>
+
+          <p>La sombra no me dio tregua. El impacto del primer choque fue tan brutal que un corte profundo me surcó la mejilla. Esto era real, y si no tenía cuidado, podía morir. Usé fuego: esferas, chorros ígneos… pero era demasiado astuto. Los esquivaba, los partía en dos, incluso los absorbía como si le dieran más fuerza.</p>
+
+          <p>Entonces lo recordé: la técnica donde la fricción de mi espada generaba una llama capaz de explotar al contacto. Solo una oportunidad.</p>
+
+          <p>Grité y corrí hacia él. En el instante exacto en que las armas chocaron, generé la vibración. Una explosión incandescente estalló entre nosotros, lanzándonos en direcciones opuestas. Rodé por el suelo, golpeado, con cortes en brazos y pecho… pero respirando. Vivo.</p>
+
+          <p>Entonces sentí un calor punzante atravesarme la espalda. Bajé la vista y vi cómo la hoja espectral de la Necrosaw emergía por mi vientre, ensangrentada.</p>
+
+          <p>—Mierda… —logré decir con la voz rota.</p>
+
+          <p>Me desplomé de rodillas, pero no caí. No aún.</p>
+
+          <p>—Este no es el final —murmuré—. Maldito demonio, es hora de que cooperes. Si yo muero… ¡tú mueres!</p>
+
+          <p>Una cortina de sombras emergió del suelo cubriéndome por completo. Todo a mi alrededor se desvaneció. Flotaba en la nada, y fue entonces que dos ojos aparecieron: grandes, de un rojo encendido, brillando como brasas recién avivadas. Una sonrisa ancha, de dientes largos y afilados como cuchillas.</p>
+
+          <p>—<em>Daaante…</em> —susurró aquella voz con un eco que erizaba la piel.</p>
+
+          <p>—¿Quién eres? —pregunté.</p>
+
+          <p>—¿En serio, muchacho? Soy la razón por la que respiras cuando estás al borde de la muerte, el rugido que te empuja cuando todo parece perdido. Abrimos los ojos el mismo día, Dante. Yo estuve ahí… siempre.</p>
+
+          <p>—¿Eres tú…? ¿El demonio que habita en mi interior?</p>
+
+          <p>—Bingo. Soy eso que susurra cuando estás a punto de matar, eso que sonríe cuando todo arde. Soy tú, pero sin las malditas reglas. Y ahora voy a ayudarte, no porque me importes… sino porque morir contigo suena demasiado mediocre.</p>
+
+          <p>Las sombras se desvanecieron y sentí cómo algo se rompía dentro de mí: algo viejo, algo sellado. Una onda de fuerza brutal emergió de mi cuerpo. La mayoría de los espejos estallaron en mil pedazos. Mi sombra cayó de rodillas. Mis heridas comenzaron a cerrarse, los músculos se tensaron, la sangre dejó de brotar.</p>
+
+          <p>Miré mis manos. Las uñas habían crecido, más afiladas, más negras. Y mis ojos… estaban inundados en rojo, como los de una bestia.</p>
+
+          <p>—¡Felicitaciones! —interrumpió el demonio—. Has alcanzado la versión 2.0 de ti mismo.</p>
+
+          <p>El contraataque fue implacable. Cada golpe, cada estocada acorralaba a la sombra. Lancé la Necrosaw con precisión milimétrica, clavándola en el último espejo intacto. Luego, una gigantesca esfera de fuego se estrelló contra el cristal, rompiendo su última defensa.</p>
+
+          <p>La sombra cayó de rodillas: rota, derrotada. Nuestros ojos se cruzaron… y sonrió. No con burla, sino con resignación. Se desmaterializó en humo negro que se fundió con mi cuerpo. No dolió. Fue como una aceptación mutua.</p>
+
+          <p>—Papá… siempre tuviste razón —murmuré—. Reprimir el demonio interno no era destruirlo… era aceptarlo, controlarlo.</p>
+
+          <p>La habitación comenzó a reconstruirse sola. Los espejos rotos se alzaron, las grietas desaparecieron. La puerta reapareció. Respiré profundo, puse la espada al hombro y salí.</p>
+
+          <p>Justo afuera, Tang devoraba libros con tal emoción que su cola se movía como un metrónomo, con un pergamino pegado en la cara y otro atrapado entre las patas.</p>
+
+          <p>—¿En serio, Tang? —dije con una sonrisa inevitable.</p>
+
+          <p>—¡Miau! ¡Mi señor! ¡Encontré un papiro que habla de armas que caminan solas… y este tiene dibujos de comida!</p>
+
+          <p>Me acerqué y le acaricié la cabeza.</p>
+
+          <p>—Vamos, amigo. Tenemos una biblioteca entera que explorar y un nuevo destino por encontrar.</p>
+
+          <p>—¡Sí, miau-amo! ¡Y esta vez yo elijo el camino!</p>
+
+          <p>—Dios nos libre… —dijo la voz interna con tono teatral—. Vamos a morir. Pero al menos… moriremos entretenidos.</p>
+
+          <p>Y con ese pensamiento, nos adentramos entre estanterías, antiguos manuscritos y pasillos ocultos. Porque sabíamos que el viaje apenas comenzaba.</p>
+
         </div>
-        <div class="rec-body">
-          <h3 class="rec-title">LAMENT OF A DEMON EL LEGADO</h3>
-          <p class="rec-author">Por W.A.ERAZO.</p>
-          <p class="rec-synopsis">Lament of a Demon narra la historia de un mundo fracturado por guerras antiguas entre fuerzas divinas, demoníacas y humanas. A través de tragedias, traiciones y vínculos prohibidos, la historia explora cómo el dolor puede corromper incluso a los seres más puros, dando origen a ideologías extremas y conflictos que amenazan con consumir toda existencia. En este universo donde la lealtad es cuestionada, la fe se tambalea y el sacrificio adquiere significados insospechados, cada personaje enfrenta decisiones que definen el destino de mundos. Las líneas entre héroe y villano se desvanecen, revelando la complejidad de la condición humana en su forma más cruda.
+      </div>
+    </div><!-- /rec-chapter -->
 
-Lament of a Demon es una exploración profunda de temas universales: el poder de la redención, el costo del orgullo, la naturaleza del sacrificio y la posibilidad de transformación a través del sufrimiento..</p>
-          <div class="rec-links">
-            <a href="https://www.amazon.com/dp/B0GKHPVWNP?ref=cm_sw_r_ffobk_cso_cp_mwn_dp_Z4CY9KAH1SFCV3J7KMMC&ref_=cm_sw_r_ffobk_cso_cp_mwn_dp_Z4CY9KAH1SFCV3J7KMMC&social_share=cm_sw_r_ffobk_cso_cp_mwn_dp_Z4CY9KAH1SFCV3J7KMMC&bestFormat=true" class="rec-link" target="_blank">Amazon</a>
-            <a href="LINK_APPLE" class="rec-link" target="_blank">Apple Books</a>
-            <a href="LINK_GOODREADS" class="rec-link" target="_blank">Goodreads</a>
-          </div>
-          <button class="rec-excerpt-btn" onclick="toggleCap(this)">
-            &#128214; Leer Cap&#237;tulo 1
-          </button>
-          <div class="rec-chapter" style="display:none;">
-            <div class="rec-chapter-inner">
-              <h4 class="rec-chap-title">Cap&#237;tulo XII</h4>
-              <div class="rec-chap-text">
-                <p>CAPÍTULO XII
-EL DESPERTAR
-
-Sentía que había algo más que libros… Observé todo lo que me rodeaba en la biblioteca: columnas antiguas decoradas con grabados arcanos, vitrinas oxidadas con manuscritos sellados en símbolos prohibidos, pero algo me llamaba más allá. Alcé la vista… y fue entonces cuando lo noté: unas escaleras circulares de piedra, viejas como el mundo mismo, que descendían en espiral hacia el centro de un pasaje olvidado por el tiempo. Una brisa extraña me envolvió al bajar, era como si el aire murmurara en un lenguaje que mi alma comprendía, pero mi mente no podía traducir. 
-En cada escalón, imágenes fugaces de mi padre aparecían, fragmentos, ecos, sombras que no asustaban, sino que consolaban. Él ya había estado allí, lo sabía, lo sentía, era un lugar marcado por su esencia. No me incomodaba, de hecho, esa era la única forma en la que podía acercarme a él. Al final del descenso, el pasillo desembocaba en una puerta rústica, vieja, de madera carcomida y metal ennegrecido. A diferencia de la entrada de la biblioteca, esta sí estaba incrustada en un muro sólido, como si protegiera algo que no debía escapar.
-—Vaya diferencia —susurré, tocando la manija con cautela. 
-Giré la perilla y crujió como una criatura herida al abrirse. Dentro, la penumbra me tragó por completo; era una habitación circular, simple, con paredes sin decoraciones ni vitrales mágicos, nada del otro mundo… con excepción del desastre absoluto en el suelo: fragmentos de cristal, espejos rotos, astillas negras y filosas como garras congeladas en el tiempo. Cada espejo había sido destruido con violencia, como si alguien no hubiese soportado ver lo que reflejaban. Caminé entre los cristales, esquivándolos con cuidado, me agaché frente a uno en especial, su superficie estaba parcialmente intacta, como si algo se resistiera a romperse por completo. Y en la base, grabadas a fuego con letras antiguas, unas palabras me dejaron helado: «Aquellos que logren combatir su oscuridad, serán dueños del poder infinito». Fruncí el ceño.
-—¿Qué demonios significa esto? 
-Apenas parpadeé, y la habitación cambió por completo: la puerta detrás de mí ya no estaba. Todo lo roto y destruido… se restauró. Los cristales en el suelo se elevaron, volviendo a sus formas originales: espejos altos, de marcos oscuros, pulidos y perfectos. Pero su reflejo… no era el mío. Me rodeaban… y en todos ellos, el ser reflejado era otro: un demonio hecho humo, como una silueta de sombra viva. Tenía alas, cuernos encorvados, garras negras, dientes afilados y unos ojos malditos, vacíos, sin temor, sin dolor. No podía ser otra cosa: esa cosa era yo, o al menos, la parte de mí que siempre quise negar. Alcé la mano y una flama surgió de mi palma. Mi reflejo me imitó, pero entonces, su fuego se apagó… y en lugar de quedarse inmóvil, desenfundó la Necrosaw. ¡La mía! Y salió del espejo. El cristal no se rompió, se abrió como agua negra para dejarlo salir. Sentí mi corazón latir en la garganta. El demonio que siempre había temido ver… ahora estaba frente a mí, tomando forma, sonriendo. esa sombra hecha carne. 
-—¡Whaoo! Eso no se ve todos los días —dije, con una sonrisa nerviosa, apenas sin poder creer lo que tenía frente a mí. 
-La sombra no me dio tregua; se abalanzó con una velocidad tan abrumadora que apenas tuve tiempo de reaccionar. Desenfundé mi espectral y la choqué contra la suya. El impacto fue tan brutal que un corte profundo me surcó la mejilla: ardía. No era una ilusión ni un entrenamiento. Esto era real… y, si no tenía cuidado, podía morir. Me separé con un impulso hacia atrás, respirando con fuerza, evaluando cada uno de sus movimientos. No solo era fuerte: era yo, pero sin mis miedos, sin mis límites, sin mi humanidad. Miré fijamente a esa sombra hecha carne.
-Él también me miraba… con esa sonrisa torcida, afilada, como si supiera exactamente lo que iba a hacer. Volvió a atacar, moviéndose con maestría, como si danzara con cada paso. Usé fuego: creé llamas, esferas, chorros ígneos… pero era demasiado astuto. Las esquivaba, las partía en dos, incluso las absorbía, como si le dieran más fuerza. Estaba en desventaja, y grande, debía pensar rápido. Entonces lo recordé: la técnica que había desarrollado entrenando el fuego, cuando la fricción de mi espada generaba una llama capaz de explotar al contacto. Si lograba usar eso en el momento justo del choque, quizás tenía una oportunidad. Pero era un riesgo; si fallaba, quedaría completamente expuesto.
-—Vamos… —susurré para mí mismo— Solo una oportunidad… 
-El reflejo volvió a lanzarse. Grité y corrí hacia él también, como si estuviera dispuesto a morir. En el instante exacto en que las armas chocaron, generé la vibración. El impacto fue monstruoso: una explosión incandescente estalló entre nosotros, lanzándonos a ambos en direcciones opuestas. Rodé por el suelo, golpeado, con cortes en los brazos y el pecho, pero respirando. Vivo. Me arrastré hasta recargarme contra uno de los espejos. Tosí sangre y escupí en el suelo. Mis dedos temblaban. Miré alrededor… —¿Lo vencí…? Pero entonces, lo sentí. 
-Un calor punzante me atravesó la espalda. No fue un golpe, fue un acero familiar. Mis ojos se abrieron con brutalidad. Bajé la vista y vi cómo la hoja espectral de la Necrosaw emergía por mi vientre, ensangrentada. El dolor fue brutal. La sangre salpicó con fuerza, tiñendo los espejos cercanos. Un hilo de ella se deslizaba por la comisura de mis labios. 
-—Mierda… —logré decir, con la voz rota. 
-Mi reflejo espectral tenía habilidades que yo aún no dominaba. Era la versión despiadada, completa, desatada… La que no temía utilizar todo lo que llevaba dentro. Me empujó hacia adelante, retirando la hoja con lentitud, como si disfrutara verme desangrar. Me desplomé de rodillas… pero no caí. No aún. Vi cómo se deslizaba entre los espejos, saliendo de uno en el suelo, como si aquel cristal fuera su reino, su prisión, su hogar. Y ahora… su campo de batalla. Caminé como pude, sosteniéndome el vientre con una mano, apretando los dientes por el dolor, mientras con la otra arrastraba la espada. La sangre me cubría el abdomen, la boca y las piernas. 
-—Este no es… el final —murmuré, con la voz ahogada. 
-No era el final, porque, aunque estaba al borde de la muerte, aún estaba consciente. Y mientras lo estuviera… aún podía luchar. 
-—Maldito demonio, es hora de que dejes de ejercer control sobre mí y cooperes, si es que quieres seguir viviendo... porque si yo muero, ¡tú mueres! —exclamé con fulgor, sintiendo cómo mi voz retumbaba en aquella sala sin fin. 
-De pronto, una cortina de sombras emergió del suelo, cubriéndome por completo. Todo a mi alrededor se desvaneció: no había suelo, ni techo, ni paredes… nada. Flotaba en la nada; un vacío frío y sin sonido. Y fue entonces, en esa absurda calma, que dos ojos aparecieron ante mí… grandes, de un rojo encendido, brillando como brasas recién avivadas. Luego, una sonrisa se dibujó en medio del vacío: ancha, de dientes largos y afilados como cuchillas. Una carcajada sorda y profunda rompió el silencio. 
-—Daaante... —susurró aquella voz con un eco que erizaba la piel. 
-—¿Quién eres? —pregunté, clavando la mirada en los ojos flotantes. 
-La entidad rió como si hubiera escuchado la mejor broma del inframundo. 
-—¿En serio, muchacho? ¿Después de todo lo que has hecho, lo que hemos sentido... me preguntas quién soy? —su voz se volvió burlona, pero con un dejo de fastidio teatral— Qué insultante. Yo soy la razón por la que respiras cuando estás al borde de la muerte, el rugido que te empuja cuando todo parece perdido… Abrimos los ojos el mismo día, Dante. Yo estuve ahí… siempre. 
-—¿Eres tú...? ¿El demonio que habita en mi interior? —murmuré, sintiendo un estremecimiento recorrerme. 
-—Bingo. Puedes llamarme como quieras: sombra, parásito, voz molesta... Me da igual. Pero en efecto, soy eso que susurra cuando estás a punto de matar, eso que sonríe cuando todo arde a tu alrededor. Soy tú, pero sin las malditas reglas. 
-—¿Y por qué apareces ahora? 
-—Porque estás a punto de morir, y aunque no me cae muy bien tu parte sentimental de salvador universal… —hizo una pausa burlona—, no puedo dejar que nos extingamos por un desangrado dramático. Así que escucha, esta vez voy a ayudarte. No porque me importes… sino porque morir contigo suena demasiado mediocre —la silueta de humo comenzó a disiparse —. Pero créeme, Dante, un día tendrás que pagar todo lo que reprimes. Y cuando lo hagas… no seré tan amable como ahora. 
-—¿Eso fue amable? —respondí con ironía. 
-Una última carcajada resonó, y las sombras se desvanecieron como si fueran arrastradas por una ráfaga infernal. Y fue así que, de la misma forma en que apareció, la cortina de oscuridad se desvaneció, como humo arrastrado por un viento invisible, volviendo a mi interior. Sentí cómo algo se rompía... no afuera, sino dentro de mí. Algo viejo, algo sellado. En ese instante, me vi envuelto en una carga de energía sofocante, espesa como la lava viva de un volcán a punto de estallar. Latido tras latido, el poder crecía y crecía, hasta que de mi cuerpo emergió una onda de fuerza brutal. El impacto fue tal que la mayoría de los espejos estallaron en mil pedazos, como si un grito reprimido durante siglos se hubiera liberado. 
-—¡Eso, así me gusta! —interrumpió la voz dentro de mí, con ese tono burlón que me ponía los nervios de punta— Nada como una buena explosión para romper el hielo.
-Mi sombra... ese reflejo demoníaco, cayó de rodillas. La onda lo había enloquecido, como si su vínculo conmigo se hubiera vuelto inestable. Vi cómo se retorcía entre los cristales rotos, gruñendo y gimiendo como un animal acorralado. Entonces lo sentí: el calor en mis venas, el poder… la vida volviendo a mí. Mis heridas comenzaron a cerrarse, como si el tiempo mismo retrocediera en mi cuerpo; mis músculos se tensaron, la sangre dejó de brotar, y una quietud sobrenatural invadió mis sentidos. Ni siquiera sentía dolor… solo fuerza. Una calma peligrosa. 
-—¿Lo sientes, Dante? —dijo la entidad en un susurro venenoso— Esa sensación cálida y embriagadora… no es sanación: es dominación. Te estás acostumbrando, ¿eh? No te preocupes, a todos les pasa… al principio, claro... 
-Miré mi mano y mis uñas habían crecido, volviéndose más afiladas, más negras; no eran humanas, ni siquiera parecían mías. Luego me fijé en mis ojos… aunque no necesitaba un espejo para saberlo: estaban inundados en sangre. Rojos como los de una bestia, como los de él. Era el mismo color que veía cada vez que perdía el conocimiento durante las transformaciones… pero esta vez, no perdí el control. 
-—¿Interesante, no? —interrumpió de nuevo el demonio con un tono de diversión siniestra—Esta vez tu cuerpecito no colapsó. ¡Felicitaciones! Has alcanzado la versión 2.0 de ti mismo. Lo llamaremos… Modo “Estoy−por−romperlo−todo−sin−parpadear”. 
-—Cállate —respondí con los dientes apretados. 
-—Oh, ¿qué pasa? ¿No te gusta ser fuerte? ¿No te gusta sanar con un chasquido y tener el poder de un dios latiendo en cada vena? Vamos, Dante, acéptalo… somos uno solo. Y en el fondo… te gusta.
-Me mantuve en silencio, tratando de ignorarlo. Pero no podía negarlo. Algo dentro de mí había cambiado. No era solo una recuperación, era una evolución, una versión más cercana a lo que realmente estaba destinado a ser. Una transformación de segundo grado. Y lo peor de todo… era que no me sentía asustado, me sentía completo. 
-—No me veo tan mal —murmuré, observando mis manos, la piel endurecida, los ojos aún tintados de rojo. Esa nueva forma… esa energía—. Así que, maldito espectro y copia barata de mí… tus segundos están contados —señalé con firmeza, alzando mi índice con una sonrisa. 
-No esperé más. El contraataque fue implacable. Cada golpe, cada estocada, cada chorro de fuego que emergía de mis manos lo acorralaba. La sombra comenzó a suprimirse, a ceder terreno. Mis movimientos eran precisos, feroces, como si mi cuerpo y mi mente por f in estuvieran en sincronía. Ya no era solo habilidad: era dominio total. Una danza brutal de velocidad y poder. El reflejo, agotado y sobrepasado, intentó ocultarse en el último espejo que quedaba intacto. Sin darle tiempo, lancé la Necrosaw con precisión milimétrica, clavándola en el marco. Luego, elevé mi mano izquierda y, como una sentencia ardiente, generé una gigantesca esfera de fuego que se estrelló contra el cristal, rompiendo su última defensa. 
-La sombra cayó de rodillas: rota, derrotada. Me acerqué, sosteniendo la espada, con el filo apuntando hacia su pecho. Nuestros ojos se cruzaron. Entonces, sucedió lo inesperado. La sombra... sonrió. No con burla, sino con resignación. Y sin más, se desmaterializó. Un humo denso, negro como el olvido, que se elevó lentamente y se fundió con mi cuerpo. No dolió, no ardió. Fue como una aceptación mutua. Sentí cómo algo en mí se completaba. La transformación se asentó con libertad. Ya no era una amenaza… era parte de mí, como un músculo que siempre estuvo dormido. Era yo, sin perderme a mí mismo. El poder de un demonio, con el alma de un hombre. Por primera vez, me sentí completo. 
-—Papá... siempre tuviste razón —murmuré, bajando la cabeza—. Reprimir el demonio interno no era destruirlo… era aceptarlo, controlarlo. 
-Y entonces, el silencio. La habitación, antes destruida, comenzó a reconstruirse sola. Los espejos rotos se alzaron, los cristales flotaron, las grietas desaparecieron, como si el caos jamás hubiera existido. La puerta reapareció. Respiré profundo, giré mi espada sobre el hombro y salí de aquella prisión circular. Justo afuera, me topé con una escena curiosa: Tang, mi pequeño compañero, estaba encima de una mesa improvisada, devorando libros con tal emoción que su cola se movía como un metrónomo. Tenía un pergamino pegado en la cara y otro atrapado entre las patas delanteras. Me crucé de brazos con una sonrisa inevitable. 
-—¿En serio, Tang? —dije. 
-—¡Miau! ¡Mi señor! ¡Encontré un papiro que habla de armas que caminan solas y... y...! ¡Y este tiene dibujos de comida! —dijo con entusiasmo, sin siquiera voltearse.
-—Awww, miren eso… —interrumpió la entidad demoníaca en mi cabeza con un tono burlonamente tierno— ¿Quién iba a pensar que un felino albino traga libros sería nuestra mascota? Ya sabes, si tuviera corazón… esto casi me derrite. 
-—No lo toques —advertí en voz baja. 
-—¿Quién, yo? Por favor… soy el demonio interno, no un monstruo. Aunque debo admitir que tiene estilo. El martillo gigante y todo ese rollo. Me cae bien el peludo.
-Me reí por dentro. Por primera vez, ambos estábamos de acuerdo en algo. Me acerqué a Tang y le acaricié la cabeza. 
-—Vamos, amigo. Tenemos una biblioteca entera que explorar y un nuevo destino por encontrar. 
-—¡Sí, miau−amo! ¡Y esta vez yo elijo el camino! 
-—¡Dios nos libre…! —dijo la voz interna con tono teatral— Vamos a morir. Pero al menos... moriremos entretenidos. 
-Y con ese pensamiento, nos adentramos entre estanterías, antiguos manuscritos y pasillos ocultos, porque sabíamos que el viaje apenas comenzaba. Tomé varios libros apilados sobre una mesa cubierta por una fina capa de polvo, sus títulos hablaban de alquimia básica, estructuras cósmicas, y uno incluso tenía recetas para ungüentos espirituales. Ninguno tenía lo que buscábamos. —Hay algo que no estamos viendo —dije en voz alta, dejando caer los libros uno a uno, con fastidio. Algo que alguien guardó con celo.
-—¡Oh, mira quién se pone filosófico! —interrumpió la voz demoníaca dentro de mí, con su tono burlón habitual—Algo que alguien guardó con celo, suena a esos diálogos dramáticos que sueltan los sabios justo antes de descubrir una trampa mortal.
- —Cállate —susurré sin mirar a nadie. 
-Mis pasos me guiaron instintivamente hacia el extremo más iluminado de la gran biblioteca. Frente a mí, se alzaba un vitral inmenso, decorado con cristales de múltiples colores. La imagen me atrapó de inmediato: un ser alado de aspecto humano, con una túnica blanca que parecía moverse aún bajo la luz inmóvil, sus manos extendidas como si entregara algo sagrado a una multitud expectante. El aura del retrato irradiaba divinidad. 
-—Astramos... —murmuré. 
-El vitral representaba claramente el momento exacto en el que, según la historia, Astramos obsequió la piedra filosofal a la humanidad. Pero algo no encajaba; mientras afinaba la vista, noté una sutil pero evidente diferencia en la composición. Un pequeño recuadro, justo en el centro del objeto que entregaba Astramos, tenía un color desvaído, mucho más opaco que el resto de la escena. Una mancha fuera de lugar. 
-—Eso no estaba en el diseño original… —dije acercándome de un gran salto.
-Extendí la mano y palpé la zona. A simple vista era parte del vitral, pero al tacto… era una lámina delgada de piedra recubriendo algo más blando. Alcé un poco de fuerza y, con cuidado, deslicé la punta de mi espada en el marco. Entonces la capa cedió, revelando una hoja perfectamente conservada, escondida detrás del cristal. 
-—Vaya… esto sí que es extraño —dije entre dientes. 
-—¡Ohhh, qué misterio tan emocionante! ¡Una página oculta detrás de un vitral divino! ¡Qué vendrá después, una llave en la sopa de Tang? —ironizó la entidad, aunque no pudo ocultar su genuino interés. 
-—Alguien arrancó esto de algún libro… —pensé— Pero ¿cuál? 
-Tomé la hoja con delicadeza, como si el más leve movimiento pudiera destruirla. En su superficie estaban escritos unos símbolos antiguos, pero no eran como los del libro de alquimia, esto era diferente, más antiguo, más… sagrado. Tang saltó sobre mi hombro, mirando también. 
-—Miau−amo… eso no es alquimia, ¿cierto? 
-—No… esto es anterior. Esto es... otro tipo de conocimiento. 
-—¡Punto extra para el felino albino! —bromeó la entidad—, ¿Quién necesita demonios con un gato tan perceptivo? 
-Ignoré su comentario y me concentré. La hoja tenía bordes dorados, no por decoración, sino por oxidación mística. El texto, escrito con una tinta que parecía moverse sutilmente, contenía símbolos que comenzaban a descifrarse en mi mente… como si el haber absorbido aquel poder en la cámara de espejos, me diera ahora acceso a una lengua olvidada. 
-—Esto… esto es una guía. No es solo historia, es una advertencia. 
-Mis ojos recorrieron el pergamino, mientras la sensación de que algo enorme estaba por revelarse me hacía contener la respiración. 
-—Vamos, Dante, hazlo dramático… di que “el destino del mundo depende de esto” —murmuró mi sombra interna con sarcasmo. 
-—No lo necesito decir… ya lo sé —respondí en voz baja, mientras la biblioteca volvía a sumirse en un silencio tan denso como la verdad que acabábamos de encontrar.
-.</p>
+  </div><!-- /rec-body -->
+</div><!-- /rec-card -->
           
       </div>
 
