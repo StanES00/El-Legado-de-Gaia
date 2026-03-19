@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://stan00.github.io/El-Legado-de-Gaia/sitemap.xml
