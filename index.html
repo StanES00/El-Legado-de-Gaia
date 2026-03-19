@@ -358,6 +358,28 @@
       .admin-grid{grid-template-columns:1fr}
     }
     @media(max-width:420px){.char-row-3 .char-card,.char-row-2 .char-card{width:100%;max-width:280px}}
+  
+    .rec-cover-wrap{position:relative;overflow:hidden;aspect-ratio:3/4;max-height:360px;cursor:zoom-in;background:var(--dark);}
+    .rec-cover-wrap img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s}
+    .rec-card:hover .rec-cover-wrap img{transform:scale(1.04)}
+    .rec-cover-shine{position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(0,0,0,.7) 100%);}
+    .rec-body{padding:1.5rem 1.6rem}
+    .rec-title{font-family:'Cinzel',serif;font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:.25rem;line-height:1.3}
+    .rec-author{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.15em;text-transform:uppercase;margin-bottom:1.1rem}
+    .rec-synopsis{font-size:.9rem;color:var(--text-dim);line-height:1.7;margin-bottom:1.3rem}
+    .rec-links{display:flex;gap:.55rem;flex-wrap:wrap;margin-bottom:1.1rem}
+    .rec-link{padding:.3rem .85rem;border:1px solid rgba(201,168,76,.3);background:rgba(201,168,76,.06);color:var(--gold);font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;transition:all .2s;}
+    .rec-link:hover{background:var(--gold);color:var(--dark)}
+    .rec-excerpt-btn{width:100%;padding:.6rem;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.25);color:var(--gold-light);font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:.5rem;}
+    .rec-excerpt-btn:hover{background:rgba(201,168,76,.15);border-color:var(--gold)}
+    .rec-chapter{margin-top:1rem;border-top:1px solid rgba(201,168,76,.15);}
+    .rec-chapter-inner{padding:1.5rem;background:rgba(0,0,0,.25);max-height:420px;overflow-y:auto;}
+    .rec-chapter-inner::-webkit-scrollbar{width:4px}
+    .rec-chapter-inner::-webkit-scrollbar-thumb{background:var(--gold);border-radius:2px}
+    .rec-chap-title{font-family:'Cinzel',serif;font-size:.85rem;color:var(--gold);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1.2rem;}
+    .rec-chap-text p{font-size:.92rem;color:var(--text);line-height:1.85;margin-bottom:1rem;}
+    .rec-empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;border:1px dashed rgba(201,168,76,.2);color:var(--text-dim);font-style:italic;}
+    .rec-empty p{margin-bottom:.8rem}
   </style>
 </head>
 <body>
@@ -385,7 +407,7 @@
       <button class="auth-btn" onclick="doRegister()">Crear Cuenta</button>
       <div class="auth-msg" id="reg-msg"></div>
     </div>
-    <div class="auth-contact">&#191;Problemas? <a href="mailto:stan.e.s@gmail.com">stan.e.s@gmail.com</a></div>
+    <div class="auth-contact">&#191;Problemas? <a href="/cdn-cgi/l/email-protection#8dfef9ece3a3e8a3fecdeae0ece4e1a3eee2e0"><span class="__cf_email__" data-cfemail="dfacabbeb1f1baf1ac9fb8b2beb6b3f1bcb0b2">[email&#160;protected]</span></a></div>
   </div>
 </div>
 
@@ -683,7 +705,155 @@
       <p style="color:var(--text-dim);font-size:.95rem;margin-top:1.2rem;font-style:italic;max-width:600px;margin-left:auto;margin-right:auto;">Escritores amigos que vale la pena conocer.</p>
     </div>
     <div class="rec-grid" id="rec-grid">
-      <div class="rec-empty"><p>&#128218; Cargando libros recomendados...</p></div>
+
+       <div class="rec-card reveal">
+        <div class="rec-cover-wrap" onclick="openLb('URL_IMAGEN_PORTADA')">
+          <img src="Lament1" alt="LAMENT OF A DEMON EL LEGADO "
+               onerror="this.parentElement.style.background='var(--dark3)'"/>
+          <div class="rec-cover-shine"></div>
+        </div>
+        <div class="rec-body">
+          <h3 class="rec-title">LAMENT OF A DEMON EL LEGAD</h3>
+          <p class="rec-author">Por W.A.ERAZO.</p>
+          <p class="rec-synopsis">Lament of a Demon narra la historia de un mundo fracturado por guerras antiguas entre fuerzas divinas, demoníacas y humanas. A través de tragedias, traiciones y vínculos prohibidos, la historia explora cómo el dolor puede corromper incluso a los seres más puros, dando origen a ideologías extremas y conflictos que amenazan con consumir toda existencia. En este universo donde la lealtad es cuestionada, la fe se tambalea y el sacrificio adquiere significados insospechados, cada personaje enfrenta decisiones que definen el destino de mundos. Las líneas entre héroe y villano se desvanecen, revelando la complejidad de la condición humana en su forma más cruda.
+
+Lament of a Demon es una exploración profunda de temas universales: el poder de la redención, el costo del orgullo, la naturaleza del sacrificio y la posibilidad de transformación a través del sufrimiento..</p>
+          <div class="rec-links">
+            <a href="https://www.amazon.com/dp/B0GKHPVWNP?ref=cm_sw_r_ffobk_cso_cp_mwn_dp_Z4CY9KAH1SFCV3J7KMMC&ref_=cm_sw_r_ffobk_cso_cp_mwn_dp_Z4CY9KAH1SFCV3J7KMMC&social_share=cm_sw_r_ffobk_cso_cp_mwn_dp_Z4CY9KAH1SFCV3J7KMMC&bestFormat=true" class="rec-link" target="_blank">Amazon</a>
+            <a href="LINK_APPLE" class="rec-link" target="_blank">Apple Books</a>
+            <a href="LINK_GOODREADS" class="rec-link" target="_blank">Goodreads</a>
+          </div>
+          <button class="rec-excerpt-btn" onclick="toggleCap(this)">
+            &#128214; Leer Cap&#237;tulo 1
+          </button>
+          <div class="rec-chapter" style="display:none;">
+            <div class="rec-chapter-inner">
+              <h4 class="rec-chap-title">Cap&#237;tulo 1</h4>
+              <div class="rec-chap-text">
+                <p>CAPÍTULO XII
+EL DESPERTAR
+
+Sentía que había algo más que libros… Observé todo lo que me rodeaba en la biblioteca: columnas antiguas decoradas con grabados arcanos, vitrinas oxidadas con manuscritos sellados en símbolos prohibidos, pero algo me llamaba más allá. Alcé la vista… y fue entonces cuando lo noté: unas escaleras circulares de piedra, viejas como el mundo mismo, que descendían en espiral hacia el centro de un pasaje olvidado por el tiempo. Una brisa extraña me envolvió al bajar, era como si el aire murmurara en un lenguaje que mi alma comprendía, pero mi mente no podía traducir. 
+En cada escalón, imágenes fugaces de mi padre aparecían, fragmentos, ecos, sombras que no asustaban, sino que consolaban. Él ya había estado allí, lo sabía, lo sentía, era un lugar marcado por su esencia. No me incomodaba, de hecho, esa era la única forma en la que podía acercarme a él. Al final del descenso, el pasillo desembocaba en una puerta rústica, vieja, de madera carcomida y metal ennegrecido. A diferencia de la entrada de la biblioteca, esta sí estaba incrustada en un muro sólido, como si protegiera algo que no debía escapar.
+—Vaya diferencia —susurré, tocando la manija con cautela. 
+Giré la perilla y crujió como una criatura herida al abrirse. Dentro, la penumbra me tragó por completo; era una habitación circular, simple, con paredes sin decoraciones ni vitrales mágicos, nada del otro mundo… con excepción del desastre absoluto en el suelo: fragmentos de cristal, espejos rotos, astillas negras y filosas como garras congeladas en el tiempo. Cada espejo había sido destruido con violencia, como si alguien no hubiese soportado ver lo que reflejaban. Caminé entre los cristales, esquivándolos con cuidado, me agaché frente a uno en especial, su superficie estaba parcialmente intacta, como si algo se resistiera a romperse por completo. Y en la base, grabadas a fuego con letras antiguas, unas palabras me dejaron helado: «Aquellos que logren combatir su oscuridad, serán dueños del poder infinito». Fruncí el ceño.
+—¿Qué demonios significa esto? 
+Apenas parpadeé, y la habitación cambió por completo: la puerta detrás de mí ya no estaba. Todo lo roto y destruido… se restauró. Los cristales en el suelo se elevaron, volviendo a sus formas originales: espejos altos, de marcos oscuros, pulidos y perfectos. Pero su reflejo… no era el mío. Me rodeaban… y en todos ellos, el ser reflejado era otro: un demonio hecho humo, como una silueta de sombra viva. Tenía alas, cuernos encorvados, garras negras, dientes afilados y unos ojos malditos, vacíos, sin temor, sin dolor. No podía ser otra cosa: esa cosa era yo, o al menos, la parte de mí que siempre quise negar. Alcé la mano y una flama surgió de mi palma. Mi reflejo me imitó, pero entonces, su fuego se apagó… y en lugar de quedarse inmóvil, desenfundó la Necrosaw. ¡La mía! Y salió del espejo. El cristal no se rompió, se abrió como agua negra para dejarlo salir. Sentí mi corazón latir en la garganta. El demonio que siempre había temido ver… ahora estaba frente a mí, tomando forma, sonriendo. esa sombra hecha carne. 
+—¡Whaoo! Eso no se ve todos los días —dije, con una sonrisa nerviosa, apenas sin poder creer lo que tenía frente a mí. 
+La sombra no me dio tregua; se abalanzó con una velocidad tan abrumadora que apenas tuve tiempo de reaccionar. Desenfundé mi espectral y la choqué contra la suya. El impacto fue tan brutal que un corte profundo me surcó la mejilla: ardía. No era una ilusión ni un entrenamiento. Esto era real… y, si no tenía cuidado, podía morir. Me separé con un impulso hacia atrás, respirando con fuerza, evaluando cada uno de sus movimientos. No solo era fuerte: era yo, pero sin mis miedos, sin mis límites, sin mi humanidad. Miré fijamente a esa sombra hecha carne.
+Él también me miraba… con esa sonrisa torcida, afilada, como si supiera exactamente lo que iba a hacer. Volvió a atacar, moviéndose con maestría, como si danzara con cada paso. Usé fuego: creé llamas, esferas, chorros ígneos… pero era demasiado astuto. Las esquivaba, las partía en dos, incluso las absorbía, como si le dieran más fuerza. Estaba en desventaja, y grande, debía pensar rápido. Entonces lo recordé: la técnica que había desarrollado entrenando el fuego, cuando la fricción de mi espada generaba una llama capaz de explotar al contacto. Si lograba usar eso en el momento justo del choque, quizás tenía una oportunidad. Pero era un riesgo; si fallaba, quedaría completamente expuesto.
+—Vamos… —susurré para mí mismo— Solo una oportunidad… 
+El reflejo volvió a lanzarse. Grité y corrí hacia él también, como si estuviera dispuesto a morir. En el instante exacto en que las armas chocaron, generé la vibración. El impacto fue monstruoso: una explosión incandescente estalló entre nosotros, lanzándonos a ambos en direcciones opuestas. Rodé por el suelo, golpeado, con cortes en los brazos y el pecho, pero respirando. Vivo. Me arrastré hasta recargarme contra uno de los espejos. Tosí sangre y escupí en el suelo. Mis dedos temblaban. Miré alrededor… —¿Lo vencí…? Pero entonces, lo sentí. 
+Un calor punzante me atravesó la espalda. No fue un golpe, fue un acero familiar. Mis ojos se abrieron con brutalidad. Bajé la vista y vi cómo la hoja espectral de la Necrosaw emergía por mi vientre, ensangrentada. El dolor fue brutal. La sangre salpicó con fuerza, tiñendo los espejos cercanos. Un hilo de ella se deslizaba por la comisura de mis labios. 
+—Mierda… —logré decir, con la voz rota. 
+Mi reflejo espectral tenía habilidades que yo aún no dominaba. Era la versión despiadada, completa, desatada… La que no temía utilizar todo lo que llevaba dentro. Me empujó hacia adelante, retirando la hoja con lentitud, como si disfrutara verme desangrar. Me desplomé de rodillas… pero no caí. No aún. Vi cómo se deslizaba entre los espejos, saliendo de uno en el suelo, como si aquel cristal fuera su reino, su prisión, su hogar. Y ahora… su campo de batalla. Caminé como pude, sosteniéndome el vientre con una mano, apretando los dientes por el dolor, mientras con la otra arrastraba la espada. La sangre me cubría el abdomen, la boca y las piernas. 
+—Este no es… el final —murmuré, con la voz ahogada. 
+No era el final, porque, aunque estaba al borde de la muerte, aún estaba consciente. Y mientras lo estuviera… aún podía luchar. 
+—Maldito demonio, es hora de que dejes de ejercer control sobre mí y cooperes, si es que quieres seguir viviendo... porque si yo muero, ¡tú mueres! —exclamé con fulgor, sintiendo cómo mi voz retumbaba en aquella sala sin fin. 
+De pronto, una cortina de sombras emergió del suelo, cubriéndome por completo. Todo a mi alrededor se desvaneció: no había suelo, ni techo, ni paredes… nada. Flotaba en la nada; un vacío frío y sin sonido. Y fue entonces, en esa absurda calma, que dos ojos aparecieron ante mí… grandes, de un rojo encendido, brillando como brasas recién avivadas. Luego, una sonrisa se dibujó en medio del vacío: ancha, de dientes largos y afilados como cuchillas. Una carcajada sorda y profunda rompió el silencio. 
+—Daaante... —susurró aquella voz con un eco que erizaba la piel. 
+—¿Quién eres? —pregunté, clavando la mirada en los ojos flotantes. 
+La entidad rió como si hubiera escuchado la mejor broma del inframundo. 
+—¿En serio, muchacho? ¿Después de todo lo que has hecho, lo que hemos sentido... me preguntas quién soy? —su voz se volvió burlona, pero con un dejo de fastidio teatral— Qué insultante. Yo soy la razón por la que respiras cuando estás al borde de la muerte, el rugido que te empuja cuando todo parece perdido… Abrimos los ojos el mismo día, Dante. Yo estuve ahí… siempre. 
+—¿Eres tú...? ¿El demonio que habita en mi interior? —murmuré, sintiendo un estremecimiento recorrerme. 
+—Bingo. Puedes llamarme como quieras: sombra, parásito, voz molesta... Me da igual. Pero en efecto, soy eso que susurra cuando estás a punto de matar, eso que sonríe cuando todo arde a tu alrededor. Soy tú, pero sin las malditas reglas. 
+—¿Y por qué apareces ahora? 
+—Porque estás a punto de morir, y aunque no me cae muy bien tu parte sentimental de salvador universal… —hizo una pausa burlona—, no puedo dejar que nos extingamos por un desangrado dramático. Así que escucha, esta vez voy a ayudarte. No porque me importes… sino porque morir contigo suena demasiado mediocre —la silueta de humo comenzó a disiparse —. Pero créeme, Dante, un día tendrás que pagar todo lo que reprimes. Y cuando lo hagas… no seré tan amable como ahora. 
+—¿Eso fue amable? —respondí con ironía. 
+Una última carcajada resonó, y las sombras se desvanecieron como si fueran arrastradas por una ráfaga infernal. Y fue así que, de la misma forma en que apareció, la cortina de oscuridad se desvaneció, como humo arrastrado por un viento invisible, volviendo a mi interior. Sentí cómo algo se rompía... no afuera, sino dentro de mí. Algo viejo, algo sellado. En ese instante, me vi envuelto en una carga de energía sofocante, espesa como la lava viva de un volcán a punto de estallar. Latido tras latido, el poder crecía y crecía, hasta que de mi cuerpo emergió una onda de fuerza brutal. El impacto fue tal que la mayoría de los espejos estallaron en mil pedazos, como si un grito reprimido durante siglos se hubiera liberado. 
+—¡Eso, así me gusta! —interrumpió la voz dentro de mí, con ese tono burlón que me ponía los nervios de punta— Nada como una buena explosión para romper el hielo.
+Mi sombra... ese reflejo demoníaco, cayó de rodillas. La onda lo había enloquecido, como si su vínculo conmigo se hubiera vuelto inestable. Vi cómo se retorcía entre los cristales rotos, gruñendo y gimiendo como un animal acorralado. Entonces lo sentí: el calor en mis venas, el poder… la vida volviendo a mí. Mis heridas comenzaron a cerrarse, como si el tiempo mismo retrocediera en mi cuerpo; mis músculos se tensaron, la sangre dejó de brotar, y una quietud sobrenatural invadió mis sentidos. Ni siquiera sentía dolor… solo fuerza. Una calma peligrosa. 
+—¿Lo sientes, Dante? —dijo la entidad en un susurro venenoso— Esa sensación cálida y embriagadora… no es sanación: es dominación. Te estás acostumbrando, ¿eh? No te preocupes, a todos les pasa… al principio, claro... 
+Miré mi mano y mis uñas habían crecido, volviéndose más afiladas, más negras; no eran humanas, ni siquiera parecían mías. Luego me fijé en mis ojos… aunque no necesitaba un espejo para saberlo: estaban inundados en sangre. Rojos como los de una bestia, como los de él. Era el mismo color que veía cada vez que perdía el conocimiento durante las transformaciones… pero esta vez, no perdí el control. 
+—¿Interesante, no? —interrumpió de nuevo el demonio con un tono de diversión siniestra—Esta vez tu cuerpecito no colapsó. ¡Felicitaciones! Has alcanzado la versión 2.0 de ti mismo. Lo llamaremos… Modo “Estoy−por−romperlo−todo−sin−parpadear”. 
+—Cállate —respondí con los dientes apretados. 
+—Oh, ¿qué pasa? ¿No te gusta ser fuerte? ¿No te gusta sanar con un chasquido y tener el poder de un dios latiendo en cada vena? Vamos, Dante, acéptalo… somos uno solo. Y en el fondo… te gusta.
+Me mantuve en silencio, tratando de ignorarlo. Pero no podía negarlo. Algo dentro de mí había cambiado. No era solo una recuperación, era una evolución, una versión más cercana a lo que realmente estaba destinado a ser. Una transformación de segundo grado. Y lo peor de todo… era que no me sentía asustado, me sentía completo. 
+—No me veo tan mal —murmuré, observando mis manos, la piel endurecida, los ojos aún tintados de rojo. Esa nueva forma… esa energía—. Así que, maldito espectro y copia barata de mí… tus segundos están contados —señalé con firmeza, alzando mi índice con una sonrisa. 
+No esperé más. El contraataque fue implacable. Cada golpe, cada estocada, cada chorro de fuego que emergía de mis manos lo acorralaba. La sombra comenzó a suprimirse, a ceder terreno. Mis movimientos eran precisos, feroces, como si mi cuerpo y mi mente por f in estuvieran en sincronía. Ya no era solo habilidad: era dominio total. Una danza brutal de velocidad y poder. El reflejo, agotado y sobrepasado, intentó ocultarse en el último espejo que quedaba intacto. Sin darle tiempo, lancé la Necrosaw con precisión milimétrica, clavándola en el marco. Luego, elevé mi mano izquierda y, como una sentencia ardiente, generé una gigantesca esfera de fuego que se estrelló contra el cristal, rompiendo su última defensa. 
+La sombra cayó de rodillas: rota, derrotada. Me acerqué, sosteniendo la espada, con el filo apuntando hacia su pecho. Nuestros ojos se cruzaron. Entonces, sucedió lo inesperado. La sombra... sonrió. No con burla, sino con resignación. Y sin más, se desmaterializó. Un humo denso, negro como el olvido, que se elevó lentamente y se fundió con mi cuerpo. No dolió, no ardió. Fue como una aceptación mutua. Sentí cómo algo en mí se completaba. La transformación se asentó con libertad. Ya no era una amenaza… era parte de mí, como un músculo que siempre estuvo dormido. Era yo, sin perderme a mí mismo. El poder de un demonio, con el alma de un hombre. Por primera vez, me sentí completo. 
+—Papá... siempre tuviste razón —murmuré, bajando la cabeza—. Reprimir el demonio interno no era destruirlo… era aceptarlo, controlarlo. 
+Y entonces, el silencio. La habitación, antes destruida, comenzó a reconstruirse sola. Los espejos rotos se alzaron, los cristales flotaron, las grietas desaparecieron, como si el caos jamás hubiera existido. La puerta reapareció. Respiré profundo, giré mi espada sobre el hombro y salí de aquella prisión circular. Justo afuera, me topé con una escena curiosa: Tang, mi pequeño compañero, estaba encima de una mesa improvisada, devorando libros con tal emoción que su cola se movía como un metrónomo. Tenía un pergamino pegado en la cara y otro atrapado entre las patas delanteras. Me crucé de brazos con una sonrisa inevitable. 
+—¿En serio, Tang? —dije. 
+—¡Miau! ¡Mi señor! ¡Encontré un papiro que habla de armas que caminan solas y... y...! ¡Y este tiene dibujos de comida! —dijo con entusiasmo, sin siquiera voltearse.
+—Awww, miren eso… —interrumpió la entidad demoníaca en mi cabeza con un tono burlonamente tierno— ¿Quién iba a pensar que un felino albino traga libros sería nuestra mascota? Ya sabes, si tuviera corazón… esto casi me derrite. 
+—No lo toques —advertí en voz baja. 
+—¿Quién, yo? Por favor… soy el demonio interno, no un monstruo. Aunque debo admitir que tiene estilo. El martillo gigante y todo ese rollo. Me cae bien el peludo.
+Me reí por dentro. Por primera vez, ambos estábamos de acuerdo en algo. Me acerqué a Tang y le acaricié la cabeza. 
+—Vamos, amigo. Tenemos una biblioteca entera que explorar y un nuevo destino por encontrar. 
+—¡Sí, miau−amo! ¡Y esta vez yo elijo el camino! 
+—¡Dios nos libre…! —dijo la voz interna con tono teatral— Vamos a morir. Pero al menos... moriremos entretenidos. 
+Y con ese pensamiento, nos adentramos entre estanterías, antiguos manuscritos y pasillos ocultos, porque sabíamos que el viaje apenas comenzaba. Tomé varios libros apilados sobre una mesa cubierta por una fina capa de polvo, sus títulos hablaban de alquimia básica, estructuras cósmicas, y uno incluso tenía recetas para ungüentos espirituales. Ninguno tenía lo que buscábamos. —Hay algo que no estamos viendo —dije en voz alta, dejando caer los libros uno a uno, con fastidio. Algo que alguien guardó con celo.
+—¡Oh, mira quién se pone filosófico! —interrumpió la voz demoníaca dentro de mí, con su tono burlón habitual—Algo que alguien guardó con celo, suena a esos diálogos dramáticos que sueltan los sabios justo antes de descubrir una trampa mortal.
+ —Cállate —susurré sin mirar a nadie. 
+Mis pasos me guiaron instintivamente hacia el extremo más iluminado de la gran biblioteca. Frente a mí, se alzaba un vitral inmenso, decorado con cristales de múltiples colores. La imagen me atrapó de inmediato: un ser alado de aspecto humano, con una túnica blanca que parecía moverse aún bajo la luz inmóvil, sus manos extendidas como si entregara algo sagrado a una multitud expectante. El aura del retrato irradiaba divinidad. 
+—Astramos... —murmuré. 
+El vitral representaba claramente el momento exacto en el que, según la historia, Astramos obsequió la piedra filosofal a la humanidad. Pero algo no encajaba; mientras afinaba la vista, noté una sutil pero evidente diferencia en la composición. Un pequeño recuadro, justo en el centro del objeto que entregaba Astramos, tenía un color desvaído, mucho más opaco que el resto de la escena. Una mancha fuera de lugar. 
+—Eso no estaba en el diseño original… —dije acercándome de un gran salto.
+Extendí la mano y palpé la zona. A simple vista era parte del vitral, pero al tacto… era una lámina delgada de piedra recubriendo algo más blando. Alcé un poco de fuerza y, con cuidado, deslicé la punta de mi espada en el marco. Entonces la capa cedió, revelando una hoja perfectamente conservada, escondida detrás del cristal. 
+—Vaya… esto sí que es extraño —dije entre dientes. 
+—¡Ohhh, qué misterio tan emocionante! ¡Una página oculta detrás de un vitral divino! ¡Qué vendrá después, una llave en la sopa de Tang? —ironizó la entidad, aunque no pudo ocultar su genuino interés. 
+—Alguien arrancó esto de algún libro… —pensé— Pero ¿cuál? 
+Tomé la hoja con delicadeza, como si el más leve movimiento pudiera destruirla. En su superficie estaban escritos unos símbolos antiguos, pero no eran como los del libro de alquimia, esto era diferente, más antiguo, más… sagrado. Tang saltó sobre mi hombro, mirando también. 
+—Miau−amo… eso no es alquimia, ¿cierto? 
+—No… esto es anterior. Esto es... otro tipo de conocimiento. 
+—¡Punto extra para el felino albino! —bromeó la entidad—, ¿Quién necesita demonios con un gato tan perceptivo? 
+Ignoré su comentario y me concentré. La hoja tenía bordes dorados, no por decoración, sino por oxidación mística. El texto, escrito con una tinta que parecía moverse sutilmente, contenía símbolos que comenzaban a descifrarse en mi mente… como si el haber absorbido aquel poder en la cámara de espejos, me diera ahora acceso a una lengua olvidada. 
+—Esto… esto es una guía. No es solo historia, es una advertencia. 
+Mis ojos recorrieron el pergamino, mientras la sensación de que algo enorme estaba por revelarse me hacía contener la respiración. 
+—Vamos, Dante, hazlo dramático… di que “el destino del mundo depende de esto” —murmuró mi sombra interna con sarcasmo. 
+—No lo necesito decir… ya lo sé —respondí en voz baja, mientras la biblioteca volvía a sumirse en un silencio tan denso como la verdad que acabábamos de encontrar.
+.</p>
+          
+      </div>
+
+      <!-- ╔═══════════════════════════════════════════════════════════╗
+           ║  PARA AGREGAR UN LIBRO NUEVO:                            ║
+           ║  1. Copia el bloque que empieza en la linea de abajo     ║
+           ║  2. Pégalo justo antes del comentario "FIN LIBROS"       ║
+           ║  3. Reemplaza los textos en MAYUSCULAS con los reales    ║
+           ╚═══════════════════════════════════════════════════════════╝
+
+      EJEMPLO — borra estas 2 lineas cuando lo actives quitando los simbolos menor y mayor:
+
+      <div class="rec-card reveal">
+        <div class="rec-cover-wrap" onclick="openLb('URL_IMAGEN_PORTADA')">
+          <img src="URL_IMAGEN_PORTADA" alt="TITULO DEL LIBRO"
+               onerror="this.parentElement.style.background='var(--dark3)'"/>
+          <div class="rec-cover-shine"></div>
+        </div>
+        <div class="rec-body">
+          <h3 class="rec-title">TITULO DEL LIBRO</h3>
+          <p class="rec-author">Por NOMBRE DEL AUTOR</p>
+          <p class="rec-synopsis">SINOPSIS DEL LIBRO AQUI. PUEDES ESCRIBIR TODO LO QUE QUIERAS.</p>
+          <div class="rec-links">
+            <a href="LINK_AMAZON" class="rec-link" target="_blank">Amazon</a>
+            <a href="LINK_APPLE" class="rec-link" target="_blank">Apple Books</a>
+            <a href="LINK_GOODREADS" class="rec-link" target="_blank">Goodreads</a>
+          </div>
+          <button class="rec-excerpt-btn" onclick="toggleCap(this)">
+            &#128214; Leer Cap&#237;tulo 1
+          </button>
+          <div class="rec-chapter" style="display:none;">
+            <div class="rec-chapter-inner">
+              <h4 class="rec-chap-title">Cap&#237;tulo 1</h4>
+              <div class="rec-chap-text">
+                <p>PRIMER PARRAFO DEL CAPITULO 1.</p>
+                <p>SEGUNDO PARRAFO.</p>
+                <p>TERCER PARRAFO.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      FIN LIBROS — LOS LIBROS VAN ARRIBA DE ESTA LINEA -->
+
+      <div class="rec-empty">
+        <p>&#128218; Pr&#243;ximamente libros recomendados de amigos escritores.</p>
+        <p style="font-size:.82rem;margin-top:.5rem;">Cada libro tendr&#225; portada, sinopsis y cap&#237;tulo para leer.</p>
+      </div>
+
     </div>
   </div>
   <div class="page-footer"><p class="ft">El Legado de Gaia</p><p>El Continente tras el Muro</p></div>
@@ -724,7 +894,7 @@
 <!-- ══════════════════════════════════════
      SCRIPTS
 ══════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══════════════════════════════════════════════════
    NUEVO SISTEMA DE NAVEGACIÓN
    - El home SIEMPRE está visible arriba
@@ -852,6 +1022,20 @@ auth.onAuthStateChanged(function(user){
 document.getElementById('authOverlay').addEventListener('click',function(e){ if(e.target===this) closeAuth(); });
 
 /* ═══ GALERÍA ═══ */
+
+function toggleCap(btn){
+  var chapter = btn.nextElementSibling;
+  if(!chapter) return;
+  if(chapter.style.display==='none'||chapter.style.display===''){
+    chapter.style.display='block';
+    btn.innerHTML='&#9650; Cerrar Cap&#237;tulo 1';
+    btn.style.color='var(--gold)';
+  } else {
+    chapter.style.display='none';
+    btn.innerHTML='&#128214; Leer Cap&#237;tulo 1';
+    btn.style.color='';
+  }
+}
 function showGallery(id,btn){
   document.querySelectorAll('.gallery-panel').forEach(function(p){ p.classList.remove('active'); });
   document.querySelectorAll('.gtab').forEach(function(t){ t.classList.remove('active'); });
@@ -1078,11 +1262,4 @@ document.addEventListener('touchstart',function(e){
     var btn=document.createElement('button');
     btn.innerHTML='&#127925;';btn.title='Música / Silencio';
     btn.style.cssText='position:fixed;bottom:1.3rem;right:1.3rem;z-index:9990;width:46px;height:46px;border-radius:50%;border:1px solid rgba(201,168,76,.45);background:rgba(8,8,12,.92);color:#c9a84c;font-size:1.2rem;cursor:pointer;box-shadow:0 3px 16px rgba(0,0,0,.6);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;transition:opacity .25s;';
-    btn.addEventListener('click',function(e){e.stopPropagation();muted=!muted;if(muted){if(AC)AC.suspend();btn.innerHTML='&#128263;';btn.style.opacity='0.38';}else{if(AC)AC.resume().then(function(){if(!musicOn)start();});btn.innerHTML='&#127925;';btn.style.opacity='1';}});
-    document.body.appendChild(btn);
-  });
-})();
-</script>
-
-</body>
-</html>
+    btn.addEventListener('click',function(e){e.stopPropagation();muted=!muted;if(muted){if(AC)AC.suspend();b
