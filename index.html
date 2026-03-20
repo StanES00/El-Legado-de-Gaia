@@ -669,68 +669,116 @@
       <!-- Galería Gaia -->
       <div id="gaia-galeria" class="sub-panel">
         <div class="gallery-tabs">
-          <button class="gtab active" onclick="showGallery('gaia-portadas',this)">Portadas</button>
-          <button class="gtab" onclick="showGallery('gaia-arte',this)">Arte</button>
-          <button class="gtab" onclick="showGallery('gaia-mapas',this)">Mapas</button>
+          <button class="gtab active" onclick="showGallery('gaia-valhalla',this)">Valhalla</button>
+          <button class="gtab" onclick="showGallery('gaia-ciudadela',this)">Ciudadela</button>
+          <button class="gtab" onclick="showGallery('gaia-valle',this)">Valle de los Condenados</button>
+          <button class="gtab" onclick="showGallery('gaia-olimpo',this)">Olimpo</button>
+          <button class="gtab" onclick="showGallery('gaia-khamet',this)">Khamet</button>
+          <button class="gtab" onclick="showGallery('gaia-inframundo',this)">Inframundo</button>
+          <button class="gtab" onclick="showGallery('gaia-resistencia',this)">Resistencia</button>
+          <button class="gtab" onclick="showGallery('gaia-still',this)">Castillo de Still</button>
+          <button class="gtab" onclick="showGallery('gaia-portadas',this)">Portadas</button>
         </div>
-        <div id="gal-gaia-portadas" class="gallery-panel active">
-          <div class="gal-item" onclick="openLb('Portada.png')"><img src="Portada.png" alt="Portada I" onerror="this.parentElement.style.display='none'"/><div class="gal-overlay"><span class="gal-zoom">&#128269;</span></div></div>
-          <div class="gallery-empty" style="display:none">&#128444; Sin imágenes aún. Añádelas desde el panel de admin.</div>
+        <div id="gal-gaia-valhalla" class="gallery-panel active">
+          <div class="gal-item" onclick="openLb('Valhalla1.jpeg')"><img src="Valhalla1.jpeg" alt="Valhalla"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+          <div class="gal-item" onclick="openLb('Valhalla2.png')"><img src="Valhalla2.png" alt="Valhalla"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
         </div>
-        <div id="gal-gaia-arte" class="gallery-panel"><div class="gallery-empty">&#128444; Galer&#237;a de arte pr&#243;ximamente.</div></div>
-        <div id="gal-gaia-mapas" class="gallery-panel"><div class="gallery-empty">&#127757; Mapas de Gaia pr&#243;ximamente.</div></div>
+        <div id="gal-gaia-ciudadela" class="gallery-panel">
+          <div class="gal-item" onclick="openLb('Ciudadela1.jpeg')"><img src="Ciudadela1.jpeg" alt="Ciudadela"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+          <div class="gal-item" onclick="openLb('Ciudadela2.png')"><img src="Ciudadela2.png" alt="Ciudadela"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+        </div>
+        <div id="gal-gaia-valle" class="gallery-panel">
+          <div class="gal-item" onclick="openLb('Valledeloscondenados1.jpeg')"><img src="Valledeloscondenados1.jpeg" alt="Valle"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+          <div class="gal-item" onclick="openLb('Valle2.png')"><img src="Valle2.png" alt="Valle"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+        </div>
+        <div id="gal-gaia-olimpo" class="gallery-panel">
+          <div class="gal-item" onclick="openLb('Olimpo1.jpeg')"><img src="Olimpo1.jpeg" alt="Olimpo"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+          <div class="gal-item" onclick="openLb('Olimpo2.png')"><img src="Olimpo2.png" alt="Olimpo"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+        </div>
+        <div id="gal-gaia-khamet" class="gallery-panel">
+          <div class="gal-item" onclick="openLb('Khamet1.jpeg')"><img src="Khamet1.jpeg" alt="Khamet"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+          <div class="gal-item" onclick="openLb('Khamet2.png')"><img src="Khamet2.png" alt="Khamet"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+        </div>
+        <div id="gal-gaia-inframundo" class="gallery-panel">
+          <div class="gal-item" onclick="openLb('Inframundo1.jpeg')"><img src="Inframundo1.jpeg" alt="Inframundo"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+          <div class="gal-item" onclick="openLb('Inframundo2.png')"><img src="Inframundo2.png" alt="Inframundo"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+        </div>
+        <div id="gal-gaia-resistencia" class="gallery-panel">
+          <div class="gal-item" onclick="openLb('Resistencia.jpeg')"><img src="Resistencia.jpeg" alt="Resistencia"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+        </div>
+        <div id="gal-gaia-still" class="gallery-panel">
+          <div class="gal-item" onclick="openLb('Castillostill2.png')"><img src="Castillostill2.png" alt="Castillo de Still"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+        </div>
+        <div id="gal-gaia-portadas" class="gallery-panel">
+          <div class="gal-item" onclick="openLb('Portada.png')"><img src="Portada.png" alt="Portada I" onerror="this.parentElement.style.display='none'"/><div class="gal-overlay"><span class="gal-zoom">&#8853;</span></div></div>
+        </div>
       </div>
       <!-- Encuestas Gaia -->
       <div id="gaia-encuestas" class="sub-panel">
         <div class="polls-grid">
-          <div class="poll-card">
-            <p class="poll-question">¿Cuál es tu personaje favorito de El Legado de Gaia?</p>
+          <div class="poll-card reveal">
+            <p class="poll-question">&#191;A cu&#225;l facci&#243;n pertenecer&#237;as en el Continente de Gaia?</p>
             <div class="poll-options" id="pollopt-gaia1">
-              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label>Río<span class="poll-pct">0</span></label></div>
-              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label>Amaya<span class="poll-pct">0</span></label></div>
-              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label>Rayen<span class="poll-pct">0</span></label></div>
-              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label>General Reiner<span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>&#9876; Valhalla</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>&#127963; Olimpo</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>&#9760; Inframundo</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>&#127984; Ciudadela</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>&#128293; Khamet</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>&#127763; Valle de los Condenados</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>&#9994; Resistencia</span><span class="poll-pct">0</span></label></div>
             </div>
             <button class="poll-vote-btn" id="pollbtn-gaia1" onclick="handleVote(this,'gaia1')">&#10022; Votar</button>
           </div>
-          <div class="poll-card">
-            <p class="poll-question">¿Qué facción del mundo de Gaia prefieres?</p>
+          <div class="poll-card reveal">
+            <p class="poll-question">&#191;Cu&#225;l es tu personaje favorito?</p>
             <div class="poll-options" id="pollopt-gaia2">
-              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label>Valhalla<span class="poll-pct">0</span></label></div>
-              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label>Olimpo<span class="poll-pct">0</span></label></div>
-              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label>Khamet<span class="poll-pct">0</span></label></div>
-              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label>Las Abominaciones<span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Amaya</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Draven</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Rayen</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Reiner</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>R&#237;o</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Rollo</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Still</span><span class="poll-pct">0</span></label></div>
             </div>
             <button class="poll-vote-btn" id="pollbtn-gaia2" onclick="handleVote(this,'gaia2')">&#10022; Votar</button>
+          </div>
+          <div class="poll-card reveal">
+            <p class="poll-question">&#191;Qu&#233; esperas m&#225;s de la historia?</p>
+            <div class="poll-options" id="pollopt-gaia3">
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Guerras entre facciones</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Revelaciones del Muro</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Romance y traiciones</span><span class="poll-pct">0</span></label></div>
+              <div class="poll-option"><div class="poll-bar" style="width:0%"></div><label><span>Magia y misterios</span><span class="poll-pct">0</span></label></div>
+            </div>
+            <button class="poll-vote-btn" id="pollbtn-gaia3" onclick="handleVote(this,'gaia3')">&#10022; Votar</button>
           </div>
         </div>
       </div>
       <!-- Personajes Gaia -->
       <div id="gaia-personajes" class="sub-panel">
         <div class="chars-layout">
-          <div class="char-row">
-            <div class="char-card">
-              <div class="char-img-wrap"><img src="RioPersonaje.png" alt="Río" onerror="this.style.display='none'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Río</span></div></div>
-              <div class="char-body">Protagonista. Joven que cruzó el Muro sin planearlo y descubrió un mundo que lo cambiaría todo.</div>
-            </div>
-            <div class="char-card">
-              <div class="char-img-wrap"><img src="AmayaPersonaje.png" alt="Amaya" onerror="this.style.display='none'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Amaya</span></div></div>
-              <div class="char-body">Guerrera y estratega. Su determinación es tan afilada como su espada.</div>
-            </div>
-            <div class="char-card">
-              <div class="char-img-wrap"><img src="RayenPersonaje.png" alt="Rayen" onerror="this.style.display='none'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rayen</span></div></div>
-              <div class="char-body">La voz de la razón. Conoce secretos que ninguno de los otros sospecha.</div>
-            </div>
+          <div class="char-row char-row-3">
+            <div class="char-card reveal"><div class="char-img-wrap"><img src="Rio.png" alt="Río" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">R&#237;o</span></div></div><div class="char-body">18 a&#241;os, marcado por ausencias que nadie supo explicarle. Cuando Reiner y las Sombras lo obligan a cruzar el Muro, R&#237;o no huye hacia el peligro&#8230; huye hacia las &#250;nicas respuestas que le quedan.</div></div>
+            <div class="char-card reveal"><div class="char-img-wrap"><img src="Amaya.png" alt="Amaya" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Amaya</span></div></div><div class="char-body">Fan&#225;tica del anime y los c&#243;mics por fuera, guerrera brutal e instintiva por dentro. La mano derecha de R&#237;o no pide permiso para proteger a los suyos.</div></div>
+            <div class="char-card reveal"><div class="char-img-wrap"><img src="Rayen.png" alt="Rayen" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rayen</span></div></div><div class="char-body">Dulce, tranquila, aparentemente inofensiva. Rayen lleva un secreto tan pesado que ha aprendido a sonre&#237;r para no derrumbarse.</div></div>
           </div>
-          <div class="chars-empty" style="margin-top:1rem;font-size:.85rem">+ Más personajes se revelarán con el avance de la saga</div>
+          <div class="char-row char-row-2">
+            <div class="char-card reveal"><div class="char-img-wrap"><img src="Reiner.png" alt="Reiner" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Reiner</span></div></div><div class="char-body">General del ej&#233;rcito controlado por Las Siete Sombras. Cuando Stan desapareci&#243; llev&#225;ndose parte de esa verdad, Reiner decidi&#243; usarla para sus propios fines.</div></div>
+            <div class="char-card reveal"><div class="char-img-wrap"><img src="Rollo.png" alt="Rollo" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Rollo</span></div></div><div class="char-body">Primer oficial de Reiner. Imbatible en combate, de mente afilada. Hay momentos en que la misi&#243;n y la conciencia no se&#241;alan en la misma direcci&#243;n.</div></div>
+          </div>
+          <div class="char-row char-row-2">
+            <div class="char-card reveal"><div class="char-img-wrap"><img src="Draven.jpg" alt="Draven" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Draven</span></div></div><div class="char-body">Hijo de un &#225;ngel y un demonio, Draven es exactamente lo que ambos mundos juraron que nunca deb&#237;a existir. Una Abominaci&#243;n.</div></div>
+            <div class="char-card reveal"><div class="char-img-wrap"><img src="Still.png" alt="Still" onerror="this.style.background='#1a1a26'"/><div class="char-img-overlay"></div><div class="char-name-badge"><span class="char-name">Still</span></div></div><div class="char-body">La leyenda. El ser m&#225;s poderoso de la creaci&#243;n, hijo de una diosa vikinga y un &#225;ngel de alto rango. Lo que &#233;l decida determinar&#225; el destino de todo lo que respira en Panasea.</div></div>
+          </div>
         </div>
       </div>
       <!-- Mapa Gaia -->
       <div id="gaia-mapa" class="sub-panel">
         <div class="map-container">
-          <img src="MapaGaia.png" alt="Mapa de Gaia" onclick="openLb('MapaGaia.png')" style="cursor:zoom-in" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
-          <div class="map-placeholder" style="display:none"><p>&#127757; El mapa de Gaia llegar&#225; pronto.</p><p style="font-size:.8rem">Contiene el continente de Pangea, el Muro de Hielo y los territorios de Panasea.</p></div>
+          <img src="Panasea.png" alt="Mapa de Panasea" onclick="openLb('Panasea.png')" style="cursor:zoom-in;width:100%;height:auto;max-height:680px;object-fit:contain;display:block;" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"/>
+          <div class="map-placeholder" style="display:none"><p>&#127757; Sube <strong style="color:var(--gold)">Panasea.png</strong> al repositorio para ver el mapa.</p></div>
         </div>
+        <div style="text-align:center;margin-top:.8rem"><p style="color:var(--text-dim);font-size:.78rem;font-style:italic">Haz clic en el mapa para verlo en pantalla completa.</p></div>
       </div>
     </div><!-- /saga-gaia -->
 
@@ -1302,7 +1350,7 @@ auth.onAuthStateChanged(function(user){
 document.getElementById('authOverlay').addEventListener('click',function(e){ if(e.target===this) closeAuth(); });
 
 /* ═══ ENCUESTAS ═══ */
-var pollIds = ['gaia1','gaia2','cronicas1','peter1','tratos1'];
+var pollIds = ['gaia1','gaia2','gaia3','cronicas1','peter1','tratos1'];
 
 function loadAllVotes(uid) {
   if(!uid) return;
