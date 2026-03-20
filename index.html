@@ -199,7 +199,7 @@
     }
     .book-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.4)}
     .book-cover{aspect-ratio:2/3;overflow:hidden;background:var(--dark);position:relative;display:flex;align-items:center;justify-content:center;}
-    .book-cover img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
+    .book-cover img{width:100%;height:100%;object-fit:contain;background:#000;transition:transform .4s}
     .book-card:hover .book-cover img{transform:scale(1.05)}
     .book-cover-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--dark3),var(--accent2));padding:1rem;text-align:center;}
     .book-cover-placeholder span{font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold-light);line-height:1.4}
@@ -483,7 +483,7 @@
 <!-- ══════════ HOME ══════════ -->
 <div id="page-home">
   <div class="home-bg"></div>
-  <img class="home-author-img" src="esstan1.jpeg" alt="Stan E.S." onerror="this.style.display='none'"/>
+
   <div class="home-content">
     <p class="home-eyebrow">&#10022; &nbsp; Escritor de Fantas&#237;a &#201;pica &nbsp; &#10022;</p>
     <h1 class="home-title">Stan E.S.</h1>
@@ -641,28 +641,28 @@
             <div class="book-body"><div class="book-num">Libro I</div><div class="book-title">El Viaje</div><div class="book-desc">El continente tras el muro. El inicio de todo. Río, Amaya y Rayen huyen y descubren que el mundo es infinitamente más grande.</div><span class="book-status status-publicado">Publicado</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia2.png" alt="Libro II" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro II</span></div></div>
-            <div class="book-body"><div class="book-num">Libro II</div><div class="book-title">Título por confirmar</div><div class="book-desc">La aventura continúa en Panasea. Las alianzas imposibles se forjan ante una amenaza común.</div><span class="book-status status-derechos">En espera de derechos</span></div>
+            <div class="book-cover"><img src="Gaia2.png" alt="El Conflicto" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro II</span></div></div>
+            <div class="book-body"><div class="book-num">Libro II</div><div class="book-title">El Conflicto</div><div class="book-desc">La aventura continúa en Panasea. Las alianzas imposibles se forjan ante una amenaza común.</div><span class="book-status status-derechos">En espera de derechos</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia3.png" alt="Libro III" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro III</span></div></div>
-            <div class="book-body"><div class="book-num">Libro III</div><div class="book-title">Título por confirmar</div><div class="book-desc">Las Abominaciones avanzan. El mapa del mundo cambia para siempre.</div><span class="book-status status-edicion">En edición</span></div>
+            <div class="book-cover"><img src="Gaia3.png" alt="El Camino" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro III</span></div></div>
+            <div class="book-body"><div class="book-num">Libro III</div><div class="book-title">El Camino</div><div class="book-desc">Las Abominaciones avanzan. El mapa del mundo cambia para siempre.</div><span class="book-status status-edicion">En edición</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia4.png" alt="Libro IV" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro IV</span></div></div>
-            <div class="book-body"><div class="book-num">Libro IV</div><div class="book-title">Título por confirmar</div><div class="book-desc">El conflicto escala. Valhalla, el Olimpo y Khamet deben elegir.</div><span class="book-status status-correccion">Corrección</span></div>
+            <div class="book-cover"><img src="Gaia4.png" alt="La Guerra" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro IV</span></div></div>
+            <div class="book-body"><div class="book-num">Libro IV</div><div class="book-title">La Guerra</div><div class="book-desc">El conflicto escala. Valhalla, el Olimpo y Khamet deben elegir.</div><span class="book-status status-correccion">Corrección</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia5.png" alt="Libro V" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro V</span></div></div>
-            <div class="book-body"><div class="book-num">Libro V</div><div class="book-title">Título por confirmar</div><div class="book-desc">Secretos enterrados por siglos salen a la luz. La verdad sobre Gaia.</div><span class="book-status status-borrador">Borrador</span></div>
+            <div class="book-cover"><img src="Gaia5.png" alt="Traiciones" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro V</span></div></div>
+            <div class="book-body"><div class="book-num">Libro V</div><div class="book-title">Traiciones</div><div class="book-desc">Secretos enterrados por siglos salen a la luz. La verdad sobre Gaia.</div><span class="book-status status-borrador">Borrador</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia6.png" alt="Libro VI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro VI</span></div></div>
-            <div class="book-body"><div class="book-num">Libro VI</div><div class="book-title">Título por confirmar</div><div class="book-desc">El camino hacia el desenlace se despeja con cada sacrificio.</div><span class="book-status status-por-escribir">Por escribir</span></div>
+            <div class="book-cover"><img src="Gaia6.png" alt="Facciones" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro VI</span></div></div>
+            <div class="book-body"><div class="book-num">Libro VI</div><div class="book-title">Facciones</div><div class="book-desc">El camino hacia el desenlace se despeja con cada sacrificio.</div><span class="book-status status-por-escribir">Por escribir</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia7.png" alt="Libro VII" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro VII</span></div></div>
-            <div class="book-body"><div class="book-num">Libro VII</div><div class="book-title">Título por confirmar</div><div class="book-desc">El libro final. El legado se completa.</div><span class="book-status status-por-escribir">Por escribir</span></div>
+            <div class="book-cover"><img src="Gaia7.png" alt="Ouroboros" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro VII</span></div></div>
+            <div class="book-body"><div class="book-num">Libro VII</div><div class="book-title">Ouroboros</div><div class="book-desc">El libro final. El legado se completa.</div><span class="book-status status-por-escribir">Por escribir</span></div>
           </div>
         </div>
       </div>
