@@ -81,14 +81,7 @@
       filter:brightness(.38) saturate(.75);transform:scale(1.04);
     }
     .home-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 45%,rgba(90,45,138,.15),transparent 70%),linear-gradient(180deg,rgba(8,8,12,.3) 0%,rgba(8,8,12,.2) 40%,rgba(8,8,12,.85) 85%,var(--dark) 100%);}
-    .home-author-img{
-      position:absolute;right:6%;bottom:0;z-index:1;
-      height:80vh;max-height:680px;
-      object-fit:contain;object-position:bottom;
-      filter:drop-shadow(-20px 0 60px rgba(201,168,76,.12));
-      opacity:.85;
-      animation:fadeIn 1.2s .5s ease forwards;opacity:0;
-    }
+    .home-author-img{display:none}
     .home-content{position:relative;z-index:2;text-align:center;display:flex;flex-direction:column;align-items:center;padding:6rem 2rem 3rem;max-width:900px;}
     .home-eyebrow{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.5em;color:var(--gold);text-transform:uppercase;margin-bottom:1.4rem;opacity:0;animation:fadeUp .8s .3s ease forwards;}
     .home-title{font-family:'Cinzel Decorative',serif;font-size:clamp(2.8rem,9vw,6.5rem);font-weight:900;line-height:1.05;background:linear-gradient(160deg,#fff 0%,var(--gold-light) 45%,var(--gold) 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:.5rem;opacity:0;animation:fadeUp 1s .5s ease forwards;}
@@ -439,8 +432,17 @@
     .auth-msg{text-align:center;font-size:.82rem;margin-top:.9rem;padding:.55rem;font-family:'Cinzel',serif}
     .auth-msg.error{color:#c05050;border:1px solid rgba(192,80,80,.28)}
     .auth-msg.success{color:#5fa85f;border:1px solid rgba(95,168,95,.28)}
-    .auth-close{position:absolute;top:.9rem;right:1.1rem;font-size:1.5rem;color:var(--text-dim);cursor:pointer;background:none;border:none;line-height:1}
-    .auth-close:hover{color:var(--gold)}
+    .auth-google-btn{width:100%;padding:.75rem;background:#fff;border:1px solid #ddd;color:#3c4043;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .22s;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;gap:.6rem;}
+    .auth-google-btn:hover{background:#f8f8f8;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+    .auth-google-btn svg{flex-shrink:0}
+    .auth-divider{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;color:var(--text-dim);font-size:.75rem;font-family:'Cinzel',serif;letter-spacing:.1em}
+    .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.2)}
+    .auth-google-btn{width:100%;padding:.75rem;background:#fff;border:1px solid #ddd;color:#333;font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:all .22s;display:flex;align-items:center;justify-content:center;gap:.6rem;margin-bottom:1.2rem;}
+    .auth-google-btn:hover{background:#f5f5f5;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+    .auth-google-btn svg{flex-shrink:0}
+    .auth-divider{display:flex;align-items:center;gap:.8rem;margin-bottom:1.2rem;}
+    .auth-divider::before,.auth-divider::after{content:'';flex:1;height:1px;background:rgba(201,168,76,.18);}
+    .auth-divider span{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-dim);white-space:nowrap}
     .auth-contact{margin-top:1.3rem;padding-top:1.1rem;border-top:1px solid rgba(201,168,76,.1);text-align:center;font-size:.75rem;color:var(--text-dim)}
     .auth-contact a{color:var(--gold);text-decoration:none}
 
@@ -492,6 +494,14 @@
     <button class="auth-close" onclick="closeAuth()">&#215;</button>
     <h2 class="auth-modal-title">Stan E.S.</h2>
     <p class="auth-modal-sub">Accede para votar y comentar</p>
+
+    <!-- Botón Google — siempre visible -->
+    <button class="auth-google-btn" onclick="doGoogleLogin()">
+      <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+      Continuar con Google
+    </button>
+    <div class="auth-divider">o</div>
+
     <div class="auth-tabs">
       <button class="auth-tab active" onclick="switchTab('login',this)">Iniciar Sesi&#243;n</button>
       <button class="auth-tab" onclick="switchTab('register',this)">Registrarse</button>
@@ -509,7 +519,7 @@
       <button class="auth-btn" onclick="doRegister()">Crear Cuenta</button>
       <div class="auth-msg" id="reg-msg"></div>
     </div>
-    <div class="auth-contact">&#191;Problemas? <a href="/cdn-cgi/l/email-protection#9eedeafff0b0fbb0eddef9f3fff7f2b0fdf1f3"><span class="__cf_email__" data-cfemail="95e6e1f4fbbbf0bbe6d5f2f8f4fcf9bbf6faf8">[email&#160;protected]</span></a></div>
+    <div class="auth-contact">&#191;Problemas? <a href="mailto:stan.e.s@gmail.com">stan.e.s@gmail.com</a></div>
   </div>
 </div>
 
@@ -538,7 +548,7 @@
 <!-- ══════════ HOME ══════════ -->
 <div id="page-home">
   <div class="home-bg"></div>
-  <img class="home-author-img" src="esstan1.jpeg" alt="Stan E.S." onerror="this.style.display='none'"/>
+
   <div class="home-content">
     <p class="home-eyebrow">&#10022; &nbsp; Escritor de Fantas&#237;a &#201;pica &nbsp; &#10022;</p>
     <h1 class="home-title">Stan E.S.</h1>
@@ -1169,25 +1179,14 @@
 
     <!-- Tabs de noticias -->
     <div class="news-tabs">
-      <button class="news-tab active" onclick="showNewsTab('general',this)">&#128240; Noticias</button>
-      <button class="news-tab" onclick="showNewsTab('concursos',this)">&#127942; Concursos</button>
+      <button class="news-tab active" onclick="showNewsTab('concursos',this)">&#127942; Concursos</button>
       <button class="news-tab" onclick="showNewsTab('lanzamientos',this)">&#128218; Lanzamientos</button>
       <button class="news-tab" onclick="showNewsTab('microcuentos',this)">&#9998; Microcuentos</button>
       <button class="news-tab" onclick="showNewsTab('newsletter',this)">&#128140; Newsletter</button>
     </div>
 
-    <!-- PANEL: NOTICIAS GENERALES -->
-    <div id="ntab-general" class="news-panel active">
-      <div class="news-grid" id="news-grid">
-        <div class="news-empty" id="news-empty">
-          <p>&#128240; Las noticias aparecer&#225;n aqu&#237; cuando el autor las publique.</p>
-          <p style="font-size:.8rem;margin-top:.5rem">Novedades sobre nuevos libros, eventos y actualizaciones del universo.</p>
-        </div>
-      </div>
-    </div>
-
     <!-- PANEL: CONCURSOS LITERARIOS -->
-    <div id="ntab-concursos" class="news-panel">
+    <div id="ntab-concursos" class="news-panel active">
       <div style="text-align:center;margin-bottom:2rem;max-width:620px;margin-left:auto;margin-right:auto;">
         <p style="color:var(--text-dim);font-style:italic;font-size:.95rem;">Concursos literarios activos. Participa, comparte y haz crecer tu escritura.</p>
       </div>
@@ -1410,7 +1409,7 @@ function showPage(id) {
 
   if(id === 'comentarios') setTimeout(loadComments, 200);
   if(id === 'recomendados') setTimeout(loadRecomendados, 200);
-  if(id === 'noticias') setTimeout(loadNoticias, 200);
+  if(id === 'noticias') setTimeout(loadConcursos, 200);
   if(id === 'admin'){ setTimeout(loadAdminComments, 200); setTimeout(loadAdminBooks, 200); setTimeout(loadAdminMicros, 200); setTimeout(loadAdminNL, 200); }
 
   var homeBtn = document.getElementById('btn-' + id);
@@ -1557,6 +1556,29 @@ function doLogin(){
     });
 }
 function doLogout(){ auth.signOut(); }
+
+function doGoogleLogin(){
+  var provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(function(result){
+      var user = result.user;
+      // Si es nuevo usuario, guardar en DB
+      db.ref('usuarios/'+user.uid).once('value').then(function(snap){
+        if(!snap.exists()){
+          db.ref('usuarios/'+user.uid).set({
+            nombre: user.displayName||'Lector',
+            email: user.email,
+            fechaRegistro: new Date().toISOString()
+          });
+        }
+      });
+      closeAuth();
+    })
+    .catch(function(err){
+      var msg = document.getElementById('login-msg');
+      if(msg){ msg.textContent = err.code==='auth/popup-closed-by-user'?'Ventana cerrada. Intenta de nuevo.': err.message; msg.className='auth-msg error'; }
+    });
+}
 
 auth.onAuthStateChanged(function(user){
   var btn=document.getElementById('navAuthBtn');
