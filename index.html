@@ -199,7 +199,7 @@
     }
     .book-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.4)}
     .book-cover{aspect-ratio:2/3;overflow:hidden;background:var(--dark);position:relative;display:flex;align-items:center;justify-content:center;}
-    .book-cover img{width:100%;height:100%;object-fit:contain;background:#000;transition:transform .4s}
+    .book-cover img{width:100%;height:100%;object-fit:cover;transition:transform .4s}
     .book-card:hover .book-cover img{transform:scale(1.05)}
     .book-cover-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(160deg,var(--dark3),var(--accent2));padding:1rem;text-align:center;}
     .book-cover-placeholder span{font-family:'Cinzel',serif;font-size:.75rem;color:var(--gold-light);line-height:1.4}
@@ -359,6 +359,61 @@
     .news-tag{display:inline-block;margin-top:.8rem;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border:1px solid rgba(201,168,76,.3);color:var(--gold)}
     .news-empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;border:1px dashed rgba(201,168,76,.18);color:var(--text-dim);font-style:italic}
 
+    /* ══ NOTICIAS — TABS ══ */
+    .news-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;border-bottom:1px solid rgba(201,168,76,.15);padding-bottom:1rem;}
+    .news-tab{padding:.45rem 1.2rem;font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;background:none;border:1px solid rgba(201,168,76,.2);color:var(--text-dim);cursor:pointer;transition:all .2s;}
+    .news-tab.active,.news-tab:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.07)}
+    .news-panel{display:none}.news-panel.active{display:block}
+
+    /* Microcuento card */
+    .micro-card{background:var(--dark3);border:1px solid rgba(201,168,76,.13);padding:1.6rem 2rem;transition:border-color .3s}
+    .micro-card:hover{border-color:rgba(201,168,76,.35)}
+    .micro-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin-bottom:.6rem}
+    .micro-titulo{font-family:'Cinzel',serif;font-size:.95rem;color:#fff}
+    .micro-autor{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.1em}
+    .micro-meta{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
+    .micro-genero{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);padding:.18rem .6rem;border:1px solid rgba(201,168,76,.2)}
+    .micro-fecha{font-size:.75rem;color:var(--text-dim)}
+    .micro-texto{font-size:.92rem;line-height:1.85;color:var(--text)}
+
+    /* Newsletter edición card */
+    .nl-card{background:var(--dark3);border:1px solid rgba(201,168,76,.13);padding:1.4rem 1.8rem;transition:border-color .3s;cursor:pointer}
+    .nl-card:hover{border-color:rgba(201,168,76,.4)}
+    .nl-card-header{display:flex;justify-content:space-between;align-items:center;gap:1rem}
+    .nl-card-title{font-family:'Cinzel',serif;font-size:.92rem;color:#fff}
+    .nl-card-date{font-family:'Cinzel',serif;font-size:.65rem;color:var(--gold);letter-spacing:.12em;white-space:nowrap}
+    .nl-card-preview{font-size:.85rem;color:var(--text-dim);margin-top:.5rem;line-height:1.6}
+    .nl-card-body{display:none;margin-top:1.2rem;padding-top:1.2rem;border-top:1px solid rgba(201,168,76,.1);font-size:.92rem;line-height:1.85;color:var(--text)}
+
+    /* Concurso card — más destacado */
+    .concurso-card{background:var(--dark3);border:1px solid rgba(201,168,76,.25);padding:2rem;transition:border-color .3s,box-shadow .3s}
+    .concurso-card:hover{border-color:var(--gold);box-shadow:0 8px 30px rgba(201,168,76,.1)}
+    .concurso-badge{display:inline-block;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.15em;text-transform:uppercase;padding:.25rem .8rem;background:rgba(201,168,76,.12);border:1px solid var(--gold);color:var(--gold);margin-bottom:.8rem}
+    .concurso-title{font-family:'Cinzel',serif;font-size:1.1rem;color:#fff;margin-bottom:.5rem}
+    .concurso-deadline{font-size:.8rem;color:#c05050;font-family:'Cinzel',serif;letter-spacing:.1em;margin-bottom:1rem}
+    .concurso-desc{font-size:.9rem;color:var(--text-dim);line-height:1.8;margin-bottom:1.2rem}
+    .concurso-bases{background:rgba(0,0,0,.3);border:1px solid rgba(201,168,76,.1);padding:1.2rem;margin-bottom:1.2rem}
+    .concurso-bases-title{font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem}
+    .concurso-bases p{font-size:.85rem;color:var(--text-dim);line-height:1.75;margin-bottom:.4rem}
+    .concurso-link{display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.4rem;border:1px solid var(--gold);background:rgba(201,168,76,.07);color:var(--gold);font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;transition:all .2s}
+    .concurso-link:hover{background:var(--gold);color:var(--dark)}
+
+    /* Lanzamiento card */
+    .lanzamiento-card{display:grid;grid-template-columns:120px 1fr;gap:1.5rem;background:var(--dark3);border:1px solid rgba(201,168,76,.15);padding:1.5rem;transition:border-color .3s}
+    .lanzamiento-card:hover{border-color:rgba(201,168,76,.4)}
+    .lanzamiento-cover{aspect-ratio:2/3;object-fit:contain;background:#000;width:100%;display:block}
+    .lanzamiento-cover-placeholder{aspect-ratio:2/3;background:linear-gradient(145deg,var(--dark3),var(--mid));display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--text-dim);font-style:italic;text-align:center;padding:.5rem}
+    .lanzamiento-tipo{display:inline-block;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;padding:.18rem .6rem;margin-bottom:.5rem}
+    .lanzamiento-tipo.propio{border:1px solid var(--gold);color:var(--gold);background:rgba(201,168,76,.08)}
+    .lanzamiento-tipo.comunidad{border:1px solid rgba(90,138,201,.5);color:#80bfff;background:rgba(90,138,201,.07)}
+    .lanzamiento-title{font-family:'Cinzel',serif;font-size:1rem;color:#fff;margin-bottom:.25rem;line-height:1.3}
+    .lanzamiento-autor{font-family:'Cinzel',serif;font-size:.7rem;color:var(--gold);letter-spacing:.1em;margin-bottom:.6rem}
+    .lanzamiento-desc{font-size:.87rem;color:var(--text-dim);line-height:1.7;margin-bottom:.8rem}
+    .lanzamiento-links{display:flex;gap:.5rem;flex-wrap:wrap}
+    @media(max-width:620px){.lanzamiento-card{grid-template-columns:80px 1fr;gap:1rem}}
+
+
+
     /* ══ LIGHTBOX ══ */
     .lightbox{display:none;position:fixed;inset:0;z-index:9999;background:rgba(0,0,0,.97);align-items:center;justify-content:center}
     .lightbox.open{display:flex}
@@ -454,7 +509,7 @@
       <button class="auth-btn" onclick="doRegister()">Crear Cuenta</button>
       <div class="auth-msg" id="reg-msg"></div>
     </div>
-    <div class="auth-contact">&#191;Problemas? <a href="mailto:stan.e.s@gmail.com">stan.e.s@gmail.com</a></div>
+    <div class="auth-contact">&#191;Problemas? <a href="/cdn-cgi/l/email-protection#9eedeafff0b0fbb0eddef9f3fff7f2b0fdf1f3"><span class="__cf_email__" data-cfemail="95e6e1f4fbbbf0bbe6d5f2f8f4fcf9bbf6faf8">[email&#160;protected]</span></a></div>
   </div>
 </div>
 
@@ -483,7 +538,7 @@
 <!-- ══════════ HOME ══════════ -->
 <div id="page-home">
   <div class="home-bg"></div>
-
+  <img class="home-author-img" src="esstan1.jpeg" alt="Stan E.S." onerror="this.style.display='none'"/>
   <div class="home-content">
     <p class="home-eyebrow">&#10022; &nbsp; Escritor de Fantas&#237;a &#201;pica &nbsp; &#10022;</p>
     <h1 class="home-title">Stan E.S.</h1>
@@ -641,28 +696,28 @@
             <div class="book-body"><div class="book-num">Libro I</div><div class="book-title">El Viaje</div><div class="book-desc">El continente tras el muro. El inicio de todo. Río, Amaya y Rayen huyen y descubren que el mundo es infinitamente más grande.</div><span class="book-status status-publicado">Publicado</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia2.png" alt="El Conflicto" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro II</span></div></div>
-            <div class="book-body"><div class="book-num">Libro II</div><div class="book-title">El Conflicto</div><div class="book-desc">La aventura continúa en Panasea. Las alianzas imposibles se forjan ante una amenaza común.</div><span class="book-status status-derechos">En espera de derechos</span></div>
+            <div class="book-cover"><img src="Gaia2.png" alt="Libro II" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro II</span></div></div>
+            <div class="book-body"><div class="book-num">Libro II</div><div class="book-title">Título por confirmar</div><div class="book-desc">La aventura continúa en Panasea. Las alianzas imposibles se forjan ante una amenaza común.</div><span class="book-status status-derechos">En espera de derechos</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia3.png" alt="El Camino" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro III</span></div></div>
-            <div class="book-body"><div class="book-num">Libro III</div><div class="book-title">El Camino</div><div class="book-desc">Las Abominaciones avanzan. El mapa del mundo cambia para siempre.</div><span class="book-status status-edicion">En edición</span></div>
+            <div class="book-cover"><img src="Gaia3.png" alt="Libro III" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro III</span></div></div>
+            <div class="book-body"><div class="book-num">Libro III</div><div class="book-title">Título por confirmar</div><div class="book-desc">Las Abominaciones avanzan. El mapa del mundo cambia para siempre.</div><span class="book-status status-edicion">En edición</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia4.png" alt="La Guerra" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro IV</span></div></div>
-            <div class="book-body"><div class="book-num">Libro IV</div><div class="book-title">La Guerra</div><div class="book-desc">El conflicto escala. Valhalla, el Olimpo y Khamet deben elegir.</div><span class="book-status status-correccion">Corrección</span></div>
+            <div class="book-cover"><img src="Gaia4.png" alt="Libro IV" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro IV</span></div></div>
+            <div class="book-body"><div class="book-num">Libro IV</div><div class="book-title">Título por confirmar</div><div class="book-desc">El conflicto escala. Valhalla, el Olimpo y Khamet deben elegir.</div><span class="book-status status-correccion">Corrección</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia5.png" alt="Traiciones" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro V</span></div></div>
-            <div class="book-body"><div class="book-num">Libro V</div><div class="book-title">Traiciones</div><div class="book-desc">Secretos enterrados por siglos salen a la luz. La verdad sobre Gaia.</div><span class="book-status status-borrador">Borrador</span></div>
+            <div class="book-cover"><img src="Gaia5.png" alt="Libro V" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro V</span></div></div>
+            <div class="book-body"><div class="book-num">Libro V</div><div class="book-title">Título por confirmar</div><div class="book-desc">Secretos enterrados por siglos salen a la luz. La verdad sobre Gaia.</div><span class="book-status status-borrador">Borrador</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia6.png" alt="Facciones" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro VI</span></div></div>
-            <div class="book-body"><div class="book-num">Libro VI</div><div class="book-title">Facciones</div><div class="book-desc">El camino hacia el desenlace se despeja con cada sacrificio.</div><span class="book-status status-por-escribir">Por escribir</span></div>
+            <div class="book-cover"><img src="Gaia6.png" alt="Libro VI" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro VI</span></div></div>
+            <div class="book-body"><div class="book-num">Libro VI</div><div class="book-title">Título por confirmar</div><div class="book-desc">El camino hacia el desenlace se despeja con cada sacrificio.</div><span class="book-status status-por-escribir">Por escribir</span></div>
           </div>
           <div class="book-card">
-            <div class="book-cover"><img src="Gaia7.png" alt="Ouroboros" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro VII</span></div></div>
-            <div class="book-body"><div class="book-num">Libro VII</div><div class="book-title">Ouroboros</div><div class="book-desc">El libro final. El legado se completa.</div><span class="book-status status-por-escribir">Por escribir</span></div>
+            <div class="book-cover"><img src="Gaia7.png" alt="Libro VII" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/><div class="book-cover-placeholder" style="display:none"><span>El Legado de Gaia<br/>Libro VII</span></div></div>
+            <div class="book-body"><div class="book-num">Libro VII</div><div class="book-title">Título por confirmar</div><div class="book-desc">El libro final. El legado se completa.</div><span class="book-status status-por-escribir">Por escribir</span></div>
           </div>
         </div>
       </div>
@@ -1111,13 +1166,110 @@
       <h2 class="page-title">Noticias</h2>
       <div class="page-rule"></div>
     </div>
-    <div class="news-grid" id="news-grid">
-      <!-- Las noticias se cargan dinámicamente desde Firebase -->
-      <div class="news-empty" id="news-empty">
-        <p>&#128240; Las noticias aparecer&#225;n aqu&#237; cuando el autor las publique.</p>
-        <p style="font-size:.8rem;margin-top:.5rem">Novedades sobre nuevos libros, eventos y actualizaciones del universo.</p>
+
+    <!-- Tabs de noticias -->
+    <div class="news-tabs">
+      <button class="news-tab active" onclick="showNewsTab('general',this)">&#128240; Noticias</button>
+      <button class="news-tab" onclick="showNewsTab('concursos',this)">&#127942; Concursos</button>
+      <button class="news-tab" onclick="showNewsTab('lanzamientos',this)">&#128218; Lanzamientos</button>
+      <button class="news-tab" onclick="showNewsTab('microcuentos',this)">&#9998; Microcuentos</button>
+      <button class="news-tab" onclick="showNewsTab('newsletter',this)">&#128140; Newsletter</button>
+    </div>
+
+    <!-- PANEL: NOTICIAS GENERALES -->
+    <div id="ntab-general" class="news-panel active">
+      <div class="news-grid" id="news-grid">
+        <div class="news-empty" id="news-empty">
+          <p>&#128240; Las noticias aparecer&#225;n aqu&#237; cuando el autor las publique.</p>
+          <p style="font-size:.8rem;margin-top:.5rem">Novedades sobre nuevos libros, eventos y actualizaciones del universo.</p>
+        </div>
       </div>
     </div>
+
+    <!-- PANEL: CONCURSOS LITERARIOS -->
+    <div id="ntab-concursos" class="news-panel">
+      <div style="text-align:center;margin-bottom:2rem;max-width:620px;margin-left:auto;margin-right:auto;">
+        <p style="color:var(--text-dim);font-style:italic;font-size:.95rem;">Concursos literarios activos. Participa, comparte y haz crecer tu escritura.</p>
+      </div>
+      <div class="news-grid" id="concursos-grid">
+        <div class="news-empty" id="concursos-empty">
+          <p>&#127942; No hay concursos activos en este momento.</p>
+          <p style="font-size:.8rem;margin-top:.5rem">Cuando haya uno disponible, aparecerá aquí con sus bases completas.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: LANZAMIENTOS -->
+    <div id="ntab-lanzamientos" class="news-panel">
+      <div style="text-align:center;margin-bottom:2rem;max-width:620px;margin-left:auto;margin-right:auto;">
+        <p style="color:var(--text-dim);font-style:italic;font-size:.95rem;">Lanzamientos de libros propios y de la comunidad de escritores amigos.</p>
+      </div>
+      <div class="news-grid" id="lanzamientos-grid">
+        <div class="news-empty" id="lanzamientos-empty">
+          <p>&#128218; No hay lanzamientos publicados aún.</p>
+          <p style="font-size:.8rem;margin-top:.5rem">Aquí aparecerán los próximos lanzamientos de Stan E.S. y la comunidad.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- PANEL: MICROCUENTOS -->
+    <div id="ntab-microcuentos" class="news-panel">
+      <div style="text-align:center;margin-bottom:2.5rem;max-width:660px;margin-left:auto;margin-right:auto;">
+        <p style="color:var(--text-dim);font-style:italic;font-size:.95rem;">Microcuentos enviados por los suscriptores de la newsletter. Máximo 300 palabras. Debes estar suscrito para participar.</p>
+      </div>
+
+      <!-- Formulario envío microcuento — solo logueados -->
+      <div id="micro-login-required" class="login-required-box" style="max-width:560px;margin:0 auto 2rem;">
+        <p>Debes iniciar sesi&#243;n para enviar un microcuento.</p>
+        <button onclick="openAuth()">Iniciar Sesi&#243;n / Registrarse</button>
+      </div>
+      <div id="micro-form-box" class="comment-form" style="display:none;max-width:700px;margin:0 auto 2.5rem;">
+        <p class="page-label" style="margin-bottom:1.2rem;">&#9998; Enviar tu microcuento</p>
+        <div class="form-grid">
+          <div class="form-field"><label>T&#237;tulo *</label><input type="text" id="micro-titulo" placeholder="T&#237;tulo de tu historia..."/></div>
+          <div class="form-field"><label>G&#233;nero</label><input type="text" id="micro-genero" placeholder="Ej: Fantas&#237;a, Terror, Romance..."/></div>
+          <div class="form-field full"><label>Tu microcuento * (m&#225;x. 300 palabras)</label><textarea id="micro-texto" style="min-height:160px;" placeholder="&#201;rase una vez..."></textarea></div>
+        </div>
+        <div class="form-note">&#128274; Tu microcuento ser&#225; revisado antes de publicarse. Al enviarlo autorizas su publicaci&#243;n en esta p&#225;gina.</div>
+        <button class="btn-submit" onclick="submitMicrocuento()">&#10022; Enviar Microcuento</button>
+        <div class="success-msg" id="micro-success-msg">&#10022; &#161;Microcuento enviado! Ser&#225; revisado y publicado pronto.</div>
+      </div>
+
+      <!-- Lista de microcuentos publicados -->
+      <div id="microcuentos-list" style="max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:1.5rem;">
+        <p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">Cargando microcuentos...</p>
+      </div>
+    </div>
+
+    <!-- PANEL: NEWSLETTER -->
+    <div id="ntab-newsletter" class="news-panel">
+      <div style="max-width:700px;margin:0 auto;">
+        <!-- Suscripción -->
+        <div class="comment-form" style="margin-bottom:3rem;text-align:center;">
+          <p class="page-label" style="margin-bottom:.8rem;">&#128140; Suscr&#237;bete a la Newsletter</p>
+          <h3 style="font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:#fff;font-weight:400;margin-bottom:1rem;">El Pergamino de Stan E.S.</h3>
+          <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:1.8rem;font-style:italic;">Avances exclusivos, extractos in&#233;ditos, concursos, recomendaciones y noticias del universo literario. Directo a tu correo.</p>
+          <div id="nl-login-required-box">
+            <div style="display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-bottom:.8rem;">
+              <input type="email" id="nl-email" placeholder="tu@correo.com" style="flex:1;min-width:220px;max-width:340px;background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.25);color:var(--text);padding:.7rem 1rem;font-family:'EB Garamond',serif;font-size:.95rem;outline:none;"/>
+              <button onclick="suscribirNewsletter()" style="padding:.7rem 1.8rem;background:rgba(201,168,76,.1);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)'" onmouseout="this.style.background='rgba(201,168,76,.1)';this.style.color='var(--gold)'">&#10022; Suscribirme</button>
+            </div>
+            <div class="admin-msg" id="nl-msg" style="display:none;margin-top:.6rem;"></div>
+            <p style="font-size:.75rem;color:var(--text-dim);margin-top:.8rem;">Sin spam. Puedes darte de baja cuando quieras.</p>
+          </div>
+        </div>
+
+        <!-- Ediciones anteriores -->
+        <div class="page-header" style="margin-bottom:1.5rem;padding-top:0;">
+          <p class="page-label">&#10022; Ediciones Anteriores &#10022;</p>
+          <div class="page-rule"></div>
+        </div>
+        <div id="newsletter-list" style="display:flex;flex-direction:column;gap:1.2rem;">
+          <p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">Cargando ediciones...</p>
+        </div>
+      </div>
+    </div>
+
   </div>
   <div class="page-footer"><p class="ft">Stan E.S.</p><p>Novedades y Noticias</p></div>
 </div>
@@ -1128,7 +1280,7 @@
     <div class="page-header"><p class="page-label">&#9881; Panel de Administrador</p><h2 class="page-title">Administrar Sitio</h2><div class="page-rule"></div></div>
 
     <div class="admin-section">
-      <h3>&#128240; Publicar Noticia</h3>
+      <h3>&#128240; Publicar Noticia General</h3>
       <div class="admin-grid">
         <div class="admin-field"><label>T&#237;tulo *</label><input type="text" id="news-titulo" placeholder="T&#237;tulo de la noticia..."/></div>
         <div class="admin-field"><label>Etiqueta</label><input type="text" id="news-tag" placeholder="Ej: Nuevo Libro, Evento..."/></div>
@@ -1139,7 +1291,67 @@
     </div>
 
     <div class="admin-section">
-      <h3>&#128218; Agregar Libro Recomendado</h3>
+      <h3>&#127942; Publicar Concurso Literario</h3>
+      <div class="admin-grid">
+        <div class="admin-field"><label>T&#237;tulo del Concurso *</label><input type="text" id="conc-titulo" placeholder="Nombre del concurso..."/></div>
+        <div class="admin-field"><label>Fecha L&#237;mite</label><input type="text" id="conc-deadline" placeholder="Ej: 30 de abril de 2026"/></div>
+        <div class="admin-field full"><label>Descripci&#243;n *</label><textarea id="conc-desc" placeholder="De qu&#233; trata el concurso..."></textarea></div>
+        <div class="admin-field full"><label>Bases (una por l&#237;nea)</label><textarea id="conc-bases" placeholder="Extensi&#243;n: 500 a 1000 palabras&#10;Tema: libre&#10;Premio: publicaci&#243;n en la p&#225;gina..."></textarea></div>
+        <div class="admin-field full"><label>Link de inscripci&#243;n / m&#225;s info</label><input type="text" id="conc-link" placeholder="https://..."/></div>
+      </div>
+      <button class="admin-btn" onclick="adminAddConcurso()" style="margin-top:1rem;">&#10022; Publicar Concurso</button>
+      <div class="admin-msg" id="conc-msg"></div>
+    </div>
+
+    <div class="admin-section">
+      <h3>&#128218; Publicar Lanzamiento</h3>
+      <div class="admin-grid">
+        <div class="admin-field"><label>T&#237;tulo *</label><input type="text" id="lanz-titulo" placeholder="T&#237;tulo del libro..."/></div>
+        <div class="admin-field"><label>Autor *</label><input type="text" id="lanz-autor" placeholder="Nombre del autor..."/></div>
+        <div class="admin-field"><label>Tipo</label>
+          <select id="lanz-tipo" style="background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.2);color:var(--text);padding:.65rem .9rem;font-family:'EB Garamond',serif;font-size:.92rem;outline:none;">
+            <option value="propio">Propio</option>
+            <option value="comunidad">Comunidad</option>
+          </select>
+        </div>
+        <div class="admin-field"><label>URL Portada</label><input type="text" id="lanz-portada" placeholder="https://..."/></div>
+        <div class="admin-field full"><label>Descripci&#243;n *</label><textarea id="lanz-desc" placeholder="Sinopsis del libro..."></textarea></div>
+        <div class="admin-field"><label>Amazon</label><input type="text" id="lanz-amazon" placeholder="https://amazon.com/..."/></div>
+        <div class="admin-field"><label>Otro link</label><input type="text" id="lanz-web" placeholder="https://..."/></div>
+      </div>
+      <button class="admin-btn" onclick="adminAddLanzamiento()" style="margin-top:1rem;">&#10022; Publicar Lanzamiento</button>
+      <div class="admin-msg" id="lanz-msg"></div>
+    </div>
+
+    <div class="admin-section">
+      <h3>&#128140; Publicar Edici&#243;n de Newsletter</h3>
+      <div class="admin-grid">
+        <div class="admin-field"><label>Asunto / T&#237;tulo *</label><input type="text" id="nl-titulo" placeholder="Edici&#243;n #1 — Novedades de marzo..."/></div>
+        <div class="admin-field"><label>Vista previa (1 l&#237;nea)</label><input type="text" id="nl-preview" placeholder="Resumen breve visible antes de abrir..."/></div>
+        <div class="admin-field full"><label>Contenido completo *</label><textarea id="nl-contenido" style="min-height:180px;" placeholder="Texto completo de la newsletter..."></textarea></div>
+      </div>
+      <button class="admin-btn" onclick="adminAddNewsletter()" style="margin-top:1rem;">&#10022; Publicar Edici&#243;n</button>
+      <div class="admin-msg" id="nl-admin-msg"></div>
+    </div>
+
+    <div class="admin-section">
+      <h3>&#9998; Gestionar Microcuentos</h3>
+      <div class="admin-list" id="admin-micros-list"><p style="color:var(--text-dim);font-style:italic;">Cargando...</p></div>
+    </div>
+
+    <div class="admin-section">
+      <h3>&#128140; Suscriptores Newsletter</h3>
+      <div class="admin-list" id="admin-nl-list"><p style="color:var(--text-dim);font-style:italic;">Cargando...</p></div>
+    </div>
+
+    <div class="admin-section">
+      <h3>&#128172; Gestionar Comentarios</h3>
+      <div class="admin-list" id="admin-comments-list"><p style="color:var(--text-dim);font-style:italic;">Cargando...</p></div>
+    </div>
+    <div class="admin-section">
+      <h3>&#128218; Libros Recomendados Publicados</h3>
+      <div class="admin-list" id="admin-books-list"><p style="color:var(--text-dim);font-style:italic;">Cargando...</p></div>
+    </div>
       <div class="admin-grid">
         <div class="admin-field"><label>T&#237;tulo *</label><input type="text" id="rec-titulo" placeholder="Nombre del libro..."/></div>
         <div class="admin-field"><label>Autor *</label><input type="text" id="rec-autor" placeholder="Nombre del autor..."/></div>
@@ -1169,7 +1381,7 @@
 </div>
 
 <!-- ══════════════════════════════════════ SCRIPTS ══════════════════════════════════════ -->
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ═══ NAVEGACIÓN ═══ */
 var currentPage = null;
 
@@ -1199,7 +1411,7 @@ function showPage(id) {
   if(id === 'comentarios') setTimeout(loadComments, 200);
   if(id === 'recomendados') setTimeout(loadRecomendados, 200);
   if(id === 'noticias') setTimeout(loadNoticias, 200);
-  if(id === 'admin'){ setTimeout(loadAdminComments, 200); setTimeout(loadAdminBooks, 200); }
+  if(id === 'admin'){ setTimeout(loadAdminComments, 200); setTimeout(loadAdminBooks, 200); setTimeout(loadAdminMicros, 200); setTimeout(loadAdminNL, 200); }
 
   var homeBtn = document.getElementById('btn-' + id);
   if(homeBtn) homeBtn.classList.add('active-section');
@@ -1350,15 +1562,19 @@ auth.onAuthStateChanged(function(user){
   var btn=document.getElementById('navAuthBtn');
   var req=document.getElementById('comment-login-required');
   var frm=document.getElementById('comment-form-box');
+  var mreq=document.getElementById('micro-login-required');
+  var mfrm=document.getElementById('micro-form-box');
   if(user){
     var name=user.displayName||user.email.split('@')[0];
     btn.textContent='✦ '+name+' · Salir'; btn.onclick=doLogout;
     if(req) req.style.display='none'; if(frm) frm.style.display='block';
+    if(mreq) mreq.style.display='none'; if(mfrm) mfrm.style.display='block';
     loadVotes(user.uid);
     checkAdmin(user);
   } else {
     btn.textContent='Iniciar Sesión'; btn.onclick=openAuth;
     if(req) req.style.display='block'; if(frm) frm.style.display='none';
+    if(mreq) mreq.style.display='block'; if(mfrm) mfrm.style.display='none';
   }
 });
 document.getElementById('authOverlay').addEventListener('click',function(e){ if(e.target===this) closeAuth(); });
@@ -1450,7 +1666,20 @@ function loadComments(){
   });
 }
 
-/* ═══ NOTICIAS ═══ */
+/* ═══ NOTICIAS — TABS ═══ */
+function showNewsTab(id, btn) {
+  document.querySelectorAll('.news-tab').forEach(function(t){ t.classList.remove('active'); });
+  document.querySelectorAll('.news-panel').forEach(function(p){ p.classList.remove('active'); });
+  var panel = document.getElementById('ntab-' + id);
+  if(panel) panel.classList.add('active');
+  if(btn) btn.classList.add('active');
+  if(id === 'microcuentos') loadMicrocuentos();
+  if(id === 'newsletter') { loadNewsletter(); loadAdminNL(); }
+  if(id === 'concursos') loadConcursos();
+  if(id === 'lanzamientos') loadLanzamientos();
+}
+
+/* ═══ NOTICIAS GENERALES ═══ */
 function loadNoticias(){
   var grid=document.getElementById('news-grid'); if(!grid) return;
   db.ref('noticias').orderByChild('fecha').on('value',function(snap){
@@ -1473,6 +1702,236 @@ function loadNoticias(){
     });
   });
 }
+
+/* ═══ CONCURSOS ═══ */
+function loadConcursos(){
+  var grid=document.getElementById('concursos-grid'); if(!grid) return;
+  db.ref('concursos').on('value',function(snap){
+    grid.innerHTML='';
+    var data=snap.val();
+    if(!data){
+      grid.innerHTML='<div class="news-empty" style="grid-column:1/-1"><p>&#127942; No hay concursos activos en este momento.</p></div>';
+      return;
+    }
+    var arr=[]; Object.entries(data).forEach(function(e){ if(e[1].activo!==false) arr.push({key:e[0],d:e[1]}); });
+    arr.sort(function(a,b){return new Date(b.d.fecha)-new Date(a.d.fecha);});
+    arr.forEach(function(item){
+      var c=item.d;
+      var bases='';
+      if(c.bases){ c.bases.split('\n').forEach(function(b){ if(b.trim()) bases+='<p>&#10022; '+escHtml(b.trim())+'</p>'; }); }
+      grid.innerHTML+='<div class="concurso-card">'
+        +'<span class="concurso-badge">&#127942; Concurso Activo</span>'
+        +'<h3 class="concurso-title">'+escHtml(c.titulo||'')+'</h3>'
+        +(c.deadline?'<p class="concurso-deadline">&#128197; Fecha límite: '+escHtml(c.deadline)+'</p>':'')
+        +'<p class="concurso-desc">'+escHtml(c.descripcion||'')+'</p>'
+        +(bases?'<div class="concurso-bases"><p class="concurso-bases-title">Bases del Concurso</p>'+bases+'</div>':'')
+        +(c.link?'<a href="'+escHtml(c.link)+'" class="concurso-link" target="_blank" rel="noopener">&#128279; M&#225;s informaci&#243;n / Inscribirse</a>':'')
+        +'</div>';
+    });
+  });
+}
+
+/* ═══ LANZAMIENTOS ═══ */
+function loadLanzamientos(){
+  var grid=document.getElementById('lanzamientos-grid'); if(!grid) return;
+  db.ref('lanzamientos').on('value',function(snap){
+    grid.innerHTML='';
+    var data=snap.val();
+    if(!data){
+      grid.innerHTML='<div class="news-empty" style="grid-column:1/-1"><p>&#128218; No hay lanzamientos publicados a&#250;n.</p></div>';
+      return;
+    }
+    var arr=[]; Object.entries(data).forEach(function(e){ if(e[1].activo!==false) arr.push({key:e[0],d:e[1]}); });
+    arr.sort(function(a,b){return new Date(b.d.fecha)-new Date(a.d.fecha);});
+    arr.forEach(function(item){
+      var l=item.d;
+      var fecha=new Date(l.fecha).toLocaleDateString('es-CL',{year:'numeric',month:'long'});
+      var links='';
+      if(l.amazon) links+='<a href="'+escHtml(l.amazon)+'" class="rec-link amazon" target="_blank" rel="noopener">Amazon</a>';
+      if(l.web) links+='<a href="'+escHtml(l.web)+'" class="rec-link web" target="_blank" rel="noopener">Ver m&#225;s</a>';
+      var tipoLabel=l.tipo==='propio'?'Stan E.S.':'Comunidad';
+      grid.innerHTML+='<div class="lanzamiento-card">'
+        +'<div>'+(l.portada?'<img class="lanzamiento-cover" src="'+escHtml(l.portada)+'" alt="'+escHtml(l.titulo||'')+'" onerror="this.style.display=\'none\'"/><div class="lanzamiento-cover-placeholder" style="display:none">Sin portada</div>':'<div class="lanzamiento-cover-placeholder">Sin portada</div>')+'</div>'
+        +'<div><span class="lanzamiento-tipo '+escHtml(l.tipo||'comunidad')+'">'+escHtml(tipoLabel)+'</span>'
+        +'<h3 class="lanzamiento-title">'+escHtml(l.titulo||'')+'</h3>'
+        +'<p class="lanzamiento-autor">'+escHtml(l.autor||'')+'</p>'
+        +'<p class="lanzamiento-desc">'+escHtml(l.descripcion||'')+'</p>'
+        +(links?'<div class="lanzamiento-links">'+links+'</div>':'')+'</div>'
+        +'</div>';
+    });
+  });
+}
+
+/* ═══ MICROCUENTOS ═══ */
+function submitMicrocuento(){
+  var user=auth.currentUser; if(!user){openAuth();return;}
+  var titulo=document.getElementById('micro-titulo').value.trim();
+  var texto=document.getElementById('micro-texto').value.trim();
+  if(!titulo||!texto){alert('Completa el título y el microcuento.');return;}
+  var palabras=texto.split(/\s+/).length;
+  if(palabras>300){alert('El microcuento supera las 300 palabras (tiene '+palabras+'). Por favor redúcelo.');return;}
+  db.ref('microcuentos').push({
+    autor:user.displayName||user.email.split('@')[0],
+    titulo:titulo,
+    genero:document.getElementById('micro-genero').value.trim(),
+    texto:texto,
+    fecha:new Date().toISOString(),
+    aprobado:false
+  }).then(function(){
+    document.getElementById('micro-success-msg').style.display='block';
+    document.getElementById('micro-titulo').value='';
+    document.getElementById('micro-genero').value='';
+    document.getElementById('micro-texto').value='';
+  }).catch(function(err){alert('Error: '+err.message);});
+}
+
+function loadMicrocuentos(){
+  var list=document.getElementById('microcuentos-list'); if(!list) return;
+  db.ref('microcuentos').on('value',function(snap){
+    list.innerHTML='';
+    var data=snap.val();
+    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">A&#250;n no hay microcuentos publicados. &#161;S&#233; el primero!</p>';return;}
+    var arr=[]; Object.values(data).forEach(function(m){if(m.aprobado===true)arr.push(m);});
+    if(arr.length===0){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">A&#250;n no hay microcuentos aprobados.</p>';return;}
+    arr.sort(function(a,b){return new Date(b.fecha)-new Date(a.fecha);});
+    arr.forEach(function(m){
+      var fecha=new Date(m.fecha).toLocaleDateString('es-CL',{year:'numeric',month:'long'});
+      list.innerHTML+='<div class="micro-card">'
+        +'<div class="micro-header"><span class="micro-titulo">'+escHtml(m.titulo||'Sin título')+'</span><span class="micro-autor">'+escHtml(m.autor||'Anónimo')+'</span></div>'
+        +'<div class="micro-meta">'+(m.genero?'<span class="micro-genero">'+escHtml(m.genero)+'</span>':'')+'<span class="micro-fecha">'+fecha+'</span></div>'
+        +'<p class="micro-texto">'+escHtml(m.texto||'').replace(/\n/g,'<br/>')+'</p>'
+        +'</div>';
+    });
+  });
+}
+
+/* ═══ NEWSLETTER ═══ */
+function suscribirNewsletter(){
+  var email=document.getElementById('nl-email').value.trim();
+  var msg=document.getElementById('nl-msg');
+  if(!email||!/\S+@\S+\.\S+/.test(email)){msg.textContent='Ingresa un correo válido.';msg.className='admin-msg err';msg.style.display='block';return;}
+  var key=email.replace(/\./g,',').replace(/@/g,'__at__');
+  db.ref('newsletter_subs/'+key).set({email:email,fecha:new Date().toISOString(),activo:true})
+    .then(function(){msg.textContent='✦ ¡Ya estás suscrito! Gracias.';msg.className='admin-msg ok';msg.style.display='block';document.getElementById('nl-email').value='';})
+    .catch(function(err){msg.textContent='Error: '+err.message;msg.className='admin-msg err';msg.style.display='block';});
+}
+
+function loadNewsletter(){
+  var list=document.getElementById('newsletter-list'); if(!list) return;
+  db.ref('newsletter_ediciones').on('value',function(snap){
+    list.innerHTML='';
+    var data=snap.val();
+    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">Las ediciones anteriores aparecerán aquí.</p>';return;}
+    var arr=[]; Object.values(data).forEach(function(n){if(n.activo!==false)arr.push(n);});
+    arr.sort(function(a,b){return new Date(b.fecha)-new Date(a.fecha);});
+    arr.forEach(function(n,i){
+      var fecha=new Date(n.fecha).toLocaleDateString('es-CL',{year:'numeric',month:'long',day:'numeric'});
+      var id='nl-body-'+i;
+      list.innerHTML+='<div class="nl-card" onclick="toggleNL(\''+id+'\')">'
+        +'<div class="nl-card-header"><span class="nl-card-title">'+escHtml(n.titulo||'')+'</span><span class="nl-card-date">'+fecha+'</span></div>'
+        +(n.preview?'<p class="nl-card-preview">'+escHtml(n.preview)+'</p>':'')
+        +'<div class="nl-card-body" id="'+id+'">'+escHtml(n.contenido||'').replace(/\n/g,'<br/>')+'</div>'
+        +'</div>';
+    });
+  });
+}
+
+function toggleNL(id){
+  var el=document.getElementById(id); if(!el) return;
+  el.style.display=el.style.display==='block'?'none':'block';
+}
+
+function loadAdminNL(){
+  var list=document.getElementById('admin-nl-list'); if(!list) return;
+  db.ref('newsletter_subs').once('value').then(function(snap){
+    var data=snap.val(); list.innerHTML='';
+    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;">No hay suscriptores aún.</p>';return;}
+    var subs=Object.values(data).filter(function(s){return s.activo!==false;});
+    list.innerHTML='<p style="color:var(--gold);font-family:\'Cinzel\',serif;font-size:.8rem;margin-bottom:.8rem;">'+subs.length+' suscriptor'+(subs.length===1?'':'es')+'</p>';
+    subs.forEach(function(s){
+      var fecha=new Date(s.fecha).toLocaleDateString('es-CL',{year:'numeric',month:'short'});
+      list.innerHTML+='<div class="admin-item"><div class="admin-item-info"><div class="admin-item-title">'+escHtml(s.email||'')+'</div><div class="admin-item-sub">'+fecha+'</div></div></div>';
+    });
+  });
+}
+
+/* ═══ ADMIN — NUEVAS SECCIONES ═══ */
+function adminAddConcurso(){
+  var titulo=document.getElementById('conc-titulo').value.trim();
+  var desc=document.getElementById('conc-desc').value.trim();
+  var msg=document.getElementById('conc-msg');
+  if(!titulo||!desc){msg.textContent='Completa Título y Descripción.';msg.className='admin-msg err';msg.style.display='block';return;}
+  db.ref('concursos').push({
+    titulo:titulo,
+    descripcion:desc,
+    deadline:document.getElementById('conc-deadline').value.trim(),
+    bases:document.getElementById('conc-bases').value.trim(),
+    link:document.getElementById('conc-link').value.trim(),
+    fecha:new Date().toISOString(),activo:true
+  }).then(function(){
+    msg.textContent='✦ Concurso publicado!';msg.className='admin-msg ok';msg.style.display='block';
+    ['conc-titulo','conc-desc','conc-deadline','conc-bases','conc-link'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  }).catch(function(err){msg.textContent='Error: '+err.message;msg.className='admin-msg err';msg.style.display='block';});
+}
+
+function adminAddLanzamiento(){
+  var titulo=document.getElementById('lanz-titulo').value.trim();
+  var autor=document.getElementById('lanz-autor').value.trim();
+  var desc=document.getElementById('lanz-desc').value.trim();
+  var msg=document.getElementById('lanz-msg');
+  if(!titulo||!autor||!desc){msg.textContent='Completa Título, Autor y Descripción.';msg.className='admin-msg err';msg.style.display='block';return;}
+  db.ref('lanzamientos').push({
+    titulo:titulo,autor:autor,descripcion:desc,
+    tipo:document.getElementById('lanz-tipo').value,
+    portada:document.getElementById('lanz-portada').value.trim(),
+    amazon:document.getElementById('lanz-amazon').value.trim(),
+    web:document.getElementById('lanz-web').value.trim(),
+    fecha:new Date().toISOString(),activo:true
+  }).then(function(){
+    msg.textContent='✦ Lanzamiento publicado!';msg.className='admin-msg ok';msg.style.display='block';
+    ['lanz-titulo','lanz-autor','lanz-desc','lanz-portada','lanz-amazon','lanz-web'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  }).catch(function(err){msg.textContent='Error: '+err.message;msg.className='admin-msg err';msg.style.display='block';});
+}
+
+function adminAddNewsletter(){
+  var titulo=document.getElementById('nl-titulo').value.trim();
+  var contenido=document.getElementById('nl-contenido').value.trim();
+  var msg=document.getElementById('nl-admin-msg');
+  if(!titulo||!contenido){msg.textContent='Completa Título y Contenido.';msg.className='admin-msg err';msg.style.display='block';return;}
+  db.ref('newsletter_ediciones').push({
+    titulo:titulo,
+    preview:document.getElementById('nl-preview').value.trim(),
+    contenido:contenido,
+    fecha:new Date().toISOString(),activo:true
+  }).then(function(){
+    msg.textContent='✦ Edición publicada!';msg.className='admin-msg ok';msg.style.display='block';
+    ['nl-titulo','nl-preview','nl-contenido'].forEach(function(id){var e=document.getElementById(id);if(e)e.value='';});
+  }).catch(function(err){msg.textContent='Error: '+err.message;msg.className='admin-msg err';msg.style.display='block';});
+}
+
+function loadAdminMicros(){
+  var list=document.getElementById('admin-micros-list'); if(!list) return;
+  db.ref('microcuentos').on('value',function(snap){
+    var data=snap.val(); list.innerHTML='';
+    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;">No hay microcuentos.</p>';return;}
+    var entries=Object.entries(data);
+    entries.sort(function(a,b){return a[1].aprobado===b[1].aprobado?0:a[1].aprobado?1:-1;});
+    entries.forEach(function(entry){
+      var key=entry[0], m=entry[1];
+      list.innerHTML+='<div class="admin-item">'
+        +'<div class="admin-item-info"><div class="admin-item-title">'+escHtml(m.titulo||'Sin título')+' — '+escHtml(m.autor||'')+'</div>'
+        +'<div class="admin-item-sub">'+escHtml((m.texto||'').substring(0,60))+'…'+(m.aprobado?'<span style="color:#5fa85f;margin-left:.5rem">✓ Publicado</span>':'<span style="color:var(--gold);margin-left:.5rem">Pendiente</span>')+'</div></div>'
+        +'<div class="admin-item-actions">'
+        +(!m.aprobado?'<button class="admin-approve" onclick="adminApproveMicro(\''+key+'\')">Aprobar</button>':'')
+        +'<button class="admin-delete" onclick="adminDeleteMicro(\''+key+'\')">Eliminar</button>'
+        +'</div></div>';
+    });
+  });
+}
+
+function adminApproveMicro(key){ db.ref('microcuentos/'+key).update({aprobado:true}); }
+function adminDeleteMicro(key){ if(confirm('¿Eliminar este microcuento?')) db.ref('microcuentos/'+key).remove(); }
+
 
 /* ═══ RECOMENDADOS dinámicos ═══ */
 function loadRecomendados(){
@@ -1757,13 +2216,4 @@ function adminDeleteBook(key){
     btn.style.cssText='position:fixed;bottom:1.3rem;right:1.3rem;z-index:9990;width:46px;height:46px;border-radius:50%;border:1px solid rgba(201,168,76,.45);background:rgba(8,8,12,.92);color:#c9a84c;font-size:1.1rem;cursor:pointer;box-shadow:0 3px 16px rgba(0,0,0,.6);backdrop-filter:blur(10px);display:flex;align-items:center;justify-content:center;transition:all .25s;';
     btn.addEventListener('click',function(e){
       e.stopPropagation(); muted=!muted;
-      if(muted){ if(AC) AC.suspend(); btn.style.opacity='.35'; btn.title='Música (silenciada)'; }
-      else { if(AC) AC.resume(); btn.style.opacity='1'; btn.title='Música / Silencio'; if(!musicOn) start(); }
-    });
-    document.body.appendChild(btn);
-  });
-})();
-</script>
-
-</body>
-</html>
+      if(muted){ if(AC) AC.suspend(); btn.style.opaci
