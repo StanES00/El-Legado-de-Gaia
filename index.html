@@ -1248,10 +1248,28 @@
           <p class="page-label" style="margin-bottom:.8rem;">&#128140; Suscr&#237;bete a la Newsletter</p>
           <h3 style="font-family:'Cinzel Decorative',serif;font-size:1.3rem;color:#fff;font-weight:400;margin-bottom:1rem;">El Pergamino de Stan E.S.</h3>
           <p style="color:var(--text-dim);font-size:.9rem;margin-bottom:1.8rem;font-style:italic;">Avances exclusivos, extractos in&#233;ditos, concursos, recomendaciones y noticias del universo literario. Directo a tu correo.</p>
-          <div id="nl-login-required-box">
+
+          <!-- Estado: ya suscrito -->
+          <div id="nl-ya-suscrito" style="display:none;padding:1rem;background:rgba(95,168,95,.07);border:1px solid rgba(95,168,95,.28);color:#5fa85f;font-family:'Cinzel',serif;font-size:.85rem;letter-spacing:.1em;margin-bottom:1rem;">
+            &#10022; Ya est&#225;s suscrito/a. &#161;Gracias!
+            <button onclick="desuscribirNewsletter()" style="display:block;margin:.8rem auto 0;padding:.35rem 1rem;border:1px solid rgba(192,80,80,.4);background:transparent;color:#c05050;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;">Darme de baja</button>
+          </div>
+
+          <!-- Formulario suscripción -->
+          <div id="nl-form-box">
+            <!-- Opción Google -->
+            <button onclick="suscribirConGoogle()" class="auth-google-btn" style="max-width:340px;margin:0 auto .8rem;">
+              <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.18 1.48-4.97 2.31-8.16 2.31-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/><path fill="none" d="M0 0h48v48H0z"/></svg>
+              Suscribirme con Google
+            </button>
+
+            <!-- Divisor -->
+            <div class="auth-divider" style="max-width:340px;margin:0 auto .8rem;">o</div>
+
+            <!-- Opción correo manual -->
             <div style="display:flex;gap:.8rem;flex-wrap:wrap;justify-content:center;margin-bottom:.8rem;">
-              <input type="email" id="nl-email" placeholder="tu@correo.com" style="flex:1;min-width:220px;max-width:340px;background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.25);color:var(--text);padding:.7rem 1rem;font-family:'EB Garamond',serif;font-size:.95rem;outline:none;"/>
-              <button onclick="suscribirNewsletter()" style="padding:.7rem 1.8rem;background:rgba(201,168,76,.1);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)'" onmouseout="this.style.background='rgba(201,168,76,.1)';this.style.color='var(--gold)'">&#10022; Suscribirme</button>
+              <input type="email" id="nl-email" placeholder="tu@correo.com" style="flex:1;min-width:220px;max-width:260px;background:rgba(0,0,0,.4);border:1px solid rgba(201,168,76,.25);color:var(--text);padding:.7rem 1rem;font-family:'EB Garamond',serif;font-size:.95rem;outline:none;"/>
+              <button onclick="suscribirConCorreo()" style="padding:.7rem 1.4rem;background:rgba(201,168,76,.1);border:1px solid var(--gold);color:var(--gold);font-family:'Cinzel',serif;font-size:.68rem;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s;" onmouseover="this.style.background='var(--gold)';this.style.color='var(--dark)'" onmouseout="this.style.background='rgba(201,168,76,.1)';this.style.color='var(--gold)'">&#10022; Suscribirme</button>
             </div>
             <div class="admin-msg" id="nl-msg" style="display:none;margin-top:.6rem;"></div>
             <p style="font-size:.75rem;color:var(--text-dim);margin-top:.8rem;">Sin spam. Puedes darte de baja cuando quieras.</p>
@@ -1828,17 +1846,75 @@ function loadMicrocuentos(){
 }
 
 /* ═══ NEWSLETTER ═══ */
-function suscribirNewsletter(){
-  var email=document.getElementById('nl-email').value.trim();
-  var msg=document.getElementById('nl-msg');
-  if(!email||!/\S+@\S+\.\S+/.test(email)){msg.textContent='Ingresa un correo válido.';msg.className='admin-msg err';msg.style.display='block';return;}
-  var key=email.replace(/\./g,',').replace(/@/g,'__at__');
-  db.ref('newsletter_subs/'+key).set({email:email,fecha:new Date().toISOString(),activo:true})
-    .then(function(){msg.textContent='✦ ¡Ya estás suscrito! Gracias.';msg.className='admin-msg ok';msg.style.display='block';document.getElementById('nl-email').value='';})
-    .catch(function(err){msg.textContent='Error: '+err.message;msg.className='admin-msg err';msg.style.display='block';});
+/* ─── Newsletter: helpers ─── */
+function nlKey(email){ return email.replace(/\./g,',').replace(/@/g,'__at__'); }
+
+function actualizarEstadoNL(email){
+  if(!email) return;
+  var key=nlKey(email);
+  db.ref('newsletter_subs/'+key).once('value').then(function(snap){
+    var suscrito=snap.exists()&&snap.val().activo!==false;
+    var box=document.getElementById('nl-ya-suscrito');
+    var form=document.getElementById('nl-form-box');
+    if(box) box.style.display=suscrito?'block':'none';
+    if(form) form.style.display=suscrito?'none':'block';
+  });
 }
 
+function suscribirConGoogle(){
+  var msg=document.getElementById('nl-msg');
+  var user=auth.currentUser;
+  if(user){
+    // ya logueado — suscribir directo
+    registrarSuscripcion(user.email, user.displayName||'', msg);
+  } else {
+    // login con Google y luego suscribir
+    var provider=new firebase.auth.GoogleAuthProvider();
+    auth.signInWithPopup(provider).then(function(result){
+      registrarSuscripcion(result.user.email, result.user.displayName||'', msg);
+    }).catch(function(err){
+      if(msg){ msg.textContent=err.code==='auth/popup-closed-by-user'?'Ventana cerrada. Intenta de nuevo.':err.message; msg.className='admin-msg err'; msg.style.display='block'; }
+    });
+  }
+}
+
+function suscribirConCorreo(){
+  var email=document.getElementById('nl-email').value.trim();
+  var msg=document.getElementById('nl-msg');
+  if(!email||!/\S+@\S+\.\S+/.test(email)){msg.textContent='Ingresa un correo v&#225;lido.';msg.className='admin-msg err';msg.style.display='block';return;}
+  registrarSuscripcion(email, '', msg);
+}
+
+function registrarSuscripcion(email, nombre, msg){
+  var key=nlKey(email);
+  db.ref('newsletter_subs/'+key).set({email:email,nombre:nombre,fecha:new Date().toISOString(),activo:true})
+    .then(function(){
+      if(msg){ msg.textContent='&#10022; ¡Ya estás suscrito/a! Gracias.'; msg.className='admin-msg ok'; msg.style.display='block'; }
+      var emailInput=document.getElementById('nl-email'); if(emailInput) emailInput.value='';
+      actualizarEstadoNL(email);
+    })
+    .catch(function(err){ if(msg){ msg.textContent='Error: '+err.message; msg.className='admin-msg err'; msg.style.display='block'; } });
+}
+
+function desuscribirNewsletter(){
+  var user=auth.currentUser;
+  var email=user?user.email:(document.getElementById('nl-email')?document.getElementById('nl-email').value.trim():'');
+  if(!email) return;
+  var key=nlKey(email);
+  db.ref('newsletter_subs/'+key).update({activo:false}).then(function(){
+    actualizarEstadoNL(email);
+  });
+}
+
+// Alias para compatibilidad
+function suscribirNewsletter(){ suscribirConCorreo(); }
+
+
 function loadNewsletter(){
+  // Verificar estado de suscripción del usuario actual
+  var user=auth.currentUser;
+  if(user) actualizarEstadoNL(user.email);
+
   var list=document.getElementById('newsletter-list'); if(!list) return;
   db.ref('newsletter_ediciones').on('value',function(snap){
     list.innerHTML='';
