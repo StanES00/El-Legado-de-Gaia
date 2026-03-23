@@ -352,22 +352,89 @@
     .news-tag{display:inline-block;margin-top:.8rem;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;padding:.2rem .6rem;border:1px solid rgba(201,168,76,.3);color:var(--gold)}
     .news-empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;border:1px dashed rgba(201,168,76,.18);color:var(--text-dim);font-style:italic}
 
-    /* ══ NOTICIAS — TABS ══ */
+    /* ══ AYUDA A ESCRITORES ══ */
+    #page-ayuda{background:var(--dark2)}
+    .ayuda-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;border-bottom:1px solid rgba(201,168,76,.15);padding-bottom:1rem;}
+    .ayuda-tab{padding:.45rem 1.2rem;font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;background:none;border:1px solid rgba(201,168,76,.2);color:var(--text-dim);cursor:pointer;transition:all .2s;}
+    .ayuda-tab.active,.ayuda-tab:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.07)}
+    .ayuda-panel{display:none}.ayuda-panel.active{display:block}
+
+    .ayuda-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:1.8rem}
+    .ayuda-card{background:var(--dark3);border:1px solid rgba(201,168,76,.15);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column;}
+    .ayuda-card:hover{transform:translateY(-5px);border-color:rgba(201,168,76,.5);box-shadow:0 14px 36px rgba(201,168,76,.1)}
+
+    /* Logo */
+    .ayuda-card-logo{width:100%;height:140px;background:var(--dark);display:flex;align-items:center;justify-content:center;overflow:hidden;border-bottom:1px solid rgba(201,168,76,.1);}
+    .ayuda-card-logo img{width:100%;height:100%;object-fit:contain;padding:1rem;transition:transform .4s}
+    .ayuda-card:hover .ayuda-card-logo img{transform:scale(1.05)}
+    .ayuda-logo-placeholder{width:70px;height:70px;border-radius:50%;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);display:flex;align-items:center;justify-content:center;font-size:1.8rem;color:var(--gold)}
+
+    /* Contenido */
+    .ayuda-card-top{padding:1.3rem 1.5rem 1rem;flex:1}
+    .ayuda-tipo-badge{display:inline-block;font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;padding:.22rem .75rem;margin-bottom:.8rem;border:1px solid}
+    .ayuda-tipo-editor{border-color:rgba(201,168,76,.5);color:var(--gold);background:rgba(201,168,76,.07)}
+    .ayuda-tipo-beta{border-color:rgba(90,138,201,.5);color:#80bfff;background:rgba(90,138,201,.07)}
+    .ayuda-tipo-ilustrador{border-color:rgba(180,90,201,.5);color:#cc80ff;background:rgba(180,90,201,.07)}
+    .ayuda-tipo-otro{border-color:rgba(255,255,255,.2);color:var(--text-dim);background:transparent}
+    .ayuda-nombre{font-family:'Cinzel',serif;font-size:1rem;color:#fff;margin-bottom:.2rem;line-height:1.3}
+    .ayuda-especialidad{font-size:.82rem;color:var(--gold-light);margin-bottom:.8rem;font-style:italic}
+    .ayuda-desc{font-size:.85rem;color:var(--text-dim);line-height:1.75;margin-bottom:.8rem}
+    .ayuda-info{display:flex;flex-direction:column;gap:.3rem;margin-bottom:.5rem}
+    .ayuda-info-item{font-size:.78rem;color:var(--text-dim);display:flex;align-items:center;gap:.4rem}
+
+    /* Footer con botones de redes */
+    .ayuda-card-footer{padding:.9rem 1.5rem;border-top:1px solid rgba(201,168,76,.1);background:rgba(0,0,0,.18);display:flex;gap:.5rem;flex-wrap:wrap;align-items:center;}
+    .ayuda-social-btn{display:inline-flex;align-items:center;gap:.3rem;padding:.3rem .75rem;font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;border:1px solid;transition:all .2s;cursor:pointer;}
+    .ayuda-social-email{border-color:rgba(201,168,76,.35);color:var(--gold);}
+    .ayuda-social-email:hover{background:var(--gold);color:var(--dark)}
+    .ayuda-social-ig{border-color:rgba(200,80,150,.4);color:#e080c0;}
+    .ayuda-social-ig:hover{background:rgba(200,80,150,.15)}
+    .ayuda-social-tw{border-color:rgba(100,160,240,.4);color:#80b0f0;}
+    .ayuda-social-tw:hover{background:rgba(100,160,240,.12)}
+    .ayuda-social-web{border-color:rgba(100,200,160,.4);color:#80d0b0;}
+    .ayuda-social-web:hover{background:rgba(100,200,160,.12)}
+    .ayuda-social-wa{border-color:rgba(80,200,80,.4);color:#80d080;}
+    .ayuda-social-wa:hover{background:rgba(80,200,80,.12)}
+    .ayuda-info-item strong{color:var(--text);font-weight:400}
+    .ayuda-card-footer{border-top:1px solid rgba(201,168,76,.1);padding:.8rem 1.6rem;background:rgba(0,0,0,.15);display:flex;gap:.5rem;flex-wrap:wrap}
+    .ayuda-empty{grid-column:1/-1;text-align:center;padding:4rem 2rem;border:1px dashed rgba(201,168,76,.18);color:var(--text-dim);font-style:italic}
+
+    /* Form registrarse como colaborador */
+    .ayuda-form-wrap{max-width:740px;margin:0 auto 3rem}
+
+
     .news-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem;border-bottom:1px solid rgba(201,168,76,.15);padding-bottom:1rem;}
     .news-tab{padding:.45rem 1.2rem;font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;background:none;border:1px solid rgba(201,168,76,.2);color:var(--text-dim);cursor:pointer;transition:all .2s;}
     .news-tab.active,.news-tab:hover{border-color:var(--gold);color:var(--gold);background:rgba(201,168,76,.07)}
     .news-panel{display:none}.news-panel.active{display:block}
 
-    /* Microcuento card */
-    .micro-card{background:var(--dark3);border:1px solid rgba(201,168,76,.13);padding:1.6rem 2rem;transition:border-color .3s}
-    .micro-card:hover{border-color:rgba(201,168,76,.35)}
-    .micro-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin-bottom:.6rem}
-    .micro-titulo{font-family:'Cinzel',serif;font-size:.95rem;color:#fff}
-    .micro-autor{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.1em}
-    .micro-meta{display:flex;gap:1rem;margin-bottom:1rem;flex-wrap:wrap}
-    .micro-genero{font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);padding:.18rem .6rem;border:1px solid rgba(201,168,76,.2)}
-    .micro-fecha{font-size:.75rem;color:var(--text-dim)}
-    .micro-texto{font-size:.92rem;line-height:1.85;color:var(--text)}
+    /* Microcuento card — estilo recomendados */
+    .micro-card{background:var(--dark3);border:1px solid rgba(201,168,76,.18);overflow:hidden;transition:transform .3s,border-color .3s,box-shadow .3s;}
+    .micro-card:hover{transform:translateY(-4px);border-color:rgba(201,168,76,.45);box-shadow:0 14px 36px rgba(201,168,76,.09)}
+    .micro-card-top{padding:1.6rem 1.8rem 1rem}
+    .micro-header{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
+    .micro-titulo{font-family:'Cinzel',serif;font-size:1.05rem;color:#fff;line-height:1.3}
+    .micro-autor{font-family:'Cinzel',serif;font-size:.72rem;color:var(--gold);letter-spacing:.12em;text-transform:uppercase}
+    .micro-meta{display:flex;gap:.8rem;margin-bottom:1rem;flex-wrap:wrap;align-items:center}
+    .micro-genero{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-dim);padding:.18rem .6rem;border:1px solid rgba(201,168,76,.2)}
+    .micro-fecha{font-size:.72rem;color:var(--text-dim)}
+    .micro-texto{font-size:.9rem;line-height:1.9;color:var(--text);margin-bottom:1.2rem}
+    /* Leer más */
+    .micro-texto-preview{display:-webkit-box;-webkit-line-clamp:6;-webkit-box-orient:vertical;overflow:hidden}
+    .micro-leer-mas{font-family:'Cinzel',serif;font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);background:none;border:none;cursor:pointer;padding:0;margin-bottom:1rem;transition:opacity .2s}
+    .micro-leer-mas:hover{opacity:.7}
+    /* Footer de la card */
+    .micro-card-footer{border-top:1px solid rgba(201,168,76,.1);padding:.9rem 1.8rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.8rem;background:rgba(0,0,0,.15)}
+    /* Estrellas */
+    .micro-stars{display:flex;align-items:center;gap:.25rem}
+    .micro-star{font-size:1.2rem;cursor:pointer;color:rgba(201,168,76,.25);transition:color .15s,transform .15s;background:none;border:none;padding:0;line-height:1}
+    .micro-star.filled{color:var(--gold)}
+    .micro-star:hover{transform:scale(1.2)}
+    .micro-rating-label{font-family:'Cinzel',serif;font-size:.65rem;color:var(--text-dim);letter-spacing:.08em;margin-left:.3rem}
+    /* Redes sociales del autor */
+    .micro-social{display:flex;gap:.5rem;flex-wrap:wrap}
+    .micro-social-link{font-size:.65rem;letter-spacing:.1em;font-family:'Cinzel',serif;text-transform:uppercase;padding:.2rem .65rem;border:1px solid rgba(201,168,76,.22);color:var(--text-dim);text-decoration:none;transition:all .2s}
+    .micro-social-link:hover{border-color:var(--gold);color:var(--gold)}
 
     /* Newsletter edición card */
     .nl-card{background:var(--dark3);border:1px solid rgba(201,168,76,.13);padding:1.4rem 1.8rem;transition:border-color .3s;cursor:pointer}
@@ -540,6 +607,7 @@
     <button class="nav-tab" onclick="showPage('redes')">Redes Sociales</button>
     <button class="nav-tab" onclick="showPage('mapa')">Mapa del Mundo</button>
     <button class="nav-tab" onclick="showPage('noticias')">Noticias</button>
+    <button class="nav-tab" onclick="showPage('ayuda')">Ayuda a Escritores</button>
     <button class="nav-tab" id="adminTab" onclick="showPage('admin')" style="display:none;color:var(--gold);">&#9881; Admin</button>
   </div>
   <button class="nav-auth-btn" id="navAuthBtn" onclick="openAuth()">Iniciar Sesi&#243;n</button>
@@ -563,6 +631,7 @@
       <button class="home-nav-btn" id="btn-redes"        onclick="showPage('redes')"><span class="home-nav-icon">&#127760;</span>Redes Sociales</button>
       <button class="home-nav-btn" id="btn-mapa"         onclick="showPage('mapa')"><span class="home-nav-icon">&#127757;</span>Mapa del Mundo</button>
       <button class="home-nav-btn" id="btn-noticias"     onclick="showPage('noticias')"><span class="home-nav-icon">&#128240;</span>Noticias</button>
+      <button class="home-nav-btn" id="btn-ayuda"        onclick="showPage('ayuda')"><span class="home-nav-icon">&#128221;</span>Ayuda Escritores</button>
     </div>
   </div>
 </div>
@@ -1222,21 +1291,28 @@
         <p>Debes iniciar sesi&#243;n para enviar un microcuento.</p>
         <button onclick="openAuth()">Iniciar Sesi&#243;n / Registrarse</button>
       </div>
-      <div id="micro-form-box" class="comment-form" style="display:none;max-width:700px;margin:0 auto 2.5rem;">
+      <div id="micro-form-box" class="comment-form" style="display:none;max-width:760px;margin:0 auto 2.5rem;">
         <p class="page-label" style="margin-bottom:1.2rem;">&#9998; Enviar tu microcuento</p>
         <div class="form-grid">
           <div class="form-field"><label>T&#237;tulo *</label><input type="text" id="micro-titulo" placeholder="T&#237;tulo de tu historia..."/></div>
+          <div class="form-field"><label>Tu nombre de escritor *</label><input type="text" id="micro-nombre" placeholder="Como quieres aparecer..."/></div>
           <div class="form-field"><label>G&#233;nero</label><input type="text" id="micro-genero" placeholder="Ej: Fantas&#237;a, Terror, Romance..."/></div>
-          <div class="form-field full"><label>Tu microcuento * (m&#225;x. 300 palabras)</label><textarea id="micro-texto" style="min-height:160px;" placeholder="&#201;rase una vez..."></textarea></div>
+          <div class="form-field"><label>Instagram</label><input type="text" id="micro-instagram" placeholder="@tuusuario"/></div>
+          <div class="form-field"><label>Twitter / X</label><input type="text" id="micro-twitter" placeholder="@tuusuario"/></div>
+          <div class="form-field"><label>Wattpad</label><input type="text" id="micro-wattpad" placeholder="usuario o link..."/></div>
+          <div class="form-field"><label>Otro link</label><input type="text" id="micro-web" placeholder="https://..."/></div>
+          <div class="form-field full"><label>Tu microcuento * (m&#225;x. 300 palabras)</label><textarea id="micro-texto" style="min-height:180px;" placeholder="&#201;rase una vez..."></textarea>
+            <span id="micro-contador" style="font-size:.75rem;color:var(--text-dim);margin-top:.3rem;display:block;">0 / 300 palabras</span>
+          </div>
         </div>
-        <div class="form-note">&#128274; Tu microcuento ser&#225; revisado antes de publicarse. Al enviarlo autorizas su publicaci&#243;n en esta p&#225;gina.</div>
+        <div class="form-note">&#128274; Tu microcuento ser&#225; revisado antes de publicarse. Al enviarlo autorizas su publicaci&#243;n en esta p&#225;gina con tu nombre y redes.</div>
         <button class="btn-submit" onclick="submitMicrocuento()">&#10022; Enviar Microcuento</button>
         <div class="success-msg" id="micro-success-msg">&#10022; &#161;Microcuento enviado! Ser&#225; revisado y publicado pronto.</div>
       </div>
 
       <!-- Lista de microcuentos publicados -->
-      <div id="microcuentos-list" style="max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:1.5rem;">
-        <p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">Cargando microcuentos...</p>
+      <div id="microcuentos-list" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2rem;max-width:1100px;margin:0 auto;">
+        <p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;grid-column:1/-1">Cargando microcuentos...</p>
       </div>
     </div>
 
@@ -1289,6 +1365,139 @@
 
   </div>
   <div class="page-footer"><p class="ft">Stan E.S.</p><p>Novedades y Noticias</p></div>
+</div>
+
+<!-- ══════════ AYUDA A ESCRITORES ══════════ -->
+<div id="page-ayuda" class="page">
+  <div class="page-inner">
+    <div class="page-header">
+      <p class="page-label">&#10022; Comunidad &#10022;</p>
+      <h2 class="page-title">Ayuda a Escritores</h2>
+      <div class="page-rule"></div>
+      <p style="color:var(--text-dim);font-size:.9rem;margin-top:1.2rem;font-style:italic;max-width:620px;margin-left:auto;margin-right:auto;">Un directorio de ilustradores, lectores beta, editores y otros profesionales para apoyar a escritores independientes. ¿Quieres aparecer aquí? Escríbenos.</p>
+    </div>
+
+    <!-- Sub-banners de categoría -->
+    <div class="ayuda-tabs">
+      <button class="ayuda-tab active" onclick="showAyudaTab('todos',this)">&#128221; Todos</button>
+      <button class="ayuda-tab" onclick="showAyudaTab('ilustrador',this)">&#127912; Ilustradores</button>
+      <button class="ayuda-tab" onclick="showAyudaTab('beta',this)">&#128214; Lectores Beta</button>
+      <button class="ayuda-tab" onclick="showAyudaTab('editor',this)">&#9998; Editores</button>
+      <button class="ayuda-tab" onclick="showAyudaTab('otro',this)">&#43; Otros</button>
+    </div>
+
+    <!-- DIRECTORIO HARDCODEADO — edita estas tarjetas directamente en el HTML -->
+    <!-- ════════════════════════════════════════════════════════════════════
+         CÓMO AGREGAR UNA TARJETA:
+         1. Copia el bloque <div class="ayuda-card" data-tipo="TIPO"> ... </div>
+         2. Pégalo antes del comentario "FIN DIRECTORIO"
+         3. Cambia data-tipo por: ilustrador | beta | editor | otro
+         4. Reemplaza los textos en MAYÚSCULAS con la info real
+         ════════════════════════════════════════════════════════════════════ -->
+    <div id="ayuda-grid" class="ayuda-grid">
+
+      <!-- ══ EJEMPLO ILUSTRADOR ══ -->
+      <div class="ayuda-card" data-tipo="ilustrador">
+        <div class="ayuda-card-logo">
+          <img src="" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="ayuda-logo-placeholder">&#127912;</div>
+        </div>
+        <div class="ayuda-card-top">
+          <span class="ayuda-tipo-badge ayuda-tipo-ilustrador">&#127912; Ilustrador</span>
+          <h3 class="ayuda-nombre">Nombre del Ilustrador</h3>
+          <p class="ayuda-especialidad">Especialidad — Ej: Fantas&#237;a &#233;pica, Portadas</p>
+          <p class="ayuda-desc">Descripci&#243;n de sus servicios. Qu&#233; ofrece, su experiencia, estilos que maneja y condiciones de trabajo. Esta tarjeta es un ejemplo — reemplaza este texto con la info real.</p>
+          <div class="ayuda-info">
+            <span class="ayuda-info-item">&#128197; Disponibilidad: Por consultar</span>
+            <span class="ayuda-info-item">&#128176; Tarifa: Por proyecto</span>
+          </div>
+        </div>
+        <div class="ayuda-card-footer">
+          <!-- Redes sociales — agrega o quita según corresponda -->
+          <a href="mailto:contacto@ejemplo.com" class="ayuda-social-btn ayuda-social-email">&#9993; Contactar</a>
+          <a href="https://instagram.com/usuario" class="ayuda-social-btn ayuda-social-ig" target="_blank" rel="noopener">&#128247; Instagram</a>
+          <a href="https://ejemplo.com" class="ayuda-social-btn ayuda-social-web" target="_blank" rel="noopener">&#127760; Portfolio</a>
+        </div>
+      </div>
+
+      <!-- ══ EJEMPLO LECTOR BETA ══ -->
+      <div class="ayuda-card" data-tipo="beta">
+        <div class="ayuda-card-logo">
+          <img src="" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="ayuda-logo-placeholder">&#128214;</div>
+        </div>
+        <div class="ayuda-card-top">
+          <span class="ayuda-tipo-badge ayuda-tipo-beta">&#128214; Lector Beta</span>
+          <h3 class="ayuda-nombre">Nombre del Lector Beta</h3>
+          <p class="ayuda-especialidad">G&#233;neros — Ej: Fantas&#237;a, Ciencia Ficci&#243;n</p>
+          <p class="ayuda-desc">Descripci&#243;n de su perfil como lector beta. Qu&#233; tipo de feedback da, tiempos de respuesta, g&#233;neros que prefiere. Esta tarjeta es un ejemplo.</p>
+          <div class="ayuda-info">
+            <span class="ayuda-info-item">&#128197; Disponibilidad: 1 manuscrito al mes</span>
+            <span class="ayuda-info-item">&#128176; Tarifa: Gratuito</span>
+          </div>
+        </div>
+        <div class="ayuda-card-footer">
+          <a href="mailto:contacto@ejemplo.com" class="ayuda-social-btn ayuda-social-email">&#9993; Contactar</a>
+          <a href="https://twitter.com/usuario" class="ayuda-social-btn ayuda-social-tw" target="_blank" rel="noopener">&#120143; Twitter</a>
+        </div>
+      </div>
+
+      <!-- ══ EJEMPLO EDITOR ══ -->
+      <div class="ayuda-card" data-tipo="editor">
+        <div class="ayuda-card-logo">
+          <img src="" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="ayuda-logo-placeholder">&#9998;</div>
+        </div>
+        <div class="ayuda-card-top">
+          <span class="ayuda-tipo-badge ayuda-tipo-editor">&#9998; Editor</span>
+          <h3 class="ayuda-nombre">Nombre del Editor</h3>
+          <p class="ayuda-especialidad">Especialidad — Ej: Edici&#243;n de estilo, Correcci&#243;n</p>
+          <p class="ayuda-desc">Descripci&#243;n de sus servicios editoriales. Experiencia, tipos de edici&#243;n que ofrece (contenido, estilo, correcci&#243;n), plazos y condiciones. Esta tarjeta es un ejemplo.</p>
+          <div class="ayuda-info">
+            <span class="ayuda-info-item">&#128197; Disponibilidad: 2 proyectos al mes</span>
+            <span class="ayuda-info-item">&#128176; Tarifa: Por acuerdo</span>
+          </div>
+        </div>
+        <div class="ayuda-card-footer">
+          <a href="mailto:contacto@ejemplo.com" class="ayuda-social-btn ayuda-social-email">&#9993; Contactar</a>
+          <a href="https://ejemplo.com" class="ayuda-social-btn ayuda-social-web" target="_blank" rel="noopener">&#127760; Web</a>
+        </div>
+      </div>
+
+      <!-- ══ EJEMPLO OTRO ══ -->
+      <div class="ayuda-card" data-tipo="otro">
+        <div class="ayuda-card-logo">
+          <img src="" alt="Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+          <div class="ayuda-logo-placeholder">&#43;</div>
+        </div>
+        <div class="ayuda-card-top">
+          <span class="ayuda-tipo-badge ayuda-tipo-otro">&#43; Otro</span>
+          <h3 class="ayuda-nombre">Nombre del Colaborador</h3>
+          <p class="ayuda-especialidad">Tipo de colaboraci&#243;n — Ej: Maquetaci&#243;n, Dise&#241;o</p>
+          <p class="ayuda-desc">Descripci&#243;n de los servicios. Puede ser maquetador, dise&#241;ador de portadas, community manager, asesor legal de derechos de autor, etc. Esta tarjeta es un ejemplo.</p>
+          <div class="ayuda-info">
+            <span class="ayuda-info-item">&#128197; Disponibilidad: Por consultar</span>
+            <span class="ayuda-info-item">&#128176; Tarifa: Variable</span>
+          </div>
+        </div>
+        <div class="ayuda-card-footer">
+          <a href="mailto:contacto@ejemplo.com" class="ayuda-social-btn ayuda-social-email">&#9993; Contactar</a>
+        </div>
+      </div>
+
+      <!-- FIN DIRECTORIO — las nuevas tarjetas van ARRIBA de esta línea -->
+
+    </div><!-- /ayuda-grid -->
+
+    <!-- CTA para unirse al directorio -->
+    <div style="text-align:center;margin-top:3.5rem;padding:2.5rem;border:1px dashed rgba(201,168,76,.2);max-width:580px;margin-left:auto;margin-right:auto;">
+      <p style="font-family:'Cinzel',serif;font-size:.8rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:.8rem;">&#10022; ¿Quieres aparecer aquí? &#10022;</p>
+      <p style="color:var(--text-dim);font-size:.9rem;line-height:1.8;margin-bottom:1.2rem;">Si eres ilustrador, lector beta, editor u ofreces cualquier servicio de apoyo a escritores, escríbenos y te agregamos al directorio.</p>
+      <a href="mailto:stan.e.s@gmail.com?subject=Quiero aparecer en el directorio de Ayuda a Escritores" class="ayuda-social-btn ayuda-social-email" style="display:inline-block;padding:.6rem 2rem;font-size:.72rem;">&#9993; Contactar a Stan E.S.</a>
+    </div>
+
+  </div>
+  <div class="page-footer"><p class="ft">Stan E.S.</p><p>Directorio de Colaboradores</p></div>
 </div>
 
 <!-- ══════════ ADMIN ══════════ -->
@@ -1349,6 +1558,11 @@
       </div>
       <button class="admin-btn" onclick="adminAddNewsletter()" style="margin-top:1rem;">&#10022; Publicar Edici&#243;n</button>
       <div class="admin-msg" id="nl-admin-msg"></div>
+    </div>
+
+    <div class="admin-section">
+      <h3>&#128221; Colaboradores Pendientes</h3>
+      <div class="admin-list" id="admin-ayuda-list"><p style="color:var(--text-dim);font-style:italic;">Cargando...</p></div>
     </div>
 
     <div class="admin-section">
@@ -1807,22 +2021,101 @@ function submitMicrocuento(){
   var user=auth.currentUser; if(!user){openAuth();return;}
   var titulo=document.getElementById('micro-titulo').value.trim();
   var texto=document.getElementById('micro-texto').value.trim();
+  var nombre=document.getElementById('micro-nombre').value.trim()||user.displayName||user.email.split('@')[0];
   if(!titulo||!texto){alert('Completa el título y el microcuento.');return;}
-  var palabras=texto.split(/\s+/).length;
+  var palabras=texto.trim().split(/\s+/).length;
   if(palabras>300){alert('El microcuento supera las 300 palabras (tiene '+palabras+'). Por favor redúcelo.');return;}
   db.ref('microcuentos').push({
-    autor:user.displayName||user.email.split('@')[0],
-    titulo:titulo,
-    genero:document.getElementById('micro-genero').value.trim(),
-    texto:texto,
-    fecha:new Date().toISOString(),
-    aprobado:false
+    autor: nombre,
+    uid: user.uid,
+    titulo: titulo,
+    genero: document.getElementById('micro-genero').value.trim(),
+    texto: texto,
+    instagram: document.getElementById('micro-instagram').value.trim(),
+    twitter: document.getElementById('micro-twitter').value.trim(),
+    wattpad: document.getElementById('micro-wattpad').value.trim(),
+    web: document.getElementById('micro-web').value.trim(),
+    fecha: new Date().toISOString(),
+    aprobado: false,
+    votos: 0
   }).then(function(){
     document.getElementById('micro-success-msg').style.display='block';
-    document.getElementById('micro-titulo').value='';
-    document.getElementById('micro-genero').value='';
-    document.getElementById('micro-texto').value='';
+    ['micro-titulo','micro-nombre','micro-genero','micro-texto','micro-instagram','micro-twitter','micro-wattpad','micro-web'].forEach(function(id){
+      var e=document.getElementById(id); if(e) e.value='';
+    });
+    var cont=document.getElementById('micro-contador'); if(cont) cont.textContent='0 / 300 palabras';
   }).catch(function(err){alert('Error: '+err.message);});
+}
+
+// Contador de palabras en tiempo real
+document.addEventListener('DOMContentLoaded',function(){
+  var textarea=document.getElementById('micro-texto');
+  var contador=document.getElementById('micro-contador');
+  if(textarea&&contador){
+    textarea.addEventListener('input',function(){
+      var words=this.value.trim()===''?0:this.value.trim().split(/\s+/).length;
+      contador.textContent=words+' / 300 palabras';
+      contador.style.color=words>300?'#c05050':words>250?'var(--gold)':'var(--text-dim)';
+    });
+  }
+});
+
+function buildSocialLinks(m){
+  var links='';
+  if(m.instagram) links+='<a class="micro-social-link" href="https://instagram.com/'+escHtml(m.instagram.replace('@',''))+'" target="_blank" rel="noopener">&#128247; '+escHtml(m.instagram)+'</a>';
+  if(m.twitter) links+='<a class="micro-social-link" href="https://x.com/'+escHtml(m.twitter.replace('@',''))+'" target="_blank" rel="noopener">&#120143; '+escHtml(m.twitter)+'</a>';
+  if(m.wattpad){
+    var wpHref=m.wattpad.startsWith('http')?m.wattpad:'https://www.wattpad.com/user/'+m.wattpad;
+    links+='<a class="micro-social-link" href="'+escHtml(wpHref)+'" target="_blank" rel="noopener">&#128218; Wattpad</a>';
+  }
+  if(m.web) links+='<a class="micro-social-link" href="'+escHtml(m.web)+'" target="_blank" rel="noopener">&#127760; Web</a>';
+  return links;
+}
+
+function buildStars(key, promedio, total, miVoto){
+  var html='<div class="micro-stars" id="stars-'+key+'">';
+  for(var i=1;i<=5;i++){
+    var filled=i<=Math.round(promedio)?'filled':'';
+    html+='<button class="micro-star '+filled+'" onclick="votarMicro(\''+key+'\','+i+')" data-val="'+i+'" title="'+i+' estrella'+(i>1?'s':'')+'">&#9733;</button>';
+  }
+  html+='<span class="micro-rating-label" id="rating-label-'+key+'">';
+  if(total>0) html+=promedio.toFixed(1)+' ('+total+' voto'+(total>1?'s':'')+')';
+  else html+='Sin votos aún';
+  html+='</span></div>';
+  return html;
+}
+
+function votarMicro(key, valor){
+  var user=auth.currentUser;
+  if(!user){openAuth();return;}
+  db.ref('micro_votos/'+key+'/'+user.uid).once('value').then(function(snap){
+    if(snap.exists()){
+      alert('Ya votaste por este microcuento.');
+      return;
+    }
+    db.ref('micro_votos/'+key+'/'+user.uid).set({valor:valor,fecha:new Date().toISOString()})
+      .then(function(){
+        // Recalcular promedio
+        db.ref('micro_votos/'+key).once('value').then(function(allSnap){
+          var data=allSnap.val()||{};
+          var vals=Object.values(data).map(function(v){return v.valor||0;});
+          var prom=vals.reduce(function(a,b){return a+b;},0)/vals.length;
+          db.ref('microcuentos/'+key).update({votos:vals.length,promedio:prom});
+          // Actualizar estrellas en pantalla
+          actualizarEstrellas(key,prom,vals.length);
+        });
+      });
+  });
+}
+
+function actualizarEstrellas(key, promedio, total){
+  var container=document.getElementById('stars-'+key); if(!container) return;
+  container.querySelectorAll('.micro-star').forEach(function(btn){
+    var v=parseInt(btn.getAttribute('data-val'));
+    btn.classList.toggle('filled',v<=Math.round(promedio));
+  });
+  var lbl=document.getElementById('rating-label-'+key);
+  if(lbl) lbl.textContent=total>0?promedio.toFixed(1)+' ('+total+' voto'+(total>1?'s':'')+')':'Sin votos aún';
 }
 
 function loadMicrocuentos(){
@@ -1830,22 +2123,64 @@ function loadMicrocuentos(){
   db.ref('microcuentos').on('value',function(snap){
     list.innerHTML='';
     var data=snap.val();
-    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">A&#250;n no hay microcuentos publicados. &#161;S&#233; el primero!</p>';return;}
-    var arr=[]; Object.values(data).forEach(function(m){if(m.aprobado===true)arr.push(m);});
-    if(arr.length===0){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;">A&#250;n no hay microcuentos aprobados.</p>';return;}
-    arr.sort(function(a,b){return new Date(b.fecha)-new Date(a.fecha);});
-    arr.forEach(function(m){
+    if(!data){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;grid-column:1/-1">A&#250;n no hay microcuentos publicados. &#161;S&#233; el primero!</p>';return;}
+    var arr=[]; Object.entries(data).forEach(function(e){if(e[1].aprobado===true)arr.push({key:e[0],d:e[1]});});
+    if(arr.length===0){list.innerHTML='<p style="color:var(--text-dim);font-style:italic;text-align:center;padding:2rem;grid-column:1/-1">A&#250;n no hay microcuentos aprobados.</p>';return;}
+    arr.sort(function(a,b){return (b.d.promedio||0)-(a.d.promedio||0)||new Date(b.d.fecha)-new Date(a.d.fecha);});
+    arr.forEach(function(item){
+      var key=item.key, m=item.d;
       var fecha=new Date(m.fecha).toLocaleDateString('es-CL',{year:'numeric',month:'long'});
-      list.innerHTML+='<div class="micro-card">'
-        +'<div class="micro-header"><span class="micro-titulo">'+escHtml(m.titulo||'Sin título')+'</span><span class="micro-autor">'+escHtml(m.autor||'Anónimo')+'</span></div>'
-        +'<div class="micro-meta">'+(m.genero?'<span class="micro-genero">'+escHtml(m.genero)+'</span>':'')+'<span class="micro-fecha">'+fecha+'</span></div>'
-        +'<p class="micro-texto">'+escHtml(m.texto||'').replace(/\n/g,'<br/>')+'</p>'
+      var promedio=m.promedio||0, total=m.votos||0;
+      var socialLinks=buildSocialLinks(m);
+      var starsHtml=buildStars(key,promedio,total,null);
+      var textoId='micro-txt-'+key;
+      var card=document.createElement('div');
+      card.className='micro-card';
+      card.innerHTML=
+        '<div class="micro-card-top">'
+          +'<div class="micro-header">'
+            +'<span class="micro-titulo">'+escHtml(m.titulo||'Sin título')+'</span>'
+          +'</div>'
+          +'<p class="micro-autor">&#9998; '+escHtml(m.autor||'Anónimo')+'</p>'
+          +'<div class="micro-meta">'
+            +(m.genero?'<span class="micro-genero">'+escHtml(m.genero)+'</span>':'')
+            +'<span class="micro-fecha">'+fecha+'</span>'
+          +'</div>'
+          +'<div id="'+textoId+'" class="micro-texto micro-texto-preview">'+escHtml(m.texto||'').replace(/\n/g,'<br/>')+'</div>'
+          +'<button class="micro-leer-mas" onclick="toggleMicroTexto(\''+textoId+'\',this)">Leer m&#225;s &#9660;</button>'
+        +'</div>'
+        +'<div class="micro-card-footer">'
+          +starsHtml
+          +(socialLinks?'<div class="micro-social">'+socialLinks+'</div>':'')
         +'</div>';
+      list.appendChild(card);
     });
   });
 }
 
-/* ═══ NEWSLETTER ═══ */
+function toggleMicroTexto(id, btn){
+  var el=document.getElementById(id); if(!el) return;
+  if(el.classList.contains('micro-texto-preview')){
+    el.classList.remove('micro-texto-preview');
+    btn.innerHTML='Leer menos &#9650;';
+  } else {
+    el.classList.add('micro-texto-preview');
+    btn.innerHTML='Leer m&#225;s &#9660;';
+  }
+}
+
+/* ═══ AYUDA A ESCRITORES ═══ */
+function showAyudaTab(tipo, btn) {
+  document.querySelectorAll('.ayuda-tab').forEach(function(t){ t.classList.remove('active'); });
+  if(btn) btn.classList.add('active');
+  document.querySelectorAll('#ayuda-grid .ayuda-card').forEach(function(card){
+    if(tipo === 'todos' || card.getAttribute('data-tipo') === tipo){
+      card.style.display = 'flex';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
 /* ─── Newsletter: helpers ─── */
 function nlKey(email){ return email.replace(/\./g,',').replace(/@/g,'__at__'); }
 
