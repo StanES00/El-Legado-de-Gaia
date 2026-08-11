@@ -715,6 +715,9 @@
         <div class="page-rule"></div>
         <p style="color:var(--text-dim);font-size:.9rem;margin-top:1.2rem;font-style:italic">Haz clic en una saga para explorar sus libros</p>
       </div>
+      <!-- Obras dinámicas desde Firebase (aparecen aquí) -->
+      <div id="obras-dinamicas-grid" style="display:contents"></div>
+
       <div class="sagas-grid">
 
         <!-- Saga 1 -->
@@ -1562,7 +1565,25 @@
   <div class="page-inner">
     <div class="page-header"><p class="page-label">&#9881; Panel de Administrador</p><h2 class="page-title">Administrar Sitio</h2><div class="page-rule"></div></div>
 
+    <!-- ══ ADMIN: NUEVA OBRA ══ -->
     <div class="admin-section">
+      <h3>&#128218; Agregar Nueva Obra a "Mis Obras"</h3>
+      <div class="dl-help-box" style="margin-bottom:1.5rem;padding:1rem;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.18);">
+        <p><strong style="color:var(--gold)">Imágenes:</strong> sube la imagen de portada a tu repositorio de GitHub junto al <code>index.html</code>. Luego escribe aquí solo el nombre del archivo (ej: <code>MiNuevaSaga.png</code>). El enlace se genera automáticamente, igual que con los PDFs.</p>
+      </div>
+      <div class="admin-grid">
+        <div class="admin-field"><label>Título de la Obra *</label><input type="text" id="obra-titulo" placeholder="Ej: La Torre Infinita"/></div>
+        <div class="admin-field"><label>Género / Subtítulo</label><input type="text" id="obra-genero" placeholder="Ej: Fantasía Épica · 3 Libros"/></div>
+        <div class="admin-field full"><label>Descripción *</label><textarea id="obra-desc" placeholder="Sinopsis o presentación de la obra..."></textarea></div>
+        <div class="admin-field"><label>Nombre del archivo de portada</label><input type="text" id="obra-portada" placeholder="Ej: MiNuevaSaga.png"/></div>
+        <div class="admin-field"><label>Orden de aparición (número)</label><input type="number" id="obra-orden" placeholder="0 = primero" value="99"/></div>
+      </div>
+      <button class="admin-btn" onclick="adminAddObra()" style="margin-top:1rem;">&#10022; Publicar Obra</button>
+      <div class="admin-msg" id="obra-msg"></div>
+      <div class="admin-list" id="admin-obras-list" style="margin-top:1.5rem;"></div>
+    </div>
+
+        <div class="admin-section">
       <h3>&#128240; Publicar Noticia General</h3>
       <div class="admin-grid">
         <div class="admin-field"><label>T&#237;tulo *</label><input type="text" id="news-titulo" placeholder="T&#237;tulo de la noticia..."/></div>
@@ -1715,11 +1736,12 @@ function showPage(id) {
   currentPage = id;
   pg.classList.add('active');
 
+  if(id === 'obras') setTimeout(loadObras, 200);
   if(id === 'comentarios') setTimeout(loadComments, 200);
   if(id === 'recomendados') setTimeout(loadRecomendados, 200);
   if(id === 'noticias') setTimeout(loadConcursos, 200);
   if(id === 'descargas') setTimeout(loadDescargas, 200);
-  if(id === 'admin'){ setTimeout(loadAdminComments, 200); setTimeout(loadAdminBooks, 200); setTimeout(loadAdminMicros, 200); setTimeout(loadAdminNL, 200); setTimeout(loadAdminDescargas, 200); }
+  if(id === 'admin'){ setTimeout(loadAdminComments, 200); setTimeout(loadAdminBooks, 200); setTimeout(loadAdminMicros, 200); setTimeout(loadAdminNL, 200); setTimeout(loadAdminDescargas, 200); setTimeout(loadAdminObras, 200); }
 
   var homeBtn = document.getElementById('btn-' + id);
   if(homeBtn) homeBtn.classList.add('active-section');
@@ -2719,6 +2741,177 @@ function adminDeleteComment(key){
 function adminDeleteBook(key){
   if(confirm('¿Eliminar este libro recomendado?')) db.ref('recomendados/'+key).remove().then(loadAdminBooks);
 }
+
+
+/* ═══ OBRAS DINÁMICAS ═══ */
+
+function loadObras() {
+  var grid = document.getElementById('obras-dinamicas-grid');
+  if (!grid) return;
+  db.ref('obras').orderByChild('orden').on('value', function(snap) {
+    grid.innerHTML = '';
+    var data = snap.val();
+    if (!data) return;
+    var arr = [];
+    Object.entries(data).forEach(function(e) {
+      if (e[1].activo !== false) arr.push({ key: e[0], d: e[1] });
+    });
+    arr.sort(function(a, b) { return (a.d.orden || 99) - (b.d.orden || 99); });
+    arr.forEach(function(item) {
+      grid.appendChild(buildObraCard(item.key, item.d));
+    });
+  });
+}
+
+function buildObraCard(key, d) {
+  var card = document.createElement('div');
+  card.className = 'saga-card reveal';
+
+  var portadaSrc = '';
+  if (d.portada) {
+    portadaSrc = /^https?:\/\//i.test(d.portada)
+      ? d.portada
+      : (new URL(d.portada, window.location.href)).href;
+  }
+
+  var coverHtml = portadaSrc
+    ? '<img src="' + escHtml(portadaSrc) + '" alt="' + escHtml(d.titulo || '') + '" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+      + '<div class="saga-cover-placeholder" style="display:none">' + escHtml(d.titulo || '') + '</div>'
+    : '<div class="saga-cover-placeholder">' + escHtml(d.titulo || '') + '</div>';
+
+  card.innerHTML =
+    '<div class="saga-cover">'
+    + coverHtml
+    + '<div class="saga-cover-shine"></div>'
+    + '<div class="saga-cover-title">' + escHtml(d.titulo || '') + '</div>'
+    + '</div>'
+    + '<div class="saga-body">'
+    + (d.genero ? '<p class="saga-subtitle">' + escHtml(d.genero) + '</p>' : '')
+    + '<p class="saga-desc">' + escHtml(d.descripcion || '') + '</p>'
+    + '<button class="saga-btn">&#10022; Ver Obra</button>'
+    + '</div>';
+
+  card.addEventListener('click', function() { openObraModal(d); });
+  setTimeout(function() { card.classList.add('shown'); }, 100);
+  return card;
+}
+
+function openObraModal(d) {
+  var existing = document.getElementById('obra-modal-overlay');
+  if (existing) existing.remove();
+
+  var portadaSrc = '';
+  if (d.portada) {
+    portadaSrc = /^https?:\/\//i.test(d.portada)
+      ? d.portada
+      : (new URL(d.portada, window.location.href)).href;
+  }
+
+  var overlay = document.createElement('div');
+  overlay.id = 'obra-modal-overlay';
+  overlay.style.cssText = 'position:fixed;inset:0;z-index:9000;background:rgba(0,0,0,.88);display:flex;align-items:center;justify-content:center;padding:1.5rem;';
+
+  overlay.innerHTML =
+    '<div style="background:var(--dark3);border:1px solid rgba(201,168,76,.28);max-width:560px;width:100%;padding:2.5rem;position:relative;max-height:90vh;overflow-y:auto;">'
+    + '<button onclick="document.getElementById(\'obra-modal-overlay\').remove();document.body.style.overflow=\'\';" style="position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:var(--gold);font-size:1.5rem;cursor:pointer;line-height:1">&#10005;</button>'
+    + (portadaSrc ? '<img src="' + escHtml(portadaSrc) + '" alt="' + escHtml(d.titulo || '') + '" style="width:160px;aspect-ratio:3/4;object-fit:cover;display:block;margin:0 auto 1.5rem;border:1px solid rgba(201,168,76,.2);">' : '')
+    + '<p style="font-family:\'Cinzel\',serif;font-size:.7rem;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:.5rem">Obra</p>'
+    + '<h2 style="font-family:\'Cinzel Decorative\',serif;font-size:1.5rem;color:#fff;margin-bottom:.5rem">' + escHtml(d.titulo || '') + '</h2>'
+    + (d.genero ? '<p style="font-family:\'Cinzel\',serif;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem">' + escHtml(d.genero) + '</p>' : '')
+    + '<p style="color:var(--text-dim);line-height:1.8">' + escHtml(d.descripcion || '') + '</p>'
+    + '</div>';
+
+  overlay.addEventListener('click', function(e) {
+    if (e.target === overlay) { overlay.remove(); document.body.style.overflow = ''; }
+  });
+  document.body.style.overflow = 'hidden';
+  document.body.appendChild(overlay);
+}
+
+function adminAddObra() {
+  var titulo   = (document.getElementById('obra-titulo').value   || '').trim();
+  var desc     = (document.getElementById('obra-desc').value     || '').trim();
+  var genero   = (document.getElementById('obra-genero').value   || '').trim();
+  var portada  = (document.getElementById('obra-portada').value  || '').trim();
+  var orden    = parseInt(document.getElementById('obra-orden').value) || 99;
+  var msg      = document.getElementById('obra-msg');
+
+  if (!titulo || !desc) {
+    msg.textContent = 'Completa al menos el Título y la Descripción.';
+    msg.className = 'admin-msg err'; msg.style.display = 'block'; return;
+  }
+
+  db.ref('obras').push({
+    titulo: titulo, descripcion: desc, genero: genero,
+    portada: portada, orden: orden,
+    fecha: new Date().toISOString(), activo: true
+  }).then(function() {
+    msg.textContent = '✦ Obra publicada en la sección Obras.';
+    msg.className = 'admin-msg ok'; msg.style.display = 'block';
+    ['obra-titulo','obra-desc','obra-genero','obra-portada'].forEach(function(id) {
+      var el = document.getElementById(id); if (el) el.value = '';
+    });
+    document.getElementById('obra-orden').value = '99';
+    loadAdminObras();
+  }).catch(function(err) {
+    msg.textContent = 'Error: ' + err.message;
+    msg.className = 'admin-msg err'; msg.style.display = 'block';
+  });
+}
+
+function loadAdminObras() {
+  var list = document.getElementById('admin-obras-list');
+  if (!list) return;
+  db.ref('obras').orderByChild('orden').on('value', function(snap) {
+    list.innerHTML = '';
+    var data = snap.val();
+    if (!data) {
+      list.innerHTML = '<p style="color:var(--text-dim);font-style:italic;font-size:.85rem;">No hay obras dinámicas publicadas aún.</p>';
+      return;
+    }
+    var arr = Object.entries(data);
+    arr.sort(function(a, b) { return (a[1].orden || 99) - (b[1].orden || 99); });
+    arr.forEach(function(e) {
+      var key = e[0], d = e[1];
+      var row = document.createElement('div');
+      row.style.cssText = 'display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:.8rem 1rem;background:rgba(0,0,0,.25);border:1px solid rgba(201,168,76,.12);margin-bottom:.5rem;';
+
+      var info = document.createElement('span');
+      info.style.cssText = 'font-size:.85rem;color:var(--text);';
+      info.innerHTML = escHtml(d.titulo || '')
+        + (d.portada ? ' <span style="color:var(--text-dim);font-size:.75rem">(' + escHtml(d.portada) + ')</span>' : '')
+        + (d.activo === false ? ' <span style="color:#c05050;font-size:.72rem">[Oculta]</span>' : '');
+
+      var actions = document.createElement('div');
+      actions.style.cssText = 'display:flex;gap:.4rem;flex-shrink:0;';
+
+      var toggleBtn = document.createElement('button');
+      toggleBtn.textContent = d.activo === false ? 'Mostrar' : 'Ocultar';
+      toggleBtn.style.cssText = 'padding:.3rem .7rem;border:1px solid rgba(201,168,76,.4);background:transparent;color:var(--gold);font-family:\'Cinzel\',serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;';
+      toggleBtn.onclick = (function(k, current) {
+        return function() { db.ref('obras/' + k).update({ activo: !current }); };
+      })(key, d.activo !== false);
+
+      var delBtn = document.createElement('button');
+      delBtn.textContent = 'Eliminar';
+      delBtn.style.cssText = 'padding:.3rem .7rem;border:1px solid rgba(192,80,80,.4);background:transparent;color:#c05050;font-family:\'Cinzel\',serif;font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;';
+      delBtn.onclick = (function(k, t) {
+        return function() {
+          if (confirm('¿Eliminar "' + t + '"? Esta acción no se puede deshacer.')) {
+            db.ref('obras/' + k).remove();
+          }
+        };
+      })(key, d.titulo || 'esta obra');
+
+      actions.appendChild(toggleBtn);
+      actions.appendChild(delBtn);
+      row.appendChild(info);
+      row.appendChild(actions);
+      list.appendChild(row);
+    });
+  });
+}
+
 </script>
 
 <!-- ══ MÚSICA — Fantasía Suave (arpa celta, flauta, cuerdas) ══ -->
